@@ -3,7 +3,7 @@
 \usepackage[ngerman]{babel} % Sprach - Package
 
 % Mathematische Formatierung
-\usepackage{amssymb, amsmath, amsfonts} % Mathematische Formeln
+\usepackage{amssymb, amsmath, amsfonts, bbm, theorem, upgreek} % Mathematische Formeln
 \boldmath
 \newcommand{\FZV}{X_1, \ldots, X_n} % Folge von Zufallsvariablen
 \newcommand{\IR}{\mathbb{R}} % reeler Wertebreich
@@ -27,6 +27,7 @@
 \usepackage[framemethod]{mdframed}
 \usepackage{enumerate} % Fuer nummerierte Listen
 \usepackage{enumitem} % Eigene Nummerierung erstellen
+\setlength\parindent{0pt} %keine hängenden Einzüge mehr!
 \newmdenv[
 topline = false,
 rightline = false,
@@ -336,7 +337,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\sigma^2\\
 			\end{array}
 			\right)
-			\rightarrow 
+			\mapsto 
 			\left(
 			\begin{array}{c}
 				\mu\\
@@ -483,7 +484,8 @@ sodass
 		\hat{\mu}_{MM}\\
 		\hat{\sigma}^2_{MM}\\
 	\end{array}
-	\right)) = 
+	\right) = 
+	f(\bar{x}, \bar{x^2})=
 	\left(
 	\begin{array}{c}
 		\bar{x}\\
@@ -529,7 +531,7 @@ sodass
 		\begin{array}{c}
 		 \EW_\theta(X)\\
 		 \EW_\theta(X^2)\\
-			\dots\\
+			\vdots\\
 		 \EW_\theta(X^k) \\
 		\end{array}
 		\right).
@@ -603,12 +605,13 @@ sodass
 		sodass
 		
 		\begin{equation*}
-			f(\left(
+			\left(
 			\begin{array}{c}
 				\hat{\mu}_{MM}\\
 				\hat{\sigma}^2_{MM}\\
 			\end{array}
-			\right)) = 
+			\right) = 
+			f(\bar{x}, \bar{x^2})=
 			\left(
 			\begin{array}{c}
 				\bar{x}\\
@@ -645,7 +648,7 @@ sodass
 		\begin{array}{c}
 			\bar{x}_n\\
 			\bar{x^2}_n\\
-			\dots\\
+			\vdots\\
 			\bar{x^k}_n\\
 		\end{array}
 		\right)\; \overset{p}\longrightarrow \;
@@ -653,7 +656,7 @@ sodass
 		\begin{array}{c}
 			\EW_\theta(X)\\
 			\EW_\theta(X^2)\\
-			\dots\\
+			\vdots\\
 			\EW_\theta(X^k) \\
 		\end{array}
 		\right).
@@ -684,7 +687,7 @@ sodass
 		\noindent Hier  erhält man ein Kofindenzintervall oder Tests für Hypothesen über $\mu_0$, welche eine exakte Verteilung beinhalten und somit exakt sind:
 	
 	\begin{equation*}
-		\sqrt{n} \; \frac{\hat{\mu}_0 - \mu}{\hat{\sigma}} \;{\sim}\; t_{n-1}
+		\sqrt{n} \; \frac{\hat{\mu}_0 - \mu}{\hat{\sigma}} \;{\sim}\; t_{n-1}.
 	\end{equation*}
 	
 		\noindent Der Ausdruck ist berechenbar und die Verteilung ist bekannt.\\
@@ -692,31 +695,29 @@ sodass
 		\noindent $\textbf{Schätzung von} \; \sigma^2_0$\\
 	Hier erhält man ein Kofindenzintervall für $\sigma^2_0$ oder Tests für Hypothesen über $\sigma^2_0$, welche ebenso exakt sind:
 	
-	
 	\begin{equation*}
-		(n-1) \; \frac{\hat{\sigma^2}_0}{\sigma^2_0} \; {\sim} \; \chi^2_{n-1}
+		(n-1) \; \frac{\hat{\sigma^2}_0}{\sigma^2_0} \; {\sim} \; \chi^2_{n-1}.
 	\end{equation*}
-	
 	
 		\noindent Ist der MM-Schätzer durch eine $\textbf{lineare Funktion}$ definiert, dann kann man den zentralen Grenzwertsatz und die Rechenregeln aus der Vorlesung Grundzüge der Statistik Kapitel 8.3. verwenden. 
 	
-	\noindent Wenn gilt
+	\noindent Wenn
 	
 	\begin{equation*}
 		\begin{split}
-				X_n \KV& X \\
-			Y_n \KW& c 
+				X_n \KV& \; X \\
+			Y_n \KW& \;c
 		\end{split}
 	\end{equation*}
 	
-	\noindent dann gilt auch
+	\noindent gilt, dann gilt auch
 	
 	\begin{equation*}
-		Y_n \cdot X_n \KV X\cdot c
+		Y_n \cdot X_n \KV X\cdot c.
 	\end{equation*}
 	
 	
-	\subsubsection{Beispiele für die Verteilung des (skalierten Schätzfehlers)}
+	\subsubsection{Beispiele für die Verteilung des (skalierten) Schätzfehlers}
 	
 	\begin{enumerate}[label = (\roman*)]
 		\item Bernoulli-Verteilung\\
@@ -730,7 +731,7 @@ sodass
 		\end{equation*}
 		und der Erwartungswert und die Varianz:
 		\begin{equation*}
-			\EW_p(X)=p \; \textbf{und} \; 	Var_p(X) = p(p-1)
+			\EW_p(X)=p \; \textbf{und} \; 	\textbf{Var}_p(X) = p(p-1)
 		\end{equation*}
 		Mit dem Zentralen Grenzwertsatz gilt:
 		\begin{equation*}
@@ -766,8 +767,8 @@ sodass
 		\end{equation*}
 		
 		Der erste Faktor konvergiert in Verteilung gegen eine Standardnormalverteilung und der zweite Faktor konvergiert in Wahrscheinlichkeit gegen 1 aufgrund der zuvorigen Konvergenz in Wahrscheinschleichkeit. 
-		Wegen den Rechenregeln der Konvergenz, konvergiert der gesamte Term, wie oben beschrieben gegen eine Standardnormalverteilung. 
-		Solche Prozeduren nennt man $\textbf{asymptotisch valide}$
+		Wegen den Rechenregeln der Konvergenz, konvergiert der gesamte Term, wie oben beschrieben, gegen eine Standardnormalverteilung. 
+		Solche Prozeduren nennt man $\textbf{asymptotisch valide}$.
 		
 		
 		
@@ -775,23 +776,23 @@ sodass
 		\item Gleichverteilung\\
 		Gegeben sind Zufallsvariablen $\FZV$ mit
 		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0 \;\textbf{mit}\; \hat{\Theta}_{MM} = 2\bar{x}
+			\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0 \;\textbf{mit}\; \hat{\theta}_{MM} = 2\bar{x}.
 		\end{equation*}
 		Der Erwartungswert und die Varianz sind: 
 		\begin{equation*}
-			\EW_\theta (X) = \frac{\theta}{2} \; \textbf{und} \; Var_\theta (X) = \frac{\theta^2}{12}
+			\EW_\theta (X) = \frac{\theta}{2} \; \textbf{und} \; \textbf{Var}_\theta (X) = \frac{\theta^2}{12}.
 		\end{equation*}
 		Mit dem zentralen Grenzwertsatz gilt:
 		
 		\begin{equation*}
-			\sqrt{n} \left(\bar{X}_n - \frac{\theta_0}{2}\right) \KV N\left(0, \frac{\theta^2_0}{12}\right)
+			\sqrt{n} \left(\bar{X}_n - \frac{\theta_0}{2}\right) \KV N\left(0, \frac{\theta^2_0}{12}\right).
 		\end{equation*}
 		
-		ähnlich wie im Bernoulli-Modell gilt
+		Ähnlich wie im Bernoulli-Modell gilt:
 		
 		\begin{equation*}
 			\frac{\sqrt{n}(\hat{\theta}_n - \theta_0)}{\sqrt{\frac{\theta^2_n}{3}}} \; = \; 
-			\frac{\sqrt{n}(2 \bar{X}_n - \theta_0)}{\sqrt{\frac{4\bar{X}^2_n}{3}}} \; = \; \frac{\sqrt{n}(\bar{X}_n - \frac{\theta_0}{2})}{\sqrt{\frac{\bar{X}^2_n}{3}}}	
+			\frac{\sqrt{n}(2 \bar{X}_n - \theta_0)}{\sqrt{\frac{4\bar{X}^2_n}{3}}} \; = \; \frac{\sqrt{n}(\bar{X}_n - \frac{\theta_0}{2})}{\sqrt{\frac{\bar{X}^2_n}{3}}}.
 		\end{equation*}
 		
 		Der Zähler konvergiert in Verteilung gegen eine Normalverteilung mit Erwartungswert 0 und einer Varianz $\frac{\theta^2_0}{12}$. Der Nenner konvergiert in Wahrscheinlichkeit gegen $\sqrt{\frac{\theta^2}{12}}$. 
@@ -800,12 +801,12 @@ sodass
 	
 	
 	\subsubsection{Delta-Methode}
-	\noindent In vielen Fällen ist der MM-Schätzer definiert durch eine nicht-lineare Funktion. Hier hilft die sogenannte $\delta \textbf{-Methode}$. Der Einfachheithalber sei $k = 1$.
+	\noindent In vielen Fällen ist der MM-Schätzer durch eine nicht-lineare Funktion definiert. Hier hilft die sogenannte \textbf{Delta-Methode}. Zur Vereinfachung sei $k = 1$.
 	
-	\noindent Es seien $Z_1, \ldots, Z_n$ i.i.d. Kopien von $Z$ mit $\EW(Z)=v$ und $Var(Z)=\delta^2 > 0$. Weiters sei $f: \IR \rightarrow \IR$ differenzierbar im Punkt $v$. Dann gilt:
+	\noindent Es seien $Z_1, \ldots, Z_n$ i.i.d. Kopien von $Z$ mit $\EW(Z)=\nu$ und $\textbf{Var}(Z)=\delta^2 > 0$. Weiters sei $f: \IR \rightarrow \IR$ differenzierbar im Punkt $\upnu$. Dann gilt:
 	
 	\begin{equation*}
-		\sqrt{n} (f(\bar{Z}_n)-f(v)) \sim N(0, \delta^2 (f'(v))^2)
+		\sqrt{n} (f(\bar{Z}_n)-f(\upnu)) \sim N(0, \delta^2 (f'(\upnu))^2)
 	\end{equation*}
 	
 	\noindent Wobei $\bar{Z}_n =  \frac{1}{n}\sum_{i=1}^{n} Z_i$.
@@ -819,23 +820,23 @@ sodass
 		\end{equation*} 
 		Der Erwartungswert und die Varianz sind:
 		\begin{equation*}
-			\EW_p(X) = \frac{1}{p} \; \textbf{und} \; Var_p(X) = \frac{1-p}{p^2}
+			\EW_p(X) = \frac{1}{p} \; \textbf{und} \;  \textbf{Var}_p(X) = \frac{1-p}{p^2},
 		\end{equation*}
 		sodass
 		\begin{equation*}
-			\hat{p}_{MM} = \frac{1}{\bar{x}_n} = f(\bar{x}_n) \; \textbf{für} \; f(t)= \frac{1}{t}
+			\hat{p}_{MM} = \frac{1}{\bar{x}_n} = f(\bar{x}_n) \; \textbf{für} \; f(t)= \frac{1}{t}.
 		\end{equation*} 
-		Die Tangente $f(t) = \frac{1}{t}$ an der Stelle $t^* = \frac{1}{p} = \EW_p(X)$
+		Die Tangente $f(t) = \frac{1}{t}$ an der Stelle $t^* = \frac{1}{p} = \EW_p(X)$ ist gegeben durch:
 		
 		\begin{equation*}
 			f\left(\frac{1}{p}\right) + f'\left(\frac{1}{p}\right) \cdot \left(t-\frac{1}{p}\right)\\
-			= p + f'\left(\frac{1}{p}\right) \left(t-\frac{1}{p}\right)
+			= p + f'\left(\frac{1}{p}\right) \left(t-\frac{1}{p}\right).
 		\end{equation*}
-		Für $t=\bar{X}_n$ gibt das
+		Für $t=\bar{X}_n$ ergibt das:
 		
 		\begin{equation*}
 			p - f'\left(\frac{1}{p}\right) \left(\bar{x}_n - \frac{1}{p}\right) \\
-			= p - f'\left(\frac{1}{p}\right) (\bar{x}_n - \EW_p(x))
+			= p - f'\left(\frac{1}{p}\right) (\bar{x}_n - \EW_p(x)).
 		\end{equation*}
 		
 	\end{BSP}
@@ -846,83 +847,82 @@ sodass
 		
 		
 		\begin{equation*}
-			\bar{Z}_n \KW v  \eqname{(1)}
+			\bar{Z}_n \KW \upnu  \eqname{(1)}.
 		\end{equation*}
 		
-		Hier gilt das Gesetz der großen Zahl
+		\noindent Hier gilt das Gesetz der großen Zahl:
 		
 		\begin{equation*}
-			\sqrt{n} (\bar{Z}_n - v) \KV N(0,\delta^2) \eqname{(2)}
+			\sqrt{n} (\bar{Z}_n - \upnu) \KV N(0,\delta^2) \eqname{(2)}.
 		\end{equation*}
 		Hier gilt der Zentrale Grenzsatz\\
 		
-		$f$ ist differenzierbar an der Stelle v, das heißt: 
+	\noindent	$f$ ist differenzierbar an der Stelle v, das heißt: 
 		
 		\begin{equation*}
-			f'(v) = \underset{n \rightarrow v}{lim} \frac{f(z) - f(v)}{z-v} \eqname{(3)}
+			f'(\upnu) = \underset{n \rightarrow \upnu}{lim} \frac{f(z) - f(\upnu)}{z-\upnu} \eqname{(3)}.
 		\end{equation*}
 		
-		Definiere eine Funktion $R(z)$ als
+		\noindent Definiere eine Funktion $R(z)$ als
 		
 		\begin{equation*}
 			R(z) = \begin{cases} 
-				f'(v) - \frac{f(z)- f(v)}{z-v} &\text{wenn } z \neq v\\
-				0 &\text{wenn } z = v
+				f'(\upnu) - \frac{f(z)- f(\upnu)}{z-\upnu}, &\text{wenn } z \neq \upnu\\
+				0, &\text{wenn } z = \upnu
 			\end{cases} \eqname{(4)}
 		\end{equation*}
 		
-		Hierbei muss beachtet werden das $R(z)$ ist an der Stelle $z=v$, weil $\underset{n \rightarrow v} {lim} R(z) = R(v)$
+		\noindent Hierbei muss beachtet werden das $R(z)$ ist an der Stelle $z=\upnu$, weil $\underset{n \rightarrow \upnu} {lim} R(z) = R(\upnu)$ und es gilt:
 		
 		\begin{equation*}
-			\underset{n \rightarrow v} {lim} R(z) = 0 = R(v)
+			\underset{n \rightarrow \upnu} {lim} R(z) = 0 = R(\upnu).
 		\end{equation*}
 		
-		Dies gilt wegen (3) und (4).
+		\noindent Dies gilt wegen (3) und (4).
 		
-		Aufgrund von (4) gilt auch für $z \neq v$:
+		\noindent Aufgrund von (4) gilt auch für $z \neq v$:
 		
 		\begin{equation*}
-			f'(v)=\frac{f(z) - f(v)}{z - v} + R(z)
+			f'(\upnu)=\frac{f(z) - f(\upnu)}{z - \upnu} + R(z).
 		\end{equation*}
 		
-		Mit einer Multiplikation mit $z-v$ ergibt sich für $z \neq v$ aber offensichtlich auch für $z = v$:
+		Mit einer Multiplikation mit $z-\upnu$ ergibt sich für $z \neq \upnu$, aber offensichtlich auch für $z = \upnu$:
 		
 		\begin{equation*}
-			f'(v) \cdot (z-v) = f(z) - f(v) + R(z) \cdot (z-v)
+			f'(\upnu) \cdot (z-\upnu) = f(z) - f(\upnu) + R(z) \cdot (z-\upnu).
 		\end{equation*}
 		
 		Wenn man nun $z$ durch $\bar{z}_n$ ersetzt, ergibt dies:
 		
 		
 		\begin{equation*}
-			f'(v) \cdot (\bar{z}_n-v) = f(\bar{z}_n) - f(v) + R(\bar{z}_n) \cdot (\bar{z}_n-v)			
+			f'(\upnu) \cdot (\bar{z}_n-\upnu) = f(\bar{z}_n) - f(\upnu) + R(\bar{z}_n) \cdot (\bar{z}_n-\upnu).			
 		\end{equation*}
 		
 		Wenn nun weiters mit $\sqrt{n}$ multipliziert wird gilt:
 		
 		\begin{equation*}
-			f'(v) \cdot\sqrt{n} (\bar{z}_n-v) = \sqrt{n}(f(\bar{z}_n) - f(v)) + \sqrt{n} (\bar{z}_n-v)	R(\bar{z}_n)
+			f'(\upnu) \cdot\sqrt{n} (\bar{z}_n-\upnu) = \sqrt{n}(f(\bar{z}_n) - f(\upnu)) + \sqrt{n} (\bar{z}_n-\upnu)	R(\bar{z}_n).
 		\end{equation*}
 		
 		Hierbei gelten folgende Konvergenzsätze:
-		
 		\begin{equation*}
 			\begin{split}
 			R(\bar{z}_n) \KW& \;0\\
-			\sqrt{n} (\bar{z}_n-v) \KV& \;N(0,\delta^2)\\
-			f'(v) \cdot\sqrt{n} (\bar{z}_n-v) \KV& \;N(0,\delta^2 \cdot (f'(v))^2)
+			\sqrt{n} (\bar{z}_n-\upnu) \KV& \;N(0,\delta^2)\\
+			f'(\upnu) \cdot\sqrt{n} (\bar{z}_n-\upnu) \KV& \;N(0,\delta^2 \cdot (f'(\upnu))^2).
 			\end{split}
 		\end{equation*}
 		
 		
 	\end{BWS}
 	
-	\noindent Die Delta-Methode ist anwendbar auf MM-Schätzer deren Form $\hat{\theta}_n = f(\bar{X}_n)$, wenn die Funktion $f$ differenzierbar ist in jeden Punkt der Menge ${\EW_\theta(X) : \theta \in \Theta}$
+	\noindent Die Delta-Methode ist anwendbar auf MM-Schätzer der Form $\hat{\theta}_n = f(\bar{X}_n)$, wenn die Funktion $f$ differenzierbar in jedem Punkt der Menge $\{\EW_\theta(X) : \theta \in \Theta\}$ ist.
 	
 	
 	
 	\begin{BSP}[Beispiel 1..... (Delta-Methode)]		
-		Geometrische Verteilung \\
+		\noindent Geometrische Verteilung \\
 		Gegeben sind Zufallsvariablen $\FZV$ mit
 		\begin{equation*}
 			\FZV \overset{\textbf{i.i.d.}}{\sim} G(p_0), \; 0 < p_0 \leq 1.
@@ -932,79 +932,79 @@ sodass
 			\EW_p(X) = \frac{1}{p} \; \textbf{und} \; Var_p(X) = \frac{1-p}{p^2}
 		\end{equation*}
 		
-		Hier ist
+		\noindent Hier ist
 		\begin{equation*}
-			\hat{p}_n = \frac{1}{\bar{x}_n}, \EW_p(X) = \frac{1}{p}, Var(X) = \frac{1-p}{p^2} 
+			\hat{p}_n = \frac{1}{\bar{x}_n}, \; \EW_p(X) = \frac{1}{p},\; \textbf{Var}(X) = \frac{1-p}{p^2} 
 		\end{equation*}
 		
-		Es ist
+		\noindent Es ist
 		\begin{equation*}
 			{\EW_p(x) : 0<p<1} = {\frac{1}{p}: 0<p<1} = [1, \infty)
 		\end{equation*}
 		
-		Die Funktion $f(m)= \frac{1}{m}$ ist differenzierbar in jedem Punkt dieser Menge mit $f'(m)= - \frac{1}{m^2}$. 
+		\noindent Die Funktion $f(m)= \frac{1}{m}$ ist differenzierbar in jedem Punkt dieser Menge mit $f'(m)= - \frac{1}{m^2}$. 
 		
-		Mit dem Zentralen Grenzwertsatz gilt:
+		\noindent Mit dem Zentralen Grenzwertsatz gilt:
 		
 		\begin{equation*}
 			\sqrt{n}\left(\bar{x}_n - \frac{1}{p}\right) \KV N\left(0, \frac{1-p}{p^2}\right),
 		\end{equation*}
 		
-		wenn $p$ der wahre Parameter ist. 
+		\noindent wenn $p$ der wahre Parameter ist. 
 		
-		Mit der Delta-Methode gilt:
+		\noindent Mit der Delta-Methode gilt:
 		
 		\begin{equation*}
 			\begin{split}
 				\sqrt{n} \left(f\left(\bar{X}_n-f\left(\frac{1}{p}\right)\right)\right) \KV&\; N\left(0,\frac{1-p}{p^2}\left(f'\left(\frac{1}{p}\right)\right)^2\right) \\
-				N\left(0,\frac{1-p}{p^2}\left(f'\left(\frac{1}{p}\right)\right)^2\right) = &\;N(0,p^2(1-p))
+				N\left(0,\frac{1-p}{p^2}\left(f'\left(\frac{1}{p}\right)\right)^2\right) = &\;N(0,p^2(1-p)),
 			\end{split}
 		\end{equation*}
 		
-		wenn $p$ der wahre Parameter ist.
+		\noindent wenn $p$ der wahre Parameter ist.
 		
 		$\hat{p}_n$ ist konsistent für $p$, das heißt $\hat{p}_n \KW p$.
 		Die Funktion $\frac{1}{\sqrt{\hat{p}_n^2(1-\hat{p}_n)}}$ ist stetig in $p$ für $0<p<1$, sodass  $\frac{1}{\sqrt{\hat{p}_n^2(1-\hat{p}_n)}} \KW  \frac{1}{\sqrt{p^2(1-p)}}$.
 		
-		Konvergenz in Wahrscheinlichkeit bleibt bei Stetigkeit erhalten. Damit gilt:
+		\noindent Konvergenz in Wahrscheinlichkeit bleibt bei Stetigkeit erhalten. Damit gilt:
 		
 		\begin{equation*}
-			\frac{\sqrt{n}(\hat{p}_n-p)}{\sqrt{\hat{p}_n^2(1-\hat{p}_n)}} \KV N(0,1)
+			\frac{\sqrt{n}(\hat{p}_n-p)}{\sqrt{\hat{p}_n^2(1-\hat{p}_n)}} \KV N(0,1).
 		\end{equation*}
 		
-		Damit kann man asymptotisch valide Tests oder Konfidenzintervalle für $p$ konstruieren. Beispielsweise ein Kondfidenzintervall für $p$ mit Überdeckungswahrscheinlichkeit $1-\alpha$ ist gegeben durch:
+		Damit kann man asymptotisch valide Tests oder Konfidenzintervalle für $p$ konstruieren. Beispielsweise ein Konfidenzintervall für $p$ mit Überdeckungswahrscheinlichkeit $1-\alpha$ ist gegeben durch:
 		
 		\begin{equation*}
-			\hat{p}_n \pm \sqrt{\frac{\hat{p}_n^2 (1-\hat{p}_n)}{n}} \phi^{-1} \left(1-\frac{\alpha}{2}\right)
+			\hat{p}_n \pm \sqrt{\frac{\hat{p}_n^2 (1-\hat{p}_n)}{n}} \phi^{-1} \left(1-\frac{\alpha}{2}\right).
 		\end{equation*}
 		
 	\end{BSP}
 	
-	\noindent Die Überdeckungswahrscheinlichkeit des Kondfidenzintervalls im letzten Beispiel ist nur nominal gleich $1-\alpha$ und hängt ab von $n$ und $p$. 
+	\noindent Die Überdeckungswahrscheinlichkeit des Kondfidenzintervalls im letzten Beispiel ist nur nominal gleich $1-\alpha$ und hängt von $n$ und $p$ ab. 
 	
-	\noindent Wenn das wahre $p$ bei $0,5$ liegt reichen nahezu $400$ Stichproben. 
+	\noindent Wenn das wahre $p$ bei $0.5$ liegt, reichen nahezu $400$ Stichproben. 
 	
-	\noindent Die tatsächliche Überdeckungswahrscheinlichkeit konvergiert für  $n \rightarrow \infty$ gegen $1-\alpha$. Der Fehler (Überdeckungs-wahrscheinlichkeit - $(1-\alpha)$) hängt von $n$ und $p$ ab. Das heißt die Konvergenz hier ist nicht gleichmäßig in $p$. Zum Glück kann man $p$ konsistent schätzen. Dieses und ähnliche Phänomene treten bei approximierten Verfahren häufig auf. 
+	Die tatsächliche Überdeckungswahrscheinlichkeit konvergiert für  $n \rightarrow \infty$ gegen $1-\alpha$. Der Fehler (Überdeckungs-wahrscheinlichkeit $(1-\alpha)$) hängt von $n$ und $p$ ab. Das heißt die Konvergenz in $p$ ist hier nicht gleichmäßig. Zum Glück kann man $p$ konsistent schätzen. Dieses und ähnliche Phänomene treten bei approximierten Verfahren häufig auf. 
 	
 	
 	\subsubsection{Maximum-Likelihood-Methode (ML)}
 	
-	Man betrachte ein Modell wie in 1.: $\FZV$ sind i.i.d. Kopien der Zufallsvariable $X$ deren Verteilung eine bestimmte Form ist. 
+	Man betrachte ein Modell wie in 1.: $\FZV$ sind i.i.d. Kopien der Zufallsvariable $X$ deren Verteilung eine bestimmte Form ist: 
 	
 	\begin{equation*}
-		X \sim \; \textbf{F}(\theta_0) \;	\theta \in \Theta \subseteq \IR^k
+		X \sim \; \textbf{F}(\theta_0) \;	\theta \in \Theta \subseteq \IR^k.
 	\end{equation*}
 	 
-	\noindent Im sogenannten diskreten Modell ist $X$ diskret und wird druch eine Wahrscheinlichkeitsfunktion $p(x \mid \theta_0)$ beschrieben. 
-	Im sogenannten stetigen Modell ist $X$ stetig und wird druch eine Dichtefunktion $f(x \mid \theta_0)$ beschrieben. 
+	\noindent Im sogenannten diskreten Modell ist $X$ diskret und wird durch eine Wahrscheinlichkeitsfunktion $p(x \mid \theta_0)$ beschrieben. 
+	Im sogenannten stetigen Modell ist $X$ stetig und wird durch eine Dichtefunktion $f(x \mid \theta_0)$ beschrieben. 
 	
-	\begin{Definition} [Definition 1.... Likelihodd-Funktion]
-		Die Likelihood-Funktion wird definiert als
+	\begin{Definition} [Definition 1.... Likelihood-Funktion]
+		Die Likelihood-Funktion wird definiert als:
 		\begin{equation*}
-			L(\theta) = \prod_{i=1}^{n} f(x_i \mid \theta) \eqname{stetig}
+			L(\theta) = \prod_{i=1}^{n} f(x_i \mid \theta), \eqname{wenn stetig}
 		\end{equation*}
 		\begin{equation*}
-			L(\theta) = \prod_{i=1}^{n} p(x_i \mid \theta) \eqname{diskret}
+			L(\theta) = \prod_{i=1}^{n} p(x_i \mid \theta), \eqname{wenn diskret}
 		\end{equation*}
 		für $\theta \in \Theta$.
 	\end{Definition}
@@ -1037,22 +1037,22 @@ sodass
 		\begin{equation*}
 			\FZV \overset{\textbf{i.i.d.}}{\sim} B(\theta_0), \; 0 \leq \theta_0 \leq 1.
 		\end{equation*} 
-		Für $x \in \{0,1\}$
+		Für $x \in \{0,1\}$ gilt:
 		\begin{equation*}
 			p(\xt) = \begin{cases}
 				\theta &: x=1 \\
 				1- \theta&: x=0
-			\end{cases} = \theta^x (1-\theta)^{1-x}
+			\end{cases} = \theta^x (1-\theta)^{1-x}.
 		\end{equation*}
-		Daraus ergibt sich die Maximum-Likelihood-Funktion
+		Daraus ergibt sich die Maximum-Likelihood-Funktion:
 		\begin{equation*}
-			L(\theta) = \prod_{i=1}^{n} p(x_i \mid \theta) =\prod_{i=1}^{n} \theta^{x_i} (1-\theta)^{x_i} = \theta^{\sum_{i=1}^{n}x_1}(1-\theta)^{\sum_{i=1}^{n}x_1}
+			L(\theta) = \prod_{i=1}^{n} p(x_i \mid \theta) =\prod_{i=1}^{n} \theta^{x_i} (1-\theta)^{x_i} = \theta^{\sum_{i=1}^{n}x_1}(1-\theta)^{\sum_{i=1}^{n}x_1},
 		\end{equation*}
-		Daraus ergibt sich die Log-Liklihood-Funktion
+		und die entsprechende Log-Likelihood-Funktion:
 		\begin{equation*}
-			l(\theta) = \left(\sum_{i=1}^{n}x_1\right) \log \theta + \left(n-\sum_{i=1}^{n}x_1\right) \log(1-\theta) = n\bar{x}\log\theta + (n-n\bar{x})\log(1-\theta)
+			l(\theta) = \left(\sum_{i=1}^{n}x_1\right) \log \theta + \left(n-\sum_{i=1}^{n}x_1\right) \log(1-\theta) = n\bar{x}\log\theta + (n-n\bar{x})\log(1-\theta).
 		\end{equation*}
-		ist.
+	
 		
 		\item Geometrische Verteilung \\
 		Gegeben sind Zufallsvariablen $\FZV$ mit
@@ -1063,13 +1063,13 @@ sodass
 		\begin{equation*}
 			p(\xt)=(1-\theta)^{x-1}\theta
 		\end{equation*}
-		Daraus ergibt sich die Maximum-Likelihood-Funktion
+		Daraus ergibt sich die Maximum-Likelihood-Funktion:
 		\begin{equation*}
-			L (\theta) = \prod_{i=1}^{n} ((1-\theta)^{x-1}\theta) = (1-\theta)^{\sum_{i=1}^{n}x_i -n} \theta^n = (1-\theta)^nx-n \theta^n
+			L (\theta) = \prod_{i=1}^{n} ((1-\theta)^{x-1}\theta) = (1-\theta)^{\sum_{i=1}^{n}x_i -n} \theta^n = (1-\theta)^nx-n \theta^n,
 		\end{equation*}
-		Daraus ergibt sich die Log-Likelihood-Funktion
+		und die entsprechende Log-Likelihood-Funktion:
 		\begin{equation*}
-			\log(\theta)= (\sum_{i=1}^{n}x_i -n)\log(1-\theta)+n\log(\theta) = (n\bar{x}-n)\log(1-\theta)+ n\log\theta
+			\log(\theta)= (\sum_{i=1}^{n}x_i -n)\log(1-\theta)+n\log(\theta) = (n\bar{x}-n)\log(1-\theta)+ n\log\theta.
 		\end{equation*}
 		
 		
@@ -1078,20 +1078,20 @@ sodass
 		\begin{equation*}
 			\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0 \; 
 		\end{equation*} 
-		Für $x \in \IR$		
+		Für $x \in \IR$	gilt:
 		\begin{equation*}
-			f(x \mid \mu, \sigma^2) = \phi_{\mu,\sigma^2}(x)=(2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}
+			f(x \mid \mu, \sigma^2) = \phi_{\mu,\sigma^2}(x)=(2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}.
 		\end{equation*}
 		
-		Daraus ergibt sich die Maximum-Likelihood-Funktion
+		Daraus ergibt sich die Maximum-Likelihood-Funktion:
 		\begin{equation*}
-			L(\mu, \sigma^2) = \prod_{i=1}^{n}((2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}) = (2\pi\sigma^2)^{-\frac{n}{2}}e^{-\frac{n}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2}
+			L(\mu, \sigma^2) = \prod_{i=1}^{n}((2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}) = (2\pi\sigma^2)^{-\frac{n}{2}}e^{-\frac{n}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2},
 		\end{equation*}
 		
-		Daraus ergibt sich die Log-Likelihood-Funktion
+		und die entsprechende Log-Likelihood-Funktion:
 		
 		\begin{equation*}
-			l(\mu, \sigma^2) = -\frac{n}{n}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2
+			l(\mu, \sigma^2) = -\frac{n}{n}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2.
 		\end{equation*}
 		
 		\item Gleichverteilung\\
@@ -1102,17 +1102,23 @@ sodass
 		Hier ist für x $\geq 0$
 		\begin{equation*}
 			f(\xt)=\begin{cases}
-				\frac{1}{\theta} &: x\leq \theta\\
-				0 &: x >\theta
+				\frac{1}{\theta}, & x\leq \theta\\
+				0, & x >\theta.
 			\end{cases}
 		\end{equation*}
-		Daraus ergibt sich die Maximum-Likelihood-Funktion
+		Daraus ergibt sich die Maximum-Likelihood-Funktion:
 		\begin{equation*}
-			L(\theta)=\prod_{i=1}^{n} f(x_i \mid \theta) = \begin{cases}
-				\frac{1}{\theta^n} &: x_i\leq \theta\\
-				0 &: \textbf{sonst}
-			\end{cases} = \frac{1}{\theta^n} \mathbb{I}\{X_{(n)} \leq \theta\}
+			\begin{split}
+					L(\theta)=\prod_{i=1}^{n} f(x_i \mid \theta) &= \begin{cases}
+					\frac{1}{\theta^n}, & x_i\leq \theta\\
+					0, & \textbf{sonst}
+				\end{cases}\\ &= \frac{1}{\theta^n} \mathbbm{1}\{X_{(n)} \leq \theta\}.
+			\end{split}
 		\end{equation*}
 		
-	\end{enumerate}	
+	\end{enumerate}
+	
+	
+	
+
 \end{document}
