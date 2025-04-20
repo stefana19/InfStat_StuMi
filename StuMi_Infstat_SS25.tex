@@ -405,7 +405,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\noindent Mit den entsprechenden empirischen Momenten kann man die ersten $k$ Momente von $X$ berechnen. 
 
 \begin{equation*}
-	\bar{x^j} = \frac{1}{n} \sum_{i=1}^n x^j = \EW_\theta(X^j)\; \textbf{für} \; 1\leq j \leq k 
+	\bar{X^j} = \frac{1}{n} \sum_{i=1}^n X^j = \EW_\theta(X^j)\; \textbf{für} \; 1\leq j \leq k 
 \end{equation*}
 
 	\noindent Der Momenten-Methoden-Schätzer $\hat{\theta}_{MM}$ für 
@@ -416,7 +416,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\noindent ist der entsprechende Plug-In Schätzer
 
 \begin{equation*}
-	\hat{\theta}_{MM} = f(\bar{x},\bar{x^2}, \ldots, \bar{x^k}).
+	\hat{\theta}_{MM} = f(\bar{X},\bar{X^2}, \ldots, \bar{X^k}).
 \end{equation*}
 
 \subsubsection{Beispiele für Plug-In Schätzer}
@@ -436,7 +436,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{equation*}
 	sodass
 	\begin{equation*}
-		\hat{p}_{MM} = \bar{x} 
+		\hat{p}_{MM} = \bar{X} 
 	\end{equation*}
 	ist.
 	
@@ -455,7 +455,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{equation*}
 	sodass
 	\begin{equation*}
-		\hat{p}_{MM} = \frac{1}{\bar{x}}.
+		\hat{p}_{MM} = \frac{1}{\bar{X}}.
 	\end{equation*}
 	
 	
@@ -521,10 +521,10 @@ sodass
 	\begin{equation*}
 		\left(
 		\begin{array}{c}
-			\bar{x}\\
-			\bar{x^2}\\
+			\bar{X}\\
+			\bar{X^2}\\
 			\vdots\\
-			\bar{x^k}\\
+			\bar{X^k}\\
 		\end{array}
 		\right)\; \textbf{ist erwartungstreu für} \;
 		\left(
@@ -536,7 +536,7 @@ sodass
 		\end{array}
 		\right).
 	\end{equation*}
-	 Allerdings ist $\hat{\theta}_{MM} = f(\bar{x}, \ldots, \bar{x}_n)$ nur erwartungstreu für $\theta = f(\EW_\theta(X), \ldots, \EW_\theta(X^k))$, wenn $f(\cdot)$ linear ist. 
+	 Allerdings ist $\hat{\theta}_{MM} = f(\bar{X}, \ldots, \bar{X^k})$ nur erwartungstreu für $\theta = f(\EW_\theta(X), \ldots, \EW_\theta(X^k))$, wenn $f(\cdot)$ linear ist. 
 	 
 	 Ist $f(\cdot)$ nicht linear, dann gilt im Allgemeinen
 	 \begin{equation*}
@@ -811,6 +811,7 @@ sodass
 	
 	\noindent Wobei $\bar{Z}_n =  \frac{1}{n}\sum_{i=1}^{n} Z_i$.
 	
+	\pagebreak
 	\begin{BSP}[Beispiel 1..... (Delta-Methode)]
 		
 		Geometrische Verteilung \\
@@ -929,12 +930,12 @@ sodass
 		\end{equation*} 
 		Der Erwartungswert und die Varianz sind:
 		\begin{equation*}
-			\EW_p(X) = \frac{1}{p} \; \textbf{und} \; Var_p(X) = \frac{1-p}{p^2}
+			\EW_p(X) = \frac{1}{p} \; \textbf{und} \; \textbf{Var}_p(X) = \frac{1-p}{p^2}
 		\end{equation*}
 		
 		\noindent Hier ist
 		\begin{equation*}
-			\hat{p}_n = \frac{1}{\bar{x}_n}, \; \EW_p(X) = \frac{1}{p},\; \textbf{Var}(X) = \frac{1-p}{p^2} 
+			\hat{p}_n = \frac{1}{\bar{x}_n}, \; \EW_p(X) = \frac{1}{p},\; \textbf{Var}_p(X) = \frac{1-p}{p^2} 
 		\end{equation*}
 		
 		\noindent Es ist
@@ -947,7 +948,7 @@ sodass
 		\noindent Mit dem Zentralen Grenzwertsatz gilt:
 		
 		\begin{equation*}
-			\sqrt{n}\left(\bar{x}_n - \frac{1}{p}\right) \KV N\left(0, \frac{1-p}{p^2}\right),
+			\sqrt{n}\left(\bar{X}_n - \frac{1}{p}\right) \KV N\left(0, \frac{1-p}{p^2}\right),
 		\end{equation*}
 		
 		\noindent wenn $p$ der wahre Parameter ist. 
