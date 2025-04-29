@@ -1119,7 +1119,402 @@ sodass
 		
 	\end{enumerate}
 	
+	\subsubsection{Maximum-Likelihood allgemein}
 	
+	Für das Modell wie in 1.3.8. ist ein Maximum-Likelihood Schätzer $\hat{\theta}_{ML}$ ein Maximierer von $L(\theta)$ bzw. von $l(\theta)$. 
+	
+	\begin{equation*}
+		\hat{\theta}_{ML} =
+		\begin{cases}
+			argmax \; L(\theta),\; \theta \in \Theta\\
+			argmax \; l(\theta),\; \theta \in \Theta
+		\end{cases}
+	\end{equation*}
+	
+	Sofern ein Maximierer existiert. 
+	Man beachte: 
+	
+	\begin{equation*}
+		\hat{\theta}_{ML} = \hat{\theta}_n (\FZV).
+	\end{equation*}
+	
+	Im Allgemeinen kann es mehrere Maximierer von $L(\theta)$ bzw. $l(\theta)$ geben, oder es kann vorkommen, dass kein Maximierer existiert. Siehe 3.6. 
+	
+	\begin{BSP}[Maximum-Likelihood]
+		\begin{enumerate}[label = (\roman*)]
+			\item Bernoulli-Verteilung \\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} B(\theta_0), \; 0 \leq \theta_0 \leq 1.
+			\end{equation*} 
+			Hier ist die Log-Likelihood-Funktion:
+			\begin{equation*}
+				l(\theta)=n\bar{x}\log\theta + (n-n\bar{x})\log(1-\theta).
+			\end{equation*}
+			Diese ist stetig und differenzierbar in $\theta \in (0,1)$:
+			
+			\begin{equation*}
+				l'(\theta) = n\bar{x}\frac{1}{\theta} - n (1-\bar{x}) \frac{1}{1-\theta}
+			\end{equation*}
+			\begin{equation*}
+				\begin{split}
+					l'(\theta) = 0 \; &\Leftrightarrow n\bar{x}\frac{1}{\theta} = n(1-\bar{x})\frac{1}{1-\theta} \\&\Leftrightarrow n\bar{x}(1-\theta) = n(1-\bar{x})\theta\\ &\Leftrightarrow n \bar{x}-n\bar{x}\theta = n\theta-n\bar{x}\theta \\&\Leftrightarrow \bar{x} = \theta.
+				\end{split}
+			\end{equation*}
+			Hier ist die $l''(\bar{x})<0$ sodass $\bar{x}$ ein Maximierer von $l(\theta)$ ist. Also:
+			\begin{equation*}
+				\hat{\theta}_{ML} = \bar{x}.
+			\end{equation*}
+			Beachte: Hier ist $\hat{\theta}_{ML} = \hat{\theta}_{MM}$.
+			
+			
+			\item Geometrische Verteilung \\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} G(\theta_0), \; 0 < \theta_0 < 1.
+			\end{equation*} 
+			Hier ist die Log-Likelihood-Funktion: 
+			\begin{equation*}
+				\log(\theta)= (n\bar{x}-n)\log(1-\theta)+ n\log\theta.
+			\end{equation*}
+			Diese ist stetig und differenzierbar in $\theta \in (0,1)$:
+			\begin{equation*}
+				l'(\theta) = - \frac{n(\bar{x}-1)}{1-\theta} + \frac{n}{\theta}
+			\end{equation*}
+			\begin{equation*}
+				\begin{split}
+					l'(\theta) = 0 &\Leftrightarrow \frac{n (\bar{x}-1)}{1-\theta} = \frac{n}{\theta}\\
+					&\Leftrightarrow (\bar{x}-1) \theta = 1-\theta\\
+					&\Leftrightarrow \bar{x} \theta - \theta = 1-\theta\\
+					&\Leftrightarrow \theta = \frac{1}{\bar{x}}.\\
+				\end{split}
+			\end{equation*}
+			
+			Wieder ist $l''(\frac{1}{\bar{x}}) <0$, sodass $\frac{1}{\bar{x}}$ ein Maximierer von $l(\theta)$ ist. Also:
+			
+			\begin{equation*}
+				\hat{\theta}_{ML} = \frac{1}{\bar{x}} = \hat{\theta}_{MM}.
+			\end{equation*} 
+			
+			\item Normalverteilung mit unbekannter Varianz und unbekanntem Erwartungswert\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0. 
+			\end{equation*}
+			
+			Hier ist die Log-Likelihood-Funktion:
+			
+			\begin{equation*}
+				l(\mu, \sigma^2) = -\frac{n}{n}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2.
+			\end{equation*}
+			
+			Für festes $\sigma^2 >0$ ist diese Funktion für $\mu \in \IR$ sicher stetig und differenzierbar. Für festes $\mu \in \IR$ ist $l(\mu, \sigma^2)$ auch sicher stetig für $\sigma^2$. 
+			
+			Halte zunächst $\sigma^2 >0$ fest und maximiere über $\mu \in \IR$: 
+			
+			\begin{equation*}
+				\frac{\updelta}{\updelta \mu} l(\mu, \sigma^2) = \frac{1}{2\sigma^2} \sum_{i=1}^{n}2(x_i-\mu) \overset{!}= 0
+			\end{equation*}
+			\begin{equation*}
+				\begin{split}
+					\sum_{i=1}^{n}(x_i - \mu) &= 0\\
+					\sum_{i=1}^{n}x_i - n\mu &= 0\\
+					\sum_{i=1}^{n}x_i &= n\mu \\
+					\frac{1}{n}\sum_{i=1}^{n}x_i &= \mu.			
+				\end{split}
+			\end{equation*}
+			Hier ist $\frac{\delta^2}{\delta\mu^2}l(\mu, \sigma^2) <0$, sodass $\bar{x}$ ein Maximierer von $l(\cdot,\sigma^2)$ ist. 
+			
+			\begin{equation*}
+				\bar{x} = argmax\; l(\mu, \sigma^2), \; \textbf{für} \; \mu \in \IR.
+			\end{equation*}
+			Hier hängt $\bar{x}$ nicht von $\sigma^2$ ab. 
+			\begin{equation*}
+				\frac{\delta}{\delta \sigma^2} l (\mu, \sigma^2) = \frac{\delta}{\delta \sigma^2} [-\frac{n}{2}\log(2\pi)-\frac{n}{2}\log(\sigma^2)\sum_{i=1}^{n}(x_i - \bar{x})^2] = -\frac{n}{2} \frac{1}{\sigma^2}+ \frac{1}{2\sigma^4}\sum_{i=1}^{n}(x_i-\bar{x}^2) \overset{!} = 0
+			\end{equation*}
+			\begin{equation*}
+				\begin{split}
+					\frac{n}{2\sigma^2} &= \frac{1}{2\sigma^4}\sum_{i=1}^{n}(x_i - \bar{x})^2\\
+					\sigma^2 &= \frac{1}{n}\sum_{i=1}^{n}(x_1-\bar{x})^2.
+				\end{split}
+			\end{equation*}
+			Wieder ist  $\frac{\delta^2}{\delta (\sigma^2)^2} l(\bar{x}, \sigma^2)<0$, sodass $\frac{1}{n}$$\sum_{i=1}^{n}(x_i-\bar{x})^2$ ein Maximierer von $l(\mu, \sigma^2)$ bezüglich $\sigma^2 > 0$ ist. 
+			
+			Damit ist:
+			\begin{equation*}
+				\left(
+				\begin{array}{c}
+					\hat{\mu}_{ML}\\
+					\hat{\sigma}^2_{ML}
+				\end{array}\right)
+				=
+				\left(
+				\begin{array}{c}
+					\bar{x}\\
+					\bar{x^2}-\bar{x}^2
+				\end{array}
+				\right).
+			\end{equation*}
+			Und hier ist wieder:
+			\begin{equation*}
+				\left(
+				\begin{array}{c}
+					\hat{\mu}_{ML}\\
+					\hat{\sigma}^2_{ML}
+				\end{array}\right)
+				=
+				\left(
+				\begin{array}{c}
+					\hat{\mu}_{MM}\\
+					\hat{\sigma}^2_{MM}
+				\end{array}
+				\right).
+			\end{equation*}
+			
+			
+			\item Gleichverteilung\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
+			\end{equation*}
+			Hier die die Maximum-Likelihood-Funktion:
+			
+			\begin{equation*}
+				L(\theta)=\theta^{-n}\mathbbm{1} \{x_{(n)}\leq  \theta \}.
+			\end{equation*}
+			
+			Diese Funktion ist nicht differenzierbar im Punkt $X_{(n)}$. Aber:
+			
+			\begin{equation*}
+				L(\theta) =
+				\begin{cases}
+					0, \;&\textbf{für}\; \theta < X_{(n)}\\
+					\theta^{-n}, \; &\textbf{für} \; \theta > X_{(n)}.
+				\end{cases}
+			\end{equation*}
+			
+			Man sieht:
+			
+			\begin{equation*}
+				\hat{\theta}_{ML} = X_{(n)} \neq \hat{\theta}_{MM}.
+			\end{equation*}
+		\end{enumerate}
+		
+	\end{BSP}
+	
+	\subsubsection{Interpretation der ML-Methode}
+	Man betrachte Beobachtungen $x_1, \ldots , x_n$ von $\FZV$. Ist dieses Modell diskret, dann ist: 
+	
+	\begin{equation*}
+		L(\theta)=\prod_{i=1}^{n} p(x_i \mid \theta) = \prod_{i=1}^{n} P (X_i = x_i \mid \theta) = P(X_1 = x_1, \ldots, X_n = x_n \mid \theta).
+	\end{equation*}
+	Der ML-Schätzer $\hat{\theta}_{ML}$ ist also jener Wert von $\theta$, für den die Wahrscheinlichkeit, Werte $x_1,\ldots,x_n$ zu beobachten, größtmöglich ist. In diesem Sinn ist $\hat{\theta}_{ML}$ die bestmögliche Beschreibung der Daten.
+	
+	Ist das Modell stetig, dann lässt sich $f(x_i \mid \theta)$ nicht als $P(X_i = x_i \mid \theta)$ interpretieren. Aber: Sei $n=1$ in einer Beobachtung von $x_1$ von $X_1$ ist $\hat{\theta}_{ML} = argmax f(x_1 \mid \theta)$ für $\delta > 0$ seien $x^{\left(\delta\right)}_1$ und $X^{\left(\delta\right)}_1$ definiert durch: 
+	
+	\begin{equation*}
+		X^{\left(\delta\right)}_1 = k \cdot \delta, \;\textbf{wenn} \; k\cdot\delta \leq x_1 < (k+1)\delta \; \textbf{für} \; k \in \mathbb{Z}.
+	\end{equation*}
+	
+	Damit ist $X^{\left(\delta\right)}_1$ eine diskrete Zufallsvariable mit Werten in $\{k\cdot\delta, k\in \mathbb{Z}\}$ und Wahrscheinlichkeitsfunktion:
+	
+	\begin{equation*}
+		\begin{split}
+			P(\xt) &= P (x\leq X_1 < x+ \delta \mid \theta) \\
+			&= P (X_1 \leq x + \delta \mid \theta) - P (X_1 < x \mid \theta) \\
+			&= F(X^{\left(\delta\right)}_1 + \delta \mid \theta) - F(x^{\left(\delta\right)}_1 \mid \theta),
+		\end{split}
+	\end{equation*}
+	
+	für $x = k \cdot \delta, \; k \in \mathbb{Z}$.
+	
+	Der entsprechende ML-Schätzer ist:
+	
+	\begin{equation*}
+		\begin{split}
+			\hat{\theta}_{ML}^{\left(\delta\right)} &= argmax_\theta \; p^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta)\\
+			&= argmax_\theta \frac{1}{\delta} \; P^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta)\\
+			&=argmax_\theta \frac{F(x^{\left(\delta\right)}_1 + \delta \mid \theta) - F(x^{\left(\delta\right)}_1 \mid \theta)}{\delta}
+		\end{split}
+	\end{equation*}
+	
+	Der letzte Term konvergiert, wenn $\delta$ gegen $0$ geht, gegen die Dichtefunktion von $x_1$, wenn $\theta$ der wahre Parameter. Bei kleineren $\delta$ nähert es sich $x$ an. 
+	
+	Unter geeigneten Voraussetzungen $f(\cdot\mid\cdot)$ gilt:
+	
+	\begin{equation*}
+		\hat{\theta}_{ML}^{\left(\delta\right)} = argmax_\theta \; p^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta) \overset{\delta \rightarrow 0} \longrightarrow \;argmax_\theta \; f(x_1 \mid \theta) = \hat{\theta}_{ML}.
+	\end{equation*}
+	
+	Der ML-Schätzer im stetigen Modell ist dann der Grenzwert von ML-Schätzern, die sich wie zuvor interpretieren lassen. (Ähnliches gilt für $n>1$).
+	
+	\begin{BSP}[Beispiel 1.0000 Schätzung der Populationsgröße mit der Capture/Recapture-Methode]
+		Gegeben ist eine Population und ein $N_0$ Individuum; $N_0 \in \mathbb{N}$ unbekannt. 
+		
+		Capture: Wähle aus der Population $n$ Individuen zufällig aus und markiere diese. (Zürcklegen)
+		
+		Recapture: Wähle nun eine zweite Gruppe von $n$ Individuen zufällig aus und ermittle $X$, die Anzahl der bereits markierten Individuen. 
+		
+		Modell:
+		
+		\begin{equation*}
+			X \sim HG(n,N_0,m)
+		\end{equation*}
+		$n$ Individuen gesamt
+		
+		$m$ Individuen markiert
+		
+		Es gilt:
+		\begin{equation*}
+			\EW(x \mid N) = \frac{mn}{N},
+		\end{equation*}
+		
+		sodass
+		
+		\begin{equation*}
+			\hat{N}_{MM}=\frac{mn}{X}.
+		\end{equation*}
+		
+		Für eine Beobachtung $x$ von $X$ ist: (ML-Methode)
+		
+		
+		\begin{equation*}
+			L(N) = P(X=x\mid N) =\frac{\left(
+				\begin{array}{c}
+					m\\
+					X\\
+				\end{array}
+				\right) 
+				\left(
+				\begin{array}{c}
+					N-m\\
+					n-x\\
+				\end{array}
+				\right)}{
+				\left(
+				\begin{array}{c}
+					N\\
+					n\\
+				\end{array}
+				\right)}.
+		\end{equation*}
+		Betrachte:
+		\begin{equation*}
+			D(N) = \frac{L(N)}{L(N^{-1})} = \frac{\left(
+				\begin{array}{c}
+					m\\
+					X\\
+				\end{array}
+				\right) 
+				\left(
+				\begin{array}{c}
+					N-m\\
+					n-x\\
+				\end{array}
+				\right)}{
+				\left(
+				\begin{array}{c}
+					N\\
+					n\\
+				\end{array}
+				\right)} \cdot 
+			\frac{\left(
+				\begin{array}{c}
+					N-1\\
+					n\\
+				\end{array}
+				\right)}{
+				\left(
+				\begin{array}{c}
+					m\\
+					x\\
+				\end{array}
+				\right)
+				\left(
+				\begin{array}{c}
+					N-1-m\\
+					n-x\\
+				\end{array}\right)}.
+		\end{equation*}
+		
+		Durch Kürzen des Bruches erhält man:
+		
+		\begin{equation*}
+			\frac{(N-n) (N-m)}{N (N - m - n -x)}.
+		\end{equation*}
+		
+		Damit ist $D(N) <$ oder $>1$:
+		
+		\begin{equation*}
+			\begin{split}
+				(N-n) (N-m) &\gtrless  N(N-m-n+x) \\
+				N^2 - Nm - Nn +nm &\gtrless N^2 -Nm-Nn+Nx\\
+				\frac{mn}{x} &\gtrless N, \; \text{für} \; x\neq 0.
+			\end{split}
+		\end{equation*}
+		
+		Für $x = 0$ ist $L(N)$ streng steigend in $N$ und hat keinen Maximierer (in $\mathbb{N}$) $\Rightarrow$ Setze $\hat{N} = \infty$.
+		
+		Sei nun $x\geq 1$
+		
+		Fall 1:
+		
+		\begin{equation*}
+			\frac{mn}{x} \notin \mathbb{N}.
+		\end{equation*}
+		
+		Hiermit ist $L(N)$ maximal, wenn:
+		
+		\begin{equation*}
+			N = \left\lfloor \frac{mn}{x} \right\rfloor. 
+		\end{equation*}
+		
+		$\Rightarrow$ Setze $\hat{N} = \left\lfloor \frac{mn}{x} \right\rfloor$. 
+		
+		Fall 2:
+		
+		\begin{equation*}
+			\frac{mn}{x} \in \mathbb{N}.
+		\end{equation*}
+		
+		Hier gilt:
+		
+		\begin{equation*}
+			D\left(\frac{mn}{x}\right) = 1.
+		\end{equation*}
+		
+		Das heißt:
+		
+		\begin{equation*}
+			L\left(\frac{mn}{x}\right) = L\left(\frac{mn}{x} -1\right).
+		\end{equation*}
+		
+		$\Rightarrow$ ML ist nicht eindeutig. $L(N)$ wird also an 2 Stellen maximiert. Setze $\hat{N} = \frac{mn}{x}$.
+		
+		Beweis:
+		
+		\begin{equation*}
+			\begin{split}
+				\frac{mn}{x} &= \frac{(N-n)(N-m)}{N(N-m-n+x)}\\  
+				&= \frac{\left(\frac{mn}{x}-n\right)\left(\frac{mn}{x} -m\right)}{\frac{mn}{x}\left(\frac{mn}{x}-m-n-x\right)}\\
+				&= \frac{\left(\frac{mn}{x}\right)^2 -\frac{mn}{x}m -\frac{mn}{x}n +mn} {\left(\frac{mn}{x}\right)^2 - \frac{mn}{x}m -\frac{mn}{x}n + mn} =1.
+			\end{split}
+		\end{equation*}
+		
+		Man erhält also den Schätzer:
+		
+		\begin{equation*}
+			\hat{N} = 
+			\begin{cases}
+				\left\lfloor \frac{mn}{x} \right\rfloor, &\textbf{für} \; x \geq 1 \\
+				\infty,  &\textbf{für} \; x =0.
+			\end{cases}
+		\end{equation*}
+		
+		Um das Problem mit $x=0$ zu umgehen, kann man zum Beispiel "weiterfischen", bis zumindest ein markiertes Individuum gefangen wird. Danach ändert sich das zugrundeliegende Modell auf ein geometrisches Modell. 
+	\end{BSP}
+	
+	\subsubsection{Konsistenz von ML-Schätzern}
 	
 
 \end{document}
