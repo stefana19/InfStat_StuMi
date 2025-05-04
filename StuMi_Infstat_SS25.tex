@@ -12,6 +12,7 @@
 \newcommand{\KV}{\overset{\sim} \longrightarrow} %Konvergenz in Verteilung
 \newcommand{\eqname}[1]{\tag*{#1}}% Tag equation with name
 \newcommand{\xt}{x \mid \theta} %x bedingt auf theta
+\newcommand{\ablt}{\frac{\delta}{\delta \theta}}
 
 
 
@@ -1516,5 +1517,276 @@ sodass
 	
 	\subsubsection{Konsistenz von ML-Schätzern}
 	
+	Betrachte ein (diskretes oder stetiges) Modell wie in 1.3.8. und für jede Stichprobe der Größe n, den ML-Schätzer:
+	
+	\begin{equation*}
+		\hat{\theta}_n = \hat{\theta}_{ML}(\FZV).
+	\end{equation*}
+	
+	Satz: Unter geeigneten Vorraussetzungen (an $f(\cdot \mid \cdot)$ bzw. $p(\cdot \mid \cdot)$) ist der ML-Schätzer konsistent für $\theta_0$. Für jeden möglichen Wert $\theta \in \Theta$ gilt:
+	
+	\begin{equation*}
+		\hat{\theta}_n \KW \theta,
+	\end{equation*}
+	
+	wenn $\theta$ der wahre Parameter ist. 
+	
+	\begin{BWS}[Beweisidee]
+		Für ein stetiges Modell (analog auch für diskret):
+		Der Einfachheit sei $k=1$:
+		\begin{equation*}
+			\hat{\theta}_n \; \textbf{maximiert} \; l_n(\theta) = \sum_{i=1}^{n}\log f(\xt), 
+		\end{equation*}
+		oder aquivalent:
+		\begin{equation*}
+			\frac{1}{n} l_n(\theta = \frac{1}{n}\sum_{i=1}^{n}\log f(x_i \mid \theta)).
+		\end{equation*}
+		Mit dem Gesetz der großen Zahl gilt:
+		Für jedes $\theta \in \Theta$ ist:
+		\begin{equation*}
+			\frac{1}{n} l_n (\theta) \KW \EW(\log f((X_1 \mid \theta) \mid \theta_0)) := l_\infty (\theta).
+		\end{equation*}
+		Idee: (Mathematisch nicht genau ausführbar)
+		\begin{equation*}
+			\textbf{Maximierer von} \; \frac{1}{n} l_n(\theta) \KW \; \textbf{Maximierer von} \; l_\infty (\theta).
+		\end{equation*}
+		Maximierer von $l_\infty (\theta)$:
+		\begin{equation*}
+			\begin{split}
+				\frac{\delta}{\delta \theta} l_\infty (\theta_0) &= \frac{\delta}{\delta \theta} \EW(\log f((x\mid \theta)\mid \theta_0))\\
+				&= \frac{\delta}{\delta \theta} \int \log f(x \mid \theta) \cdot f(x \mid \theta_0) \; dx \\
+				&= \int \frac{\delta}{\delta \theta} \log f(x \mid \theta) \cdot f(x\mid \theta_0) \; dx \\
+				&=\int \frac{\frac{\delta}{\delta \theta} f(x\mid \theta)}{f(x\mid \theta)} \cdot f(x\mid \theta_0) \; dx. 
+			\end{split}
+		\end{equation*}
+		An der Stelle $\theta = \theta_0$ ist:
+		\begin{equation*}
+			\frac{\delta}{\delta \theta} l_\infty (\theta_0) = \int \frac{\frac{\delta}{\delta \theta} f(x\mid\theta_0)}{f(x\mid\theta_0)} \cdot f(x\mid\theta_0) \; dx = \frac{\delta}{\delta \theta} \int f(x\mid\theta_0) \; dx = 0.
+		\end{equation*}
+		Ebenfalls an der Stelle $\theta = \theta_0$ ist:
+		\begin{equation*}
+			\frac{\delta^2}{\delta \theta^2} l_\infty(\theta_0) = \frac{\delta^2}{\delta \theta^2} \EW (\log f((X_1 \mid \theta_0) \mid \theta_0)) = \EW \left(\frac{\delta^2}{\delta \theta^2}\log f\left(\left(X_1 \mid \theta_0\right) \mid \theta_0\right)\right) = - I(\theta_0) \leq 0.
+		\end{equation*}
+		Im nicht trivialen Fall, wo $I(\theta_0) > 0$ ist, wird also $l_\infty (\theta)$ an der Stelle $\theta_0$ maximiert. Die Details des Beweises werden im Master-Studium behandelt. 
+	\end{BWS}
+	
+	\subsubsection{Verteilung des (skalierten) Fehlers von ML-Schätzern}
+
+	\begin{Definition}[Definition(Fischer-Information)]
+		Betrachte ein (diskretes oder stetiges) Modell wie in 1.3.8. und für jede Stichprobengröße $n$, den ML-Schätzer: 
+	\begin{equation*}
+		\hat{\theta}_n = \hat{\theta}_{ML}(\FZV).
+	\end{equation*}
+	Zur Vereinfachung sei $k = \dim \theta_0 = 1$.
+	
+	Die Größe:
+	\begin{equation*}
+		I(\theta_0) = \EW\left[\left(\frac{\delta}{\delta \theta} \log f( X\mid \theta_0)\right)^2 \mid \theta_0 \right], \eqname{(stetig)}
+	\end{equation*}
+	beziehungsweise
+	\begin{equation*}
+		I(\theta_0) = \EW\left[\left(\frac{\delta}{\delta \theta} \log p( X\mid \theta_0)\right)^2 \mid \theta_0 \right] \eqname{(diskret)}
+	\end{equation*}
+	nennt man die Fisher-Information (von $X$ über $\theta_0$), sofern diese Größe wohldefiniert ist. 
+	
+	Beachte:
+	\begin{equation*}
+		I(\theta_0) \geq 0.
+	\end{equation*}
+	Unter geeigneten Vorraussetzungen an $f(\cdot \mid \cdot)$ bzw. $p(\cdot \mid \cdot)$ kann man $I(\theta_0)$ alternativ berechnen als:
+	\begin{equation*}
+		I(\theta_0) = -\EW \left[\frac{\delta^2}{\delta \theta^2} \log f(X\mid\theta_0) \mid \theta_0 \right], \eqname{(stetig)}
+	\end{equation*}
+	beziehungsweise
+	\begin{equation*}
+		I(\theta_0) = -\EW \left[\frac{\delta^2}{\delta \theta^2} \log p(X\mid\theta_0) \mid \theta_0 \right]. \eqname{(diskret)}
+	\end{equation*}
+	\end{Definition}
+	
+	\begin{BWS} [Beweisidee Fisher-Information]
+		Diese Beweisidee wurde für stetige Fälle ausgearbeitet, gilt aber genauso für diskrete Modelle. Für jedes $\theta \in \Theta$ ist $\int f(x\mid \theta) \; dx = 1$. 
+		\begin{equation*}
+			\begin{split}
+				\Rightarrow 0 &= \frac{\delta}{\delta \theta} \int f(X\mid \theta) \; dx \\
+				&= \int \frac{\delta}{\delta \theta} f(X\mid \theta) \; dx \\
+				&=  \int \frac{\frac{\delta}{\delta \theta} f(x\mid\theta)}{f(x\mid\theta)} \cdot f(x\mid\theta) \; dx \\
+				&= \int \frac{\delta}{\delta \theta} \log f(X \mid \theta) \cdot f(X \mid \theta) \; dx.
+			\end{split}
+		\end{equation*}
+		\begin{equation*}
+			\begin{split}
+				\Rightarrow 0 &= \frac{\delta}{\delta \theta} \int \frac{\delta}{\delta \theta} \log f(X\mid \theta) \cdot f(X \mid \theta) \; dx \\
+				&= \int \frac{\delta^2}{\delta \theta^2} \log  f(X\mid \theta) \cdot f(X\mid \theta) + \frac{\delta}{\delta \theta} \log f(X\mid \theta) \cdot \frac{\delta}{\delta \theta} \; dx \\
+				&=\int \left(\frac{\delta^2}{\delta \theta^2} \log  f(X\mid \theta)\right) \cdot (f(X\mid \theta)) \; dx + \int \left(\frac{\delta}{\delta \theta} \log f(X\mid \theta)\right)^2 \cdot \frac{\delta}{\delta \theta} \; dx
+			\end{split}
+		\end{equation*}
+		\begin{equation*}
+			I(\theta) = -\int \left(\frac{\delta^2}{\delta \theta^2} \log  f(X\mid \theta)\right) \cdot (f(X\mid \theta)) \; dx = -\EW \left[\frac{\delta^2}{\delta \theta^2} \log  f(X\mid \theta)\right]
+		\end{equation*}
+	\end{BWS}
+	
+	Satz 1.3.13.: Unter geeigneten Vorraussetzungen an $f(\cdot \mid \cdot)$ bzw. $p(\cdot \mid \cdot)$ gilt für den ML-Schätzer $\hat{\theta}_n$ und für $\theta \in \Theta$ mit $I(\theta) > 0$, dass:
+	
+	\begin{equation*}
+		\sqrt{n}(\hat{\theta}_n - \theta) \KV N\left(0,\frac{1}{I(\theta)}\right),
+	\end{equation*}
+	wenn $\theta$ der wahre Parameter ist. 
+	
+	\begin{BWS}[Beweisidee Verteilung des Schätzfehlers]
+		Diese Beweisidee wurde für stetige Fälle ausgearbeitet, gilt aber genauso für diskrete Modelle. 
+		
+		Sei $\theta \in \Theta$ mit $I(\theta) > 0$. $\hat{\theta}_n$ minimiert $l_n (\theta) = \sum_{i=1}^{n} \log f (x_i \mid \theta)$, sodass:
+		
+		\begin{equation*}
+			\begin{split}
+				0 &= l'_n (\hat{\theta}_n) \\
+				&= l'(\theta) + l''_n(\theta) (\hat{\theta}_n - \theta) + \; \textbf{Rest}.
+			\end{split}
+		\end{equation*}
+		Der Rest kann ignoriert werden und die zweite Zeile ergibt sich aus der Taylor Entwicklung von $ln(\cdot)$ im Punkt $\theta$. 
+		
+		Dies gibt die Approximation:
+		\begin{equation*}
+			0 \approx l'_n (\theta) +  l''_n(\theta) (\hat{\theta}_n - \theta),
+		\end{equation*}
+		beziehungsweise:
+		\begin{equation*}
+			(\hat{\theta}_n - \theta) \approx \frac{-l'_n (\theta)}{l''_n(\theta)},
+		\end{equation*}
+		beziehungsweise:
+		\begin{equation*}
+			\sqrt{n} (\hat{\theta}_n - \theta) \approx \frac{-\sqrt{n}\;l'_n(\theta)}{l''_n(\theta)} = \frac{-\frac{1}{\sqrt{n} } \; l'_n(\theta)}{\frac{1}{n}\;l''_n(\theta)}.
+		\end{equation*}
+		Der Zähler ist:
+		\begin{equation*}
+			\frac{1}{\sqrt{n}}\sum_{i=1}^{n} \frac{\delta}{\delta \theta} log f(x_i \mid \theta).
+		\end{equation*}
+		Die Summanden sind i.i.d. mit folgenden Erwartungswert:
+		\begin{equation*}
+			\EW\left(\ablt \log f(x_i \mid \theta) \mid \theta\right) = \int \frac{\ablt f(x \mid \theta)}{f(\xt)} f(\xt) \; dx = \ablt \int f(\xt) \; dx = 0
+		\end{equation*}
+		und folgender Varianz:
+		\begin{equation*}
+			\EW(\left(\ablt \log f(x_i \mid \theta)\right)^2 \mid \theta) = I(\theta).
+		\end{equation*}
+		Mit dem zentralen Grenzwertsatz folgt:
+		\begin{equation*}
+			\textbf{Zähler} \; \KV \; N(0,I(\theta)),
+		\end{equation*}
+		wenn $\theta$ der wahre Parameter ist.
+		
+		Der Nenner ist:
+		\begin{equation*}
+			\frac{1}{n} \sum_{i=1}^{n} \frac{\delta^2}{\delta \theta^2} \log f(x_i \mid \theta).
+		\end{equation*}
+		Die Summanden sind i.i.d. mit folgenden Erwartungswert:
+		\begin{equation*}
+			\EW \left(\frac{\delta^2}{\delta \theta^2} \log f(x_i \mid \theta) \mid \theta \right) = -I(\theta).
+		\end{equation*}
+		Mit dem Gesetz der großen Zahl gilt:
+		\begin{equation*}
+			\textbf{Nenner} \; \KW \; -I(\theta),
+		\end{equation*}
+		wenn $\theta$ der wahre Parameter ist. 
+		
+		Also: 
+		\begin{equation*}
+			\begin{split}
+				\textbf{Zähler} \; &\KV \; N(0,I(\theta))\\
+				\textbf{Nenner} \; &\KW \; -I(\theta).
+			\end{split}
+		\end{equation*}
+		Damit gilt:
+		\begin{equation*}
+			- \frac{\textbf{Zähler}}{\textbf{Nenner}} \KV -\frac{N(0,I(\theta))}{-I(\theta)} = \frac{N(0, I(\theta))}{I(\theta)} = N\left(0, \frac{1}{I(\theta)}\right)
+		\end{equation*}
+		In dieser Approximation $\sqrt{n}(\hat{\theta}_n - \theta) = - \frac{\textbf{Zähler}}{\textbf{Nenner}}$ ist der Fehler für $n \rightarrow \infty$ vernachlässigbar. Sodass auch:
+		\begin{equation*}
+			\sqrt{n}(\hat{\theta}_n - \theta)  \KV N\left(0, \frac{1}{I(\theta)}\right)
+		\end{equation*}
+		gilt, wenn $\theta$ der wahre Parameter ist. Genaue Details dieses Beweises folgen im Master-Studium. 
+	\end{BWS}
+	Unter geeigneten Vorraussetzungen kann $I(\theta)$ im stetigen Fall konsistent geschätzt werden durch:
+	\begin{equation*}
+		\hat{I}_n = \frac{1}{n} \sum_{i=1}^{n}\left(\ablt \log f(x_i\mid \hat{\theta}_n)\right)^2.
+	\end{equation*}
+	Im diskreten Fall ist $f(\cdot \mid \cdot)$ durch $p(\cdot \mid \cdot)$ zu ersetzen.
+	Unter den Voraussetzungen von Satz 1.3.13. gilt dann, dass:
+	\begin{equation*}
+		\sqrt{n} \sqrt{\hat{I}_n}(\hat{\theta}_n - \theta) \KV N(0,1),
+	\end{equation*}
+	wenn $\theta$ der wahre Parameter ist. 
+	
+	Damit kann man wieder asymptotisch valide Konfidenzintervalle oder Hypothesentests für $\theta_0$ konstruieren. 
+	\begin{BSP}[Konfidenzintervall für $\theta_0$]
+		\begin{equation*}
+			\hat{\theta}_n \pm (n \cdot \hat{I}_n)^{-\frac{1}{2}} \cdot \phi\left(1-\frac{\alpha}{2}\right).
+		\end{equation*}
+	\end{BSP}
+	Vorteil der ML: Man braucht keine Delta-Methode. Man braucht hier nur die Fisher-Information. 
+	
+	Es gibt Situationen, wo Satz 1.3.13. nicht anwendbar ist. Im folgenden Beispiel konvergiert $\hat{\theta}_n - \theta$ schneller als $\frac{1}{\sqrt{n}}$ und die skalierte Grenzverteilung ist nicht normal. 
+	
+	\begin{BSP}[Beispiel Grenzverteilung keine Normalverteilung]
+		Gegeben sind Zufallsvariablen $\FZV$ mit
+		\begin{equation*}
+			\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
+		\end{equation*}
+		Hier ist der ML-Schätzer:
+		\begin{equation*}
+			\hat{\theta}_n = X_{(n)} = \underset{1\leq i \leq n}{max} X_n. 
+		\end{equation*}
+		Und es gilt:
+		\begin{equation*}
+			n(\theta_0-\hat{\theta}_n) \KV Exp\left(\frac{1}{\theta_0}\right) \eqname{*}.
+		\end{equation*}
+		Dies konvergiert mit der Rate $\frac{1}{n} < \frac{1}{\sqrt{n}}$.
+		Beachte: Hier ist:
+		\begin{equation*}
+			f(X\mid \theta) =
+			\begin{cases}
+				\frac{1}{\theta}, &0\leq x\leq \theta\\
+				0, &\textbf{sonst}.
+			\end{cases}
+		\end{equation*}
+		Zu * Erstmal ist:
+		\begin{equation*}
+			\begin{split}
+				P(\hat{\theta}_n < X \mid \theta_0) =& P(\underset{1\leq i \leq n}{max} X_i < x \mid \theta_0)\\
+				=& P(X_1 < x, \ldots, X_n < x \mid \theta_0)\\
+				\underset{u.a.}=& P(X_1<x\mid \theta_0) \cdot \ldots \cdot P(X_n < x \mid \theta_0)\\
+				\underset{\textbf{für} \; 0 \leq x \leq \theta_0}=& \left(\frac{1}{\theta_0}x\right)^{n}\\
+				=& \left(\frac{x}{\theta_0}\right)^n.
+			\end{split}
+		\end{equation*}
+		Damit ist:
+		\begin{equation*}
+			\begin{split}
+				P (n(\theta_0 -\hat{\theta}_0) \leq t \mid \theta_0) &= 1-P(n(\theta_0 -\hat{\theta}_0) \\
+				&= 1- P(n \theta_0 -n\hat{\theta}_n > t \mid \theta_0)\\
+				&= 1- P(n\hat{\theta}_n < n\theta_0 - t \mid \theta_0)\\
+				&= 1- P\left(\hat{\theta}_n < \theta_0 - \frac{t}{n} \mid \theta_0 \right)\\
+				&= 1- \left(\frac{\theta_0 \frac{t}{n}}{\theta_0}\right)^n\\
+				&= 1- \left(1-\frac{t}{n \theta_0}\right)^n \overset{n\rightarrow \infty}\longrightarrow 1-e^{-\frac{t}{\theta_0}}.
+			\end{split}
+		\end{equation*}
+		Dies entspricht der Verteilungsfunktion von einer Exponentialverteilung mit Parameter $\frac{1}{\theta_0}$ an der Stelle $t$.
+		
+		Vergleich mit der Momentenmethode:
+		\begin{equation*}
+			\begin{split}
+				\hat{\theta}_{MM}& = 2 \bar{X}_n\\
+				\hat{\theta}_{MM}& \; \textbf{mit Rate} \;\frac{1}{\sqrt{n}}\\
+				\hat{\theta}_{ML}& \; \textbf{mit Rate} \;\frac{1}{n}.
+			\end{split}
+		\end{equation*}
+	\end{BSP}
+	
+	\subsection{Zulässigkeit, Effizienz und Cramér-Rao-Schranke}
+	
+	
+	
+
+
 
 \end{document}
