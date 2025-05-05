@@ -98,7 +98,7 @@ coltitle = black, %Titel Box
 	\end{enumerate}
 	
 	
-	\begin{Definition}[Definition 1.1 (Schätzer)]
+	\begin{Definition}[Definition 1.1.1 (Schätzer)]
 		Ein Schätzer $\hat{\theta}$ für $\theta_0$ ist eine Funktion 
 		\begin{equation*}
 				\hat{\theta} = \hat{\theta} (\FZV)
@@ -110,7 +110,7 @@ coltitle = black, %Titel Box
 	 \end{equation*}
 	\end{Definition}
 	 
-	 \begin{BSP}[Beispiel 1.2 (Mittelwertschätzer)]
+	 \begin{BSP}[Beispiel 1.1.1 (Mittelwertschätzer)]
 	 	Ein bekanntes Beispiel eines Schätzers ist der Mittelwertschätzer (Stichprobenmittel), welcher wie folgt definiert ist:
 	 	\begin{equation*}
 	 			\hat{\mu}=\frac{1}{n}\sum_{i=1}^{n} X_i.
@@ -122,90 +122,91 @@ coltitle = black, %Titel Box
 
 \pagebreak % fuegt einen Zeilenumbruch ein
 \subsection{Beispiele von parametrischen Modellen}
-	
-	\begin{enumerate}[label = (\roman*)]
-		\item Bernoulli-Verteilung \\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
-		\end{equation*} 
-		Hier ist der wahre Parameter 
-		\begin{equation*}
-			\theta_0 = p_0
-		\end{equation*}
-		mit entsprechendem Parameterraum
-		\begin{equation*}
-			\Theta = [0,1] \subseteq \IR^k,\; k=1.
-		\end{equation*}
-		
-		\item Geometrische Verteilung \\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} G(p_0), \; 0 < p_0 \leq 1.
-		\end{equation*} 
-		Hier ist der wahre Parameter 
-		\begin{equation*}
-			\theta_0 = p_0
-		\end{equation*}
-		mit entsprechendem Parameterraum
-		\begin{equation*}
-			\Theta = (0,1] \subseteq \IR^k,\; k=1.
-		\end{equation*}
-
-
-	\item Normalverteilung
-	\begin{enumerate}[label = (\alph*)] % Alph = Buchstaben
-	\item Normalverteilung mit bekannter Varianz $\sigma^2$\\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma^2),\; \mu_0 \in \IR, \; \sigma^2 >0.
-	\end{equation*} 
-	Hier ist der wahre Parameter 
-	\begin{equation*}
-		\theta_0 = \mu_0
-	\end{equation*}
-	mit entsprechendem Parameterraum
-	\begin{equation*}
-		\Theta = \IR \subseteq \IR^k,\; k=1.
-	\end{equation*}
-	
-	\item Normalverteilung mit bekanntem Erwartungswert $\mu$\\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu,\sigma_0^2),\; \mu \in \IR, \; \sigma_0^2 >0.
-	\end{equation*} 
-	Hier ist der wahre Parameter 
-	\begin{equation*}
-		\theta_0 = \sigma_0^2
-	\end{equation*}
-	mit entsprechendem Parameterraum
-	\begin{equation*}
-		\Theta = (0,\infty) \subseteq \IR^k,\; k=1.
-	\end{equation*}
-	\item Normalverteilung mit unbekanter Varianz und unbekanntem Erwartungswert\\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0.
-	\end{equation*} 
-	Hier ist der wahre Parameter 
-	\begin{equation*}
-		\theta_0 = (\mu_0, \sigma_0^2)^\top
-	\end{equation*}
-	mit entsprechendem Parameterraum
-	\begin{equation*}
-		\Theta = \IR \times (0,\infty) \subseteq \IR^k,\; k=2.
-	\end{equation*}
-	\end{enumerate}
-\item Gleichverteilung\\
-Gegeben sind Zufallsvariablen $\FZV$ mit
-\begin{equation*}
-	\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
-\end{equation*}
-mit entsprechendem Parameterraum
-\begin{equation*}
-	\Theta = (0,\infty)  \subseteq \IR^k,\; k=1.
-\end{equation*}
-	\end{enumerate}
+	\begin{BSP}[Beispiel 1.1.2 (parametrische Modelle)]
+		\begin{enumerate}[label = (\roman*)]
+			\item Bernoulli-Verteilung \\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
+			\end{equation*} 
+			Hier ist der wahre Parameter 
+			\begin{equation*}
+				\theta_0 = p_0
+			\end{equation*}
+			mit entsprechendem Parameterraum
+			\begin{equation*}
+				\Theta = [0,1] \subseteq \IR^k,\; k=1.
+			\end{equation*}
+			
+			\item Geometrische Verteilung \\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} G(p_0), \; 0 < p_0 \leq 1.
+			\end{equation*} 
+			Hier ist der wahre Parameter 
+			\begin{equation*}
+				\theta_0 = p_0
+			\end{equation*}
+			mit entsprechendem Parameterraum
+			\begin{equation*}
+				\Theta = (0,1] \subseteq \IR^k,\; k=1.
+			\end{equation*}
+			
+			
+			\item Normalverteilung
+			\begin{enumerate}[label = (\alph*)] % Alph = Buchstaben
+				\item Normalverteilung mit bekannter Varianz $\sigma^2$\\
+				Gegeben sind Zufallsvariablen $\FZV$ mit
+				\begin{equation*}
+					\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma^2),\; \mu_0 \in \IR, \; \sigma^2 >0.
+				\end{equation*} 
+				Hier ist der wahre Parameter 
+				\begin{equation*}
+					\theta_0 = \mu_0
+				\end{equation*}
+				mit entsprechendem Parameterraum
+				\begin{equation*}
+					\Theta = \IR \subseteq \IR^k,\; k=1.
+				\end{equation*}
+				
+				\item Normalverteilung mit bekanntem Erwartungswert $\mu$\\
+				Gegeben sind Zufallsvariablen $\FZV$ mit
+				\begin{equation*}
+					\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu,\sigma_0^2),\; \mu \in \IR, \; \sigma_0^2 >0.
+				\end{equation*} 
+				Hier ist der wahre Parameter 
+				\begin{equation*}
+					\theta_0 = \sigma_0^2
+				\end{equation*}
+				mit entsprechendem Parameterraum
+				\begin{equation*}
+					\Theta = (0,\infty) \subseteq \IR^k,\; k=1.
+				\end{equation*}
+				\item Normalverteilung mit unbekanter Varianz und unbekanntem Erwartungswert\\
+				Gegeben sind Zufallsvariablen $\FZV$ mit
+				\begin{equation*}
+					\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0.
+				\end{equation*} 
+				Hier ist der wahre Parameter 
+				\begin{equation*}
+					\theta_0 = (\mu_0, \sigma_0^2)^\top
+				\end{equation*}
+				mit entsprechendem Parameterraum
+				\begin{equation*}
+					\Theta = \IR \times (0,\infty) \subseteq \IR^k,\; k=2.
+				\end{equation*}
+			\end{enumerate}
+			\item Gleichverteilung\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
+			\end{equation*}
+			mit entsprechendem Parameterraum
+			\begin{equation*}
+				\Theta = (0,\infty)  \subseteq \IR^k,\; k=1.
+			\end{equation*}
+		\end{enumerate}
+	\end{BSP}
 	
 	
 \subsection{Wunschliste für einen Schätzer}
@@ -281,121 +282,123 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 
 \subsubsection{Beispiele für den Momentenmethoden-Schätzer}
 
-	\begin{enumerate}[label = (\roman*)]
-	\item Bernoulli-Verteilung \\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
-	\end{equation*} 
-	Hier ist das erste Moment
-	\begin{equation*}
-		\EW_p(X)=p.
-	\end{equation*}
-	Somit gilt:
-	\begin{equation*}
-		f(m)=m.
-	\end{equation*}
-	
-	\item Geometrische Verteilung \\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}}{\sim} G(p_0), \; 0 < p_0 \leq 1.
-	\end{equation*} 
-	Hier ist das erste Moment
-	\begin{equation*}
-		\EW_p(X) = \frac{1}{p}.
-	\end{equation*}
-	Somit gilt:
-	\begin{equation*}
-		f(m)=\frac{1}{m}.
-	\end{equation*}
-	
-	
-		\item Normalverteilung mit unbekanter Varianz und unbekanntem Erwartungswert\\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0 \; \textbf{mit} \; \theta_0 = \left(
-			\begin{array}{c}
-				\mu_0\\
-				\sigma_0^2\\
-			\end{array}
-			\right)
-		\end{equation*} 
-		Hier ist das erste Moment
-		\begin{equation*}
-			\EW_{\mu,\sigma^2}(X)=\mu.
-		\end{equation*}
-		Das zweite Moment enstpricht: 
-		\begin{equation*}
-			\EW_{\mu,\sigma^2}(X^2)=\textbf{Var}_{\mu,\sigma^2}(X^2) + (\EW_{\mu,\sigma^2}(X))^2 = \sigma^2 + \mu^2
-		\end{equation*}
-		Also:
-		
-		\begin{equation*}
-			\left(
-			\begin{array}{c}
-				\mu\\
-				\sigma^2\\
-			\end{array}
-			\right)
-			\mapsto 
-			\left(
-			\begin{array}{c}
-				\mu\\
-				\sigma^2+\mu^2\\
-			\end{array}
-			\right) =
-			\left(
-			\begin{array}{c}
-				m_1\\
-				m_2\\
-			\end{array}
-			\right)
-		\end{equation*}
-		Hier ist also
-		\begin{equation*}
-			m_1 = \mu
-		\end{equation*}
-		und
-		\begin{equation*}
+	\begin{BSP}[Beispiel 1.3.1 (Momentenmethoden-Schätzer)]
+		\begin{enumerate}[label = (\roman*)]
+			\item Bernoulli-Verteilung \\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
+			\end{equation*} 
+			Hier ist das erste Moment
+			\begin{equation*}
+				\EW_p(X)=p.
+			\end{equation*}
+			Somit gilt:
+			\begin{equation*}
+				f(m)=m.
+			\end{equation*}
+			
+			\item Geometrische Verteilung \\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} G(p_0), \; 0 < p_0 \leq 1.
+			\end{equation*} 
+			Hier ist das erste Moment
+			\begin{equation*}
+				\EW_p(X) = \frac{1}{p}.
+			\end{equation*}
+			Somit gilt:
+			\begin{equation*}
+				f(m)=\frac{1}{m}.
+			\end{equation*}
+			
+			
+			\item Normalverteilung mit unbekanter Varianz und unbekanntem Erwartungswert\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0 \; \textbf{mit} \; \theta_0 = \left(
+				\begin{array}{c}
+					\mu_0\\
+					\sigma_0^2\\
+				\end{array}
+				\right)
+			\end{equation*} 
+			Hier ist das erste Moment
+			\begin{equation*}
+				\EW_{\mu,\sigma^2}(X)=\mu.
+			\end{equation*}
+			Das zweite Moment enstpricht: 
+			\begin{equation*}
+				\EW_{\mu,\sigma^2}(X^2)=\textbf{Var}_{\mu,\sigma^2}(X^2) + (\EW_{\mu,\sigma^2}(X))^2 = \sigma^2 + \mu^2
+			\end{equation*}
+			Also:
+			
+			\begin{equation*}
+				\left(
+				\begin{array}{c}
+					\mu\\
+					\sigma^2\\
+				\end{array}
+				\right)
+				\mapsto 
+				\left(
+				\begin{array}{c}
+					\mu\\
+					\sigma^2+\mu^2\\
+				\end{array}
+				\right) =
+				\left(
+				\begin{array}{c}
+					m_1\\
+					m_2\\
+				\end{array}
+				\right)
+			\end{equation*}
+			Hier ist also
+			\begin{equation*}
+				m_1 = \mu
+			\end{equation*}
+			und
+			\begin{equation*}
 				m_2 - m_1^2 = \sigma^2 + \mu^2 - \mu^2 = \sigma^2.
-		\end{equation*}
-		
-		Damit ist hier
-		
-		\begin{equation*}
-			f(\left(
-			\begin{array}{c}
-				m_1\\
-				m_2\\
-			\end{array}
-			\right)) = 
-			\left(
-			\begin{array}{c}
-				m_1\\
-				m_2 - m_1^2\\
-			\end{array}
-			\right).
-		\end{equation*}
-		
+			\end{equation*}
+			
+			Damit ist hier
+			
+			\begin{equation*}
+				f(\left(
+				\begin{array}{c}
+					m_1\\
+					m_2\\
+				\end{array}
+				\right)) = 
+				\left(
+				\begin{array}{c}
+					m_1\\
+					m_2 - m_1^2\\
+				\end{array}
+				\right).
+			\end{equation*}
+			
+			
+			
+			\item Gleichverteilung\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
+			\end{equation*}
+			Hier ist das erste Moment
+			\begin{equation*}
+				\EW_\theta (X) = \frac{\theta} {2} = m \; \textbf{bzw.} \;
+				\theta = 2\cdot m = 2 \cdot \EW_\theta(X).
+			\end{equation*}
+			Somit gilt:
+			\begin{equation*}
+				f(m) = 2\cdot m.
+			\end{equation*}
+		\end{enumerate}
+	\end{BSP}
 	
-
-	\item Gleichverteilung\\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
-	\end{equation*}
-	Hier ist das erste Moment
-	\begin{equation*}
-		\EW_\theta (X) = \frac{\theta} {2} = m \; \textbf{bzw.} \;
-		\theta = 2\cdot m = 2 \cdot \EW_\theta(X).
-	\end{equation*}
-	Somit gilt:
-	\begin{equation*}
-		f(m) = 2\cdot m.
-	\end{equation*}
-\end{enumerate}
-
 	\noindent Man betrachte erneut ein Experiment mit $\FZV$ Zufallsvariablen und trifft die Annahme, dass $\FZV$ i.i.d. Kopien von einer Zufallsvariable $X$ darstellen und einer Verteilung mit bestimmter Form folgen:
 
 \vspace{-2mm}
@@ -421,98 +424,100 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 \end{equation*}
 
 \subsubsection{Beispiele für Plug-In Schätzer}
-	\begin{enumerate}[label = (\roman*)]
-	\item Bernoulli-Verteilung \\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
-	\end{equation*} 
-	Hier ist das erste Moment
-	\begin{equation*}
-		\EW_p(X)=p.
-	\end{equation*}
-	Also gilt
-	\begin{equation*}
-		f(m)=m,
-	\end{equation*}
-	sodass
-	\begin{equation*}
-		\hat{p}_{MM} = \bar{X} 
-	\end{equation*}
-	ist.
+	\begin{BSP}[Beispiel 1.3.2 (Plug-In-Schätzer)]
+		\begin{enumerate}[label = (\roman*)]
+			\item Bernoulli-Verteilung \\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
+			\end{equation*} 
+			Hier ist das erste Moment
+			\begin{equation*}
+				\EW_p(X)=p.
+			\end{equation*}
+			Also gilt
+			\begin{equation*}
+				f(m)=m,
+			\end{equation*}
+			sodass
+			\begin{equation*}
+				\hat{p}_{MM} = \bar{X} 
+			\end{equation*}
+			ist.
+			
+			\item Geometrische Verteilung \\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} G(p_0), \; 0 < p_0 \leq 1.
+			\end{equation*} 
+			Hier ist das erste Moment
+			\begin{equation*}
+				\EW_p(X) = \frac{1}{p}.
+			\end{equation*}
+			Also gilt
+			\begin{equation*}
+				f(m)=\frac{1}{m},
+			\end{equation*}
+			sodass
+			\begin{equation*}
+				\hat{p}_{MM} = \frac{1}{\bar{X}}.
+			\end{equation*}
+			
+			
+			\item Normalverteilung mit unbekannter Varianz und unbekanntem Erwartungswert\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0 \; \textbf{mit} \; 	f(\left(
+				\begin{array}{c}
+					m_1\\
+					m_2\\
+				\end{array}
+				\right)) = 
+				\left(
+				\begin{array}{c}
+					m_1\\
+					m_2 - m_1^2\\
+				\end{array}
+				\right),
+			\end{equation*} 
+			
+			sodass
+			
+			\begin{equation*}
+				\left(
+				\begin{array}{c}
+					\hat{\mu}_{MM}\\
+					\hat{\sigma}^2_{MM}\\
+				\end{array}
+				\right) = 
+				f(\bar{x}, \bar{x^2})=
+				\left(
+				\begin{array}{c}
+					\bar{x}\\
+					\bar{x^2}-\bar{x}^2\\
+				\end{array}
+				\right),
+			\end{equation*}
+			
+			
+			
+			\item Gleichverteilung\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
+			\end{equation*}
+			Hier ist also
+			\begin{equation*}
+				f(m) = 2\cdot m,
+			\end{equation*}
+			sodass
+			\begin{equation*}
+				\hat{\theta}_{MM} = 2\bar{x}
+			\end{equation*}
+			
+		\end{enumerate}
+	\end{BSP}
 	
-	\item Geometrische Verteilung \\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}}{\sim} G(p_0), \; 0 < p_0 \leq 1.
-	\end{equation*} 
-	Hier ist das erste Moment
-	\begin{equation*}
-		\EW_p(X) = \frac{1}{p}.
-	\end{equation*}
-	Also gilt
-	\begin{equation*}
-		f(m)=\frac{1}{m},
-	\end{equation*}
-	sodass
-	\begin{equation*}
-		\hat{p}_{MM} = \frac{1}{\bar{X}}.
-	\end{equation*}
-	
-	
-	\item Normalverteilung mit unbekannter Varianz und unbekanntem Erwartungswert\\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0 \; \textbf{mit} \; 	f(\left(
-		\begin{array}{c}
-			m_1\\
-			m_2\\
-		\end{array}
-		\right)) = 
-		\left(
-		\begin{array}{c}
-			m_1\\
-			m_2 - m_1^2\\
-		\end{array}
-		\right),
-	\end{equation*} 
-
-sodass
-
-\begin{equation*}
-	\left(
-	\begin{array}{c}
-		\hat{\mu}_{MM}\\
-		\hat{\sigma}^2_{MM}\\
-	\end{array}
-	\right) = 
-	f(\bar{x}, \bar{x^2})=
-	\left(
-	\begin{array}{c}
-		\bar{x}\\
-		\bar{x^2}-\bar{x}^2\\
-	\end{array}
-	\right),
-\end{equation*}
-	
-	
-	
-	\item Gleichverteilung\\
-	Gegeben sind Zufallsvariablen $\FZV$ mit
-	\begin{equation*}
-		\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
-	\end{equation*}
-	Hier ist also
-\begin{equation*}
-	f(m) = 2\cdot m,
-\end{equation*}
-	sodass
-	\begin{equation*}
-		\hat{\theta}_{MM} = 2\bar{x}
-	\end{equation*}
-	
-\end{enumerate}
-
 \subsubsection{Eigenschaften der Momentenmethode}
 
 \begin{enumerate}
@@ -550,96 +555,98 @@ sodass
 	
 	Ist f linear, dann gilt Gleichheit für $\EW_{\theta}(f)$ und $f(\EW_{\theta})$, womit $\hat{\theta}_{MM}$ unverzerrt für $\theta$ ist.\\
 	
-	\textbf{Beispiele Erwartungstreue}
-
-	\begin{enumerate}[label = (\roman*)]
-		\item Bernoulli-Verteilung\\
+	\begin{BSP}[Beispiel 1.3.3 (Erwartungstreue)]
+			\begin{enumerate}[label = (\roman*)]
+			\item Bernoulli-Verteilung\\
 			Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
-		\end{equation*} 
-		Hier ist das erste Moment
-		\begin{equation*}
-			\EW_p(X)=p \; \textbf{und} \; 	f(m)=m,
-		\end{equation*}
-		sodass
-		\begin{equation*}
-			\hat{p}_{MM} = \bar{x} 
-		\end{equation*}
-		linear ist. Daher ist 
-		\begin{equation*}
-			\EW_p(\hat{p}_{MM}) = \EW_p(\bar{X}) = \EW_p(X) = p
-		\end{equation*}
-		
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
+			\end{equation*} 
+			Hier ist das erste Moment
+			\begin{equation*}
+				\EW_p(X)=p \; \textbf{und} \; 	f(m)=m,
+			\end{equation*}
+			sodass
+			\begin{equation*}
+				\hat{p}_{MM} = \bar{x} 
+			\end{equation*}
+			linear ist. Daher ist 
+			\begin{equation*}
+				\EW_p(\hat{p}_{MM}) = \EW_p(\bar{X}) = \EW_p(X) = p
+			\end{equation*}
+			
 			\item Geometrische Verteilung \\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} G(p_0), \; 0 < p_0 \leq 1.
-		\end{equation*} 
-		Hier ist das erste Moment
-		\begin{equation*}
-			\EW_p(X) = \frac{1}{p} \; \textbf{und} \;			f(m)=\frac{1}{m},
-		\end{equation*}
-		sodass
-		\begin{equation*}
-			\hat{p}_{MM} = \frac{1}{\bar{x}}
-		\end{equation*}
-		Diese Funktion ist nicht linear. Tatsächlich gilt, dass $\EW_p(\hat{p}_{MM}) = \EW_p (\frac{1}{\bar{x}}) < p, \; \forall  \; p \in (0,1)$. Damit ist der Schätzer verzerrt. Eine Ausnahme bildet $ p = 1 $, in welcher $\hat{p}_{MM}$  unverzerrt ist.
-		
-		\item Normalverteilung mit unbekannter Varianz und unbekanntem Erwartungswert\\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0 \; \textbf{mit} \; 	f(\left(
-			\begin{array}{c}
-				m_1\\
-				m_2\\
-			\end{array}
-			\right)) = 
-			\left(
-			\begin{array}{c}
-				m_1\\
-				m_2 - m_1^2\\
-			\end{array}
-			\right),
-		\end{equation*} 
-		
-		sodass
-		
-		\begin{equation*}
-			\left(
-			\begin{array}{c}
-				\hat{\mu}_{MM}\\
-				\hat{\sigma}^2_{MM}\\
-			\end{array}
-			\right) = 
-			f(\bar{x}, \bar{x^2})=
-			\left(
-			\begin{array}{c}
-				\bar{x}\\
-				\bar{x^2}-\bar{x}^2\\
-			\end{array}
-			\right),
-		\end{equation*}
-		
-		$\bar{x}$ ist eine lineare Funktion, $\bar{x^2}-\bar{x}^2$ allerdings nicht.  Daher ist der Schätzer für $\mu$ unverzerrt. 
-		
-		Die mögliche Erwartungstreue des Schätzers für $\sigma^2$ lässt sich folgendermaßen überprüfen:
-		
-		\begin{equation*}
-			\EW_{\mu,\sigma^2} (\tilde{\sigma}^2_{MM}) = \EW_{\mu,\sigma^2} (\tilde{\sigma}^2) = \frac{n - 1 }{n} \sigma^2 < \sigma^2 
-		\end{equation*}
-	
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} G(p_0), \; 0 < p_0 \leq 1.
+			\end{equation*} 
+			Hier ist das erste Moment
+			\begin{equation*}
+				\EW_p(X) = \frac{1}{p} \; \textbf{und} \;			f(m)=\frac{1}{m},
+			\end{equation*}
+			sodass
+			\begin{equation*}
+				\hat{p}_{MM} = \frac{1}{\bar{x}}
+			\end{equation*}
+			Diese Funktion ist nicht linear. Tatsächlich gilt, dass $\EW_p(\hat{p}_{MM}) = \EW_p (\frac{1}{\bar{x}}) < p, \; \forall  \; p \in (0,1)$. Damit ist der Schätzer verzerrt. Eine Ausnahme bildet $ p = 1 $, in welcher $\hat{p}_{MM}$  unverzerrt ist.
+			
+			\item Normalverteilung mit unbekannter Varianz und unbekanntem Erwartungswert\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0 \; \textbf{mit} \; 	f(\left(
+				\begin{array}{c}
+					m_1\\
+					m_2\\
+				\end{array}
+				\right)) = 
+				\left(
+				\begin{array}{c}
+					m_1\\
+					m_2 - m_1^2\\
+				\end{array}
+				\right),
+			\end{equation*} 
+			
+			sodass
+			
+			\begin{equation*}
+				\left(
+				\begin{array}{c}
+					\hat{\mu}_{MM}\\
+					\hat{\sigma}^2_{MM}\\
+				\end{array}
+				\right) = 
+				f(\bar{x}, \bar{x^2})=
+				\left(
+				\begin{array}{c}
+					\bar{x}\\
+					\bar{x^2}-\bar{x}^2\\
+				\end{array}
+				\right),
+			\end{equation*}
+			
+			$\bar{x}$ ist eine lineare Funktion, $\bar{x^2}-\bar{x}^2$ allerdings nicht.  Daher ist der Schätzer für $\mu$ unverzerrt. 
+			
+			Die mögliche Erwartungstreue des Schätzers für $\sigma^2$ lässt sich folgendermaßen überprüfen:
+			
+			\begin{equation*}
+				\EW_{\mu,\sigma^2} (\tilde{\sigma}^2_{MM}) = \EW_{\mu,\sigma^2} (\tilde{\sigma}^2) = \frac{n - 1 }{n} \sigma^2 < \sigma^2 
+			\end{equation*}
+			
 			\item Gleichverteilung\\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0 \;\textbf{mit}\; f(m) = 2m,
-		\end{equation*}
-		sodass
-		\begin{equation*}
-			\hat{\theta}_{MM} = 2\bar{x}
-		\end{equation*}
-		Dieser Schätzer bildet eine lineare Funktion. Daher ist der Schätzer erwartungstreu bzw. unverzerrt. 
-	\end{enumerate}	
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0 \;\textbf{mit}\; f(m) = 2m,
+			\end{equation*}
+			sodass
+			\begin{equation*}
+				\hat{\theta}_{MM} = 2\bar{x}
+			\end{equation*}
+			Dieser Schätzer bildet eine lineare Funktion. Daher ist der Schätzer erwartungstreu bzw. unverzerrt. 
+		\end{enumerate}	
+	\end{BSP}
+
+
 	
 	\item Konsistenz \\
 	Man betrachte einen Momenten-Methoden-Schätzer $\hat{\theta}_n = f(\bar{X}_n, \bar{X^2}_n, \ldots, \bar{X^k}_n)$. Wie in 1.3.4. gilt mit dem Gesetz der Großen Zahl für jedes $\theta \in \Theta$ und jedes $j \geq 1$ dass $\bar{x^j}_n \longrightarrow \EW_\theta (X^j)$, wenn $\theta$ der wahre Parameter ist. Damit gilt auch, dass
@@ -665,7 +672,7 @@ sodass
 
 	Ist zusätzlich $f: \IR^k \rightarrow \IR^k$ stetig im Punkt $(\EW_\theta(X),\ldots,\EW_\theta(X^k))$, dann folgt auch, dass $\hat{\theta}_n = f(\bar{X_n}, \ldots, \bar{X^k_n}) \overset{p} \rightarrow f(\EW_\theta(X),\ldots,\EW_\theta(X^k)) = \theta$, wenn $\theta$ der wahre Parameter ist. 
 
-	\begin{Definition}[Definition 1.... (Konsistenz von MM-Schätzern)]
+	\begin{Definition}[Definition 1.3.1 (Konsistenz von MM-Schätzern)]
 	Ein MM-Schätzer $\hat\theta_n = f(\bar{X_n},\ldots,\bar{X^k_n})$, wie in 1.3.4., ist konsistent, wenn die Funktion $f:\IR ^k \rightarrow \IR ^k$ stetig ist in jedem Punkt der Menge $\{(\EW_\theta(X),\ldots, \EW_\theta(X^k)) : \theta \in \Theta\}$ ist.	\end{Definition}
 
 \end{enumerate}
@@ -720,100 +727,98 @@ sodass
 	
 	\subsubsection{Beispiele für die Verteilung des (skalierten) Schätzfehlers}
 	
-	\begin{enumerate}[label = (\roman*)]
-		\item Bernoulli-Verteilung\\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
-		\end{equation*} 
-		Hier ist
-		\begin{equation*}
-			\hat{p}_{MM} = \bar{x},
-		\end{equation*}
-		und der Erwartungswert und die Varianz:
-		\begin{equation*}
-			\EW_p(X)=p \; \textbf{und} \; 	\textbf{Var}_p(X) = p(p-1)
-		\end{equation*}
-		Mit dem Zentralen Grenzwertsatz gilt:
-		\begin{equation*}
-			\sqrt{n}(\hat{p}_n - p_0) \KV N(0,p_0(1-p_0))
-		\end{equation*}
-		
-		Leider ist der Parameter $p_0$ unbekannt. Allerdings gilt:
-		
-		\begin{equation*}
-			\hat{p}_n \KW p_0
-		\end{equation*}
-		
-		Damit gilt auch:
-		
-		\begin{equation*}
-			\begin{split}
-				\hat{p}_n (1-\hat{p}_n) &\KW p_0(1-p_0) \\
-				\sqrt{\hat{p}_n (1-\hat{p}_n)} &\KW \sqrt{p_0(1-p_0)} \\
-				\frac{1}{\sqrt{\hat{p}_n (1-\hat{p}_n)}} &\KW \frac{1}{\sqrt{p_0(1-p_0)}}
-			\end{split}
-		\end{equation*}
-		
-		Somit gilt mit dem Zentralen Grenzwertsatz also:
-		
-		\begin{equation*}
-			\frac{\sqrt{n} (\hat{p}_n - p_0)}{\sqrt{\hat{p}_n (1-\hat{p}_n)}} \sim N(0,1)
-		\end{equation*}
-		
-		Dieser Term ergibt sich aus folgender Überlegung:
-		
-		\begin{equation*}
-			\frac{\sqrt{n} (\hat{p}_n - p_0)}{\sqrt{p_0 (1-p_0)}} \cdot \frac{\sqrt{p_0(1-p_0)}}{\sqrt{\hat{p}_n (1-\hat{p}_n)}}
-		\end{equation*}
-		
-		Der erste Faktor konvergiert in Verteilung gegen eine Standardnormalverteilung und der zweite Faktor konvergiert in Wahrscheinlichkeit gegen 1 aufgrund der zuvorigen Konvergenz in Wahrscheinschleichkeit. 
-		Wegen den Rechenregeln der Konvergenz, konvergiert der gesamte Term, wie oben beschrieben, gegen eine Standardnormalverteilung. 
-		Solche Prozeduren nennt man $\textbf{asymptotisch valide}$.
-		
-		
-		
-		
-		\item Gleichverteilung\\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0 \;\textbf{mit}\; \hat{\theta}_{MM} = 2\bar{x}.
-		\end{equation*}
-		Der Erwartungswert und die Varianz sind: 
-		\begin{equation*}
-			\EW_\theta (X) = \frac{\theta}{2} \; \textbf{und} \; \textbf{Var}_\theta (X) = \frac{\theta^2}{12}.
-		\end{equation*}
-		Mit dem zentralen Grenzwertsatz gilt:
-		
-		\begin{equation*}
-			\sqrt{n} \left(\bar{X}_n - \frac{\theta_0}{2}\right) \KV N\left(0, \frac{\theta^2_0}{12}\right).
-		\end{equation*}
-		
-		Ähnlich wie im Bernoulli-Modell gilt:
-		
-		\begin{equation*}
-			\frac{\sqrt{n}(\hat{\theta}_n - \theta_0)}{\sqrt{\frac{\theta^2_n}{3}}} \; = \; 
-			\frac{\sqrt{n}(2 \bar{X}_n - \theta_0)}{\sqrt{\frac{4\bar{X}^2_n}{3}}} \; = \; \frac{\sqrt{n}(\bar{X}_n - \frac{\theta_0}{2})}{\sqrt{\frac{\bar{X}^2_n}{3}}}.
-		\end{equation*}
-		
-		Der Zähler konvergiert in Verteilung gegen eine Normalverteilung mit Erwartungswert 0 und einer Varianz $\frac{\theta^2_0}{12}$. Der Nenner konvergiert in Wahrscheinlichkeit gegen $\sqrt{\frac{\theta^2}{12}}$. 
-		
-	\end{enumerate}	
+	\begin{BSP}[Beispiel 1.3.4 (Schätzfehlerverteilung MM-Schätzer)]
+			\begin{enumerate}[label = (\roman*)]
+			\item Bernoulli-Verteilung\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} B(p_0), \; 0 \leq p_0 \leq 1.
+			\end{equation*} 
+			Hier ist
+			\begin{equation*}
+				\hat{p}_{MM} = \bar{x},
+			\end{equation*}
+			und der Erwartungswert und die Varianz:
+			\begin{equation*}
+				\EW_p(X)=p \; \textbf{und} \; 	\textbf{Var}_p(X) = p(p-1)
+			\end{equation*}
+			Mit dem Zentralen Grenzwertsatz gilt:
+			\begin{equation*}
+				\sqrt{n}(\hat{p}_n - p_0) \KV N(0,p_0(1-p_0))
+			\end{equation*}
+			
+			Leider ist der Parameter $p_0$ unbekannt. Allerdings gilt:
+			
+			\begin{equation*}
+				\hat{p}_n \KW p_0
+			\end{equation*}
+			
+			Damit gilt auch:
+			
+			\begin{equation*}
+				\begin{split}
+					\hat{p}_n (1-\hat{p}_n) &\KW p_0(1-p_0) \\
+					\sqrt{\hat{p}_n (1-\hat{p}_n)} &\KW \sqrt{p_0(1-p_0)} \\
+					\frac{1}{\sqrt{\hat{p}_n (1-\hat{p}_n)}} &\KW \frac{1}{\sqrt{p_0(1-p_0)}}
+				\end{split}
+			\end{equation*}
+			
+			Somit gilt mit dem Zentralen Grenzwertsatz also:
+			
+			\begin{equation*}
+				\frac{\sqrt{n} (\hat{p}_n - p_0)}{\sqrt{\hat{p}_n (1-\hat{p}_n)}} \sim N(0,1)
+			\end{equation*}
+			
+			Dieser Term ergibt sich aus folgender Überlegung:
+			
+			\begin{equation*}
+				\frac{\sqrt{n} (\hat{p}_n - p_0)}{\sqrt{p_0 (1-p_0)}} \cdot \frac{\sqrt{p_0(1-p_0)}}{\sqrt{\hat{p}_n (1-\hat{p}_n)}}
+			\end{equation*}
+			
+			Der erste Faktor konvergiert in Verteilung gegen eine Standardnormalverteilung und der zweite Faktor konvergiert in Wahrscheinlichkeit gegen 1 aufgrund der zuvorigen Konvergenz in Wahrscheinschleichkeit. 
+			Wegen den Rechenregeln der Konvergenz, konvergiert der gesamte Term, wie oben beschrieben, gegen eine Standardnormalverteilung. 
+			Solche Prozeduren nennt man $\textbf{asymptotisch valide}$.
+			
+			
+			
+			
+			\item Gleichverteilung\\
+			Gegeben sind Zufallsvariablen $\FZV$ mit
+			\begin{equation*}
+				\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0 \;\textbf{mit}\; \hat{\theta}_{MM} = 2\bar{x}.
+			\end{equation*}
+			Der Erwartungswert und die Varianz sind: 
+			\begin{equation*}
+				\EW_\theta (X) = \frac{\theta}{2} \; \textbf{und} \; \textbf{Var}_\theta (X) = \frac{\theta^2}{12}.
+			\end{equation*}
+			Mit dem zentralen Grenzwertsatz gilt:
+			
+			\begin{equation*}
+				\sqrt{n} \left(\bar{X}_n - \frac{\theta_0}{2}\right) \KV N\left(0, \frac{\theta^2_0}{12}\right).
+			\end{equation*}
+			
+			Ähnlich wie im Bernoulli-Modell gilt:
+			
+			\begin{equation*}
+				\frac{\sqrt{n}(\hat{\theta}_n - \theta_0)}{\sqrt{\frac{\theta^2_n}{3}}} \; = \; 
+				\frac{\sqrt{n}(2 \bar{X}_n - \theta_0)}{\sqrt{\frac{4\bar{X}^2_n}{3}}} \; = \; \frac{\sqrt{n}(\bar{X}_n - \frac{\theta_0}{2})}{\sqrt{\frac{\bar{X}^2_n}{3}}}.
+			\end{equation*}
+			
+			Der Zähler konvergiert in Verteilung gegen eine Normalverteilung mit Erwartungswert 0 und einer Varianz $\frac{\theta^2_0}{12}$. Der Nenner konvergiert in Wahrscheinlichkeit gegen $\sqrt{\frac{\theta^2}{12}}$. 
+		\end{enumerate}	
+	\end{BSP}
+
 	
 	
 	\subsubsection{Delta-Methode}
 	\noindent In vielen Fällen ist der MM-Schätzer durch eine nicht-lineare Funktion definiert. Hier hilft die sogenannte \textbf{Delta-Methode}. Zur Vereinfachung sei $k = 1$.
 	
-	\noindent Es seien $Z_1, \ldots, Z_n$ i.i.d. Kopien von $Z$ mit $\EW(Z)=\nu$ und $\textbf{Var}(Z)=\delta^2 > 0$. Weiters sei $f: \IR \rightarrow \IR$ differenzierbar im Punkt $\upnu$. Dann gilt:
-	
+	Es seien $Z_1, \ldots, Z_n$ i.i.d. Kopien von $Z$ mit $\EW(Z)=\nu$ und $\textbf{Var}(Z)=\delta^2 > 0$. Weiters sei $f: \IR \rightarrow \IR$ differenzierbar im Punkt $\upnu$. Dann gilt:
 	\begin{equation*}
 		\sqrt{n} (f(\bar{Z}_n)-f(\upnu)) \sim N(0, \delta^2 (f'(\upnu))^2)
 	\end{equation*}
-	
-	\noindent Wobei $\bar{Z}_n =  \frac{1}{n}\sum_{i=1}^{n} Z_i$.
-	
-	\pagebreak
-	\begin{BSP}[Beispiel 1..... (Delta-Methode)]
+	Wobei $\bar{Z}_n =  \frac{1}{n}\sum_{i=1}^{n} Z_i$.
+	\begin{BSP}[Beispiel 1.3.5 (Delta-Methode)]
 		
 		Geometrische Verteilung \\
 		Gegeben sind Zufallsvariablen $\FZV$ mit
@@ -844,7 +849,7 @@ sodass
 	\end{BSP}
 	
 	
-	\begin{BWS}[Beweis 1.1 Delta-Methode]
+	\begin{BWS}[Beweis 1.3.1 Delta-Methode]
 		Es gilt:
 		
 		
@@ -923,7 +928,7 @@ sodass
 	
 	
 	
-	\begin{BSP}[Beispiel 1..... (Delta-Methode)]		
+	\begin{BSP}[Beispiel 1.3.6 (Delta-Methode)]		
 		\noindent Geometrische Verteilung \\
 		Gegeben sind Zufallsvariablen $\FZV$ mit
 		\begin{equation*}
@@ -1000,7 +1005,7 @@ sodass
 	\noindent Im sogenannten diskreten Modell ist $X$ diskret und wird durch eine Wahrscheinlichkeitsfunktion $p(x \mid \theta_0)$ beschrieben. 
 	Im sogenannten stetigen Modell ist $X$ stetig und wird durch eine Dichtefunktion $f(x \mid \theta_0)$ beschrieben. 
 	
-	\begin{Definition} [Definition 1.... Likelihood-Funktion]
+	\begin{Definition} [Definition 1.3.2 (Likelihood-Funktion)]
 		Die Likelihood-Funktion wird definiert als:
 		\begin{equation*}
 			L(\theta) = \prod_{i=1}^{n} f(x_i \mid \theta), \eqname{wenn stetig}
@@ -1013,7 +1018,7 @@ sodass
 	
 	Oft betrachtet man auch die Log-Likelihood
 	
-	\begin{Definition} [Definition 1.... Log-Likelihood-Funktion]
+	\begin{Definition} [Definition 1.3.3 (Log-Likelihood-Funktion)]
 		\begin{equation*}
 			l(\theta) = \log ( L(\theta)) = \begin{cases}
 				\sum_{i=1}^{n} \log (f(x_i \mid \theta)) \\
@@ -1033,92 +1038,94 @@ sodass
 	\end{equation*}
 	
 	\subsubsection{Beispiele Maximum-Likelihood-Schätzer}
-		\begin{enumerate}[label = (\roman*)]
-		\item Bernoulli-Verteilung \\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} B(\theta_0), \; 0 \leq \theta_0 \leq 1.
-		\end{equation*} 
-		Für $x \in \{0,1\}$ gilt:
-		\begin{equation*}
-			p(\xt) = \begin{cases}
-				\theta &: x=1 \\
-				1- \theta&: x=0
-			\end{cases} = \theta^x (1-\theta)^{1-x}.
-		\end{equation*}
-		Daraus ergibt sich die Maximum-Likelihood-Funktion:
-		\begin{equation*}
-			L(\theta) = \prod_{i=1}^{n} p(x_i \mid \theta) =\prod_{i=1}^{n} \theta^{x_i} (1-\theta)^{x_i} = \theta^{\sum_{i=1}^{n}x_1}(1-\theta)^{\sum_{i=1}^{n}x_1},
-		\end{equation*}
-		und die entsprechende Log-Likelihood-Funktion:
-		\begin{equation*}
-			l(\theta) = \left(\sum_{i=1}^{n}x_1\right) \log \theta + \left(n-\sum_{i=1}^{n}x_1\right) \log(1-\theta) = n\bar{x}\log\theta + (n-n\bar{x})\log(1-\theta).
-		\end{equation*}
-	
+		\begin{BSP} [Beispiel 1.3.7 (Maximum-Likelihood-Schätzer)]
+			\begin{enumerate}[label = (\roman*)]
+				\item Bernoulli-Verteilung \\
+				Gegeben sind Zufallsvariablen $\FZV$ mit
+				\begin{equation*}
+					\FZV \overset{\textbf{i.i.d.}}{\sim} B(\theta_0), \; 0 \leq \theta_0 \leq 1.
+				\end{equation*} 
+				Für $x \in \{0,1\}$ gilt:
+				\begin{equation*}
+					p(\xt) = \begin{cases}
+						\theta &: x=1 \\
+						1- \theta&: x=0
+					\end{cases} = \theta^x (1-\theta)^{1-x}.
+				\end{equation*}
+				Daraus ergibt sich die Maximum-Likelihood-Funktion:
+				\begin{equation*}
+					L(\theta) = \prod_{i=1}^{n} p(x_i \mid \theta) =\prod_{i=1}^{n} \theta^{x_i} (1-\theta)^{x_i} = \theta^{\sum_{i=1}^{n}x_1}(1-\theta)^{\sum_{i=1}^{n}x_1},
+				\end{equation*}
+				und die entsprechende Log-Likelihood-Funktion:
+				\begin{equation*}
+					l(\theta) = \left(\sum_{i=1}^{n}x_1\right) \log \theta + \left(n-\sum_{i=1}^{n}x_1\right) \log(1-\theta) = n\bar{x}\log\theta + (n-n\bar{x})\log(1-\theta).
+				\end{equation*}
+				
+				
+				\item Geometrische Verteilung \\
+				Gegeben sind Zufallsvariablen $\FZV$ mit
+				\begin{equation*}
+					\FZV \overset{\textbf{i.i.d.}}{\sim} G(\theta_0), \; 0 < \theta_0 < 1.
+				\end{equation*} 
+				Hier ist für $x\in \mathbb{N}$
+				\begin{equation*}
+					p(\xt)=(1-\theta)^{x-1}\theta
+				\end{equation*}
+				Daraus ergibt sich die Maximum-Likelihood-Funktion:
+				\begin{equation*}
+					L (\theta) = \prod_{i=1}^{n} ((1-\theta)^{x-1}\theta) = (1-\theta)^{\sum_{i=1}^{n}x_i -n} \theta^n = (1-\theta)^nx-n \theta^n,
+				\end{equation*}
+				und die entsprechende Log-Likelihood-Funktion:
+				\begin{equation*}
+					\log(\theta)= (\sum_{i=1}^{n}x_i -n)\log(1-\theta)+n\log(\theta) = (n\bar{x}-n)\log(1-\theta)+ n\log\theta.
+				\end{equation*}
+				
+				
+				\item Normalverteilung mit unbekannter Varianz und unbekanntem Erwartungswert\\
+				Gegeben sind Zufallsvariablen $\FZV$ mit
+				\begin{equation*}
+					\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0 \; 
+				\end{equation*} 
+				Für $x \in \IR$	gilt:
+				\begin{equation*}
+					f(x \mid \mu, \sigma^2) = \phi_{\mu,\sigma^2}(x)=(2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}.
+				\end{equation*}
+				
+				Daraus ergibt sich die Maximum-Likelihood-Funktion:
+				\begin{equation*}
+					L(\mu, \sigma^2) = \prod_{i=1}^{n}((2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}) = (2\pi\sigma^2)^{-\frac{n}{2}}e^{-\frac{n}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2},
+				\end{equation*}
+				
+				und die entsprechende Log-Likelihood-Funktion:
+				
+				\begin{equation*}
+					l(\mu, \sigma^2) = -\frac{n}{n}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2.
+				\end{equation*}
+				
+				\item Gleichverteilung\\
+				Gegeben sind Zufallsvariablen $\FZV$ mit
+				\begin{equation*}
+					\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
+				\end{equation*}
+				Hier ist für x $\geq 0$
+				\begin{equation*}
+					f(\xt)=\begin{cases}
+						\frac{1}{\theta}, & x\leq \theta\\
+						0, & x >\theta.
+					\end{cases}
+				\end{equation*}
+				Daraus ergibt sich die Maximum-Likelihood-Funktion:
+				\begin{equation*}
+					\begin{split}
+						L(\theta)=\prod_{i=1}^{n} f(x_i \mid \theta) &= \begin{cases}
+							\frac{1}{\theta^n}, & x_i\leq \theta\\
+							0, & \textbf{sonst}
+						\end{cases}\\ &= \frac{1}{\theta^n} \mathbbm{1}\{X_{(n)} \leq \theta\}.
+					\end{split}
+				\end{equation*}
+			\end{enumerate}
+		\end{BSP}
 		
-		\item Geometrische Verteilung \\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} G(\theta_0), \; 0 < \theta_0 < 1.
-		\end{equation*} 
-		Hier ist für $x\in \mathbb{N}$
-		\begin{equation*}
-			p(\xt)=(1-\theta)^{x-1}\theta
-		\end{equation*}
-		Daraus ergibt sich die Maximum-Likelihood-Funktion:
-		\begin{equation*}
-			L (\theta) = \prod_{i=1}^{n} ((1-\theta)^{x-1}\theta) = (1-\theta)^{\sum_{i=1}^{n}x_i -n} \theta^n = (1-\theta)^nx-n \theta^n,
-		\end{equation*}
-		und die entsprechende Log-Likelihood-Funktion:
-		\begin{equation*}
-			\log(\theta)= (\sum_{i=1}^{n}x_i -n)\log(1-\theta)+n\log(\theta) = (n\bar{x}-n)\log(1-\theta)+ n\log\theta.
-		\end{equation*}
-		
-		
-		\item Normalverteilung mit unbekannter Varianz und unbekanntem Erwartungswert\\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0 \; 
-		\end{equation*} 
-		Für $x \in \IR$	gilt:
-		\begin{equation*}
-			f(x \mid \mu, \sigma^2) = \phi_{\mu,\sigma^2}(x)=(2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}.
-		\end{equation*}
-		
-		Daraus ergibt sich die Maximum-Likelihood-Funktion:
-		\begin{equation*}
-			L(\mu, \sigma^2) = \prod_{i=1}^{n}((2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}) = (2\pi\sigma^2)^{-\frac{n}{2}}e^{-\frac{n}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2},
-		\end{equation*}
-		
-		und die entsprechende Log-Likelihood-Funktion:
-		
-		\begin{equation*}
-			l(\mu, \sigma^2) = -\frac{n}{n}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2.
-		\end{equation*}
-		
-		\item Gleichverteilung\\
-		Gegeben sind Zufallsvariablen $\FZV$ mit
-		\begin{equation*}
-			\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
-		\end{equation*}
-		Hier ist für x $\geq 0$
-		\begin{equation*}
-			f(\xt)=\begin{cases}
-				\frac{1}{\theta}, & x\leq \theta\\
-				0, & x >\theta.
-			\end{cases}
-		\end{equation*}
-		Daraus ergibt sich die Maximum-Likelihood-Funktion:
-		\begin{equation*}
-			\begin{split}
-					L(\theta)=\prod_{i=1}^{n} f(x_i \mid \theta) &= \begin{cases}
-					\frac{1}{\theta^n}, & x_i\leq \theta\\
-					0, & \textbf{sonst}
-				\end{cases}\\ &= \frac{1}{\theta^n} \mathbbm{1}\{X_{(n)} \leq \theta\}.
-			\end{split}
-		\end{equation*}
-		
-	\end{enumerate}
 	
 	\subsubsection{Maximum-Likelihood allgemein}
 	
@@ -1141,7 +1148,7 @@ sodass
 	
 	Im Allgemeinen kann es mehrere Maximierer von $L(\theta)$ bzw. $l(\theta)$ geben, oder es kann vorkommen, dass kein Maximierer existiert. Siehe 3.6. 
 	
-	\begin{BSP}[Maximum-Likelihood]
+	\begin{BSP}[Beispiel 1.3.8 (Maximum-Likelihood)]
 		\begin{enumerate}[label = (\roman*)]
 			\item Bernoulli-Verteilung \\
 			Gegeben sind Zufallsvariablen $\FZV$ mit
@@ -1349,7 +1356,7 @@ sodass
 	
 	Der ML-Schätzer im stetigen Modell ist dann der Grenzwert von ML-Schätzern, die sich wie zuvor interpretieren lassen. (Ähnliches gilt für $n>1$).
 	
-	\begin{BSP}[Beispiel 1.0000 Schätzung der Populationsgröße mit der Capture/Recapture-Methode]
+	\begin{BSP}[Beispiel 1.3.9 (Schätzung der Populationsgröße mit der Capture/Recapture-Methode)]
 		Gegeben ist eine Population und ein $N_0$ Individuum; $N_0 \in \mathbb{N}$ unbekannt. 
 		
 		Capture: Wähle aus der Population $n$ Individuen zufällig aus und markiere diese. (Zürcklegen)
@@ -1531,7 +1538,7 @@ sodass
 	
 	wenn $\theta$ der wahre Parameter ist. 
 	
-	\begin{BWS}[Beweisidee]
+	\begin{BWS}[Beweisidee 1.3.4 (Konsistenz von ML-Schätzern)]
 		Für ein stetiges Modell (analog auch für diskret):
 		Der Einfachheit sei $k=1$:
 		\begin{equation*}
@@ -1572,7 +1579,7 @@ sodass
 	
 	\subsubsection{Verteilung des (skalierten) Fehlers von ML-Schätzern}
 
-	\begin{Definition}[Definition(Fischer-Information)]
+	\begin{Definition}[Definition 1.3.2 (Fischer-Information)]
 		Betrachte ein (diskretes oder stetiges) Modell wie in 1.3.8. und für jede Stichprobengröße $n$, den ML-Schätzer: 
 	\begin{equation*}
 		\hat{\theta}_n = \hat{\theta}_{ML}(\FZV).
@@ -1603,7 +1610,7 @@ sodass
 	\end{equation*}
 	\end{Definition}
 	
-	\begin{BWS} [Beweisidee Fisher-Information]
+	\begin{BWS} [Beweisidee 1.3.5 (Fisher-Information)]
 		Diese Beweisidee wurde für stetige Fälle ausgearbeitet, gilt aber genauso für diskrete Modelle. Für jedes $\theta \in \Theta$ ist $\int f(x\mid \theta) \; dx = 1$. 
 		\begin{equation*}
 			\begin{split}
@@ -1632,7 +1639,7 @@ sodass
 	\end{equation*}
 	wenn $\theta$ der wahre Parameter ist. 
 	
-	\begin{BWS}[Beweisidee Verteilung des Schätzfehlers]
+	\begin{BWS}[Beweisidee 1.3.6 (Verteilung des Schätzfehlers)]
 		Diese Beweisidee wurde für stetige Fälle ausgearbeitet, gilt aber genauso für diskrete Modelle. 
 		
 		Sei $\theta \in \Theta$ mit $I(\theta) > 0$. $\hat{\theta}_n$ minimiert $l_n (\theta) = \sum_{i=1}^{n} \log f (x_i \mid \theta)$, sodass:
@@ -1718,7 +1725,7 @@ sodass
 	wenn $\theta$ der wahre Parameter ist. 
 	
 	Damit kann man wieder asymptotisch valide Konfidenzintervalle oder Hypothesentests für $\theta_0$ konstruieren. 
-	\begin{BSP}[Konfidenzintervall für $\theta_0$]
+	\begin{BSP}[Beispiel 1.3.10 (Konfidenzintervall für $\theta_0$)]
 		\begin{equation*}
 			\hat{\theta}_n \pm (n \cdot \hat{I}_n)^{-\frac{1}{2}} \cdot \phi\left(1-\frac{\alpha}{2}\right).
 		\end{equation*}
@@ -1727,7 +1734,7 @@ sodass
 	
 	Es gibt Situationen, wo Satz 1.3.13. nicht anwendbar ist. Im folgenden Beispiel konvergiert $\hat{\theta}_n - \theta$ schneller als $\frac{1}{\sqrt{n}}$ und die skalierte Grenzverteilung ist nicht normal. 
 	
-	\begin{BSP}[Beispiel Grenzverteilung keine Normalverteilung]
+	\begin{BSP}[Beispiel 1.3.11 (Grenzverteilung keine Normalverteilung)]
 		Gegeben sind Zufallsvariablen $\FZV$ mit
 		\begin{equation*}
 			\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
