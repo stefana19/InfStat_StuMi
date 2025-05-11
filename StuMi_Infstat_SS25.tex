@@ -13,6 +13,7 @@
 \newcommand{\eqname}[1]{\tag*{#1}}% Tag equation with name
 \newcommand{\xt}{x \mid \theta} %x bedingt auf theta
 \newcommand{\ablt}{\frac{\delta}{\delta \theta}}
+\usepackage{aligned-overset} % Richiges alignment von over-/underset
 
 
 
@@ -1134,8 +1135,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{equation*}
 		\hat{\theta}_{ML} =
 		\begin{cases}
-			argmax \; L(\theta),\; \theta \in \Theta\\
-			argmax \; l(\theta),\; \theta \in \Theta
+			\textbf{argmax} \; L(\theta),\; \theta \in \Theta\\
+			\textbf{argmax} \; l(\theta),\; \theta \in \Theta
 		\end{cases}
 	\end{equation*}
 	
@@ -1157,21 +1158,21 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\end{equation*} 
 			Hier ist die Log-Likelihood-Funktion:
 			\begin{equation*}
-				l(\theta)=n\bar{x}\log\theta + (n-n\bar{x})\log(1-\theta).
+				l(\theta)=n\bar{X}\log\theta + (n-n\bar{X})\log(1-\theta).
 			\end{equation*}
 			Diese ist stetig und differenzierbar in $\theta \in (0,1)$:
 			
 			\begin{equation*}
-				l'(\theta) = n\bar{x}\frac{1}{\theta} - n (1-\bar{x}) \frac{1}{1-\theta}
+				l'(\theta) = n\bar{X}\frac{1}{\theta} - n (1-\bar{X}) \frac{1}{1-\theta}
 			\end{equation*}
 			\begin{equation*}
 				\begin{split}
-					l'(\theta) = 0 \; &\Leftrightarrow n\bar{x}\frac{1}{\theta} = n(1-\bar{x})\frac{1}{1-\theta} \\&\Leftrightarrow n\bar{x}(1-\theta) = n(1-\bar{x})\theta\\ &\Leftrightarrow n \bar{x}-n\bar{x}\theta = n\theta-n\bar{x}\theta \\&\Leftrightarrow \bar{x} = \theta.
+					l'(\theta) = 0 \; &\Leftrightarrow n\bar{X}\frac{1}{\theta} = n(1-\bar{X})\frac{1}{1-\theta} \\&\Leftrightarrow n\bar{X}(1-\theta) = n(1-\bar{X})\theta\\ &\Leftrightarrow n \bar{X}-n\bar{X}\theta = n\theta-n\bar{X}\theta \\&\Leftrightarrow \bar{X} = \theta.
 				\end{split}
 			\end{equation*}
-			Hier ist die $l''(\bar{x})<0$ sodass $\bar{x}$ ein Maximierer von $l(\theta)$ ist. Also:
+			Hier ist  $l''(\bar{X})<0$, sodass $\bar{X}$ ein Maximierer von $l(\theta)$ ist. Also:
 			\begin{equation*}
-				\hat{\theta}_{ML} = \bar{x}.
+				\hat{\theta}_{ML} = \bar{X}.
 			\end{equation*}
 			Beachte: Hier ist $\hat{\theta}_{ML} = \hat{\theta}_{MM}$.
 			
@@ -1183,22 +1184,22 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\end{equation*} 
 			Hier ist die Log-Likelihood-Funktion: 
 			\begin{equation*}
-				\log(\theta)= (n\bar{x}-n)\log(1-\theta)+ n\log\theta.
+				\log(\theta)= (n\bar{X}-n)\log(1-\theta)+ n\log\theta.
 			\end{equation*}
 			Diese ist stetig und differenzierbar in $\theta \in (0,1)$:
 			\begin{equation*}
-				l'(\theta) = - \frac{n(\bar{x}-1)}{1-\theta} + \frac{n}{\theta}
+				l'(\theta) = - \frac{n(\bar{X}-1)}{1-\theta} + \frac{n}{\theta}
 			\end{equation*}
 			\begin{equation*}
 				\begin{split}
-					l'(\theta) = 0 &\Leftrightarrow \frac{n (\bar{x}-1)}{1-\theta} = \frac{n}{\theta}\\
-					&\Leftrightarrow (\bar{x}-1) \theta = 1-\theta\\
-					&\Leftrightarrow \bar{x} \theta - \theta = 1-\theta\\
-					&\Leftrightarrow \theta = \frac{1}{\bar{x}}.\\
+					l'(\theta) \overset{!}{=} 0 &\Leftrightarrow \frac{n (\bar{X}-1)}{1-\theta} = \frac{n}{\theta}\\
+					&\Leftrightarrow (\bar{X}-1) \theta = 1-\theta\\
+					&\Leftrightarrow \bar{X} \theta - \theta = 1-\theta\\
+					&\Leftrightarrow \theta = \frac{1}{\bar{X}}.\\
 				\end{split}
 			\end{equation*}
 			
-			Wieder ist $l''(\frac{1}{\bar{x}}) <0$, sodass $\frac{1}{\bar{x}}$ ein Maximierer von $l(\theta)$ ist. Also:
+			Wieder ist $l''(\frac{1}{\bar{X}}) <0$, sodass $\frac{1}{\bar{X}}$ ein Maximierer von $l(\theta)$ ist. Also:
 			
 			\begin{equation*}
 				\hat{\theta}_{ML} = \frac{1}{\bar{x}} = \hat{\theta}_{MM}.
@@ -1213,7 +1214,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			Hier ist die Log-Likelihood-Funktion:
 			
 			\begin{equation*}
-				l(\mu, \sigma^2) = -\frac{n}{n}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2.
+				l(\mu, \sigma^2) = -\frac{n}{n}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(X_i-\mu)^2.
 			\end{equation*}
 			
 			Für festes $\sigma^2 >0$ ist diese Funktion für $\mu \in \IR$ sicher stetig und differenzierbar. Für festes $\mu \in \IR$ ist $l(\mu, \sigma^2)$ auch sicher stetig für $\sigma^2$. 
@@ -1221,32 +1222,34 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			Halte zunächst $\sigma^2 >0$ fest und maximiere über $\mu \in \IR$: 
 			
 			\begin{equation*}
-				\frac{\updelta}{\updelta \mu} l(\mu, \sigma^2) = \frac{1}{2\sigma^2} \sum_{i=1}^{n}2(x_i-\mu) \overset{!}= 0
+				\frac{\partial}{\partial \mu} l(\mu, \sigma^2) = \frac{1}{2\sigma^2} \sum_{i=1}^{n}2(x_i-\mu) \overset{!}= 0
 			\end{equation*}
 			\begin{equation*}
 				\begin{split}
-					\sum_{i=1}^{n}(x_i - \mu) &= 0\\
-					\sum_{i=1}^{n}x_i - n\mu &= 0\\
-					\sum_{i=1}^{n}x_i &= n\mu \\
-					\frac{1}{n}\sum_{i=1}^{n}x_i &= \mu.			
+					\sum_{i=1}^{n}(X_i - \mu) &= 0\\
+					\sum_{i=1}^{n}X_i - n\mu &= 0\\
+					\sum_{i=1}^{n}X_i &= n\mu \\
+					\frac{1}{n}\sum_{i=1}^{n}X_i &= \mu.			
 				\end{split}
 			\end{equation*}
-			Hier ist $\frac{\delta^2}{\delta\mu^2}l(\mu, \sigma^2) <0$, sodass $\bar{x}$ ein Maximierer von $l(\cdot,\sigma^2)$ ist. 
+			Hier ist $\frac{\partial^2}{\delta\mu^2}l(\mu, \sigma^2) <0$, sodass $\bar{X}$ ein Maximierer von $l(\cdot,\sigma^2)$ ist. 
 			
 			\begin{equation*}
-				\bar{x} = argmax\; l(\mu, \sigma^2), \; \textbf{für} \; \mu \in \IR.
+				\bar{X} = \underset{\mu \in \IR}{\textbf{argmax}}\; l(\mu, \sigma^2).
 			\end{equation*}
-			Hier hängt $\bar{x}$ nicht von $\sigma^2$ ab. 
+			Hier hängt $\bar{X}$ nicht von $\sigma^2$ ab. 
 			\begin{equation*}
-				\frac{\delta}{\delta \sigma^2} l (\mu, \sigma^2) = \frac{\delta}{\delta \sigma^2} [-\frac{n}{2}\log(2\pi)-\frac{n}{2}\log(\sigma^2)\sum_{i=1}^{n}(x_i - \bar{x})^2] = -\frac{n}{2} \frac{1}{\sigma^2}+ \frac{1}{2\sigma^4}\sum_{i=1}^{n}(x_i-\bar{x}^2) \overset{!} = 0
+				\begin{split}
+				\frac{\partial}{\partial \sigma^2} l (\mu, \sigma^2) &= \frac{\partial}{\partial \sigma^2} \left[-\frac{n}{2}\log(2\pi)-\frac{n}{2}\log(\sigma^2)\sum_{i=1}^{n}(X_i - \bar{X})^2\right]\\ &= -\frac{n}{2} \frac{1}{\sigma^2}+ \frac{1}{2\sigma^4}\sum_{i=1}^{n}(X_i-\bar{X}^2) \overset{!} = 0
+			\end{split}
 			\end{equation*}
 			\begin{equation*}
 				\begin{split}
-					\frac{n}{2\sigma^2} &= \frac{1}{2\sigma^4}\sum_{i=1}^{n}(x_i - \bar{x})^2\\
-					\sigma^2 &= \frac{1}{n}\sum_{i=1}^{n}(x_1-\bar{x})^2.
+					\frac{n}{2\sigma^2} &= \frac{1}{2\sigma^4}\sum_{i=1}^{n}(X_i - \bar{X})^2\\
+					\sigma^2 &= \frac{1}{n}\sum_{i=1}^{n}(X_i-\bar{X})^2.
 				\end{split}
 			\end{equation*}
-			Wieder ist  $\frac{\delta^2}{\delta (\sigma^2)^2} l(\bar{x}, \sigma^2)<0$, sodass $\frac{1}{n}$$\sum_{i=1}^{n}(x_i-\bar{x})^2$ ein Maximierer von $l(\mu, \sigma^2)$ bezüglich $\sigma^2 > 0$ ist. 
+			Wieder ist  $\frac{\partial^2}{\partial (\sigma^2)^2} l(\bar{X}, \sigma^2)<0$, sodass $\frac{1}{n}$$\sum_{i=1}^{n}(X_i-\bar{X})^2$ ein Maximierer von $l(\mu, \sigma^2)$ bezüglich $\sigma^2 > 0$ ist. 
 			
 			Damit ist:
 			\begin{equation*}
@@ -1258,8 +1261,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				=
 				\left(
 				\begin{array}{c}
-					\bar{x}\\
-					\bar{x^2}-\bar{x}^2
+					\bar{X}\\
+					\bar{X^2}-\bar{X}^2
 				\end{array}
 				\right).
 			\end{equation*}
@@ -1288,7 +1291,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			Hier die die Maximum-Likelihood-Funktion:
 			
 			\begin{equation*}
-				L(\theta)=\theta^{-n}\mathbbm{1} \{x_{(n)}\leq  \theta \}.
+				L(\theta)=\theta^{-n}\mathbbm{1} \{X_{(n)}\leq  \theta \}.
 			\end{equation*}
 			
 			Diese Funktion ist nicht differenzierbar im Punkt $X_{(n)}$. Aber:
@@ -1311,14 +1314,14 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{BSP}
 	
 	\subsubsection{Interpretation der ML-Methode}
-	Man betrachte Beobachtungen $x_1, \ldots , x_n$ von $\FZV$. Ist dieses Modell diskret, dann ist: 
+	Man betrachte Beobachtungen $x_1, \ldots , x_n$ von $\FZV$. Ist dieses Modell diskret, dann gilt: 
 	
 	\begin{equation*}
 		L(\theta)=\prod_{i=1}^{n} p(x_i \mid \theta) = \prod_{i=1}^{n} P (X_i = x_i \mid \theta) = P(X_1 = x_1, \ldots, X_n = x_n \mid \theta).
 	\end{equation*}
 	Der ML-Schätzer $\hat{\theta}_{ML}$ ist also jener Wert von $\theta$, für den die Wahrscheinlichkeit, Werte $x_1,\ldots,x_n$ zu beobachten, größtmöglich ist. In diesem Sinn ist $\hat{\theta}_{ML}$ die bestmögliche Beschreibung der Daten.
 	
-	Ist das Modell stetig, dann lässt sich $f(x_i \mid \theta)$ nicht als $P(X_i = x_i \mid \theta)$ interpretieren. Aber: Sei $n=1$ in einer Beobachtung von $x_1$ von $X_1$ ist $\hat{\theta}_{ML} = argmax f(x_1 \mid \theta)$ für $\delta > 0$ seien $x^{\left(\delta\right)}_1$ und $X^{\left(\delta\right)}_1$ definiert durch: 
+	Ist das Modell stetig, dann lässt sich $f(x_i \mid \theta)$ nicht als $P(X_i = x_i \mid \theta)$ interpretieren. Aber: Sei $n=1$. Gegeben einer Beobachtung  $x_1$ von $X_1$ ist $\hat{\theta}_{ML} = \textbf{argmax} \; f(x_1 \mid \theta)$. Für $\delta > 0$ seien $x^{\left(\delta\right)}_1$ und $X^{\left(\delta\right)}_1$ definiert durch: 
 	
 	\begin{equation*}
 		X^{\left(\delta\right)}_1 = k \cdot \delta, \;\textbf{wenn} \; k\cdot\delta \leq x_1 < (k+1)\delta \; \textbf{für} \; k \in \mathbb{Z}.
@@ -1330,7 +1333,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{split}
 			P(\xt) &= P (x\leq X_1 < x+ \delta \mid \theta) \\
 			&= P (X_1 \leq x + \delta \mid \theta) - P (X_1 < x \mid \theta) \\
-			&= F(X^{\left(\delta\right)}_1 + \delta \mid \theta) - F(x^{\left(\delta\right)}_1 \mid \theta),
+			&= F(x^{\left(\delta\right)}_1 + \delta \mid \theta) - F(x^{\left(\delta\right)}_1 \mid \theta),
 		\end{split}
 	\end{equation*}
 	
@@ -1340,28 +1343,28 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	\begin{equation*}
 		\begin{split}
-			\hat{\theta}_{ML}^{\left(\delta\right)} &= argmax_\theta \; p^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta)\\
-			&= argmax_\theta \frac{1}{\delta} \; P^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta)\\
-			&=argmax_\theta \frac{F(x^{\left(\delta\right)}_1 + \delta \mid \theta) - F(x^{\left(\delta\right)}_1 \mid \theta)}{\delta}
+			\hat{\theta}_{ML}^{\left(\delta\right)} &= \textbf{argmax}_\theta  \; p^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta)\\
+			&= \textbf{argmax}_\theta \; \frac{1}{\delta} \; P^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta)\\
+			&= \textbf{argmax}_\theta \; \frac{F(x^{\left(\delta\right)}_1 + \delta \mid \theta) - F(x^{\left(\delta\right)}_1 \mid \theta)}{\delta}
 		\end{split}
 	\end{equation*}
 	
-	Der letzte Term konvergiert, wenn $\delta$ gegen $0$ geht, gegen die Dichtefunktion von $x_1$, wenn $\theta$ der wahre Parameter. Bei kleineren $\delta$ nähert es sich $x$ an. 
+	Der letzte Term konvergiert für  $\delta \rightarrow 0$ gegen die Dichtefunktion von $X_1$, wenn $\theta$ der wahre Parameter. Bei kleineren $\delta$ nähert es sich $x_1$ an. 
 	
 	Unter geeigneten Voraussetzungen $f(\cdot\mid\cdot)$ gilt:
 	
 	\begin{equation*}
-		\hat{\theta}_{ML}^{\left(\delta\right)} = argmax_\theta \; p^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta) \overset{\delta \rightarrow 0} \longrightarrow \;argmax_\theta \; f(x_1 \mid \theta) = \hat{\theta}_{ML}.
+		\hat{\theta}_{ML}^{\left(\delta\right)} = \textbf{argmax}_\theta \; p^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta) \overset{\delta \rightarrow 0} \longrightarrow \;\textbf{argmax}_\theta \; f(x_1 \mid \theta) = \hat{\theta}_{ML}.
 	\end{equation*}
 	
 	Der ML-Schätzer im stetigen Modell ist dann der Grenzwert von ML-Schätzern, die sich wie zuvor interpretieren lassen. (Ähnliches gilt für $n>1$).
 	
 	\begin{BSP}[Beispiel 1.3.9 (Schätzung der Populationsgröße mit der Capture/Recapture-Methode)]
-		Gegeben ist eine Population und ein $N_0$ Individuum; $N_0 \in \mathbb{N}$ unbekannt. 
+		Gegeben ist eine Population von $N_0$ Individuen; $N_0 \in \mathbb{N}$ unbekannt. 
 		
-		Capture: Wähle aus der Population $n$ Individuen zufällig aus und markiere diese. (Zürcklegen)
+		Capture: Wähle aus der Population $m$ Individuen zufällig aus und markiere diese. (Zurü cklegen)
 		
-		Recapture: Wähle nun eine zweite Gruppe von $n$ Individuen zufällig aus und ermittle $X$, die Anzahl der bereits markierten Individuen. 
+		Recapture: Wähle nun eine zweite Gruppe von $n$ Individuen zufällig aus und ermittle $X$, welches die Anzahl der bereits markierten Individuen darstellt. 
 		
 		Modell:
 		
@@ -1374,7 +1377,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		Es gilt:
 		\begin{equation*}
-			\EW(x \mid N) = \frac{mn}{N},
+			\EW(X \mid N) = \frac{mn}{N},
 		\end{equation*}
 		
 		sodass
@@ -1408,7 +1411,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Betrachte:
 		\begin{equation*}
-			D(N) = \frac{L(N)}{L(N^{-1})} = \frac{\left(
+			D(N) = \frac{L(N)}{L(N-1)} = \frac{\left(
 				\begin{array}{c}
 					m\\
 					X\\
@@ -1461,7 +1464,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\end{split}
 		\end{equation*}
 		
-		Für $x = 0$ ist $L(N)$ streng steigend in $N$ und hat keinen Maximierer (in $\mathbb{N}$) $\Rightarrow$ Setze $\hat{N} = \infty$.
+		Für $x = 0$ ist $L(N)$ streng monoton steigend in $N$ und hat keinen Maximierer (in $\mathbb{N}$) $\Rightarrow$ Setze $\hat{N} = \infty$.
 		
 		Sei nun $x\geq 1$
 		
@@ -1546,12 +1549,12 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		oder aquivalent:
 		\begin{equation*}
-			\frac{1}{n} l_n(\theta = \frac{1}{n}\sum_{i=1}^{n}\log f(x_i \mid \theta)).
+			\frac{1}{n} l_n(\theta) = \frac{1}{n}\sum_{i=1}^{n}\log f(X_i \mid \theta).
 		\end{equation*}
 		Mit dem Gesetz der großen Zahl gilt:
 		Für jedes $\theta \in \Theta$ ist:
 		\begin{equation*}
-			\frac{1}{n} l_n (\theta) \KW \EW(\log f((X_1 \mid \theta) \mid \theta_0)) := l_\infty (\theta).
+			\frac{1}{n} l_n (\theta) \KW \EW(\log f(X_1 \mid \theta) \mid \theta_0) := l_\infty (\theta).
 		\end{equation*}
 		Idee: (Mathematisch nicht genau ausführbar)
 		\begin{equation*}
@@ -1560,19 +1563,19 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Maximierer von $l_\infty (\theta)$:
 		\begin{equation*}
 			\begin{split}
-				\frac{\delta}{\delta \theta} l_\infty (\theta_0) &= \frac{\delta}{\delta \theta} \EW(\log f((x\mid \theta)\mid \theta_0))\\
-				&= \frac{\delta}{\delta \theta} \int \log f(x \mid \theta) \cdot f(x \mid \theta_0) \; dx \\
-				&= \int \frac{\delta}{\delta \theta} \log f(x \mid \theta) \cdot f(x\mid \theta_0) \; dx \\
-				&=\int \frac{\frac{\delta}{\delta \theta} f(x\mid \theta)}{f(x\mid \theta)} \cdot f(x\mid \theta_0) \; dx. 
+				\frac{\partial}{\partial \theta} l_\infty (\theta_0) &= \frac{\partial}{\partial \theta} \EW(\log f((x\mid \theta)\mid \theta_0))\\
+				&= \frac{\partial}{\partial \theta} \int \log f(x \mid \theta) \cdot f(x \mid \theta_0) \; dx \\
+				&= \int \frac{\partial}{\partial \theta} \log f(x \mid \theta) \cdot f(x\mid \theta_0) \; dx \\
+				&=\int \frac{\frac{\partial}{\partial \theta} f(x\mid \theta)}{f(x\mid \theta)} \cdot f(x\mid \theta_0) \; dx. 
 			\end{split}
 		\end{equation*}
 		An der Stelle $\theta = \theta_0$ ist:
 		\begin{equation*}
-			\frac{\delta}{\delta \theta} l_\infty (\theta_0) = \int \frac{\frac{\delta}{\delta \theta} f(x\mid\theta_0)}{f(x\mid\theta_0)} \cdot f(x\mid\theta_0) \; dx = \frac{\delta}{\delta \theta} \int f(x\mid\theta_0) \; dx = 0.
+			\frac{\partial}{\partial \theta} l_\infty (\theta_0) = \int \frac{\frac{\partial}{\partial \theta} f(x\mid\theta_0)}{f(x\mid\theta_0)} \cdot f(x\mid\theta_0) \; dx = \frac{\partial}{\partial \theta} \int f(x\mid\theta_0) \; dx = 0.
 		\end{equation*}
 		Ebenfalls an der Stelle $\theta = \theta_0$ ist:
 		\begin{equation*}
-			\frac{\delta^2}{\delta \theta^2} l_\infty(\theta_0) = \frac{\delta^2}{\delta \theta^2} \EW (\log f((X_1 \mid \theta_0) \mid \theta_0)) = \EW \left(\frac{\delta^2}{\delta \theta^2}\log f\left(\left(X_1 \mid \theta_0\right) \mid \theta_0\right)\right) = - I(\theta_0) \leq 0.
+			\frac{\partial^2}{\partial \theta^2} l_\infty(\theta_0) = \frac{\partial^2}{\partial \theta^2} \EW (\log f((X_1 \mid \theta_0) \mid \theta_0)) = \EW \left(\frac{\partial^2}{\partial \theta^2}\log f\left(\left(X_1 \mid \theta_0\right) \mid \theta_0\right)\right) = - I(\theta_0) \leq 0.
 		\end{equation*}
 		Im nicht trivialen Fall, wo $I(\theta_0) > 0$ ist, wird also $l_\infty (\theta)$ an der Stelle $\theta_0$ maximiert. Die Details des Beweises werden im Master-Studium behandelt. 
 	\end{BWS}
@@ -1584,15 +1587,15 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{equation*}
 		\hat{\theta}_n = \hat{\theta}_{ML}(\FZV).
 	\end{equation*}
-	Zur Vereinfachung sei $k = \dim \theta_0 = 1$.
+	Zur Vereinfachung sei $k = \dim(\theta_0) = 1$.
 	
 	Die Größe:
 	\begin{equation*}
-		I(\theta_0) = \EW\left[\left(\frac{\delta}{\delta \theta} \log f( X\mid \theta_0)\right)^2 \mid \theta_0 \right], \eqname{(stetig)}
+		I(\theta_0) = \EW\left[\left(\frac{\partial}{\partial \theta} \log f( X\mid \theta_0)\right)^2 \mid \theta_0 \right], \eqname{(stetig)}
 	\end{equation*}
 	beziehungsweise
 	\begin{equation*}
-		I(\theta_0) = \EW\left[\left(\frac{\delta}{\delta \theta} \log p( X\mid \theta_0)\right)^2 \mid \theta_0 \right] \eqname{(diskret)}
+		I(\theta_0) = \EW\left[\left(\frac{\partial}{\partial \theta} \log p( X\mid \theta_0)\right)^2 \mid \theta_0 \right] \eqname{(diskret)}
 	\end{equation*}
 	nennt man die Fisher-Information (von $X$ über $\theta_0$), sofern diese Größe wohldefiniert ist. 
 	
@@ -1602,11 +1605,11 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{equation*}
 	Unter geeigneten Vorraussetzungen an $f(\cdot \mid \cdot)$ bzw. $p(\cdot \mid \cdot)$ kann man $I(\theta_0)$ alternativ berechnen als:
 	\begin{equation*}
-		I(\theta_0) = -\EW \left[\frac{\delta^2}{\delta \theta^2} \log f(X\mid\theta_0) \mid \theta_0 \right], \eqname{(stetig)}
+		I(\theta_0) = -\EW \left[\frac{\partial^2}{\partial \theta^2} \log f(X\mid\theta_0) \mid \theta_0 \right], \eqname{(stetig)}
 	\end{equation*}
 	beziehungsweise
 	\begin{equation*}
-		I(\theta_0) = -\EW \left[\frac{\delta^2}{\delta \theta^2} \log p(X\mid\theta_0) \mid \theta_0 \right]. \eqname{(diskret)}
+		I(\theta_0) = -\EW \left[\frac{\partial^2}{\partial \theta^2} \log p(X\mid\theta_0) \mid \theta_0 \right]. \eqname{(diskret)}
 	\end{equation*}
 	\end{Definition}
 	
@@ -1615,20 +1618,20 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\begin{split}
 				\Rightarrow 0 &= \frac{\delta}{\delta \theta} \int f(X\mid \theta) \; dx \\
-				&= \int \frac{\delta}{\delta \theta} f(X\mid \theta) \; dx \\
-				&=  \int \frac{\frac{\delta}{\delta \theta} f(x\mid\theta)}{f(x\mid\theta)} \cdot f(x\mid\theta) \; dx \\
-				&= \int \frac{\delta}{\delta \theta} \log f(X \mid \theta) \cdot f(X \mid \theta) \; dx.
+				&= \int \frac{\partial}{\partial \theta} f(X\mid \theta) \; dx \\
+				&=  \int \frac{\frac{\partial}{\partial \theta} f(x\mid\theta)}{f(x\mid\theta)} \cdot f(x\mid\theta) \; dx \\
+				&= \int \frac{\partial}{\partial \theta} \log f(X \mid \theta) \cdot f(X \mid \theta) \; dx.
 			\end{split}
 		\end{equation*}
 		\begin{equation*}
 			\begin{split}
-				\Rightarrow 0 &= \frac{\delta}{\delta \theta} \int \frac{\delta}{\delta \theta} \log f(X\mid \theta) \cdot f(X \mid \theta) \; dx \\
-				&= \int \frac{\delta^2}{\delta \theta^2} \log  f(X\mid \theta) \cdot f(X\mid \theta) + \frac{\delta}{\delta \theta} \log f(X\mid \theta) \cdot \frac{\delta}{\delta \theta} \; dx \\
-				&=\int \left(\frac{\delta^2}{\delta \theta^2} \log  f(X\mid \theta)\right) \cdot (f(X\mid \theta)) \; dx + \int \left(\frac{\delta}{\delta \theta} \log f(X\mid \theta)\right)^2 \cdot \frac{\delta}{\delta \theta} \; dx
+				\Rightarrow 0 &= \frac{\partial}{\partial \theta} \int \frac{\partial}{\partial \theta} \log f(X\mid \theta) \cdot f(X \mid \theta) \; dx \\
+				&= \int \frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta) \cdot f(X\mid \theta) + \frac{\partial}{\partial \theta} \log f(X\mid \theta) \cdot \frac{\partial}{\partial \theta} f(X\mid \theta) \; dx \\
+				&=\int \left(\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right) \cdot (f(X\mid \theta)) \; dx + \int \left(\frac{\partial}{\partial \theta} \log f(X\mid \theta)\right)^2 \cdot \frac{\partial}{\partial \theta} f(X\mid \theta)  \; dx
 			\end{split}
 		\end{equation*}
 		\begin{equation*}
-			I(\theta) = -\int \left(\frac{\delta^2}{\delta \theta^2} \log  f(X\mid \theta)\right) \cdot (f(X\mid \theta)) \; dx = -\EW \left[\frac{\delta^2}{\delta \theta^2} \log  f(X\mid \theta)\right]
+			I(\theta) = -\int \left(\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right) \cdot (f(X\mid \theta)) \; dx = -\EW \left[\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right]
 		\end{equation*}
 	\end{BWS}
 	
@@ -1642,7 +1645,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{BWS}[Beweisidee 1.3.6 (Verteilung des Schätzfehlers)]
 		Diese Beweisidee wurde für stetige Fälle ausgearbeitet, gilt aber genauso für diskrete Modelle. 
 		
-		Sei $\theta \in \Theta$ mit $I(\theta) > 0$. $\hat{\theta}_n$ minimiert $l_n (\theta) = \sum_{i=1}^{n} \log f (x_i \mid \theta)$, sodass:
+		Sei $\theta \in \Theta$ mit $I(\theta) > 0$. $\hat{\theta}_n$ maximiert $l_n (\theta) = \sum_{i=1}^{n} \log f (x_i \mid \theta)$, sodass:
 		
 		\begin{equation*}
 			\begin{split}
@@ -1650,7 +1653,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				&= l'(\theta) + l''_n(\theta) (\hat{\theta}_n - \theta) + \; \textbf{Rest}.
 			\end{split}
 		\end{equation*}
-		Der Rest kann ignoriert werden und die zweite Zeile ergibt sich aus der Taylor Entwicklung von $ln(\cdot)$ im Punkt $\theta$. 
+		Der Rest kann ignoriert werden und die zweite Zeile ergibt sich aus der Taylor Entwicklung von $l'_{n}(\cdot)$ im Punkt $\theta$. 
 		
 		Dies gibt die Approximation:
 		\begin{equation*}
@@ -1684,11 +1687,11 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		Der Nenner ist:
 		\begin{equation*}
-			\frac{1}{n} \sum_{i=1}^{n} \frac{\delta^2}{\delta \theta^2} \log f(x_i \mid \theta).
+			\frac{1}{n} \sum_{i=1}^{n} \frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \theta).
 		\end{equation*}
 		Die Summanden sind i.i.d. mit folgenden Erwartungswert:
 		\begin{equation*}
-			\EW \left(\frac{\delta^2}{\delta \theta^2} \log f(x_i \mid \theta) \mid \theta \right) = -I(\theta).
+			\EW \left(\frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \theta) \mid \theta \right) = -I(\theta).
 		\end{equation*}
 		Mit dem Gesetz der großen Zahl gilt:
 		\begin{equation*}
@@ -1727,7 +1730,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Damit kann man wieder asymptotisch valide Konfidenzintervalle oder Hypothesentests für $\theta_0$ konstruieren. 
 	\begin{BSP}[Beispiel 1.3.10 (Konfidenzintervall für $\theta_0$)]
 		\begin{equation*}
-			\hat{\theta}_n \pm (n \cdot \hat{I}_n)^{-\frac{1}{2}} \cdot \phi\left(1-\frac{\alpha}{2}\right).
+			\hat{\theta}_n \pm (n \cdot \hat{I}_n)^{-\frac{1}{2}} \cdot \Phi^{-1}\left(1-\frac{\alpha}{2}\right).
 		\end{equation*}
 	\end{BSP}
 	Vorteil der ML: Man braucht keine Delta-Methode. Man braucht hier nur die Fisher-Information. 
@@ -1741,14 +1744,14 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Hier ist der ML-Schätzer:
 		\begin{equation*}
-			\hat{\theta}_n = X_{(n)} = \underset{1\leq i \leq n}{max} X_n. 
+			\hat{\theta}_n = X_{(n)} = \underset{1\leq i \leq n}{\max} X_n. 
 		\end{equation*}
 		Und es gilt:
 		\begin{equation*}
 			n(\theta_0-\hat{\theta}_n) \KV Exp\left(\frac{1}{\theta_0}\right) \eqname{*}.
 		\end{equation*}
 		Dies konvergiert mit der Rate $\frac{1}{n} < \frac{1}{\sqrt{n}}$.
-		Beachte: Hier ist:
+		Beachte, dass hier:
 		\begin{equation*}
 			f(X\mid \theta) =
 			\begin{cases}
@@ -1756,14 +1759,14 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				0, &\textbf{sonst}.
 			\end{cases}
 		\end{equation*}
-		Zu * Erstmal ist:
+		Zu *. Erstmal ist:
 		\begin{equation*}
 			\begin{split}
-				P(\hat{\theta}_n < X \mid \theta_0) =& P(\underset{1\leq i \leq n}{max} X_i < x \mid \theta_0)\\
-				=& P(X_1 < x, \ldots, X_n < x \mid \theta_0)\\
-				\underset{u.a.}=& P(X_1<x\mid \theta_0) \cdot \ldots \cdot P(X_n < x \mid \theta_0)\\
-				\underset{\textbf{für} \; 0 \leq x \leq \theta_0}=& \left(\frac{1}{\theta_0}x\right)^{n}\\
-				=& \left(\frac{x}{\theta_0}\right)^n.
+				P(\hat{\theta}_n < X \mid \theta_0) &= \; P(\underset{1\leq i \leq n}{\max} X_i < x \mid \theta_0)\\
+				&= P(X_1 < x, \ldots, X_n < x \mid \theta_0)\\
+				\overset{u.a.}&{=} P(X_1<x\mid \theta_0) \cdot \ldots \cdot P(X_n < x \mid \theta_0)\\
+				\overset{\textbf{für} \; 0 \leq x \leq \theta_0}&{=} \left(\frac{1}{\theta_0}x\right)^{n}\\
+				&=\left(\frac{x}{\theta_0}\right)^n.
 			\end{split}
 		\end{equation*}
 		Damit ist:
@@ -1773,7 +1776,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				&= 1- P(n \theta_0 -n\hat{\theta}_n > t \mid \theta_0)\\
 				&= 1- P(n\hat{\theta}_n < n\theta_0 - t \mid \theta_0)\\
 				&= 1- P\left(\hat{\theta}_n < \theta_0 - \frac{t}{n} \mid \theta_0 \right)\\
-				&= 1- \left(\frac{\theta_0 \frac{t}{n}}{\theta_0}\right)^n\\
+				&= 1- \left(\frac{\theta_0 -\frac{t}{n}}{\theta_0}\right)^n\\
 				&= 1- \left(1-\frac{t}{n \theta_0}\right)^n \overset{n\rightarrow \infty}\longrightarrow 1-e^{-\frac{t}{\theta_0}}.
 			\end{split}
 		\end{equation*}
