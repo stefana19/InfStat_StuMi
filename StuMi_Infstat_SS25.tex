@@ -12,8 +12,11 @@
 \newcommand{\KV}{\overset{\sim} \longrightarrow} %Konvergenz in Verteilung
 \newcommand{\eqname}[1]{\tag*{#1}}% Tag equation with name
 \newcommand{\xt}{x \mid \theta} %x bedingt auf theta
-\newcommand{\ablt}{\frac{\delta}{\delta \theta}}
+\newcommand{\ablt}{\frac{\partial}{\partial \theta}}
+\newcommand{\MSE}{\textbf{MSE}} %MSE 
+\newcommand{\Var}{\textbf{Var}} %Varianz als fett geschrieben
 \usepackage{aligned-overset} % Richiges alignment von over-/underset
+\usepackage{multirow}
 
 
 
@@ -1794,7 +1797,261 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	\subsection{Zulässigkeit, Effizienz und Cramér-Rao-Schranke}
 	
+	Betrachte ein stetiges oder diskretes Modell wie in 1.3.8. mit $\FZV$ i.i.d. mit Dichte $f(X\mid \theta_0)$ beziehungsweise Wahrscheinlichkeitsfunktion $p(X \mid \theta_0)$, wobei $\theta_0 \in \Theta \subseteq \IR^k$. 
 	
+	Für einen Schätzer $\hat{\theta} = \hat{\theta}(X_1, \ldots, X_n)$ für $\theta_0 \in \IR^k$.
+	
+	Betrachtet man hierbei den mittleren quadr. Fehler:
+	
+	\begin{equation*}
+		\textbf{MSE}(\hat{\theta}_n, \theta_0) := \EW (\Vert {\hat{\theta}_n-\theta_0}\Vert ^2 \mid \theta_0)
+	\end{equation*}
+	
+	Bemerkung: Für $k = 1$ ist 
+	
+	\begin{equation*}
+			\textbf{MSE} (\hat{\theta}_n, \theta) = \EW (( {\hat{\theta}_n-\theta_0} )^2 \mid \theta_0),
+	\end{equation*}
+	
+	ist zusätzlich 	$\hat{\theta}_n$ unverzerrt, dann ist: 
+	
+	\begin{equation*}
+		\textbf{MSE} (\hat{\theta}_n, \theta) =  \textbf{Var}(\hat{\theta}_n \mid \theta_0)
+	\end{equation*}
+	
+	Für $k>1$ ist 
+	\begin{equation*}
+		\begin{split}
+			MSE(\hat{\theta}_n, \theta_0) &= \EW(\sum_{j=1}^{k}(\hat{\theta}_{n_{ji}} - \theta_{0_{ij}})^2 \mid \theta_0 )\\
+			&= \sum_{j=1}^{n} \EW ((\hat{\theta}_{n_{ji}} - \theta_{0_{ij}})^2 \mid \theta_0),
+		\end{split}
+	\end{equation*}
+	
+	weil $\theta_0$ unbekannt ist, betrachtet man $\MSE(\hat{\theta}, \theta)$ als Funktion von $\theta \in \Theta$.
+	
+	Im Folgenden sei $K$ eine Klasse von Schätzern. Zum Beispiel: Alle unverzerrten Schätzer für $\theta_0$, basierend auf $\FZV$ oder alle Schätzer für $\theta_0$ basierend auf $\FZV$. 
+	
+	\begin{Definition}[Definition 1.4.1 (Zulässigkeit)]
+		Ein Schätzer $\hat{\theta} \in K$ ist unzulässig (in der Klasse $K$), wenn Folgendes gilt:
+		
+		Es gibt einen Schätzer $\tilde{\theta} \in K$, sodass:
+		
+		\begin{equation*}
+			\forall \; \theta \in \Theta: \MSE(\tilde{\theta}, \theta) \leq \MSE(\hat{\theta}, \theta)
+		\end{equation*}
+		und 
+		\begin{equation*}
+			\exists \; \theta \in \Theta: \MSE(\tilde{\theta}, \theta) < \MSE(\hat{\theta},\theta).
+		\end{equation*}
+		
+		Ein Schätzer $\hat{\theta} \in K$ ist zulässig (in der Klasse $K$), wenn er nicht unzulässig ist. 
+	\end{Definition}
+	
+	\begin{Definition}[Definition 1.4.2 (Effizienz)]
+		Ein Schätzer $\hat{\theta}$ ist effizient (in der Klasse $K$), wenn Folgendes gilt:
+		\begin{equation*}
+			\forall \; \theta \in \Theta: \MSE(\hat{\theta}, \theta) = \textbf{min} \MSE(\tilde{\theta},\theta). 
+		\end{equation*}
+	\end{Definition}
+	\begin{BSP}[Beispiel 1.4.1 (Noten Effizienz und Zulässigkeit)]
+		In folgender Tabelle sind die Noten der Schüler*innen $\textbf{A, B, C}$ und $\textbf{D}$ in vier verschiedenen Fächern angegeben:
+		\begin{align*}
+				\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				\textbf{Fächer} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D}\\
+				\hline
+				\textbf{F1} & 1 & 2 & 4 & 1\\
+				\hline
+				\textbf{F2} & 2 & 3 & 2 & 3\\
+				\hline
+				\textbf{F3} & 4 & 5 & 1 & 4\\
+				\hline
+				\textbf{F4} & 2 & 3 & 2 & 1\\
+				\hline
+			\end{tabular}
+		\end{align*}
+		$\textbf{B}$ ist hier unzulässif, weil dieser Schüler immer schlechter als $\textbf{A}$ oder auch $\textbf{D}$ ist. 
+		$\textbf{A}$ kann nicht Klassenbester sein, weil er einmal schlechter als $\textbf{C}$ ist. $\textbf{A}$ ist aber zulässig. $\textbf{C}$ und $\textbf{D}$ sind ebenfalls zulässig. In diesem Beispiel gibt es keinen effizienten Schüler, da keiner alles dominiert.
+	\end{BSP}
+	
+	Satz: Cramér-Rao-Schranke:
+	
+	Betrachte ein parametrisches Modell wie in 1.4. mit $k = 1$. Ist $\hat{\theta}_n = \hat{\theta}_n \left(\FZV \right)$ ein unverzerrter Schätzer für $\theta_0$, dann gilt:
+	
+	\begin{equation*}
+		\textbf{Var}(\hat{\theta}_n \mid \theta_0) \geq \frac{1}{nI(\theta_0)}.
+	\end{equation*}
+	
+	Dies gilt unter geeigneten Voraussetzungen an $f(\cdot \mid \cdot)$ beziehungsweise $p(\cdot \mid \cdot)$. 
+	
+	Korollar:
+	
+	Ist $\hat{\theta}_n = \hat{\theta}_n (\FZV)$ ein unverzerrter Schätzer für $\theta_0$ und gilt:
+	\begin{equation*}
+		\textbf{Var}(\hat{\theta}_n \mid \theta_0) \geq \frac{1}{nI(\theta_0)},
+	\end{equation*}
+	für jedes $\theta \in \Theta $, dann ist $\hat{\theta}_n$ effizient in dieser Klasse aller unverzerrten Schätzer für $\theta_0$ basierend auf $\FZV$.
+	
+	\begin{BWS}[Beweis 1.4.1 (Effizienz)]
+		Dieser Beweis wurde für stetige Modelle ausgeführt, gilt aber genauso für diskrete Modelle.
+		
+		Setze:
+		\begin{equation*}
+			Z := \sum_{i=1}^{n} \frac{\partial}{\partial \theta} \log f(X_i \mid \theta_0).
+		\end{equation*}
+		Es gilt:
+		\begin{equation*}
+			1 \geq \textbf{Corr}(\hat{\theta}_n, Z \mid \theta_0)^2 = \frac{\textbf{Covar}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0)}.
+		\end{equation*}
+		Daraus folgt:
+		\begin{equation*}
+			\textbf{Var}(\hat{\theta}_n \mid \theta_0) \geq \frac{\textbf{Covar}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(Z \mid \theta_0)}.
+		\end{equation*}
+		Hieraus folgt die C-R-Ungleichung, wenn Folgendes gilt:
+		\begin{enumerate}
+			\item 
+			\begin{equation*}
+				\textbf{Covar}(\hat{\theta}_n, Z \mid \theta_0) = 1
+			\end{equation*}
+			\item 
+			\begin{equation*}
+				\textbf{Var}(Z\mid \theta_0) = nI(\theta_0).
+			\end{equation*}
+		\end{enumerate}
+		Zu 2.:
+		\begin{equation*}
+			\begin{split}
+				\EW (Z \mid \theta_0) &=  n\EW\left(\ablt \log f(x \mid \theta_0)\mid \theta_0\right)\\
+				&= n \int \left(\ablt \log f(x \mid \theta_0)\mid \theta_0\right) \cdot f(x \mid \theta_0) \; dx\\
+				&= n \int \frac{\ablt f(x \mid \theta_0)}{f(x \mid \theta_0)} \cdot f(x \mid \theta_0) \; dx\\
+				&= n \ablt \underbrace{\int f(x \mid \theta_0) \; dx}_{1} = 0
+			\end{split}
+		\end{equation*}
+		Hieraus folgt:
+		\begin{equation*}
+			\begin{split}
+				\textbf{Var}(Z \mid \theta_0) &= n \textbf{Var}\left(\ablt \log f(x \mid \theta_0)\mid \theta_0 \right)\\
+				&= n\EW((\ablt \log f(x \mid \theta_0))^2 \mid \theta_0)\\
+				&= nI(\theta_0).
+			\end{split}
+		\end{equation*}
+		Also gilt 2.. Nun zu 1.:
+		\begin{equation*}
+			\begin{split}
+				\textbf{Covar}(\hat{\theta}_n, Z \mid \theta_0) &= \underbrace{\EW(\hat{\theta}_n \mid \theta_0)}_{= \theta_0} \cdot \underbrace{\EW(Z \mid \theta_0)}_{= 0}\\
+				&= \underbrace{\int \cdots \int}_{\textbf{n-mal}}\hat{\theta}_n(\FZV) \underbrace{(\sum_{i=1}^{n}\ablt \log f(x_i \mid \theta_0)) \prod_{i=1}^{n}f(x_i \mid \theta_0)}_{*} dx_i, \ldots, dx_n\\
+				&= \int \cdots \int \hat{\theta}_n (\FZV) \ablt \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n\\
+				&= \ablt \underbrace{\int \cdots \int \hat{\theta}_n(\FZV) \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n}_{\EW(\hat{\theta}_n \mid \theta_0) = \theta_0} = 1.
+			\end{split}
+		\end{equation*}
+		Zu *: Für zum Beispiel $n=2$ ist dies gleich:
+		\begin{equation*}
+			\begin{split}
+				&\left(\frac{f'(x_1 \mid \theta_0)}{f(x_1 \mid \theta_0)} + \frac{f'(x_2 \mid \theta_0)}{f(x_2 \mid \theta_0)}\right) \cdot f(x_1 \mid \theta_0) \cdot f(x_2 \mid \theta_0)\\
+				\Leftrightarrow & \;f'(x_1 \mid \theta_0) \cdot f(x_2 \mid \theta_0) + f(x_1 \mid \theta_0) \cdot f'(x_2 \mid \theta_0)\\
+				\Leftrightarrow & \;\ablt (f(x_1 \mid \theta_0) \cdot f(x_2 \mid \theta_0)).
+			\end{split}
+		\end{equation*}
+		Ähnliches gilt auch für $n \geq 2$.
+	\end{BWS}
+	
+	\begin{BSP}[Beispiel 1.4.2 (Anwendung C-R-Schranke Bernoulli-Verteilung)]
+		Gegeben sind
+		\begin{equation*}
+			X \overset{\textbf{i.i.d.}}{\sim} B(\theta_0), \; 0 \leq \theta_0 \leq 1.
+		\end{equation*}
+		Hier ist der Maximum-Likelihood-Schätzer
+		\begin{equation*}
+			\hat{\theta}_{ML} = \bar{X}_n.
+		\end{equation*}
+		$\hat{\theta}_{ML}$ ist unverzerrt mit folgender Varianz:
+		\begin{equation*}
+			\textbf{Var}(\hat{\theta}_{ML} \mid \theta) = \frac{\theta (1-\theta)}{n}.
+		\end{equation*}
+		Dieses Modell hat folgende Wahrscheinlichkeitsfunktion:
+		\begin{equation*}
+			p (X \mid \theta) = \theta^x(1-\theta)^{1-\theta} \; \textbf{für} \; x \in \{0,1\}.
+		\end{equation*}
+		Fisher-Information berechnen:
+		\begin{equation*}
+			\begin{split}
+				\log(p(x \mid \theta)) =& \; x \log (\theta) +(1-x) \cdot \log(1-\theta)\\
+				\ablt \log p(x \mid \theta) =& \; \frac{x}{\theta} - \frac{1-x}{1-\theta} = \frac{x-x\theta-\theta+x\theta}{\theta (1-\theta)} = \frac{x-\theta}{\theta (1-\theta)}\\
+				I(\theta) =& \; \EW \left(\left(\ablt \log p(x_i \mid \theta_0)\right)^2 \mid \theta\right)\\
+				=& \; \EW \left(\left(\frac{x-\theta}{\theta(1-\theta)}\right)^2 \mid \theta \right)\\
+				=& \; \frac{(\EW(x-\theta)^2 \theta)}{\theta^2 (1-\theta)^2}\\
+				=& \; \frac{\textbf{Var}(x\mid \theta)}{\theta^2 (1-\theta)^2}\\ 
+				=& \; \frac{\theta(1-\theta)}{\theta^2 (1-\theta)^2}\\
+				=& \; \frac{1}{\theta(1-\theta)}.
+			\end{split}
+		\end{equation*}
+		Berechnung der C-R-Schranke:
+		\begin{equation*}
+			\frac{1}{nI(\theta)} = \frac{\theta(1-\theta)}{n}.
+		\end{equation*}
+		Hier ist die Varianz gleich der C-R-Schranke:
+		\begin{equation*}
+			\Var(\hat{\theta}_{ML} \mid \theta) = \frac{\theta(1-\theta)}{n} = \frac{1}{nI(\theta)}.
+		\end{equation*}
+		Dies gilt für jedes $\theta$, mit $0< \theta <1$. 
+		Also ist $\hat{\theta}_{ML}$ effizient in der Klasse aller unverzerrten Schätzer. 
+	\end{BSP}
+	
+	\begin{BSP}[Beispiel 1.4.3 (Anwendung C-R-Schrank Geometrische Verteilung)]
+	Gegeben sind:
+		\begin{equation*}
+			X \overset{\textbf{i.i.d.}}{\sim} G(\theta_0), \; 0 < \theta_0 < 1.
+		\end{equation*}
+		Hier ist der Maximum-Likelihood-Schätzer
+		\begin{equation*}
+			\hat{\theta}_{ML} = \frac{1}{\bar{X}_n}.
+		\end{equation*}
+		Dieser Schätzer ist allerdings verzerrt, sodass die C-R-Schranke hier nicht anwendbar ist. Daher ist eine Modifikation notwendig:
+		\begin{equation*}
+			\theta_0 \rightarrow \frac{1}{\theta_0} := \lambda_0, \; \textbf{sodass} \; \frac{1}{\lambda_0} = \theta_0.
+		\end{equation*}
+		\begin{equation*}
+			X \overset{\textbf{i.i.d.}}{\sim} G(\frac{1}{\lambda_0}), \; 0 < \lambda_0 < \infty.
+		\end{equation*}
+		Hierbei ist Folgendes zu beachten:
+		\begin{equation*}
+			\EW (X \mid \lambda_0) = \lambda_0.
+		\end{equation*}
+		Also ist hier der Schätzer unverzerrt. Die Varianz muss ebenfalls an die Modifikation angepasst werden. Die Varianz hat folgende ursprüngliche Form:
+		\begin{equation*}
+			\Var(\hat{\lambda}_{ML} \mid \theta_0) = \frac{1 - \theta_0}{\theta^2_0}.
+		\end{equation*}
+		Diese wird folgendermaßen modifiziert:
+		\begin{equation*}
+			\Var(\tilde{\lambda}_{ML} \mid \theta_0) = \frac{1- \frac{1}{\lambda_0}}{\left(\frac{1}{\lambda_0}\right)^2} =\lambda^2_0 \frac{\lambda_0-1}{\lambda_0} = \lambda_0(\lambda_0-1). 
+		\end{equation*}
+		Hier ist die Wahrscheinlichkeitsfunktion folgende:
+		\begin{equation*}
+			\begin{split}
+				p(x\mid \lambda) &= \left(\frac{1}{\lambda}\right)\left(1- \frac{1}{\lambda}\right)^{x-1}, \textbf{für}\; x \in \mathbb{N}\\
+				&= \frac{1}{\lambda}\left(\frac{\lambda-1}{\lambda}\right)^{x-1}\\
+				&= \frac{(\lambda -1)^{x-1}}{\lambda x}
+			\end{split}
+		\end{equation*}
+		Die logarithmierte Wahrscheinlichkeitsfunktion sieht folgendermaßen aus: 
+		\begin{equation*}
+			\log p (x \mid \lambda) = (x-1)\log (x-1) - x \log \lambda.
+		\end{equation*}
+		Nun wurde die Ableitung der logarithmierten Wahrscheinlichkeitsfunktion berechnet:
+		\begin{equation*}
+			\frac{\partial}{\partial\lambda} \log p(x \mid \lambda) = \frac{x-1}{\lambda -1} - \frac{x}{\lambda} = \frac{x \lambda - \lambda - \lambda \lambda + x}{\lambda (\lambda -1)} = \frac{x -1}{\lambda (\lambda -1)}.
+		\end{equation*}
+		Daraus ergibt sich folgende Fisher-Information:
+		\begin{equation*}
+			I(\lambda) = \EW\left(\left(\frac{x - \lambda}{\lambda ( \lambda -1)}\right)^2 \mid \lambda \right) = \frac{\EW ((x - \lambda)^2 \mid \lambda)}{\lambda^2(\lambda-1)^2} = \frac{\Var(x \mid \lambda)}{\lambda^2 (\lambda -1)^2} = \frac{\lambda (\lambda -1)}{\lambda^2 (\lambda -1)^2} = \frac{1}{\lambda (\lambda -1)}.
+		\end{equation*}
+		Die C-R-Schranke folgt daraus:
+		\begin{equation*}
+			\frac{1}{nI(\lambda)} = \frac{1}{n} \lambda ( \lambda - 1 ) = \frac{\lambda (\lambda -1)}{n}
+		\end{equation*}
+		Dies entspricht genau der Varianz. Daher ist der Schätzer effizient in der Klasse der unverzerrten Schätzer. 
+	\end{BSP}
+
 	
 
 
