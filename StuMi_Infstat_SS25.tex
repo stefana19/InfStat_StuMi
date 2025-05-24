@@ -15,8 +15,11 @@
 \newcommand{\ablt}{\frac{\partial}{\partial \theta}}
 \newcommand{\MSE}{\textbf{MSE}} %MSE 
 \newcommand{\Var}{\textbf{Var}} %Varianz als fett geschrieben
+\newcommand{\JSEM}{\hat{\mu}_{JS}} %J-S-Schätzer für \mu
 \usepackage{aligned-overset} % Richiges alignment von over-/underset
 \usepackage{multirow}
+\usepackage{tikz}
+
 
 
 
@@ -1997,7 +2000,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Also ist $\hat{\theta}_{ML}$ effizient in der Klasse aller unverzerrten Schätzer. 
 	\end{BSP}
 	
-	\begin{BSP}[Beispiel 1.4.3 (Anwendung C-R-Schrank Geometrische Verteilung)]
+	\begin{BSP}[Beispiel 1.4.3 (Anwendung C-R-Schranke Geometrische Verteilung)]
 	Gegeben sind:
 		\begin{equation*}
 			X \overset{\textbf{i.i.d.}}{\sim} G(\theta_0), \; 0 < \theta_0 < 1.
@@ -2051,9 +2054,350 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Dies entspricht genau der Varianz. Daher ist der Schätzer effizient in der Klasse der unverzerrten Schätzer. 
 	\end{BSP}
-
+	\begin{BSP}[Beispiel 1.4.4 (Anwendung C-R-Schranke Gleichverteilung)]
+		Gegeben sind:
+		\begin{equation*}
+		X {\sim} U([0, \theta_0]), \theta_0 > 0.
+		\end{equation*}
+		Hier ist der Maximum-Likelihood-Schätzer:
+		\begin{equation*}
+			\hat{\theta}_{ML} = X_{(n)}.
+		\end{equation*}
+		$\hat{\theta}_{ML}$ ist verzerrt (dies ist einfach nachzuprüfen), sodass die C-R-Schranke nicht anwendbar ist. Aber ein unverzerrter Schätzer ist $\tilde{\theta} = \frac{n+1}{n} X_{(n)}$. Beispiel 1.3.11 legt nahe, dass die C-R-Schranke auch hier nicht anwendbar ist: Die Schranke ist von der Form: $\Var(\sqrt{n}(\hat{\theta}-\theta)\mid \theta) \geq \frac{1}{I(\theta)}$ und suggeriert damit, dass $\hat{\theta} - \theta$ mit der Reihe $\frac{1}{\sqrt{n}}$ gegen $0$ geht. Beispiel 1.3.11 dagegen zeigt, dass $\tilde{\theta} - \theta$ mit der Reihe $\frac{1}{n}$ gegen $0$ geht:
+		
+		\begin{equation*}
+			\begin{split}
+				n(\tilde{\theta} - \theta) &= \; n \left(\frac{(n+1)}{n} X_{(n)}- \theta\right)\\
+				&= \; n\left(X_{(n)} \frac{1}{n}X_{(n)}-\theta\right)\\
+				&= \; \underbrace{n(X_{(n)} - \theta)}_{\KV - \textbf{Exp}\left(\frac{1}{\theta}\right)} + \underbrace{X_{(n)}}_{\KW \theta}\\
+				&\KV \; \theta - \textbf{Exp}\left(\frac{1}{\theta}\right).
+			\end{split}
+		\end{equation*}
 	
+		Tatsächlich erfüllt die Dichte:
+		\begin{equation*}
+			f(x\mid \theta) = 
+			\begin{cases}
+				\frac{1}{\theta} &: 0 \leq x \leq \theta\\
+				0 &: \textbf{sonst},
+			\end{cases}
+		\end{equation*}
+		die Vorraussetzung von dem Satz der Cramèr-Rao-Schranke nicht. 
+	\end{BSP}
+	
+	\begin{BSP}[Beispiel 1.4.5 (Anwendung der C-R-Schranke Normalverteilung mit bekannter Varianz)]
+		Gegeben sind:
+		\begin{equation*}
+			X \sim N(\mu_0, \sigma^2), \mu_0 \in \IR, \sigma^2 > 0 \; \textbf{und bekannt}
+		\end{equation*}
+		Hier ist der Maximum-Likelihood-Schätzer:
+		\begin{equation*}
+			\hat{\mu}_{ML} = \bar{X}. 
+		\end{equation*}
+		Dieser ist unverzerrt für $\mu$ und hat folgende Varianz:
+		\begin{equation*}
+			\Var(\hat{\mu}_{ML} \mid \mu) = \frac{\sigma^2}{n}.
+		\end{equation*}
+		Die Dichte sieht folgendermaßen aus:
+		\begin{equation*}
+			f(x \mid \mu) = (2\pi \sigma^2)^{-\frac{1}{2}} e^{-\frac{1}{2\sigma^2}(x-\mu)^2}
+		\end{equation*}
+		Die logarithmierte Dichtefunktion ist folgendermaßen:
+		\begin{equation*}
+			\log f(x \mid \mu) = -\frac{1}{2} \log (2\pi \sigma^2) - \frac{1}{2 \sigma^2} (x-\mu)^2
+		\end{equation*}
+		Die Ableitung dieser ist Folgende:
+		\begin{equation*}
+			\frac{\partial}{\partial \mu} \log(f(x \mid \mu)) = \frac{1}{\sigma^2} (x-\mu)
+		\end{equation*}
+		Daraus ergibt sich folgende Fisher-Information:
+		\begin{equation*}
+			\begin{split}
+				I(\mu) &= \EW\left(\left(\frac{\partial}{\partial \mu }\right)\right)\\
+				&= \EW\left(\frac{(x-\mu)^2}{\sigma^4} \mid \mu \right)\\
+				&= \frac{1}{\sigma^4} \Var(X \mid \mu)\\
+				&= \frac{\sigma^2}{\sigma^4} = \frac{1}{\sigma^2}
+			\end{split} 
+		\end{equation*}
+		Die C-R-Schranke sieht folgt daraus:
+		\begin{equation*}
+			\frac{1}{nI(\mu)}= \frac{\sigma^2}{n}
+		\end{equation*}
+		Also ist, bei bekannter Varianz $\hat{\mu}_{ML}$ für $\mu$ effizient in der Klasse aller unverzerrter Schätzer für $\mu$. 
+		Die Klasse sieht folgendermaßen aus:
+		\begin{equation*}
+			K_\sigma^2 = \{\tilde{\mu}(\FZV, \sigma^2): \forall \mu \in \IR \textbf{ist} \EW(\tilde{\mu} \mid \mu) = \mu\}.
+		\end{equation*}
+		Hierbei ist zu beachten, dass der effiziente Schätzer $\bar{X}_n$ nicht von $\sigma^2$ abhängt. 
+	\end{BSP}
+	\begin{BSP}[Beispiel 1.4.6 (Anwendung C-R-Schranke Normalverteilung mit unbekannten Parametern)]
+		Gegeben sind:
+		\begin{equation*}
+			X \sim N(\mu_0, \sigma_0^2), \mu_0 \in \IR, \sigma_0^2 > 0 \; \textbf{beide unbekannt}
+		\end{equation*}
+		Wieder ist $\hat{\mu}_{ML} = \bar{X}_n$ unverzerrt für $\mu$. Da $\mu_0$ und $\sigma^2_0$ unbekannt sind ($k=2$) ist der Satz der C-R-Schranke nicht anwendbar. Aber: Die Klasse der unverzerrten Schätzer für $\mu$ ist hier:
+		\begin{equation*}
+			K = \{\tilde{\mu}(\FZV): \forall \mu \in \IR \; \textbf{und} \; \forall \sigma^2 > 0 \; \textbf{ist} \; \EW(\tilde{\mu} \mid \mu, \sigma^2) = \mu\}
+		\end{equation*}
+		Beachte hierbei aber, dass $K_{\sigma^2}$ wie im letzten Beispiel ist:
+		\begin{equation*}
+			K \subseteq K_{\sigma^2} \; \textbf{für jedes} \; \sigma^2 > 0, \eqname{(1)}
+		\end{equation*}
+		\begin{equation*}
+			\bar{X}_n \in K \eqname{(2)}.
+		\end{equation*}
+		Mit Beispiel 1.4.5 ist:
+		\begin{equation*}
+			\forall \mu \in \IR: \Var (\bar{X}_n \mid \mu, \sigma^2) = \textbf{min}\Var(\tilde{\mu} \mid \mu, \sigma^2) \; \textbf{mit} \; \tilde{\mu} \in K_{\sigma^2}. \eqname{(3)}
+		\end{equation*}
+		Damit folgt:
+		\begin{equation*}
+			\begin{split}
+				\forall \mu \in \IR, \forall \sigma^2 >0: \Var(\bar{X}_n \mid \mu, \sigma^2) \overset{(2)}{\geq}& \; \textbf{min} \Var(\tilde{\mu}\mid \mu,\sigma^2), \tilde{\mu} \in K\\
+				\overset{(1)}{\geq}& \; \underset{\tilde{\mu} \in K_{\sigma^2}}{\textbf{inf}}\Var(\tilde{\mu} \mid \mu, \sigma^2)\\
+				\overset{(3)}{=}& \; \underset{\tilde{\mu} \in K_{\sigma^2}}{\textbf{min}} \Var(\tilde{\mu} \mid \mu, \sigma^2) \\
+				\overset{(3)}{=}& \Var(\bar{X}_n \mid \mu, \sigma^2)
+			\end{split}
+		\end{equation*}
+		Daraus folgt:
+		\begin{equation*}
+			\forall \mu, \forall \sigma^2: \Var(\bar{X}_n \mid \mu, \sigma^2) = \; \textbf{min} \Var(\tilde{\mu} \mid \mu, \sigma^2), \tilde{\mu} \in K.
+		\end{equation*}
+		Mit anderen Worten: $\bar{X}_n$ ist effizient für $\mu$ (in der Klasse aller unverzerrten Schätzer, auch wenn beide Parameter unbekannt sind.)
+	\end{BSP}
+	
+	\subsubsection{Asymptotische Effizienz von ML-Schätzern}
+	
+	Unter den Voraussetzungen von dem Satz der C-R-Schranke ist:
+	\begin{equation*}
+		\EW(\sqrt{n}(\hat{\theta}-\theta_0)\mid \theta_0)
+	\end{equation*}
+	und 
+	\begin{equation*}
+		\Var(\sqrt{n}(\hat{\theta}-\theta_0)\mid \theta_0) \geq \frac{1}{I(\theta_0)}
+	\end{equation*}
+	Unter den Voraussetzungen von Satz 1.3.13 gilt für den ML-Schätzer $\hat{\theta}_n = \hat{\theta}_{ML}(\FZV)$, dass
+	\begin{equation*}
+		\sqrt{n}(\hat{\theta}_n-\theta_0) \KV N\left(0,\frac{1}{I(\theta_0)}\right). \eqname{(*)}
+	\end{equation*}
+	Mann nennt den ML-Schätzer $\hat{\theta}_n$ daher $\textbf{asymptotisch effizient}$.
+	Leider folgt aus (*) nicht, dass
+	\begin{equation*}
+		\EW(\sqrt{n}(\hat{\theta}_n-\theta_0)\mid \theta_0) \overset{n\rightarrow \infty}{\longrightarrow} 0,
+	\end{equation*}
+	oder
+	\begin{equation*}
+		\Var(\sqrt{n}(\hat{\theta}_n-\theta_0)\mid \theta_0) \overset{n\rightarrow \infty}{\longrightarrow} \frac{1}{I(\theta)}.
+	\end{equation*}
+	Mit Resultaten von Lucian LeCom kann man zeigen, dass der ML-Schätzer tatsächlich asymptotische effizient ist in einem geeigneten Sinn. 
+	
+	\begin{BSP}[Beispiel 1.4.7 (Asymptotische Effizienz)]
+		Sei $X \sim N(0,1)$ und für $n \geq 1$ sei:
+		\begin{equation*}
+			X_n =
+			\begin{cases}
+				X &\text{mit Wahrscheinlichkeit} \; 1-\frac{1}{n}\\
+				n &\text{mit Wahrscheinlichkeit} \; \frac{1}{n}.
+			\end{cases}
+		\end{equation*}
+		Mit Rechenregeln für bedingte Wahrscheinlichkeiten ist:
+		\begin{equation*}
+			\begin{split}
+				P(X_n \leq t) &= \underset{= \phi(t)}{P(X \leq t)} \cdot \underset{\rightarrow 1}{1-\frac{1}{n}} + \underset{\rightarrow 0}{\mathbbm{1} \{n < t\} \cdot \frac{1}{n}}\\
+				&\overset{n \rightarrow \infty}{\longrightarrow} P(X \leq t) \; \textbf{für jedes} \; t \in \IR.
+			\end{split}
+		\end{equation*}
+		Also: $X_n \KV X$. 
+		Aber:
+		\begin{equation*}
+			\EW(X_n) = 0 \cdot \left(1- \frac{1}{n}\right) + n \cdot \frac{1}{n} = 1 \overset{n \rightarrow \infty}{\longrightarrow} \EW(X) = 0.
+		\end{equation*}
+	\end{BSP}
 
+	\subsection{James-Stein-Phänomen und Shrinkage Schätzer}
 
+	Hier werden nicht nur unverzerrte Schätzer betrachtet:
+	
+	Proposition: Sei $X \sim N(\mu_0, I_n)$ mit $\mu_0 \in \IR^k.$ (Hier ist $n=1$). Der ML-Schätzer $\hat{\mu}_{ML} = X$ für $\mu_0$ ist zulässig in der Klasse aller Schätzer für $\mu_0$ für $k=1$ oder $k=2$. Die im Beweis verwendete Technik ist einfach für $k=1$, aber deutlich komplizierter für $k=2$ und bricht zusammen für $k>2$. 
+	
+	Für $X \sim N(\mu_0, I_n), \mu_0 \in \IR^k$ mit $k \geq 3$ gibt es einen Schätzer $\hat{\mu}_{JS}$ für $\mu_0$, sodass folgendes gilt:
+	\begin{equation*}
+		\forall \mu \in \IR^k: \MSE(\hat{\mu}_{JS}, \mu) < \MSE(0,\hat{\mu})
+	\end{equation*}
+	$\hat{\mu}_{JS}$ ist gegeben durch:
+	\begin{equation*}
+		\hat{\mu}_{JS} = \left(1-\frac{k-2}{x'x}\right) \cdot x.
+	\end{equation*}
+	Insbesondere ist der ML-Schätzer unzulässig in der Klasse aller Schätzer, für $\mu_0$, wenn $k \geq 3$. 
 
+	\subsubsection{Motivation des J-S-Schätzers}
+	Sei $X \sim N(\mu, I_n), \mu \in \IR^k$. Anstatt des mittleren quadratischen Fehlers:
+	\begin{equation*}
+		\MSE(\hat{\mu}_{JS}, \mu) = \EW(\Vert \JSEM - \mu \Vert^2 \mid \mu) \; \textbf{bzw.} \; \MSE(X, \mu) = \EW( \Vert x - \mu \Vert^2 \mid \mu).
+	\end{equation*}
+	Betrachten wir den quadratischen Fehler selbst, also
+	\begin{equation*}
+		\Vert \JSEM - \mu \Vert^2 \; \textbf{bzw.} \; \Vert X - \mu \Vert^2.
+	\end{equation*}
+	Im Folgenden wird eine Approximation betrachtet, wo $k \rightarrow \infty$ geht. In $X \sim N(\mu, I_n), \mu \in \IR^k$, hängt $\mu$ von $k$ ab. Dabei wird angenommen, dass:
+	\begin{equation*}
+		\frac{\Vert \mu \Vert^2}{k} \overset{k \rightarrow \infty}{\longrightarrow} \rho^2 \in [0, \infty)
+	\end{equation*}
+	$\rho^2$ ist hierbei eine Signal to Noise Ratio.
+	Zerlege $X$ als $X = \mu + \epsilon$ für $\epsilon = X- \mu \sim N(0, I_n)$.
+	Man sieht sofort, dass $X$ als Schätzer für $\mu$ im Mittel "zu lang" ist:
+	\begin{equation*}
+		\begin{split}
+			\EW(\Vert X \Vert^2) &= \EW(X'X) \\
+			&= \EW((\mu + \epsilon)'(\mu + \epsilon)) \\
+			&= \EW(\mu' \mu + \mu' \epsilon + \epsilon' \mu + \epsilon' \epsilon) \\
+			&= \EW(\mu'\mu + 2\mu'\epsilon + \epsilon'\epsilon)\\
+			&= \mu' \mu + \underbrace{2\EW(\mu'\epsilon)}_{\begin{split}
+					&= \EW(\sum_{i=1}^{k} \mu_i \cdot \epsilon_i)\\
+					&= \sum_{i = 1}^{k} \mu_i \cdot \underbrace{\EW(\epsilon)}_{0}\\
+					&=0
+				\end{split}} + \underbrace{\EW(\epsilon' \epsilon)}_{\sum_{i=1}^{k}\EW(\epsilon_i^2)=1}\\
+			&= \Vert \mu \Vert^2 +k > \Vert \mu \Vert^2.
+		\end{split}
+	\end{equation*}
+	
+	Betrachte das Dreieck, das von $0, \mu, X$ bzw. $0, \frac{1}{\sqrt{k}} \mu, \frac{1}{\sqrt{k}} X$ aufgespannt wird:
+	\begin{align*}
+			\begin{tikzpicture}
+			\draw[thick, ->] (0,0) node[below left] {0} -- node[midway, above left] {$\frac{1}{\sqrt{k}}\mu$} (5,5);
+			\draw[thick, ->] (5,5) -- node[midway, above right] {$\frac{1}{\sqrt{k}}\epsilon$} (8,2);
+			\draw[thick, ->] (0,0) -- node[midway, below] {$\frac{1}{\sqrt{k}}X$} (8,2);
+		\end{tikzpicture}
+	\end{align*}	
+	
+	Die quadrierten Seitenlängen sind:
+	\begin{equation*}
+		\begin{split}
+			&\left\Vert \frac{1}{\sqrt{k}} \mu \right\Vert^2 = \frac{\mu'\mu}{k} \KW \rho^2\\
+			&\left\Vert \frac{1}{\sqrt{k}}\epsilon \right\Vert^2= \frac{\epsilon'\epsilon}{k}\KW 1\\
+			&\left\Vert \frac{1}{\sqrt{k}}X\right\Vert^2= \frac{x'x}{k} = \frac{1}{k} \cdot (\mu + \epsilon)' (\mu+\epsilon) \\
+		\end{split}
+	\end{equation*}
+	Daraus folgt:
+	\begin{equation*}
+		\underbrace{\frac{1}{k} \mu' \mu}_{\KW \rho^2} + \underbrace{\frac{1}{k} \epsilon'\epsilon}_{\KW 1} + \underbrace{\frac{1}{k} \mu' \epsilon}_{\KW 0} \KW \rho^2 +1.
+	\end{equation*}
+	Dies ergibt sich aus folgenden Nebenrechnungen:
+	\begin{equation*}
+		\begin{split}
+			\frac{1}{k} \epsilon' \epsilon =& \frac{1}{k} \sum_{i=1}^{k} \epsilon_i^2 \KW 1\\
+			\frac{1}{k} \mu' \epsilon =& \frac{1}{k} \sum_{i=1}^{k} \underbrace{\mu_i \epsilon_i}_{\substack{
+					\scriptstyle\sim N(0,\mu_i^2) \\ 
+					\scriptstyle\sim N(0, \textstyle\sum \mu_i^2) \\ 
+					\scriptstyle\sim N(0, \frac{\mu' \mu}{k^2})}}
+		\end{split}
+	\end{equation*}
+	Für $\delta >0$ ist:
+	\begin{equation*}
+		\begin{split}
+			P\left(\left\vert \frac{1}{k} \mu' \epsilon \right\vert \right) \overset{\text{Cheby.}}&{\leq} \frac{1}{\delta^2} \Var\left(\frac{1}{k} \mu' \epsilon \right)\\
+			&= \underbrace{\frac{1}{\delta^2}}_{\text{fest}} \cdot \underbrace{\frac{\mu' \mu}{k}}_{\rightarrow \rho^2} \cdot \underbrace{\frac{1}{k}}_{\rightarrow 0} \rightarrow 0
+		\end{split}
+	\end{equation*}
+	Also gilt:
+	\begin{equation*}
+		\begin{split}
+			\Vert \sqrt{k}x\vert^2 &\approx \rho^2+1\\
+				&\approx \left\Vert \frac{1}{\sqrt{k}}\mu\right\Vert^2 + \left\Vert \frac{1}{\sqrt{k}} \epsilon \right\Vert^2.
+		\end{split}
+	\end{equation*}
+	Das Dreieck ist also approximativ rechtwickling: 
+	
+	\begin{align*}
+		\begin{tikzpicture}
+			\draw[thick, -] (0,0) -- node[midway, above left] {$\frac{1}{\sqrt{k}}\mu$} (6.029836,3.446703);
+			\draw[thick, -] (6.029836,3.446703) -- node[midway, above right] {$\frac{1}{\sqrt{k}}\epsilon$} (8,0);
+			\draw[thick, -] (0,0) -- node[midway, below] {$\frac{1}{\sqrt{k}}X$} (8,0);
+			\draw[thick, -] (6.029836,0) -- (6.029836,3.446703);
+			\draw[very thick, ->] (6.029836,0) -- (7,-1) node[below right] {$\frac{1}{\sqrt{k}} \hat{\mu} = \frac{1}{\sqrt{x}} x \cdot \alpha$};
+		\end{tikzpicture}
+	\end{align*}	
+	
+	Bestimmung von $\alpha$:
+	
+	\begin{equation*}
+		\begin{split}
+			&a = \frac{1}{\sqrt{k}} \mu\\
+			&b = \frac{1}{\sqrt{k}} \epsilon\\
+			&c = \frac{1}{\sqrt{k}} x.
+		\end{split}
+	\end{equation*}
+		\begin{align*}
+		\begin{tikzpicture}
+			\draw[thick, -] (0,0) -- node[midway, above left] {$a$} (6.029836,3.446703);
+			\draw[thick, -] (6.029836,3.446703) -- node[midway, above right] {$b$} (8,0);
+			\draw[thick, -] (0,0) -- node[midway, below] {$\alpha - c$} (6.029863,0);
+			\draw[thick, -] (6.029863,0) -- node[midway, below] {$(1- \alpha) \cdot c$} (8,0);
+			\draw[thick, -] (6.029836,0) -- (6.029836,3.446703);
+			\draw[thick, |-|] (0,-1) --node[midway, below] {$c$} (8,-1);
+		\end{tikzpicture}
+	\end{align*}
+	
+	Daraus ergibt sich Folgendes: 
+	\begin{equation*}
+		\begin{split}
+			a^2 - \alpha^2 c^2 &= b^2 - (1-\alpha)^2 c^2\\
+			a^2 -\alpha^2 c^2 &= b^2 - c^2 + 2 \alpha c^2 - \alpha^2 c^2 \\
+		\end{split}
+	\end{equation*}
+	\begin{equation*}
+		\alpha = \frac{a^2-(b^2-c^2)}{2c^2} = \frac{2(c^2-b^2)}{2c^2} = 1-\frac{b^2}{c^2}
+	\end{equation*}
+	Also:
+	\begin{equation*}
+		\alpha = 1-\frac{b^2}{c^2} = 1-\frac{\epsilon' \epsilon / k}{x'x/k} \approx 1-\frac{k}{x'x}
+	\end{equation*}
+	Man sieht:
+	\begin{equation*}
+		\hat{\mu}= \left(1- \frac{k}{x'x}\right)-x
+	\end{equation*}
+	Dies ist schon (fast) der James-Stein-Schätzer!
+	
+	Für $k \rightarrow \infty$ ist $\hat{\mu}$ tatsächlich deutlich besser als $X$:
+	Proposition: Im Setting von der Motivation des J-S-Schätzers gilt:
+	\begin{equation*}
+		\frac{\Vert \hat{\mu} - \mu \Vert^2}{\Vert x - \mu \Vert^2} \underset{\text{für} \; k \rightarrow \infty} {\KW} 1 - \frac{1}{1+ \rho^2}
+	\end{equation*}
+	
+	\begin{BWS}[Beweis 1.5.1]
+		Zuerst zum Nenner:
+		\begin{equation*}
+			\frac{1}{k} \cdot \text{Nenner} = \frac{1}{k} \Vert \epsilon \Vert^2 = \frac{1}{k} \epsilon'\epsilon \KW 1.
+		\end{equation*}
+		Nun zum Zähler:
+		\begin{equation*}
+			\frac{1}{k} \cdot \text{Zähler} = \frac{1}{k} \left\Vert \left( 1 - \frac{k}{x'x} \cdot (x-\mu) \right) \right\Vert^2 = \frac{1}{k} \epsilon' \epsilon + \frac{1}{k} \left(\frac{k}{x'x}\right)^2 \cdot x'x - \frac{2}{k} \epsilon' \frac{k}{x'x} \cdot \epsilon
+		\end{equation*}
+		Wenn man sich nun die Konvergenz in Wahrscheinlichkeit dieser Terme des Zähler im Detail anschaut, zeigt sich Folgendes:
+		Zu $\frac{1}{k} \epsilon' \epsilon$:
+		\begin{equation*}
+			\frac{1}{k} \epsilon' \epsilon \KW 1.
+		\end{equation*}
+		Zu $\frac{1}{k} \left(\frac{k}{x'x}\right)^2 \cdot x'x$:
+		\begin{equation*}
+			\frac{1}{k} \left(\frac{k}{x'x}\right)^2 \cdot x'x = \frac{x'x}{k} \cdot \frac{k^2}{(x'x)^2} = \frac{k}{x'x} = \left(\frac{1}{k} x'x\right)^{-1} \KW (1+\rho^2)^{-1}.
+		\end{equation*}
+		Zu $\frac{2}{k} \epsilon' \frac{k}{x'x} \cdot \epsilon$:
+		\begin{equation*}
+			\frac{2}{k} \epsilon' \frac{k}{x'x} \cdot \epsilon = 2 \frac{k}{x'x} \cdot \frac{x'x}{k} = \underbrace{2 \frac{k}{x'x}}_{\KW \frac{1}{1+\rho^2}} \cdot (\underbrace{\frac{\mu' \epsilon}{k}}_{\KW 0} + \underbrace{\frac{\epsilon'\epsilon}{k}}_{\KW 1})
+		\end{equation*}
+		Daraus ergibt sich:
+		\begin{equation*}
+			\frac{k}{x'x} = \left(\frac{1}{k} x'x\right)^{-1} \KW (1+\rho^2)^{-1} \KW 1 + \frac{1}{1+ \rho^2} - 2\frac{1}{1+\rho^2} = 1- \frac{1}{1+\rho^2}.
+		\end{equation*}
+	\end{BWS}
+	
+	Bemerkungen:
+	Der J-S-Schätzer ist vor allem von konzeptioneller Bedeutung. In hohen Dimensionen $(k \rightarrow \infty)$ und bei schwachen Signalen ($\rho$ klein) kann der naive Schätzer ($x$) durch dramatisch verbessert werden. Siehe Lasso, Support Vecotr Mechanism, Regularized Neutral Networsk,...
+	
+	Die Resultate von LeCam und James/Stein beruhen auf unterschiedlichen Approximationen. Man muss anhand der Stichprobengröße (Anzahl d. Parameter) entscheiden, welche Methode. Es gibt auch Approximationen, wo $ n \rightarrow \infty, k \rightarrow \infty$ und $\frac{k}{n} \rightarrow \infty, c \geq 0$. 
+	
+	
+	
+	
 \end{document}
