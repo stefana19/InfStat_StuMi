@@ -18,7 +18,14 @@
 \newcommand{\JSEM}{\hat{\mu}_{JS}} %J-S-Schätzer für \mu
 \usepackage{aligned-overset} % Richiges alignment von over-/underset
 \usepackage{multirow}
+\usepackage[makeroom] {cancel} %Durchstreichen
+
+
+%Funktionen und Grafiken zeichnen
 \usepackage{tikz}
+\usetikzlibrary{patterns}
+\usetikzlibrary{intersections}
+\usepackage{pgfplots}
 
 
 
@@ -66,8 +73,27 @@ colback = cyan!15, % Hintergrund Farbbox
 colframe = cyan!65, %Randfarbe Box 
 coltitle = black, %Titel Box
 }
+\newtcolorbox{Bemerkung}[1][Heading]{ %Farbbox Bemerkung
+	title = \textbf{#1},
+	colback = gray!10, % Hintergrund Farbbox
+	colframe = gray!50, %Randfarbe Box 
+	coltitle = black, %Titel Box
+}
+\newtcolorbox{Satz}[1][Heading]{ %Farbbox Satz
+	title = \textbf{#1},
+	colback = magenta!5, % Hintergrund Farbbox
+	colframe = magenta!40, %Randfarbe Box 
+	coltitle = black, %Titel Box
+}
+\newtcolorbox{Proposition}[1][Heading]{ %Farbbox Proposition
+	title = \textbf{#1},
+	colback = olive!5, % Hintergrund Farbbox
+	colframe = olive!40, %Randfarbe Box 
+	coltitle = black, %Titel Box
+}
 \usepackage{setspace}  % Fuer line spacing (T13.04.2025)
 \onehalfspacing	% (T13.04.2025)
+
 
 
 
@@ -202,6 +228,14 @@ coltitle = black, %Titel Box
 				\begin{equation*}
 					\Theta = \IR \times (0,\infty) \subseteq \IR^k,\; k=2.
 				\end{equation*}
+				Hier zur Veranschaulichung eine Grafik:
+				\begin{align*}
+					\begin{tikzpicture}
+						\draw[thick, ->] (0,0) -- (5,0) node[right] {$\mu$};
+						\draw[thick, ->] (2.5,0) -- (2.5,3) node[above] {$\sigma^2$};
+						\fill[pattern=north east lines, pattern color= brown, opacity = 0.5] (0,0.1) rectangle (5,3);
+					\end{tikzpicture}
+				\end{align*}
 			\end{enumerate}
 			\item Gleichverteilung\\
 			Gegeben sind Zufallsvariablen $\FZV$ mit
@@ -237,25 +271,23 @@ coltitle = black, %Titel Box
 	\begin{equation*}
 		\hat{\theta}_n \overset{p} \longrightarrow \theta \;\; \textbf{für} \;\; n \rightarrow \infty,
 	\end{equation*}
-	wenn $\theta$ der wahre Parameter ist, \;  $\forall \; \theta \in \Theta$. \\
+	wenn $\theta$ der wahre Parameter ist, $\forall \; \theta \in \Theta$. \\
 	
-	\pagebreak
-	Einschub: Rechenregeln für Konvergenz in Wahrscheinlichkeit\\
-	
-	
-	Es seien $\FZV$ k-dimensionale Vektoren von Zufallsvariablen und $c,d$  feste k-dimensionale Vektoren. 
-	\begin{itemize}
-		\item Gilt $X_m \KW c$ und ist $f: \IR^k \rightarrow \IR^l$ eine Funktion, die stetig im Punkt $c$ ist, dann gilt auch: \begin{equation*}
-		f(X_1) \KW f(c).
-		\end{equation*}
-		\item Gilt $X_n \KW c$ und $Y_n \KW d$, dann gilt auch:
-		\begin{equation*}
-			\begin{split}
-			X_n \pm Y_n &\KW c \pm d\\
-			X_n^\top Y_n &\KW c^\top d.
-			\end{split}
-		\end{equation*}
-	\end{itemize}
+	\begin{Bemerkung} [Bemerkung 1.1.1 (Rechenregeln für Konvergenz)]
+		Es seien $\FZV$ k-dimensionale Vektoren von Zufallsvariablen und $c,d$  feste k-dimensionale Vektoren. 
+		\begin{itemize}
+			\item Gilt $X_m \KW c$ und ist $f: \IR^k \rightarrow \IR^l$ eine Funktion, die stetig im Punkt $c$ ist, dann gilt auch: \begin{equation*}
+				f(X_1) \KW f(c).
+			\end{equation*}
+			\item Gilt $X_n \KW c$ und $Y_n \KW d$, dann gilt auch:
+			\begin{equation*}
+				\begin{split}
+					X_n \pm Y_n &\KW c \pm d\\
+					X_n^\top Y_n &\KW c^\top d.
+				\end{split}
+			\end{equation*}
+		\end{itemize}
+	\end{Bemerkung}
 	
 	\item Genauigkeit bei festem $n$.
 	\item Verteilung des Fehlers\\
@@ -280,7 +312,7 @@ Diese Verteilung ist abhängig von $\theta_0 \in \Theta \subseteq \IR^k$.
 	\theta = (\theta_1, \ldots, \theta_k)^\top \mapsto (\EW_\theta(X), \EW_\theta(X^2),\ldots,\EW_\theta(X^k))
 \end{equation*}
 
-\noindent Die Momentenmethode ist anwendbar, wenn diese Beziehung umkerhbar ist. Das heißt, wenn man aus den gegebenen Momenten die Parameter schätzen kann. Zusätzlich nehmen wir in diesen Kapitel an, dass es eine Funktion $f: \IR^k \rightarrow \IR^k$ gibt, sodass 
+\noindent Die Momentenmethode ist anwendbar, wenn diese Beziehung umkehrbar ist. Das heißt, wenn man aus den gegebenen Momenten die Parameter schätzen kann. Zusätzlich nehmen wir in diesem Kapitel an, dass es eine Funktion $f: \IR^k \rightarrow \IR^k$ gibt, sodass 
 
 \begin{equation*}
 	\EW_\theta(X),\ldots,\EW_\theta(X^k) \mapsto f(\EW_\theta(X),\ldots,\EW_\theta(X^k)) \overset{!}= \theta.
@@ -556,7 +588,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	 	\begin{split}
 	 	\EW_\theta(\hat{\theta}_{MM}) &\neq \EW_\theta(f(\bar{X}, \ldots, \bar{X^k}))\\
 	 	&\neq f(\EW_\theta(\bar{X}),\ldots, \EW_\theta(\bar{X^k}))\\
-	 	&= f(\EW_\theta({X}),\ldots, \EW_\theta({X^k})) =  \theta
+	 	&= f(\EW_\theta({X}),\ldots, \EW_\theta({X^k})) =  \theta.
 	 \end{split}
 	 \end{equation*}
 	
@@ -656,15 +688,15 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 
 	
 	\item Konsistenz \\
-	Man betrachte einen Momenten-Methoden-Schätzer $\hat{\theta}_n = f(\bar{X}_n, \bar{X^2}_n, \ldots, \bar{X^k}_n)$. Wie in 1.3.4. gilt mit dem Gesetz der Großen Zahl für jedes $\theta \in \Theta$ und jedes $j \geq 1$ dass $\bar{x^j}_n \longrightarrow \EW_\theta (X^j)$, wenn $\theta$ der wahre Parameter ist. Damit gilt auch, dass
+	Man betrachte einen Momenten-Methoden-Schätzer $\hat{\theta}_n = f(\bar{X}_n, \bar{X}^2_n, \ldots, \bar{X}^k_n)$. Wie in 1.3.4. gilt mit dem Gesetz der Großen Zahl für jedes $\theta \in \Theta$ und jedes $j \geq 1$ dass $\bar{x}^j_n \longrightarrow \EW_\theta (X^j)$, wenn $\theta$ der wahre Parameter ist. Damit gilt auch, dass
 	
 		\begin{equation*}
 		\left(
 		\begin{array}{c}
 			\bar{x}_n\\
-			\bar{x^2}_n\\
+			\bar{x}^2_n\\
 			\vdots\\
-			\bar{x^k}_n\\
+			\bar{x}^k_n\\
 		\end{array}
 		\right)\; \overset{p}\longrightarrow \;
 		\left(
@@ -677,10 +709,10 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\right).
 	\end{equation*}
 
-	Ist zusätzlich $f: \IR^k \rightarrow \IR^k$ stetig im Punkt $(\EW_\theta(X),\ldots,\EW_\theta(X^k))$, dann folgt auch, dass $\hat{\theta}_n = f(\bar{X_n}, \ldots, \bar{X^k_n}) \overset{p} \rightarrow f(\EW_\theta(X),\ldots,\EW_\theta(X^k)) = \theta$, wenn $\theta$ der wahre Parameter ist. 
+	Ist zusätzlich $f: \IR^k \rightarrow \IR^k$ stetig im Punkt $(\EW_\theta(X),\ldots,\EW_\theta(X^k))$, dann folgt auch, dass $\hat{\theta}_n = f(\bar{X}_n, \ldots, \bar{X}^k_n) \overset{p} \rightarrow f(\EW_\theta(X),\ldots,\EW_\theta(X^k)) = \theta$, wenn $\theta$ der wahre Parameter ist. 
 
 	\begin{Definition}[Definition 1.3.1 (Konsistenz von MM-Schätzern)]
-	Ein MM-Schätzer $\hat\theta_n = f(\bar{X_n},\ldots,\bar{X^k_n})$, wie in 1.3.4., ist konsistent, wenn die Funktion $f:\IR ^k \rightarrow \IR ^k$ stetig ist in jedem Punkt der Menge $\{(\EW_\theta(X),\ldots, \EW_\theta(X^k)) : \theta \in \Theta\}$ ist.	\end{Definition}
+	Ein MM-Schätzer $\hat\theta_n = f(\bar{X}_n,\ldots,\bar{X}^k_n)$, wie in 1.3.4., ist konsistent, wenn die Funktion $f:\IR ^k \rightarrow \IR ^k$ stetig ist in jedem Punkt der Menge $\{(\EW_\theta(X),\ldots, \EW_\theta(X^k)) : \theta \in \Theta\}$ ist.	\end{Definition}
 
 \end{enumerate}
 
@@ -783,8 +815,10 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\end{equation*}
 			
 			Der erste Faktor konvergiert in Verteilung gegen eine Standardnormalverteilung und der zweite Faktor konvergiert in Wahrscheinlichkeit gegen 1 aufgrund der zuvorigen Konvergenz in Wahrscheinschleichkeit. 
+			
 			Wegen den Rechenregeln der Konvergenz, konvergiert der gesamte Term, wie oben beschrieben, gegen eine Standardnormalverteilung. 
-			Solche Prozeduren nennt man $\textbf{asymptotisch valide}$.
+			Solche Prozeduren nennt man 
+			$\textbf{asymptotisch valide}$.
 			
 			
 			
@@ -820,6 +854,37 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\subsubsection{Delta-Methode}
 	\noindent In vielen Fällen ist der MM-Schätzer durch eine nicht-lineare Funktion definiert. Hier hilft die sogenannte \textbf{Delta-Methode}. Zur Vereinfachung sei $k = 1$.
 	
+	\begin{align*}
+			\begin{tikzpicture}
+			\begin{axis}[
+				axis lines = middle,
+				xlabel = $\bar{X}_n$,
+				xmin = -2, xmax = 6,
+				ymin = 0, ymax = 1.2,
+				xtick = {2},
+				xticklabels = {$\EW_{\theta_0}(X)$},
+				samples = 200,
+				smooth,
+				legend style = {cells={anchor=west}, legend pos = north east}
+				]
+				% Gemeinsamer Mittelwert (µ = 2)
+				\def\mu{2}
+				% Drei Normalverteilungen mit abnehmender Standardabweichung σ
+				\addplot[domain=-1:5, blue, thick] 
+				{1/(1*sqrt(2*pi))*exp(-((x-\mu)^2)/(2*1^2))};
+				\addlegendentry{n = 5}
+				\addplot[domain=0:4, red, thick, dashed] 
+				{1/(0.6*sqrt(2*pi))*exp(-((x-\mu)^2)/(2*0.6^2))};
+				\addlegendentry{n = 10}
+				\addplot[domain=0.5:3.5, green!60!black, thick, dotted] 
+				{1/(0.3*sqrt(2*pi))*exp(-((x-\mu)^2)/(2*0.3^2))};
+				\addlegendentry{n = 100}
+				% Mittelwert-Linie
+				\draw[dashed, gray] (axis cs:\mu,0) -- (axis cs:\mu,1.2);
+			\end{axis}
+		\end{tikzpicture}
+	\end{align*}
+
 	Es seien $Z_1, \ldots, Z_n$ i.i.d. Kopien von $Z$ mit $\EW(Z)=\nu$ und $\textbf{Var}(Z)=\delta^2 > 0$. Weiters sei $f: \IR \rightarrow \IR$ differenzierbar im Punkt $\upnu$. Dann gilt:
 	\begin{equation*}
 		\sqrt{n} (f(\bar{Z}_n)-f(\upnu)) \sim N(0, \delta^2 (f'(\upnu))^2)
@@ -995,6 +1060,26 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{BSP}
 	
 	\noindent Die Überdeckungswahrscheinlichkeit des Kondfidenzintervalls im letzten Beispiel ist nur nominal gleich $1-\alpha$ und hängt von $n$ und $p$ ab. 
+	\begin{align*}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\multicolumn{8}{c}{$\textbf{n}$}\\
+			\hline
+			\textbf{p} & \textbf{5} & \textbf{20} & \textbf{80} & \textbf{320} & \textbf{1280} & \textbf{5120} & \textbf{20480}\\
+			\hline
+			\textbf{0,01} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+			\hline
+			\textbf{0,1} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark\\
+			\hline
+			\textbf{0,5} & x & x & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark\\
+			\hline
+			\textbf{0,9} &x &x &x &x & \checkmark& \checkmark& \checkmark\\
+			\hline
+			\textbf{0,99} &x &x &x &x &x &x & \checkmark \\
+			\hline
+		\end{tabular}
+	\end{align*}
+	
+	
 	
 	\noindent Wenn das wahre $p$ bei $0.5$ liegt, reichen nahezu $400$ Stichproben. 
 	
@@ -1003,7 +1088,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	\subsubsection{Maximum-Likelihood-Methode (ML)}
 	
-	Man betrachte ein Modell wie in 1.: $\FZV$ sind i.i.d. Kopien der Zufallsvariable $X$ deren Verteilung eine bestimmte Form ist: 
+	Man betrachte ein Modell: $\FZV$ sind i.i.d. Kopien der Zufallsvariable $X$ deren Verteilung eine bestimmte Form ist: 
 	
 	\begin{equation*}
 		X \sim \; \textbf{F}(\theta_0) \;	\theta \in \Theta \subseteq \IR^k.
@@ -1041,7 +1126,6 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			L(\theta) =& L(\theta, \FZV)\\
 			l(\theta) =&l(\theta, \FZV)
 		\end{split}
-		\eqname{zufällig}
 	\end{equation*}
 	
 	\subsubsection{Beispiele Maximum-Likelihood-Schätzer}
@@ -1330,7 +1414,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Ist das Modell stetig, dann lässt sich $f(x_i \mid \theta)$ nicht als $P(X_i = x_i \mid \theta)$ interpretieren. Aber: Sei $n=1$. Gegeben einer Beobachtung  $x_1$ von $X_1$ ist $\hat{\theta}_{ML} = \textbf{argmax} \; f(x_1 \mid \theta)$. Für $\delta > 0$ seien $x^{\left(\delta\right)}_1$ und $X^{\left(\delta\right)}_1$ definiert durch: 
 	
 	\begin{equation*}
-		X^{\left(\delta\right)}_1 = k \cdot \delta, \;\textbf{wenn} \; k\cdot\delta \leq x_1 < (k+1)\delta \; \textbf{für} \; k \in \mathbb{Z}.
+		X^{\left(\delta\right)}_1 = k \cdot \delta, \;\textbf{wenn} \; k\cdot\delta \leq x_1 < (k+1) \; \delta \; \textbf{für} \; k \in \mathbb{Z}.
 	\end{equation*}
 	
 	Damit ist $X^{\left(\delta\right)}_1$ eine diskrete Zufallsvariable mit Werten in $\{k\cdot\delta, k\in \mathbb{Z}\}$ und Wahrscheinlichkeitsfunktion:
@@ -1368,7 +1452,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{BSP}[Beispiel 1.3.9 (Schätzung der Populationsgröße mit der Capture/Recapture-Methode)]
 		Gegeben ist eine Population von $N_0$ Individuen; $N_0 \in \mathbb{N}$ unbekannt. 
 		
-		Capture: Wähle aus der Population $m$ Individuen zufällig aus und markiere diese. (Zurü cklegen)
+		Capture: Wähle aus der Population $m$ Individuen zufällig aus und markiere diese. (Zurücklegen)
 		
 		Recapture: Wähle nun eine zweite Gruppe von $n$ Individuen zufällig aus und ermittle $X$, welches die Anzahl der bereits markierten Individuen darstellt. 
 		
@@ -1533,19 +1617,21 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	\subsubsection{Konsistenz von ML-Schätzern}
 	
-	Betrachte ein (diskretes oder stetiges) Modell wie in 1.3.8. und für jede Stichprobe der Größe n, den ML-Schätzer:
+	Betrachte ein (diskretes oder stetiges) Modell wie in 1.3.8. und für jede Stichprobe der Größe $n$, den ML-Schätzer:
 	
 	\begin{equation*}
 		\hat{\theta}_n = \hat{\theta}_{ML}(\FZV).
 	\end{equation*}
 	
-	Satz: Unter geeigneten Vorraussetzungen (an $f(\cdot \mid \cdot)$ bzw. $p(\cdot \mid \cdot)$) ist der ML-Schätzer konsistent für $\theta_0$. Für jeden möglichen Wert $\theta \in \Theta$ gilt:
+	\begin{Satz}[Satz 1.3.1 (Konsistenz des ML-Schätzers)]
+	Unter geeigneten Vorraussetzungen (an $f(\cdot \mid \cdot)$ bzw. $p(\cdot \mid \cdot)$) ist der ML-Schätzer konsistent für $\theta_0$. Für jeden möglichen Wert $\theta \in \Theta$ gilt:
 	
 	\begin{equation*}
 		\hat{\theta}_n \KW \theta,
 	\end{equation*}
 	
 	wenn $\theta$ der wahre Parameter ist. 
+	\end{Satz}
 	
 	\begin{BWS}[Beweisidee 1.3.4 (Konsistenz von ML-Schätzern)]
 		Für ein stetiges Modell (analog auch für diskret):
@@ -1553,7 +1639,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\hat{\theta}_n \; \textbf{maximiert} \; l_n(\theta) = \sum_{i=1}^{n}\log f(\xt), 
 		\end{equation*}
-		oder aquivalent:
+		oder äquivalent:
 		\begin{equation*}
 			\frac{1}{n} l_n(\theta) = \frac{1}{n}\sum_{i=1}^{n}\log f(X_i \mid \theta).
 		\end{equation*}
@@ -1641,12 +1727,14 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 	\end{BWS}
 	
-	Satz 1.3.13.: Unter geeigneten Vorraussetzungen an $f(\cdot \mid \cdot)$ bzw. $p(\cdot \mid \cdot)$ gilt für den ML-Schätzer $\hat{\theta}_n$ und für $\theta \in \Theta$ mit $I(\theta) > 0$, dass:
-	
-	\begin{equation*}
-		\sqrt{n}(\hat{\theta}_n - \theta) \KV N\left(0,\frac{1}{I(\theta)}\right),
-	\end{equation*}
-	wenn $\theta$ der wahre Parameter ist. 
+	\begin{Satz}[Satz 1.3.2 (Verteilung des Schätzfehlers)]
+		Unter geeigneten Vorraussetzungen an $f(\cdot \mid \cdot)$ bzw. $p(\cdot \mid \cdot)$ gilt für den ML-Schätzer $\hat{\theta}_n$ und für $\theta \in \Theta$ mit $I(\theta) > 0$, dass:
+		
+		\begin{equation*}
+			\sqrt{n}(\hat{\theta}_n - \theta) \KV N\left(0,\frac{1}{I(\theta)}\right),
+		\end{equation*}
+		wenn $\theta$ der wahre Parameter ist. 
+	\end{Satz}
 	
 	\begin{BWS}[Beweisidee 1.3.6 (Verteilung des Schätzfehlers)]
 		Diese Beweisidee wurde für stetige Fälle ausgearbeitet, gilt aber genauso für diskrete Modelle. 
@@ -1727,7 +1815,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\hat{I}_n = \frac{1}{n} \sum_{i=1}^{n}\left(\ablt \log f(x_i\mid \hat{\theta}_n)\right)^2.
 	\end{equation*}
 	Im diskreten Fall ist $f(\cdot \mid \cdot)$ durch $p(\cdot \mid \cdot)$ zu ersetzen.
-	Unter den Voraussetzungen von Satz 1.3.13. gilt dann, dass:
+	Unter den Voraussetzungen von Satz 1.3.2 gilt dann, dass:
 	\begin{equation*}
 		\sqrt{n} \sqrt{\hat{I}_n}(\hat{\theta}_n - \theta) \KV N(0,1),
 	\end{equation*}
@@ -1741,7 +1829,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{BSP}
 	Vorteil der ML: Man braucht keine Delta-Methode. Man braucht hier nur die Fisher-Information. 
 	
-	Es gibt Situationen, wo Satz 1.3.13. nicht anwendbar ist. Im folgenden Beispiel konvergiert $\hat{\theta}_n - \theta$ schneller als $\frac{1}{\sqrt{n}}$ und die skalierte Grenzverteilung ist nicht normal. 
+	Es gibt Situationen, wo Satz 1.3.2 nicht anwendbar ist. Im folgenden Beispiel konvergiert $\hat{\theta}_n - \theta$ schneller als $\frac{1}{\sqrt{n}}$ und die skalierte Grenzverteilung ist nicht normal. 
 	
 	\begin{BSP}[Beispiel 1.3.11 (Grenzverteilung keine Normalverteilung)]
 		Gegeben sind Zufallsvariablen $\FZV$ mit
@@ -1804,7 +1892,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	Für einen Schätzer $\hat{\theta} = \hat{\theta}(X_1, \ldots, X_n)$ für $\theta_0 \in \IR^k$.
 	
-	Betrachtet man hierbei den mittleren quadr. Fehler:
+	Betrachtet man hierbei den mittleren quadratsichen Fehler:
 	
 	\begin{equation*}
 		\textbf{MSE}(\hat{\theta}_n, \theta_0) := \EW (\Vert {\hat{\theta}_n-\theta_0}\Vert ^2 \mid \theta_0)
@@ -1873,11 +1961,11 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\hline
 			\end{tabular}
 		\end{align*}
-		$\textbf{B}$ ist hier unzulässif, weil dieser Schüler immer schlechter als $\textbf{A}$ oder auch $\textbf{D}$ ist. 
+		$\textbf{B}$ ist hier unzulässig, weil dieser Schüler immer schlechter als $\textbf{A}$ oder auch $\textbf{D}$ ist. 
 		$\textbf{A}$ kann nicht Klassenbester sein, weil er einmal schlechter als $\textbf{C}$ ist. $\textbf{A}$ ist aber zulässig. $\textbf{C}$ und $\textbf{D}$ sind ebenfalls zulässig. In diesem Beispiel gibt es keinen effizienten Schüler, da keiner alles dominiert.
 	\end{BSP}
 	
-	Satz: Cramér-Rao-Schranke:
+	\begin{Satz}[Satz 1.4.1 (Cramér-Rao-Schranke)]
 	
 	Betrachte ein parametrisches Modell wie in 1.4. mit $k = 1$. Ist $\hat{\theta}_n = \hat{\theta}_n \left(\FZV \right)$ ein unverzerrter Schätzer für $\theta_0$, dann gilt:
 	
@@ -1886,7 +1974,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{equation*}
 	
 	Dies gilt unter geeigneten Voraussetzungen an $f(\cdot \mid \cdot)$ beziehungsweise $p(\cdot \mid \cdot)$. 
-	
+	\end{Satz}
+		
 	Korollar:
 	
 	Ist $\hat{\theta}_n = \hat{\theta}_n (\FZV)$ ein unverzerrter Schätzer für $\theta_0$ und gilt:
@@ -1963,7 +2052,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			X \overset{\textbf{i.i.d.}}{\sim} B(\theta_0), \; 0 \leq \theta_0 \leq 1.
 		\end{equation*}
-		Hier ist der Maximum-Likelihood-Schätzer
+		Hier ist der Maximum-Likelihood-Schätzer:
 		\begin{equation*}
 			\hat{\theta}_{ML} = \bar{X}_n.
 		\end{equation*}
@@ -2005,7 +2094,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			X \overset{\textbf{i.i.d.}}{\sim} G(\theta_0), \; 0 < \theta_0 < 1.
 		\end{equation*}
-		Hier ist der Maximum-Likelihood-Schätzer
+		Hier ist der Maximum-Likelihood-Schätzer:
 		\begin{equation*}
 			\hat{\theta}_{ML} = \frac{1}{\bar{X}_n}.
 		\end{equation*}
@@ -2028,7 +2117,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\Var(\tilde{\lambda}_{ML} \mid \theta_0) = \frac{1- \frac{1}{\lambda_0}}{\left(\frac{1}{\lambda_0}\right)^2} =\lambda^2_0 \frac{\lambda_0-1}{\lambda_0} = \lambda_0(\lambda_0-1). 
 		\end{equation*}
-		Hier ist die Wahrscheinlichkeitsfunktion folgende:
+		Hier ist die Wahrscheinlichkeitsfunktion:
 		\begin{equation*}
 			\begin{split}
 				p(x\mid \lambda) &= \left(\frac{1}{\lambda}\right)\left(1- \frac{1}{\lambda}\right)^{x-1}, \textbf{für}\; x \in \mathbb{N}\\
@@ -2176,7 +2265,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{equation*}
 		\Var(\sqrt{n}(\hat{\theta}-\theta_0)\mid \theta_0) \geq \frac{1}{I(\theta_0)}
 	\end{equation*}
-	Unter den Voraussetzungen von Satz 1.3.13 gilt für den ML-Schätzer $\hat{\theta}_n = \hat{\theta}_{ML}(\FZV)$, dass
+	Unter den Voraussetzungen von Satz 1.3.2 gilt für den ML-Schätzer $\hat{\theta}_n = \hat{\theta}_{ML}(\FZV)$, dass
 	\begin{equation*}
 		\sqrt{n}(\hat{\theta}_n-\theta_0) \KV N\left(0,\frac{1}{I(\theta_0)}\right). \eqname{(*)}
 	\end{equation*}
@@ -2218,17 +2307,19 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 
 	Hier werden nicht nur unverzerrte Schätzer betrachtet:
 	
-	Proposition: Sei $X \sim N(\mu_0, I_n)$ mit $\mu_0 \in \IR^k.$ (Hier ist $n=1$). Der ML-Schätzer $\hat{\mu}_{ML} = X$ für $\mu_0$ ist zulässig in der Klasse aller Schätzer für $\mu_0$ für $k=1$ oder $k=2$. Die im Beweis verwendete Technik ist einfach für $k=1$, aber deutlich komplizierter für $k=2$ und bricht zusammen für $k>2$. 
-	
-	Für $X \sim N(\mu_0, I_n), \mu_0 \in \IR^k$ mit $k \geq 3$ gibt es einen Schätzer $\hat{\mu}_{JS}$ für $\mu_0$, sodass folgendes gilt:
-	\begin{equation*}
-		\forall \mu \in \IR^k: \MSE(\hat{\mu}_{JS}, \mu) < \MSE(0,\hat{\mu})
-	\end{equation*}
-	$\hat{\mu}_{JS}$ ist gegeben durch:
-	\begin{equation*}
-		\hat{\mu}_{JS} = \left(1-\frac{k-2}{x'x}\right) \cdot x.
-	\end{equation*}
-	Insbesondere ist der ML-Schätzer unzulässig in der Klasse aller Schätzer, für $\mu_0$, wenn $k \geq 3$. 
+	\begin{Proposition}[Proposition 1.5.1 (James-Stein-Schätzer)]
+		Sei $X \sim N(\mu_0, I_n)$ mit $\mu_0 \in \IR^k.$ (Hier ist $n=1$). Der ML-Schätzer $\hat{\mu}_{ML} = X$ für $\mu_0$ ist zulässig in der Klasse aller Schätzer für $\mu_0$ für $k=1$ oder $k=2$. Die im Beweis verwendete Technik ist einfach für $k=1$, aber deutlich komplizierter für $k=2$ und bricht zusammen für $k>2$. 
+		
+		Für $X \sim N(\mu_0, I_n), \mu_0 \in \IR^k$ mit $k \geq 3$ gibt es einen Schätzer $\hat{\mu}_{JS}$ für $\mu_0$, sodass folgendes gilt:
+		\begin{equation*}
+			\forall \mu \in \IR^k: \MSE(\hat{\mu}_{JS}, \mu) < \MSE(0,\hat{\mu})
+		\end{equation*}
+		$\hat{\mu}_{JS}$ ist gegeben durch:
+		\begin{equation*}
+			\hat{\mu}_{JS} = \left(1-\frac{k-2}{x'x}\right) \cdot x.
+		\end{equation*}
+		Insbesondere ist der ML-Schätzer unzulässig in der Klasse aller Schätzer, für $\mu_0$, wenn $k \geq 3$. 
+	\end{Proposition}
 
 	\subsubsection{Motivation des J-S-Schätzers}
 	Sei $X \sim N(\mu, I_n), \mu \in \IR^k$. Anstatt des mittleren quadratischen Fehlers:
@@ -2306,7 +2397,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				&\approx \left\Vert \frac{1}{\sqrt{k}}\mu\right\Vert^2 + \left\Vert \frac{1}{\sqrt{k}} \epsilon \right\Vert^2.
 		\end{split}
 	\end{equation*}
-	Das Dreieck ist also approximativ rechtwickling: 
+	Das Dreieck ist also approximativ rechtwinkling: 
 	
 	\begin{align*}
 		\begin{tikzpicture}
@@ -2359,10 +2450,15 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Dies ist schon (fast) der James-Stein-Schätzer!
 	
 	Für $k \rightarrow \infty$ ist $\hat{\mu}$ tatsächlich deutlich besser als $X$:
-	Proposition: Im Setting von der Motivation des J-S-Schätzers gilt:
-	\begin{equation*}
-		\frac{\Vert \hat{\mu} - \mu \Vert^2}{\Vert x - \mu \Vert^2} \underset{\text{für} \; k \rightarrow \infty} {\KW} 1 - \frac{1}{1+ \rho^2}
-	\end{equation*}
+	
+	\begin{Proposition}[Proposition 1.5.2]
+		Im Setting von der Motivation des J-S-Schätzers gilt:
+		\begin{equation*}
+			\frac{\Vert \hat{\mu} - \mu \Vert^2}{\Vert x - \mu \Vert^2} \underset{\text{für} \; k \rightarrow \infty} {\KW} 1 - \frac{1}{1+ \rho^2}.
+		\end{equation*}
+	\end{Proposition}
+	
+
 	
 	\begin{BWS}[Beweis 1.5.1]
 		Zuerst zum Nenner:
@@ -2373,7 +2469,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\frac{1}{k} \cdot \text{Zähler} = \frac{1}{k} \left\Vert \left( 1 - \frac{k}{x'x} \cdot (x-\mu) \right) \right\Vert^2 = \frac{1}{k} \epsilon' \epsilon + \frac{1}{k} \left(\frac{k}{x'x}\right)^2 \cdot x'x - \frac{2}{k} \epsilon' \frac{k}{x'x} \cdot \epsilon
 		\end{equation*}
-		Wenn man sich nun die Konvergenz in Wahrscheinlichkeit dieser Terme des Zähler im Detail anschaut, zeigt sich Folgendes:
+		Wenn man sich nun die Konvergenz in Wahrscheinlichkeit dieser Terme des Zählers im Detail anschaut, zeigt sich Folgendes:
 		Zu $\frac{1}{k} \epsilon' \epsilon$:
 		\begin{equation*}
 			\frac{1}{k} \epsilon' \epsilon \KW 1.
@@ -2392,10 +2488,114 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 	\end{BWS}
 	
-	Bemerkungen:
-	Der J-S-Schätzer ist vor allem von konzeptioneller Bedeutung. In hohen Dimensionen $(k \rightarrow \infty)$ und bei schwachen Signalen ($\rho$ klein) kann der naive Schätzer ($x$) durch dramatisch verbessert werden. Siehe Lasso, Support Vecotr Mechanism, Regularized Neutral Networsk,...
+	\begin{Bemerkung}[Bemerkung 1.5.1 (J-S-Schätzer)]
+		Der J-S-Schätzer ist vor allem von konzeptioneller Bedeutung. In hohen Dimensionen $(k \rightarrow \infty)$ und bei schwachen Signalen ($\rho$ klein) kann der naive Schätzer ($x$) dadurch dramatisch verbessert werden. Siehe Lasso, Support Vector Mechanism, Regularized Neutral Networks,...
+		
+		Die Resultate von LeCam und James/Stein beruhen auf unterschiedlichen Approximationen. Man muss anhand der Stichprobengröße (Anzahl d. Parameter) entscheiden, welche Methode. Es gibt auch Approximationen, wo $ n \rightarrow \infty, k \rightarrow \infty$ und $\frac{k}{n} \rightarrow \infty, c \geq 0$. 
+	\end{Bemerkung}
+
 	
-	Die Resultate von LeCam und James/Stein beruhen auf unterschiedlichen Approximationen. Man muss anhand der Stichprobengröße (Anzahl d. Parameter) entscheiden, welche Methode. Es gibt auch Approximationen, wo $ n \rightarrow \infty, k \rightarrow \infty$ und $\frac{k}{n} \rightarrow \infty, c \geq 0$. 
+	\pagebreak
+	\part{Testen von Hypothesen}
+	
+	\section{Neyman-Pearson-Tests}
+	
+	N-P-Tests haben folgenden Aufbau:
+	
+	Gegeben sind:
+	\begin{enumerate}
+		\item Zufallsvariablen: $\FZV$ (Daten)
+		\item Null-Hypothese $H_0$ über die Verteilung von $\FZV$
+		\item Alternativ-Hypothese $H_1$ über die Vertilung von $\FZV$
+		\item Signifikanzniveau $\alpha \in (0,1)$
+	\end{enumerate}
+	Zu wählen sind:
+	\begin{enumerate}
+		\item Test-Statistik $T = T(\FZV)$, deren Verteilung unter $H_0$ bekannt (oder approximierbar) ist. 
+		\item Verwerfungsbereich $R$, sodass $P(T \in R \mid H_0) = \alpha$ (oder $\approx \alpha$). (1)
+	\end{enumerate}
+	
+	Der resultierende Test ist: 
+	\begin{equation*}
+		\begin{split}
+			&\xcancel{H_0}, \text{wenn} \; T \in R.\\
+			\rightarrow &H_0, \text{wenn} \; T \notin R.
+		\end{split}
+	\end{equation*}
+	
+	Gilt (1) mit "$= \alpha$", dann ist das ein Test mit Signifikanzniveau $\alpha$. 
+	
+	Gilt (1) mit "$\approx \alpha$", dann ist das ein Test mit nominalen Signifikanzniveau $\alpha$. 
+	
+	Zwei Arten von Fehlern können auftreten:
+	\begin{itemize}
+		\item  $\xcancel{H_0}$, wenn $H_0$ zutrifft = Fehler 1. Art.\\
+		\item $\rightarrow H_0$, wenn $H_1$ zutrifft = Fehler 2. Art.
+	\end{itemize}
+
+	\begin{Definition}[Definition 2.0.1 (Size)]
+			Die Wahrscheinlichkeit, $H_0$ fälschlicherweise zu verwerfen, nennt man die $\textbf{Size}$ des Tests:
+			\begin{equation*}
+			\begin{split}
+				\textbf{Size} &= P(\xcancel{H_0} \mid H_0)\\
+				&= \; \text{Wahrscheinllichkeit eines Fehlers 1. Art}\\
+				&= \begin{cases}
+					= \alpha, \; \text{oder}\\
+					\approx \alpha.
+				\end{cases}
+			\end{split}
+		\end{equation*}
+		
+		Je kleiner die Size, desto besser ist der Test. Die Wahrscheinlichkeit eines Fehlers 1. Art ist gut kontrollierbar.
+	\end{Definition}
+	
+	\begin{Definition}[Definition 2.0.2 (Power)]
+		Die Wahrscheinlichkeit, $H_0$ korrekterweise zu verwerfen, nennt man die $\textbf{Power}$ des Tests:
+		\begin{equation*}
+			\begin{split}
+				\textbf{Power} &= P(\xcancel{H_0} \mid H_1)\\
+							&= 1 - \text{Wahrscheinlichkeit eines Fehlers 2. Art}\\
+							&= \beta
+			\end{split}
+		\end{equation*}
+		
+		Je größer die Power, desto besser ist der Test. Die Wahrscheinlichkeit eines Fehlers 2. Art ist meist nicht gut kontrollierbar. 
+		
+		Die Power eines Test hängt ab von:
+		\begin{itemize}
+			\item Der Wahr der Statistik $T$
+			\item Der Wahr des Verwerfungsbereichs $R$.
+		\end{itemize}
+	\end{Definition}
+
+	\begin{Bemerkung}[Bemerkung 2.0.1 (Verwerfungsbereich $R$)]
+		Vergrößert man den Verwerfungsbereich $R$, dann:
+		\begin{itemize}
+			\item steigt die Size 
+			\item steigt die Power
+		\end{itemize}
+	\end{Bemerkung}
+	
+	\begin{BSP}[Beispiel 2.0.1 (Ist der Euro fair?)]
+		Kreiselexperiment:
+		\begin{align*}
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				\textbf{Land} & \textbf{n} & \textbf{S = $\#$Kopf} & \textbf{$T = (X - \frac{n}{2})$} & \textbf{c} & \textbf{Entscheidung}\\
+				\hline
+				\textbf{AUT} & 100 & 50 & 0 & 11 & $\rightarrow H_0$\\
+				\hline
+				\textbf{GER} & 100 & 52 & 2 & 11 & $\rightarrow H_0$\\
+				\hline
+				\textbf{ITA} & 250 & 103 & 22 & 16 &$\xcancel{H_0}$\\
+				\hline
+				\textbf{FRA} & 250 & 158 & 33 & 16 &$\xcancel{H_0}$\\
+				\hline
+			\end{tabular}
+		\end{align*}
+		Modell: Für jedes Land sind die Münzwürfe $\FZV \overset{i.i.d.}{\sim} B(p), 0<p<1$.
+	\end{BSP}
+	
 	
 	
 	
