@@ -16,6 +16,7 @@
 \newcommand{\MSE}{\textbf{MSE}} %MSE 
 \newcommand{\Var}{\textbf{Var}} %Varianz als fett geschrieben
 \newcommand{\JSEM}{\hat{\mu}_{JS}} %J-S-Schätzer für \mu
+\newcommand{\sni}{\sum_{i=1}^{n}} %Summe von i=1 bis n
 \usepackage{aligned-overset} % Richiges alignment von over-/underset
 \usepackage{multirow}
 \usepackage[makeroom] {cancel} %Durchstreichen
@@ -89,6 +90,12 @@ coltitle = black, %Titel Box
 	title = \textbf{#1},
 	colback = olive!5, % Hintergrund Farbbox
 	colframe = olive!40, %Randfarbe Box 
+	coltitle = black, %Titel Box
+}
+\newtcolorbox{Korollar}[1][Heading]{ %Farbbox Korollar
+	title = \textbf{#1},
+	colback = teal!5, % Hintergrund Farbbox
+	colframe = teal!40, %Randfarbe Box 
 	coltitle = black, %Titel Box
 }
 \usepackage{setspace}  % Fuer line spacing (T13.04.2025)
@@ -992,7 +999,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			f'(\upnu) \cdot\sqrt{n} (\bar{z}_n-\upnu) \KV& \;N(0,\delta^2 \cdot (f'(\upnu))^2).
 			\end{split}
 		\end{equation*}
-		
+		\begin{flushright}
+			$\square$
+		\end{flushright}
 		
 	\end{BWS}
 	
@@ -1706,26 +1715,40 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{Definition}
 	
 	\begin{BWS} [Beweisidee 1.3.5 (Fisher-Information)]
-		Diese Beweisidee wurde für stetige Fälle ausgearbeitet, gilt aber genauso für diskrete Modelle. Für jedes $\theta \in \Theta$ ist $\int f(x\mid \theta) \; dx = 1$. 
+		Diese Beweisidee wurde für stetige Fälle ausgearbeitet, gilt aber genauso für diskrete Modelle. Für jedes $\theta \in \Theta$ ist $\int f(x\mid \theta) \; dx = 1$ (1). 
 		\begin{equation*}
 			\begin{split}
-				\Rightarrow 0 &= \frac{\delta}{\delta \theta} \int f(X\mid \theta) \; dx \\
+				\Rightarrow 0 \overset{\text{weil (1)}}&{=} \frac{\partial}{\partial \theta} \int f(X\mid \theta) \; dx \\
 				&= \int \frac{\partial}{\partial \theta} f(X\mid \theta) \; dx \\
-				&=  \int \frac{\frac{\partial}{\partial \theta} f(x\mid\theta)}{f(x\mid\theta)} \cdot f(x\mid\theta) \; dx \\
-				&= \int \frac{\partial}{\partial \theta} \log f(X \mid \theta) \cdot f(X \mid \theta) \; dx.
+				&= \int \frac{\frac{\partial}{\partial \theta} f(X\mid\theta)}{f(X\mid\theta)} \cdot f(X\mid\theta) \; dx \\
+				\overset{\star}&{=} \int \frac{\partial}{\partial \theta} \log f(X \mid \theta) \cdot f(X \mid \theta) \; dx.
 			\end{split}
 		\end{equation*}
 		\begin{equation*}
 			\begin{split}
-				\Rightarrow 0 &= \frac{\partial}{\partial \theta} \int \frac{\partial}{\partial \theta} \log f(X\mid \theta) \cdot f(X \mid \theta) \; dx \\
-				&= \int \frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta) \cdot f(X\mid \theta) + \frac{\partial}{\partial \theta} \log f(X\mid \theta) \cdot \frac{\partial}{\partial \theta} f(X\mid \theta) \; dx \\
-				&=\int \left(\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right) \cdot (f(X\mid \theta)) \; dx + \int \left(\frac{\partial}{\partial \theta} \log f(X\mid \theta)\right)^2 \cdot \frac{\partial}{\partial \theta} f(X\mid \theta)  \; dx
+				\Longrightarrow \ablt 0 &= \frac{\partial}{\partial \theta} \int \frac{\partial}{\partial \theta} \log f(X\mid \theta) \cdot f(X \mid \theta) \; dx \\
+				\overset{\text{Produktregel}}&{=}\int \frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta) \cdot f(X\mid \theta) + \frac{\partial}{\partial \theta} \log f(X\mid \theta) \cdot \frac{\partial}{\partial \theta} f(X\mid \theta) \; dx \\
+				&=\int \frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta) \cdot f(X\mid \theta)\; dx + \int \frac{\partial}{\partial \theta} \log f(X\mid \theta) \cdot \frac{\partial}{\partial \theta} f(X\mid \theta) \; dx \\
+				&=\int \frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta) \cdot f(X\mid \theta)\; dx + \int \frac{\partial}{\partial \theta} \log f(X\mid \theta) \cdot \underbrace{\frac{\partial}{\partial \theta} f(X\mid \theta) \frac{f(X \mid \theta)}{f(X\mid \theta)}}_{\star} \; dx \\
+				&=\underbrace{\int \left(\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right) \cdot (f(X\mid \theta)) \; dx}_{\EW\left(\left(\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right)\right)} + \underbrace{\int \left(\frac{\partial}{\partial \theta} \log f(X\mid \theta)\right)^2 \cdot f(X\mid \theta)  \; dx}_{I(\theta)}
 			\end{split}
 		\end{equation*}
 		\begin{equation*}
-			I(\theta) = -\int \left(\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right) \cdot (f(X\mid \theta)) \; dx = -\EW \left[\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right]
+			\begin{split}
+				\Longrightarrow 0 &= \EW\left(\left(\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right)\right) + I(\theta)\\
+				\Longleftrightarrow I(\theta) &= -\EW \left[\frac{\partial^2}{\partial \theta^2} \log  f(X\mid \theta)\right] .
+			\end{split}
 		\end{equation*}
+		\begin{flushright}
+			$\square$
+		\end{flushright}
 	\end{BWS}
+	\begin{Bemerkung}[Bemerkung (Beweis)]
+		Bezüglich $\star$ ist folgendes zu beachten:
+		\begin{equation} \label{logab}
+			\frac{\partial}{\partial X} \log (f(X)) = \frac{\partial}{\partial X} f(X) \cdot \frac{1}{f(X)}.
+		\end{equation} 
+	\end{Bemerkung}
 	
 	\begin{Satz}[Satz 1.3.2 (Verteilung des Schätzfehlers)]
 		Unter geeigneten Vorraussetzungen an $f(\cdot \mid \cdot)$ bzw. $p(\cdot \mid \cdot)$ gilt für den ML-Schätzer $\hat{\theta}_n$ und für $\theta \in \Theta$ mit $I(\theta) > 0$, dass:
@@ -1740,7 +1763,6 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Diese Beweisidee wurde für stetige Fälle ausgearbeitet, gilt aber genauso für diskrete Modelle. 
 		
 		Sei $\theta \in \Theta$ mit $I(\theta) > 0$. $\hat{\theta}_n$ maximiert $l_n (\theta) = \sum_{i=1}^{n} \log f (x_i \mid \theta)$, sodass:
-		
 		\begin{equation*}
 			\begin{split}
 				0 &= l'_n (\hat{\theta}_n) \\
@@ -1749,29 +1771,29 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Der Rest kann ignoriert werden und die zweite Zeile ergibt sich aus der Taylor Entwicklung von $l'_{n}(\cdot)$ im Punkt $\theta$. 
 		
-		Dies gibt die Approximation:
+		Dies gibt die folgende Approximation:
 		\begin{equation*}
 			0 \approx l'_n (\theta) +  l''_n(\theta) (\hat{\theta}_n - \theta),
 		\end{equation*}
-		beziehungsweise:
+		beziehungsweise
 		\begin{equation*}
-			(\hat{\theta}_n - \theta) \approx \frac{-l'_n (\theta)}{l''_n(\theta)},
+			(\hat{\theta}_n - \theta) \approx -\frac{l'_n (\theta)}{l''_n(\theta)},
 		\end{equation*}
-		beziehungsweise:
+		oder auch
 		\begin{equation*}
-			\sqrt{n} (\hat{\theta}_n - \theta) \approx \frac{-\sqrt{n}\;l'_n(\theta)}{l''_n(\theta)} = \frac{-\frac{1}{\sqrt{n} } \; l'_n(\theta)}{\frac{1}{n}\;l''_n(\theta)}.
+			\sqrt{n} (\hat{\theta}_n - \theta) \approx -\frac{\sqrt{n}\;l'_n(\theta)}{l''_n(\theta)} = -\frac{\frac{1}{\sqrt{n} } \; l'_n(\theta)}{\frac{1}{n}\;l''_n(\theta)}.
 		\end{equation*}
 		Der Zähler ist:
 		\begin{equation*}
-			\frac{1}{\sqrt{n}}\sum_{i=1}^{n} \frac{\delta}{\delta \theta} log f(x_i \mid \theta).
+			\frac{1}{\sqrt{n}}\sum_{i=1}^{n} \frac{\partial}{\partial \theta} \log f(x_i \mid \theta).
 		\end{equation*}
-		Die Summanden sind i.i.d. mit folgenden Erwartungswert:
+		Die Summanden sind i.i.d. mit folgendem Erwartungswert:
 		\begin{equation*}
-			\EW\left(\ablt \log f(x_i \mid \theta) \mid \theta\right) = \int \frac{\ablt f(x \mid \theta)}{f(\xt)} f(\xt) \; dx = \ablt \int f(\xt) \; dx = 0
+			\EW\left(\ablt \log f(x_i \mid \theta) \mid \theta\right) \overset{\ref{logab}}{=} \int \frac{\ablt f(x \mid \theta)}{f(\xt)} f(\xt) \; dx = \ablt \int f(\xt) \; dx = 0
 		\end{equation*}
 		und folgender Varianz:
 		\begin{equation*}
-			\EW(\left(\ablt \log f(x_i \mid \theta)\right)^2 \mid \theta) = I(\theta).
+			\EW\left(\left(\ablt \log f(x_i \mid \theta)\right)^2 \mid \theta\right) = I(\theta).
 		\end{equation*}
 		Mit dem zentralen Grenzwertsatz folgt:
 		\begin{equation*}
@@ -1802,9 +1824,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Damit gilt:
 		\begin{equation*}
-			- \frac{\textbf{Zähler}}{\textbf{Nenner}} \KV -\frac{N(0,I(\theta))}{-I(\theta)} = \frac{N(0, I(\theta))}{I(\theta)} = N\left(0, \frac{1}{I(\theta)}\right)
+			\frac{\textbf{Zähler}}{\textbf{Nenner}} \KV \frac{N(0,I(\theta))}{-I(\theta)} = N\left(0, I(\theta) \cdot \frac{1}{(-I(\theta))^2}\right) = N\left(0, \frac{1}{I(\theta)}\right)
 		\end{equation*}
-		In dieser Approximation $\sqrt{n}(\hat{\theta}_n - \theta) = - \frac{\textbf{Zähler}}{\textbf{Nenner}}$ ist der Fehler für $n \rightarrow \infty$ vernachlässigbar. Sodass auch:
+		In dieser Approximation $\sqrt{n}(\hat{\theta}_n - \theta) = \frac{\textbf{Zähler}}{\textbf{Nenner}}$ ist der Fehler für $n \rightarrow \infty$ vernachlässigbar. Sodass auch:
 		\begin{equation*}
 			\sqrt{n}(\hat{\theta}_n - \theta)  \KV N\left(0, \frac{1}{I(\theta)}\right)
 		\end{equation*}
@@ -1842,7 +1864,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Und es gilt:
 		\begin{equation*}
-			n(\theta_0-\hat{\theta}_n) \KV Exp\left(\frac{1}{\theta_0}\right) \eqname{*}.
+			n(\theta_0-\hat{\theta}_n) \KV Exp\left(\frac{1}{\theta_0}\right) \eqname{$\star$}.
 		\end{equation*}
 		Dies konvergiert mit der Rate $\frac{1}{n} < \frac{1}{\sqrt{n}}$.
 		Beachte, dass hier:
@@ -1853,12 +1875,12 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				0, &\textbf{sonst}.
 			\end{cases}
 		\end{equation*}
-		Zu *. Erstmal ist:
+		Zu $\star$. Erstmal ist:
 		\begin{equation*}
 			\begin{split}
 				P(\hat{\theta}_n < X \mid \theta_0) &= \; P(\underset{1\leq i \leq n}{\max} X_i < x \mid \theta_0)\\
 				&= P(X_1 < x, \ldots, X_n < x \mid \theta_0)\\
-				\overset{u.a.}&{=} P(X_1<x\mid \theta_0) \cdot \ldots \cdot P(X_n < x \mid \theta_0)\\
+				\overset{u.a.}&{=} P(X_1<x\mid \theta_0) \cdots P(X_n < x \mid \theta_0)\\
 				\overset{\textbf{für} \; 0 \leq x \leq \theta_0}&{=} \left(\frac{1}{\theta_0}x\right)^{n}\\
 				&=\left(\frac{x}{\theta_0}\right)^n.
 			\end{split}
@@ -1890,42 +1912,41 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	Betrachte ein stetiges oder diskretes Modell wie in 1.3.8. mit $\FZV$ i.i.d. mit Dichte $f(X\mid \theta_0)$ beziehungsweise Wahrscheinlichkeitsfunktion $p(X \mid \theta_0)$, wobei $\theta_0 \in \Theta \subseteq \IR^k$. 
 	
-	Für einen Schätzer $\hat{\theta} = \hat{\theta}(X_1, \ldots, X_n)$ für $\theta_0 \in \IR^k$.
-	
-	Betrachtet man hierbei den mittleren quadratsichen Fehler:
-	
+	Für einen Schätzer $\hat{\theta} = \hat{\theta}(X_1, \ldots, X_n)$ für $\theta_0 \in \IR^k$ betrachtet man hierbei den mittleren quadratsichen Fehler:
 	\begin{equation*}
 		\textbf{MSE}(\hat{\theta}_n, \theta_0) := \EW (\Vert {\hat{\theta}_n-\theta_0}\Vert ^2 \mid \theta_0)
 	\end{equation*}
 	
-	Bemerkung: Für $k = 1$ ist 
+	\begin{Bemerkung}[Bemerkung ]
+			Bemerkung: Für $k = 1$ ist 
+		
+		\begin{equation*}
+			\textbf{MSE} (\hat{\theta}_n, \theta) = \EW (( {\hat{\theta}_n-\theta_0} )^2 \mid \theta_0).
+		\end{equation*}
+		
+		Wenn zusätzlich 	$\hat{\theta}_n$ unverzerrt ist, gilt: 
+		
+		\begin{equation*}
+			\textbf{MSE} (\hat{\theta}_n, \theta) =  \textbf{Var}(\hat{\theta}_n \mid \theta_0).
+		\end{equation*}
+		
+		Für $k>1$ ist 
+		\begin{equation*}
+			\begin{split}
+				\MSE(\hat{\theta}_n, \theta_0) &= \EW(\sum_{j=1}^{k}(\hat{\theta}_{n_{ji}} - \theta_{0_{ij}})^2 \mid \theta_0 )\\
+				&= \sum_{j=1}^{n} \EW ((\hat{\theta}_{n_{ji}} - \theta_{0_{ij}})^2 \mid \theta_0),
+			\end{split}
+		\end{equation*}
+		
+		weil $\theta_0$ unbekannt ist, betrachtet man $\MSE(\hat{\theta}, \theta)$ als Funktion von $\theta \in \Theta$.
+	\end{Bemerkung}
 	
-	\begin{equation*}
-			\textbf{MSE} (\hat{\theta}_n, \theta) = \EW (( {\hat{\theta}_n-\theta_0} )^2 \mid \theta_0),
-	\end{equation*}
-	
-	ist zusätzlich 	$\hat{\theta}_n$ unverzerrt, dann ist: 
-	
-	\begin{equation*}
-		\textbf{MSE} (\hat{\theta}_n, \theta) =  \textbf{Var}(\hat{\theta}_n \mid \theta_0)
-	\end{equation*}
-	
-	Für $k>1$ ist 
-	\begin{equation*}
-		\begin{split}
-			MSE(\hat{\theta}_n, \theta_0) &= \EW(\sum_{j=1}^{k}(\hat{\theta}_{n_{ji}} - \theta_{0_{ij}})^2 \mid \theta_0 )\\
-			&= \sum_{j=1}^{n} \EW ((\hat{\theta}_{n_{ji}} - \theta_{0_{ij}})^2 \mid \theta_0),
-		\end{split}
-	\end{equation*}
-	
-	weil $\theta_0$ unbekannt ist, betrachtet man $\MSE(\hat{\theta}, \theta)$ als Funktion von $\theta \in \Theta$.
-	
-	Im Folgenden sei $K$ eine Klasse von Schätzern. Zum Beispiel: Alle unverzerrten Schätzer für $\theta_0$, basierend auf $\FZV$ oder alle Schätzer für $\theta_0$ basierend auf $\FZV$. 
+	Im Folgenden sei $\mathcal{K}$ eine Klasse von Schätzern. Zum Beispiel: Alle unverzerrten Schätzer für $\theta_0$, basierend auf $\FZV$ oder alle Schätzer für $\theta_0$ basierend auf $\FZV$. 
 	
 	\begin{Definition}[Definition 1.4.1 (Zulässigkeit)]
-		Ein Schätzer $\hat{\theta} \in K$ ist unzulässig (in der Klasse $K$), wenn Folgendes gilt:
+		Ein Schätzer $\hat{\theta} \in \mathcal{K}$ ist unzulässig (in der Klasse $\mathcal{K}$), wenn Folgendes gilt:
 		
-		Es gibt einen Schätzer $\tilde{\theta} \in K$, sodass:
+		Es gibt einen Schätzer $\tilde{\theta} \in \mathcal{K}$, sodass:
 		
 		\begin{equation*}
 			\forall \; \theta \in \Theta: \MSE(\tilde{\theta}, \theta) \leq \MSE(\hat{\theta}, \theta)
@@ -1935,13 +1956,13 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\exists \; \theta \in \Theta: \MSE(\tilde{\theta}, \theta) < \MSE(\hat{\theta},\theta).
 		\end{equation*}
 		
-		Ein Schätzer $\hat{\theta} \in K$ ist zulässig (in der Klasse $K$), wenn er nicht unzulässig ist. 
+		Ein Schätzer $\hat{\theta} \in \mathcal{K}$ ist zulässig (in der Klasse $\mathcal{K}$), wenn er nicht unzulässig ist. 
 	\end{Definition}
 	
 	\begin{Definition}[Definition 1.4.2 (Effizienz)]
-		Ein Schätzer $\hat{\theta}$ ist effizient (in der Klasse $K$), wenn Folgendes gilt:
+		Ein Schätzer $\hat{\theta}$ ist effizient (in der Klasse $\mathcal{K}$), wenn Folgendes gilt:
 		\begin{equation*}
-			\forall \; \theta \in \Theta: \MSE(\hat{\theta}, \theta) = \textbf{min} \MSE(\tilde{\theta},\theta). 
+			\forall \; \theta \in \Theta: \MSE(\hat{\theta}, \theta) = \underset{\tilde{\theta}}{\min} \; \MSE(\tilde{\theta},\theta). 
 		\end{equation*}
 	\end{Definition}
 	\begin{BSP}[Beispiel 1.4.1 (Noten Effizienz und Zulässigkeit)]
@@ -1961,8 +1982,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\hline
 			\end{tabular}
 		\end{align*}
-		$\textbf{B}$ ist hier unzulässig, weil dieser Schüler immer schlechter als $\textbf{A}$ oder auch $\textbf{D}$ ist. 
-		$\textbf{A}$ kann nicht Klassenbester sein, weil er einmal schlechter als $\textbf{C}$ ist. $\textbf{A}$ ist aber zulässig. $\textbf{C}$ und $\textbf{D}$ sind ebenfalls zulässig. In diesem Beispiel gibt es keinen effizienten Schüler, da keiner alles dominiert.
+		$\textbf{B}$ ist hier unzulässig, weil diese/r Schüler*in immer schlechter als $\textbf{A}$ oder auch $\textbf{D}$ ist. 
+		$\textbf{A}$ kann nicht Klassenbeste*r sein, weil sie/er einmal schlechter als $\textbf{C}$ ist. $\textbf{A}$ ist aber zulässig. $\textbf{C}$ und $\textbf{D}$ sind ebenfalls zulässig. In diesem Beispiel gibt es keine/n effizienten Schüler*in, da keine/r alles dominiert.
 	\end{BSP}
 	
 	\begin{Satz}[Satz 1.4.1 (Cramér-Rao-Schranke)]
@@ -1975,15 +1996,15 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	Dies gilt unter geeigneten Voraussetzungen an $f(\cdot \mid \cdot)$ beziehungsweise $p(\cdot \mid \cdot)$. 
 	\end{Satz}
-		
-	Korollar:
 	
-	Ist $\hat{\theta}_n = \hat{\theta}_n (\FZV)$ ein unverzerrter Schätzer für $\theta_0$ und gilt:
-	\begin{equation*}
-		\textbf{Var}(\hat{\theta}_n \mid \theta_0) \geq \frac{1}{nI(\theta_0)},
-	\end{equation*}
-	für jedes $\theta \in \Theta $, dann ist $\hat{\theta}_n$ effizient in dieser Klasse aller unverzerrten Schätzer für $\theta_0$ basierend auf $\FZV$.
-	
+	\begin{Korollar}[Korollar]
+			Ist $\hat{\theta}_n = \hat{\theta}_n (\FZV)$ ein unverzerrter Schätzer für $\theta_0$ und gilt:
+		\begin{equation*}
+			\textbf{Var}(\hat{\theta}_n \mid \theta_0) = \frac{1}{nI(\theta_0)},
+		\end{equation*}
+		für jedes $\theta \in \Theta $, dann ist $\hat{\theta}_n$ effizient in dieser Klasse aller unverzerrten Schätzer für $\theta_0$ basierend auf $\FZV$.
+	\end{Korollar}
+
 	\begin{BWS}[Beweis 1.4.1 (Effizienz)]
 		Dieser Beweis wurde für stetige Modelle ausgeführt, gilt aber genauso für diskrete Modelle.
 		
@@ -1993,17 +2014,17 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Es gilt:
 		\begin{equation*}
-			1 \geq \textbf{Corr}(\hat{\theta}_n, Z \mid \theta_0)^2 = \frac{\textbf{Covar}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0)}.
+			1 \geq \textbf{Corr}(\hat{\theta}_n, Z \mid \theta_0)^2 = \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0)}.
 		\end{equation*}
 		Daraus folgt:
 		\begin{equation*}
-			\textbf{Var}(\hat{\theta}_n \mid \theta_0) \geq \frac{\textbf{Covar}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(Z \mid \theta_0)}.
+			\textbf{Var}(\hat{\theta}_n \mid \theta_0) \geq \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(Z \mid \theta_0)}.
 		\end{equation*}
-		Hieraus folgt die C-R-Ungleichung, wenn Folgendes gilt:
+		Hieraus folgt die C-R-Ungleichung, wenn folgendes gilt:
 		\begin{enumerate}
 			\item 
 			\begin{equation*}
-				\textbf{Covar}(\hat{\theta}_n, Z \mid \theta_0) = 1
+				\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0) = 1
 			\end{equation*}
 			\item 
 			\begin{equation*}
@@ -2016,21 +2037,21 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\EW (Z \mid \theta_0) &=  n\EW\left(\ablt \log f(x \mid \theta_0)\mid \theta_0\right)\\
 				&= n \int \left(\ablt \log f(x \mid \theta_0)\mid \theta_0\right) \cdot f(x \mid \theta_0) \; dx\\
 				&= n \int \frac{\ablt f(x \mid \theta_0)}{f(x \mid \theta_0)} \cdot f(x \mid \theta_0) \; dx\\
-				&= n \ablt \underbrace{\int f(x \mid \theta_0) \; dx}_{1} = 0
+				&= n \ablt \underbrace{\int f(x \mid \theta_0) \; dx}_{1} = 0.
 			\end{split}
 		\end{equation*}
 		Hieraus folgt:
 		\begin{equation*}
 			\begin{split}
 				\textbf{Var}(Z \mid \theta_0) &= n \textbf{Var}\left(\ablt \log f(x \mid \theta_0)\mid \theta_0 \right)\\
-				&= n\EW((\ablt \log f(x \mid \theta_0))^2 \mid \theta_0)\\
+				&= n\EW\left(\left(\ablt \log f(x \mid \theta_0)\right)^2 \mid \theta_0\right)\\
 				&= nI(\theta_0).
 			\end{split}
 		\end{equation*}
-		Also gilt 2.. Nun zu 1.:
+		Also gilt 2. Nun zu 1.:
 		\begin{equation*}
 			\begin{split}
-				\textbf{Covar}(\hat{\theta}_n, Z \mid \theta_0) &= \underbrace{\EW(\hat{\theta}_n \mid \theta_0)}_{= \theta_0} \cdot \underbrace{\EW(Z \mid \theta_0)}_{= 0}\\
+				\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0) &= \underbrace{\EW(\hat{\theta}_n \mid \theta_0)}_{= \theta_0} \cdot \underbrace{\EW(Z \mid \theta_0)}_{= 0}\\
 				&= \underbrace{\int \cdots \int}_{\textbf{n-mal}}\hat{\theta}_n(\FZV) \underbrace{(\sum_{i=1}^{n}\ablt \log f(x_i \mid \theta_0)) \prod_{i=1}^{n}f(x_i \mid \theta_0)}_{*} dx_i, \ldots, dx_n\\
 				&= \int \cdots \int \hat{\theta}_n (\FZV) \ablt \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n\\
 				&= \ablt \underbrace{\int \cdots \int \hat{\theta}_n(\FZV) \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n}_{\EW(\hat{\theta}_n \mid \theta_0) = \theta_0} = 1.
@@ -2062,7 +2083,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Dieses Modell hat folgende Wahrscheinlichkeitsfunktion:
 		\begin{equation*}
-			p (X \mid \theta) = \theta^x(1-\theta)^{1-\theta} \; \textbf{für} \; x \in \{0,1\}.
+			p (X \mid \theta) = \theta^x(1-\theta)^{1-x} \; \textbf{für} \; x \in \{0,1\}.
 		\end{equation*}
 		Fisher-Information berechnen:
 		\begin{equation*}
@@ -2215,7 +2236,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Also ist, bei bekannter Varianz $\hat{\mu}_{ML}$ für $\mu$ effizient in der Klasse aller unverzerrter Schätzer für $\mu$. 
 		Die Klasse sieht folgendermaßen aus:
 		\begin{equation*}
-			K_\sigma^2 = \{\tilde{\mu}(\FZV, \sigma^2): \forall \mu \in \IR \textbf{ist} \EW(\tilde{\mu} \mid \mu) = \mu\}.
+			\mathcal{K}_\sigma^2 = \{\tilde{\mu}(\FZV, \sigma^2): \forall \mu \in \IR \; \textbf{ist} \; \EW(\tilde{\mu} \mid \mu) = \mu\}.
 		\end{equation*}
 		Hierbei ist zu beachten, dass der effiziente Schätzer $\bar{X}_n$ nicht von $\sigma^2$ abhängt. 
 	\end{BSP}
@@ -2226,7 +2247,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Wieder ist $\hat{\mu}_{ML} = \bar{X}_n$ unverzerrt für $\mu$. Da $\mu_0$ und $\sigma^2_0$ unbekannt sind ($k=2$) ist der Satz der C-R-Schranke nicht anwendbar. Aber: Die Klasse der unverzerrten Schätzer für $\mu$ ist hier:
 		\begin{equation*}
-			K = \{\tilde{\mu}(\FZV): \forall \mu \in \IR \; \textbf{und} \; \forall \sigma^2 > 0 \; \textbf{ist} \; \EW(\tilde{\mu} \mid \mu, \sigma^2) = \mu\}
+			\mathcal{K} = \{\tilde{\mu}(\FZV): \forall \mu \in \IR \; \textbf{und} \; \forall \sigma^2 > 0 \; \textbf{ist} \; \EW(\tilde{\mu} \mid \mu, \sigma^2) = \mu\}
 		\end{equation*}
 		Beachte hierbei aber, dass $K_{\sigma^2}$ wie im letzten Beispiel ist:
 		\begin{equation*}
@@ -2278,7 +2299,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{equation*}
 		\Var(\sqrt{n}(\hat{\theta}_n-\theta_0)\mid \theta_0) \overset{n\rightarrow \infty}{\longrightarrow} \frac{1}{I(\theta)}.
 	\end{equation*}
-	Mit Resultaten von Lucian LeCom kann man zeigen, dass der ML-Schätzer tatsächlich asymptotische effizient ist in einem geeigneten Sinn. 
+	Mit Resultaten von Lucian LeCam kann man zeigen, dass der ML-Schätzer tatsächlich asymptotische effizient ist in einem geeigneten Sinn. 
 	
 	\begin{BSP}[Beispiel 1.4.7 (Asymptotische Effizienz)]
 		Sei $X \sim N(0,1)$ und für $n \geq 1$ sei:
@@ -2486,6 +2507,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\frac{k}{x'x} = \left(\frac{1}{k} x'x\right)^{-1} \KW (1+\rho^2)^{-1} \KW 1 + \frac{1}{1+ \rho^2} - 2\frac{1}{1+\rho^2} = 1- \frac{1}{1+\rho^2}.
 		\end{equation*}
+		\begin{flushright}
+			$\square$
+		\end{flushright}
 	\end{BWS}
 	
 	\begin{Bemerkung}[Bemerkung 1.5.1 (J-S-Schätzer)]
@@ -2581,7 +2605,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{align*}
 			\begin{tabular}{|c|c|c|c|c|c|c|}
 				\hline
-				\textbf{Land} & \textbf{n} & \textbf{S = $\#$Kopf} & \textbf{$T = (X - \frac{n}{2})$} & \textbf{c} & \textbf{Entscheidung}\\
+				\textbf{Land} & \textbf{n} & \textbf{S = $\#$Kopf} & \textbf{$T = (S - \frac{n}{2})$} & \textbf{c} & \textbf{Entscheidung}\\
 				\hline
 				\textbf{AUT} & 100 & 50 & 0 & 11 & $\rightarrow H_0$\\
 				\hline
@@ -2594,10 +2618,373 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\end{tabular}
 		\end{align*}
 		Modell: Für jedes Land sind die Münzwürfe $\FZV \overset{i.i.d.}{\sim} B(p), 0<p<1$.
+		
+		Teste:
+		\begin{equation*}
+			H_0: p = \frac{1}{2} \; \text{gegen} \; H_1: p \neq \frac{1}{2}.
+		\end{equation*}
+		Setze $\alpha = 0,05$.
+		
+		Wähle:
+		\begin{equation*}
+			S = \sum_{i = 1}^{n} X_i \sim \textbf{Bin}(n,p).
+		\end{equation*}
+		Unter $H_0$ ist:
+		\begin{equation*}
+			S \sim \textbf{Bin}\left(n, \frac{1}{2}\right).
+		\end{equation*}
+		Große Werte von $\left\vert S - \frac{n}{2} \right\vert$ sprechen gegen $H_0$. 
+		
+		Wähle $T = \left\vert S - \frac{n}{2} \right\vert$ und verwerfe $H_0$, wenn $T \geq c$, das heißt $R = [c, \infty)$. Dabei soll gelten:
+		\begin{equation*}
+			\begin{split}
+				P(\xcancel{H_0} \mid H_0) &= P(T \geq c \mid H_0)\\
+				&= P\left(\left\vert \textbf{Bin}\left(n,\frac{1}{2}\right) - \frac{n}{2} \right\vert \geq c \mid H_0 \right)\\
+				\underset{c > 0}&{=} P\left(\textbf{Bin}\left(n, \frac{1}{2}\right)- \frac{2}{n} \leq -c \mid H_0\right) + P \left(\textbf{Bin}\left(n, \frac{1}{2}\right) - \frac{n}{2} \geq c \mid H_0 \right)\\
+				&= F \left(\frac{n}{2}-c\right)+1- F \left(\frac{n}{2} +c -1\right) \approx \alpha. (*)
+			\end{split}
+		\end{equation*}
+		$F$ entspricht der Verteilungsfunktion der Binomialverteilung mit Parameter $n$ und $p = \frac{1}{2}$. Weil $F(\cdot)$ eine Treppenfunktion ist, kann $P(\xcancel{H_0} \mid H_0)$ nicht jeden Wert von $\alpha$ erreichen. Wir wählen $c >0$ möglichst klein, sodass die linke Seite von $(*) \leq \alpha$ ist:
+			\begin{align*}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				\textbf{n} & \textbf{$\alpha$} & \textbf{c} & \textbf{Size} & \textbf{Size für c-1}\\
+				\hline
+				100 & 0,1 & 9 & 0,089 & 0,113\\
+				\hline
+				100 & 0,05 & 11 & 0,035 & 0,57\\
+				\hline
+				100 & 0,01 & 14 & 0,007 & 0,012\\
+				\hline
+				250 & 0,1 & 14 & 0,088 & 0,114\\
+				\hline
+				250 & 0,05 & 16 & 0,050 & 0,066\\
+				\hline
+				250 & 0,01 & 21 & 0,009 & 0,013\\
+				\hline
+			\end{tabular}
+		\end{align*}
+		Beachte: Wenn $\alpha$ größer wird, dann wird $c$ kleiner und $R$ größer:
+		
+			\begin{align*}
+			\begin{tikzpicture}
+				\draw[thick, ->] (0,0) -- (5,0) node[below] {c};
+				\draw[thick, ->] (0,0) -- (0,5);
+			\end{tikzpicture}
+		\end{align*}
+		Kataplutexperiment:
+		
+			\begin{align*}
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				\textbf{Land} & \textbf{n} & \textbf{S = $\#$Kopf} & \textbf{$T = \vert(S - \frac{n}{2})\vert$} & \textbf{c} & \textbf{Entscheidung}\\
+				\hline
+				\textbf{AUT} & 400 & 196 & 4 & 21 & $\rightarrow H_0$\\
+				\hline
+				\textbf{ITA} & 150 & 71 & 4 & 13 &$\rightarrow H_0$\\
+				\hline
+				\textbf{FRA} & 150 & 78 & 4 & 13 &$\rightarrow H_0$\\
+				\hline
+			\end{tabular}
+		\end{align*}
+		Man sieht, dass die Null-Hypothese nur verworfen oder nicht verworfen, aber nie angeommen werden kann! Man sieht auch, dass die konkrete Ausführung des Experiments entscheidend sein kann. 
+		
+		Zur Power dieser Tests:
+		\begin{equation*}
+			\textbf{Power} \; = P(T \geq c \mid H_1).
+		\end{equation*}
+		Dies hängt von $p \neq \frac{1}{2}$ ab.
+		Setze:
+		\begin{equation*}
+			\Pi_n(P) = P(T \geq c \mid p) = P\left(\left\vert \textbf{Bin}(n,p) - \frac{n}{2} \right\vert \geq c \right).
+		\end{equation*}
+		Für $p = \frac{1}{2}$ ist $\Pi_n (P) \approx \alpha$, also die Size des Tests. Für $p \neq \frac{1}{2}$ ist $\Pi_n(P)$ die Power des Tests, wenn der wahre Parameter gerade $p$ ist.
+		
+		Funktion!!!
+		
+		Wie groß muss n sein, damit z.B. $\Pi_n (P) \geq 0,8$ ist? 
+		
+		Für $p = \frac{79}{150}$ ist $\Pi_n \left(\frac{79}{150}\right) \geq 0,8$ für $n = 2760$. Im Kreiselexperiment wird $H_0$ für Italien und Frankreich verworfen, aber Frankreich scheint extremer zu sein als Italien. Der nächste Begriff ermöglicht dies zu quantifizieren.
 	\end{BSP}
 	
+	Betrachte einen N-P-Test wie in 2. Für jedes $\alpha$ erhält man einen Verwerfungsbreiche $R_\alpha$, sodass $P(T \in R_\alpha \mid H_0) = \alpha$ (bzw. $\approx \alpha$), zusätzlich wird hier angenommen, dass folgendes gilt:
 	
+	\begin{equation*}
+		\alpha \leq \alpha' \Rightarrow R_\alpha \leq R_{\alpha'}. \eqname{(1)}
+	\end{equation*}
 	
+	\begin{Definition}[Definition 2.0.3 (p-Wert)]
+		(1) fordert, dass $R_\alpha$ schrumpft, wenn $\alpha$ kleiner wird. Unter diesen Voraussetzungen ist der p-Wert definiert als:
+		\begin{equation*}
+			p(t) = \textbf{inf} \{\alpha \geq 0 : t \in R_\alpha\}. 
+		\end{equation*}
+	\end{Definition}
+	Wenn $t$ der beobachtete Wert der Test-Statistik $T$ ist. Informell ist $p(t)$ das kleinste Signifikanzniveau, auf den die Null-Hypothese verworfen werden kann. In diesem Sinne beschreibt der p-Wert, wie stark der beobachtete Wert $t$ der Null-Hypothese entspricht. 
+
+	\begin{BSP}[Beispiel 2.0.2 (p-Wert)]
+		Für die Tests in Beispiel 2.0.1 ist der p-Wert wohldefiniert, weil (1) erfoüllt ist.
+		Ist $t$ der beobachtete Wert von $T = \left\vert S - \frac{n}{2} \right\vert$, dann ist:
+		\begin{equation*}
+			\begin{split}
+				p(t) &= \; \textbf{inf} \; \{\alpha \geq 0: t \in R_\alpha\}\\
+				&= \; \textbf{inf} \; \{\alpha \geq 0 : t \geq c_\alpha \}.
+			\end{split}
+		\end{equation*}
+		Insbesondere ist $p(t) = \alpha^*$, wenn $t = c_{\alpha^*}$ ist, sodass
+		\begin{equation*}
+			\alpha^* = P(T > t \mid H_0) = F\left(\frac{n}{2} - t \right) + 1 - F\left(\frac{n}{2} + t -1\right),
+		\end{equation*}
+		wobei $F(\cdot)$ die Verteilungsfunktion der $\textbf{Bin}\left(n, \frac{1}{2} \right) $ ist.
+		Beachte: Der p-Wert ist hier das Signifikanzniveau jenes Tests, bei dem der kritische Wert $c = t$. 
+		Man erhält:
+			\begin{align*}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				\textbf{Experiment} & \textbf{Land} & \textbf{n} & \textbf{t} & \textbf{p(t)}\\
+				\hline
+				& AUT & 100 & 0 & 1\\
+				Kreisel & GER & 100 & 2 & 0,76\\
+				& ITA & 250 & 22 & 0,006\\
+				& FRA & 250 & 33 & 0,0004\\
+				\hline
+				& AUT & 400 & 4 & 0,72\\
+				Katapult & ITA & 150 & 4 & 0,57\\
+				& FRA & 150 & 4 & 0,57\\
+				\hline
+			\end{tabular}
+		\end{align*}
+		Dies zeigt, dass man mit p-Werten die Ergebnissen mit ganz unterschiedlichen Tests einfach vergleich kann. 
+	\end{BSP}	
 	
+	\begin{BSP}[Beispiel 2.0.3 (Der z-Test (bekannte Varianz))]
+		Betrachte $\FZV \overset{i.i.d.}{\sim} N(\mu,\sigma), \mu \in \IR$, unbekannt, $\sigma^2 > 0$ bekannt. Gegeben $\alpha \in (0,1)$ möchte man $H_0: \mu - \mu_0$ gegen verschiedene Alternativen testen. Beachte: Unter $H_0$ ist $\sqrt{n} \frac{\bar{X}_n - \mu}{\sigma} \sim N(0,1)$.
+		
+		Teste: $H_0$ gegen $H_1$: $\mu > \mu_0$. Setze $T = \sqrt{n} \frac{\bar(X)_n - \mu_0}{\sigma}$, $c = \phi^{-1} (1- \alpha)$ und verwerfe, wenn $T\geq c$ ist. 
+		Der Test hat sig. Niveau $\alpha$, denn: 
+		\begin{equation*}
+			\begin{split}
+				P(\xcancel{H_0} \mid H_0) &= P(T \geq c \mid H_0) = P(N(0,1) \geq c)\\
+				&= 1- P(N(0,1) \leq c) = 1- \phi(c)\\
+				&= 1- \phi(\phi^{-1}(1-\alpha)) = 1-(1-\alpha) = \alpha.
+			\end{split}
+		\end{equation*}
+		Gegeben $T=t$ ist der $p-Wert$ gegeben durch:
+		\begin{equation*}
+			p(t) = P(T \geq t \mid H_0) = 1-\phi(t). 
+		\end{equation*}
+		
+		Teste $H_0$ gegen $H_1 : \mu - \mu_0$. Setze $T = \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}, c = \phi^{-1}$ und verwerfe $H_0$, wenn $T \leq c$ ist. Signifikanzniveau:
+		\begin{equation*}
+			P(\xcancel{H_0} \mid H_0) = P(T \leq c \mid H_0) = P(N(0,1) \leq c) = \phi(\phi^{-1}(\alpha)) = \alpha.
+		\end{equation*}
+		Gegeben $T=t$ ist $p(t)$ gerade:
+		\begin{equation*}
+			p(t) = P(T \leq t \mid H_0) = P(N(0,1) \leq t) = \phi(t).
+		\end{equation*}
+		Teste $H_0$ gegen $H_1: \mu \neq \mu_0$. Setze $T = \left\vert \sqrt{n} \frac{\bar{X}_n -\mu_0}{\sigma} \right\vert, c = \phi^{-1} \left(1 -\frac{\alpha}{2}\right)$ und verwerfe $H_0$, wenn $T \leq c$ ist. Signifikanzniveau:
+		\begin{equation*}
+			\begin{split}
+				P(\xcancel{H_0} \mid H_0) &= P(T \geq c \mid H_0)\\
+				&= P(N(0,1) \leq -c \; \text{oder} \; N(0,1) \geq c)\\
+				&= P(N(0,1) \leq -c) + P(N(0,1) \geq c)\\
+				&= 1- P(N(0,1) \leq c) + 1 - P(N(0,1) \leq c)\\
+				&= 1- \phi(c) + 1- \phi(c)\\
+				&= 2 \cdot (1- \phi(\phi^{-1} \left(- \frac{\alpha}{2}\right)))\\
+				&= 2 \cdot \left(1-\left(1-\frac{\alpha}{2}\right)\right) = \alpha.
+			\end{split}
+		\end{equation*}
+		Gegeben $T=t$ ist der $p-\textbf{Wert}$
+		\begin{equation*}
+			p(t) = 2\cdot(1-\phi(t)).
+		\end{equation*}
+	\end{BSP}
+	\begin{BSP}[Beispiel 2.0.4 (Der t-Test)]
+		Betrachte $\FZV \overset{i.i.d.}{\sim} N(\mu, \sigma^2), \mu \in \IR, \sigma^2 > 0$, beide unbekannt. 
+		Gegeben $\alpha \in (0,1)$ möchte man $H_0: \mu = \mu_0$ gegen verschiedene Alternativne testen.
+		Beachte: Unter $H_0$ ist:
+		\begin{equation*}
+			\sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}_n} \sim t_{n-1},
+		\end{equation*}
+		wobei $\hat{\sigma}^2 = \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \bar{X}_n)^2$. Im Folgenden sei $F_{n-1}$ die Verteilungsfunktion der t-Verteilung.
+		Teste $H_0$ gegen $H_1: \mu > \mu_0$.
+		Setze $T=\sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}_n}, c = F^{-1}_{n-1}(1-\alpha)$ und verwerfe $H_0$, wenn $T\geq c$. Signifikanzniveau = $P(\xcancel{H_0} \mid H_0) = \alpha$.
+		
+		$p-\textbf{Wert}$:
+		\begin{equation*}
+			p(t)= 1- F_{n-1}(t).
+		\end{equation*}
+		Teste $H_0$ gegen $H_1: \mu < \mu_0$.
+		Setze $T=\sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}_n}, c = F^{-1}_{n-1}(1-\alpha)$ und verwerfe $H_0$, wenn $T\leq c$. Signifikanzniveau = $P(\xcancel{H_0} \mid H_0) = \alpha$.
+		
+		$p-\textbf{Wert}$:
+		\begin{equation*}
+			p(t)= F_{n-1}(t).
+		\end{equation*}
+		Teste $H_0$ gegen $H_1: \mu \neq \mu_0$.
+		Setze $T=\left\vert\sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}_n} \right\vert, c = F^{-1}_{n-1}\left(1-\frac{\alpha}{2}\right)$ und verwerfe $H_0$, wenn $T\geq c$. Signifikanzniveau = $P(\xcancel{H_0} \mid H_0) = \alpha$.
+		
+		$p-\textbf{Wert}$:
+		\begin{equation*}
+			p(t)= 2\cdot (1- F^{-1}_{n-1}(t)).
+		\end{equation*}
+	\end{BSP}
+	
+	\begin{Bemerkung}[Bemerkung 2.0.2 (Testkonstuktion mit anderen Verteilungen)]
+		Auch für die anderen bisherigen betrachteten Modelle ($G(p_0), U([0, \theta])$) kann man, basierend auf MM-Schätzer oder ML-Schätzer, Tests konstruieren, mit Sigifikanzniveau $\alpha$, wenn die Verteilung der Test-Statistik unter der $H_0$ bekannt ist, bzw. mit nominalen Signifikanzniveau $\alpha$, wenn diese approximiert werden kann.
+	\end{Bemerkung}
+	
+	\subsection{Likelihood-Ratio-Tests}
+	LR Tests sind eine allgemeine Methode, um N-P-Tests zu konstruieren (vgl. MM- oder ML-Schätzer). Man kann auch für LR-Tests Optimalitätseigenschaften zeigen.
+	
+	Betrachte ein (diskretes oder stetiges) parametrisches Modell:
+	
+	$\FZV$ i.i.d. Kopien einer Zufallsvariable $X$, wobei $X$ eine Dichte $f(X \mid \theta)$ bzw. eine Wahrscheinlichkeitsfunktion $p(X\mid \theta)$ hat, mit $\theta \in \Theta \subseteq \IR^k$.
+	
+	Für $\Theta_0 \subseteq \Theta$ testen:
+	\begin{equation*}
+		\begin{split}
+			H_0: \theta \in \Theta_0 \; \textbf{vs.} \; H_1: \theta \in \Theta \setminus \Theta_0.
+		\end{split}
+	\end{equation*}
+	
+	\begin{Definition} [Definition 2.1.1 (Liklihood-Ratio-Statistik)]
+		Die Likelihood-Ratio-Statistik ist definiert als:
+		\begin{equation*}
+			\Lambda = \frac{L(\hat{\theta}_0)}{L(\hat{\theta})}
+		\end{equation*}
+		
+		Für $\hat{\theta} = \underset{\theta \in \Theta}{\textbf{argmax}} \; L(\theta)$ (ML-Schätzer unrestrigniert).
+		
+		Für $\hat{\theta}_0 = \underset{\theta \in \Theta_0}{\textbf{argmax}} \; L(\theta)$ (ML-Schätzer unter $H_0$).
+		
+		Laut Konstruktion ist $0 \leq \Lambda \leq 1$, weil $\Theta_0 \subseteq \Theta$.
+		
+		Der L-R-Test verwirft $H_0$, wenn $\Lambda \leq c$ für einen geeigneten kritischen Wert $c \leq 1$. 
+	\end{Definition}
+	
+	\begin{BSP}[Beispiel 2.1.1 (z-Test mit zweiseitiger Alternative)]
+		$X \sim N(\mu, \sigma^2), \mu \in \IR, \sigma^2 > 0$ bekannt. Gegeben $\mu_0 \in \IR$, fest.
+		
+		$H_0: \mu = \mu_0$ gegen $H_1: \mu \neq \mu_0$. 
+		
+		Hier ist $\theta = \mu, \Theta = \IR, \Theta_0 = {\mu_0}$.
+		\begin{equation*}
+			\begin{split}
+				L(\mu) &= \prod_{i = 1}^{n} \Phi_{\mu, \sigma^2} (X_i)\\
+				&= \prod_{i = 1}^{n} \left((2\pi \sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2 \sigma^2} (x_i - \mu)^2}\right)\\
+				&= (2\pi \sigma^2)^{-\frac{n}{n}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^{n}(x_i -\mu)^2}.
+			\end{split}
+		\end{equation*}
+		Für $\hat{\mu}$ gilt:
+		\begin{equation*}
+			\hat{\mu}= \;\underset{\mu \in \IR}{\textbf{argmax}} \; L(\mu) \overset{!}{=} \bar{X}_n.
+		\end{equation*}
+		Für $\hat{\mu}_0$ gilt:
+		\begin{equation*}
+			\hat{\mu}_0= \;\underset{\mu \in \{\mu_0\}}{\textbf{argmax}} \; L(\mu) = \mu_0.
+		\end{equation*}
+		Die L-R-Statistik sieht folgendermaßen aus:
+		\begin{equation*}
+		\begin{split}
+			\Lambda &= \frac{L(\mu_0)}{L(\bar{X}_n)}\\
+			&= \frac{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(x_i - \mu_0)^2}}{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(x_i - \bar{X}_n)^2}}\\
+			&= \; \textbf{exp}\left(- \frac{1}{2\sigma^2}\sni (x_i - \mu_0)^2 + \frac{1}{2 \sigma^2} \sni (x_i - \bar{X}_n)^2\right)\\
+			&= \; \textbf{exp} \left(- \frac{1}{2\sigma^2}(\sni x_i^2 - 2 \mu_0 \sni x_i + n\mu_0^2 - \sni x_i + \underbrace{2 \bar{X}_n \underbrace{\sni x_i}_{n \bar{X}_n} - n\bar{X}^2_n}_{n \bar{X}_n^2})\right)\\
+			&= \; \textbf{exp} \left(- \frac{1}{2 \sigma^2} (n \bar{X}_n^2 - 2 \mu_0n\bar{X}_n + n\mu_0^2)\right)\\
+			&= \; \textbf{exp} \left(- \frac{1}{2 \sigma^2}n (\bar{X}_n^2 - 2 \mu_0 \bar{X}_n + \mu_0^2)\right) \\
+			&= \; \textbf{exp} \left(- \frac{1}{2} \underbrace{\left(\sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}\right)^2}_{\text{Das ist die z-Statistik}}\right)
+		\end{split}
+		\end{equation*}
+		Man sieht: $\Lambda$ ist genau dann klein, wenn $\left\vert \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma} \right\vert$ groß ist. Genauer:
+		\begin{equation*}
+			\begin{split}
+				\Lambda \leq c \Leftrightarrow e^{- \frac{1}{n} (\ldots)^2} &\leq c\\
+				-\frac{1}{2}(\ldots)^2 &\leq \log(c)\\
+				(\ldots)^2 &\geq -2 \log(c)\\
+				\left\vert \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma} \right\vert &\geq \sqrt{-2 \log(c)}
+			\end{split} 
+		\end{equation*}
+		Hier ist der L-R-Test gerade der z-Test aus Beispiel 2.0.3 zum Testen von $H_0: \mu = \mu_0$ gegen $H_1: \mu \neq \mu_0$. 
+	\end{BSP}
+	
+	\begin{BSP}[Beispiel 2.1.2 (z-Test mit einseitiger Alternative)]
+		Betrachte $X \sim N(\mu, \sigma^2), \mu \in \IR, \sigma^2 >0$ bekannt.
+		
+		Teste $H_0: \mu = \mu_0$ gegen $H_1: \mu > \mu_0$.
+		
+		Hier ist $\theta = \mu, \Theta = [\mu, \infty), \Theta_0 = \{\mu_0\}$.
+		
+		Man erhält für $\hat{\mu}_0 = \;\underset{\mu \in \{\mu_0\}}{\textbf{argmax}} \; L(\mu) = \mu_0$.
+		Und für $\hat{\mu} = \;\underset{\mu \in [\mu_0, \infty)}{\textbf{argmax}} \; L(\mu) = \bar{X}_n$.
+		
+		Die L-R-Statistik sieht folgendermaßen aus:
+		\begin{equation*}
+			\Lambda = \frac{L(\mu_0)}{L(\hat{\mu})} = \begin{cases}
+				1 &: X_n < \mu_0\\
+				\frac{L(\mu_0)}{\bar{X}_n} &: X_n \geq \mu_0
+			\end{cases}
+			= \begin{cases}
+				1 &: \bar{X}_n < \mu_0\\
+				\textbf{exp} \left(- \frac{1}{n}\left(\sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}\right)^2\right) &: \bar{X}_n \geq \mu_0.
+			\end{cases}
+		\end{equation*}
+		
+		Für $\alpha \in (0,1)$ muss der entsprechende kritische Wert $c$ kleiner sind. Das ist:
+		
+		\begin{equation*}
+			\begin{split}
+				\Lambda \leq c &\Leftrightarrow \bar{X}_n \geq \mu_0 \; \text{und} \; \textbf{exp}\left(-\frac{1}{2}\left(\sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}\right)^2\right) \leq c\\
+				&\Leftrightarrow \bar{X}_n \geq \mu_0 \; \text{und} \; \left\vert \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma} \right\vert \geq \sqrt{-2 \log(c)} \\
+				&\Leftrightarrow \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma} \geq \sqrt{-2 \log(c)}.
+			\end{split}
+		\end{equation*}
+		Auch für einseitige Alternativen ist der L-R-Test gerade der entsprechende z-Test. 
+	\end{BSP}
+	
+	\begin{BSP} [Beispiel 2.1.3 (t-Test mit zweiseitiger Alternative)]
+		Betrachte $X \sim N(\mu, \sigma^2), \mu \in \IR, \sigma^2 >0.$
+		
+		Teste: $H_0$: $\mu = \mu_0$ gegen $H_1$: $\mu \neq \mu_0$.
+		
+		Hier ist $\theta = (\mu, \sigma^2)', \Theta = \IR \times \{0, \infty\}$ und $\theta_0 = \{\mu_0\} \times (0,\infty)$.
+		
+		\begin{equation*}
+			\left(\begin{array}{c}
+				\hat{\mu}\\
+				\tilde{\sigma}^2\\
+			\end{array}\right) = \; \underset{	\left(\begin{array}{c}
+				\mu\\
+				\sigma^2\\
+			\end{array}\right) \in \Theta}{\textbf{argmax}} \; L(\mu, \sigma^2) \overset{\text{Bsp. 1.3.1}}{=} \left(\begin{array}{c}
+			\bar{X}_n\\
+			\bar{X^2}_n - \bar{X}^2_n\\
+		\end{array}\right)
+		\end{equation*}
+		
+		\begin{equation*}
+			\left(\begin{array}{c}
+				\hat{\mu}_0\\
+				\tilde{\sigma}_0^2\\
+			\end{array}\right) = \; \underset{	\left(\begin{array}{c}
+					\mu\\
+					\sigma^2\\
+				\end{array}\right) \in \Theta_0}{\textbf{argmax}} \; L(\mu, \sigma^2) = \left(\begin{array}{c}
+				\mu_0\\
+				\frac{1}{n} \sni (x_i - \mu_0)^2\\
+			\end{array}\right)
+		\end{equation*}
+		Daraus ergibt sich die L-R-Statistik:
+		
+		\begin{equation*}
+			\begin{split}
+				\Lambda &= \frac{L(\hat{\mu}_0, \tilde{\sigma}^2_0)}{L(\mu, \tilde{\sigma}^2)}\\
+				&= \frac{(2 \pi \tilde{\sigma}^2_0)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2_0} \sni (x_i - \mu_0)^2}}{(2 \pi \tilde{\sigma}^2_0)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2_0} \sni (x_i - \bar{X}_n)^2}}\\
+				&= \left(\frac{\frac{1}{2} \sni (x_i - \mu_0)^2}{\frac{1}{n} \sni (x_i - \bar{X}_n)^2}\right)^{-\frac{n}{2}} \cdot e^{-\frac{1}{2}n + \frac{1}{2}n} = \%
+			\end{split}
+		\end{equation*}
+		
+	
+
+	\end{BSP}
 	
 \end{document}
