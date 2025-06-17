@@ -2021,7 +2021,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		für jedes $\theta \in \Theta $, dann ist $\hat{\theta}_n$ effizient in dieser Klasse aller unverzerrten Schätzer für $\theta_0$ basierend auf $\FZV$.
 	\end{Korollar}
 
-	\begin{BWS}[Beweis 1.4.1 (Effizienz)]
+	\begin{BWS}[Beweis 1.4.1 (Cramér-Rao-Schranke)]
 		Dieser Beweis wurde für stetige Modelle ausgeführt, gilt aber genauso für diskrete Modelle.
 		
 		Setze:
@@ -2030,13 +2030,20 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Es gilt:
 		\begin{equation*}
-			1 \geq \textbf{Corr}(\hat{\theta}_n, Z \mid \theta_0)^2 = \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0)}.
+			1 \geq \textbf{Corr}(\hat{\theta}_n, Z \mid \theta_0)^2 = \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0)} \leq 1.
 		\end{equation*}
 		Daraus folgt:
 		\begin{equation*}
-			\textbf{Var}(\hat{\theta}_n \mid \theta_0) \geq \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(Z \mid \theta_0)}.
+			\begin{split}
+				1 &\geq \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0)}\\
+				\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0) &\geq \textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2\\
+				\textbf{Var}(\hat{\theta}_n \mid \theta_0) &\geq \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(Z \mid \theta_0)}
+			\end{split}
 		\end{equation*}
-		Hieraus folgt die C-R-Ungleichung, wenn folgendes gilt:
+		Wir wollen also zeigen, dass $\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2 = 1$ ist und $\textbf{Var}(Z \mid \theta_0)$ gleich $nI(\theta_0)$ entspricht. Damit folgendes gezeigt ist:
+		\begin{equation*}
+			\textbf{Var}(\hat{\theta}_n \mid \theta_0) \geq \frac{1}{nI(\theta_0)}.
+		\end{equation*}
 		\begin{enumerate}
 			\item 
 			\begin{equation*}
@@ -2056,7 +2063,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				&= n \ablt \underbrace{\int f(x \mid \theta_0) \; dx}_{1} = 0.
 			\end{split}
 		\end{equation*}
-		Hieraus folgt:
+		Aus dem Verschiebungssatz folgt:
 		\begin{equation*}
 			\begin{split}
 				\textbf{Var}(Z \mid \theta_0) &= n \textbf{Var}\left(\ablt \log f(x \mid \theta_0)\mid \theta_0 \right)\\
@@ -2068,12 +2075,12 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\begin{split}
 				\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0) &= \underbrace{\EW(\hat{\theta}_n \mid \theta_0)}_{= \theta_0} \cdot \underbrace{\EW(Z \mid \theta_0)}_{= 0}\\
-				&= \underbrace{\int \cdots \int}_{\textbf{n-mal}}\hat{\theta}_n(\FZV) \underbrace{(\sum_{i=1}^{n}\ablt \log f(x_i \mid \theta_0)) \prod_{i=1}^{n}f(x_i \mid \theta_0)}_{*} dx_i, \ldots, dx_n\\
+				&= \underbrace{\int \cdots \int}_{\textbf{n-mal}}\hat{\theta}_n(\FZV) \underbrace{(\sum_{i=1}^{n}\ablt \log f(x_i \mid \theta_0)) \prod_{i=1}^{n}f(x_i \mid \theta_0)}_{\heartsuit} dx_i, \ldots, dx_n\\
 				&= \int \cdots \int \hat{\theta}_n (\FZV) \ablt \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n\\
 				&= \ablt \underbrace{\int \cdots \int \hat{\theta}_n(\FZV) \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n}_{\EW(\hat{\theta}_n \mid \theta_0) = \theta_0} = 1.
 			\end{split}
 		\end{equation*}
-		Zu *: Für zum Beispiel $n=2$ ist dies gleich:
+		Zu $\heartsuit$ : Für zum Beispiel $n=2$ ergibt dies unter Anwendung von $\star$:
 		\begin{equation*}
 			\begin{split}
 				&\left(\frac{f'(x_1 \mid \theta_0)}{f(x_1 \mid \theta_0)} + \frac{f'(x_2 \mid \theta_0)}{f(x_2 \mid \theta_0)}\right) \cdot f(x_1 \mid \theta_0) \cdot f(x_2 \mid \theta_0)\\
@@ -2345,7 +2352,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Hier werden nicht nur unverzerrte Schätzer betrachtet:
 	
 	\begin{Proposition}[Proposition 1.5.1 (James-Stein-Schätzer)]
-		Sei $X \sim N(\mu_0, I_n)$ mit $\mu_0 \in \IR^k.$ (Hier ist $n=1$). Der ML-Schätzer $\hat{\mu}_{ML} = X$ für $\mu_0$ ist zulässig in der Klasse aller Schätzer für $\mu_0$ für $k=1$ oder $k=2$. Die im Beweis verwendete Technik ist einfach für $k=1$, aber deutlich komplizierter für $k=2$ und bricht zusammen für $k>2$. 
+		Sei $X \sim N(\mu_0, I_n)$ mit $\mu_0 \in \IR^k.$ (Hier ist $n=1$ und $I_n$ die Identitätsmatrix). Der ML-Schätzer $\hat{\mu}_{ML} = X$ für $\mu_0$ ist zulässig in der Klasse aller Schätzer für $\mu_0$ für $k=1$ oder $k=2$. Die im Beweis verwendete Technik ist einfach für $k=1$, aber deutlich komplizierter für $k=2$ und bricht zusammen für $k>2$. 
 		
 		Für $X \sim N(\mu_0, I_n), \mu_0 \in \IR^k$ mit $k \geq 3$ gibt es einen Schätzer $\hat{\mu}_{JS}$ für $\mu_0$, sodass folgendes gilt:
 		\begin{equation*}
@@ -2369,22 +2376,22 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{equation*}
 	Im Folgenden wird eine Approximation betrachtet, wo $k \rightarrow \infty$ geht. In $X \sim N(\mu, I_n), \mu \in \IR^k$, hängt $\mu$ von $k$ ab. Dabei wird angenommen, dass:
 	\begin{equation*}
-		\frac{\Vert \mu \Vert^2}{k} \overset{k \rightarrow \infty}{\longrightarrow} \rho^2 \in [0, \infty)
+		\frac{\Vert \mu \Vert^2}{k} \overset{k \rightarrow \infty}{\longrightarrow} \rho^2 \in [0, \infty) 
 	\end{equation*}
 	$\rho^2$ ist hierbei eine Signal to Noise Ratio.
 	Zerlege $X$ als $X = \mu + \epsilon$ für $\epsilon = X- \mu \sim N(0, I_n)$.
-	Man sieht sofort, dass $X$ als Schätzer für $\mu$ im Mittel "zu lang" ist:
+	Man sieht sofort, dass $X$ als Schätzer für $\mu$ im Mittel \textit{zu lang} ist:
 	\begin{equation*}
 		\begin{split}
 			\EW(\Vert X \Vert^2) &= \EW(X'X) \\
 			&= \EW((\mu + \epsilon)'(\mu + \epsilon)) \\
-			&= \EW(\mu' \mu + \mu' \epsilon + \epsilon' \mu + \epsilon' \epsilon) \\
+			\underset{\text{ausmultiplizieren}}&{=} \EW(\mu' \mu + \mu' \epsilon + \epsilon' \mu + \epsilon' \epsilon) \\
 			&= \EW(\mu'\mu + 2\mu'\epsilon + \epsilon'\epsilon)\\
-			&= \mu' \mu + \underbrace{2\EW(\mu'\epsilon)}_{\begin{split}
+			\underset{\text{Lin. und}\; \epsilon \sim N(0,I_n)}&{=} \mu' \mu + \underbrace{2\EW(\mu'\epsilon)}_{\begin{split}
 					&= \EW(\sum_{i=1}^{k} \mu_i \cdot \epsilon_i)\\
-					&= \sum_{i = 1}^{k} \mu_i \cdot \underbrace{\EW(\epsilon)}_{0}\\
+					\underset{\epsilon \sim N(0,I_n)}&{=} \sum_{i = 1}^{k} \mu_i \cdot \underbrace{\EW(\epsilon)}_{0}\\
 					&=0
-				\end{split}} + \underbrace{\EW(\epsilon' \epsilon)}_{\sum_{i=1}^{k}\EW(\epsilon_i^2)=1}\\
+				\end{split}} + \underbrace{\EW(\epsilon' \epsilon)}_{\sum_{i=1}^{k}\EW(\epsilon_i^2)= \sum_{i = 1}^{k} 1 = k}\\
 			&= \Vert \mu \Vert^2 +k > \Vert \mu \Vert^2.
 		\end{split}
 	\end{equation*}
