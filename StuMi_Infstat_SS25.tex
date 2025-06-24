@@ -975,12 +975,12 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			f'(\upnu) \cdot\sqrt{n} (\bar{Z}_n-\upnu) \KV& \;N(0,\delta^2 \cdot (f'(\upnu))^2).
 			\end{split}
 		\end{equation*}
-		Daraus ergibt sich: 
+		Daraus ergibt sich für $n \rightarrow \infty$: 
 		\begin{equation*}
 			\begin{split}
-				\sqrt{n}(f(\bar{Z}_n) - f(\upnu)) + \sqrt{n} (\bar{Z}_n-\upnu)	R(\bar{Z}_n) &= f'(\upnu) \cdot\sqrt{n} (\bar{Z}_n-\upnu) \\
-				\sqrt{n}(f(\bar{Z}_n) - f(\upnu)) + \sqrt{n} (\bar{Z}_n-\upnu) \cdot 0 &= f'(\upnu) \cdot\sqrt{n} (\bar{Z}_n-\upnu) \\
-				\sqrt{n} (f(\bar{Z}_n) - f(\upnu)) &= f'(\upnu) \cdot \sqrt{n} (\bar{Z}_n - \upnu) \sim N(0, \delta^2 (f'(\upnu))^2).
+				\sqrt{n}(f(\bar{Z}_n) - f(\upnu)) + \sqrt{n} (\bar{Z}_n-\upnu)	\underbrace{R(\bar{Z}_n)}_{\overset{p}{\rightarrow} 0} &= f'(\upnu) \cdot\sqrt{n} (\bar{Z}_n-\upnu) \\
+				\sqrt{n}(f(\bar{Z}_n) - f(\upnu)) + \underbrace{\sqrt{n} (\bar{Z}_n-\upnu) \cdot R(\bar{Z}_n)}_{\overset{\sim}{\rightarrow}N(0, \delta^2) \cdot 0 = 0} &= \underbrace{f'(\upnu) \cdot\sqrt{n} (\bar{Z}_n-\upnu)}_{\KV \;N(0,\delta^2 \cdot (f'(\upnu))^2)} \\
+				\Longrightarrow \sqrt{n} (f(\bar{Z}_n) - f(\upnu)) \overset{\sim}&{\rightarrow} N(0, \delta^2 (f'(\upnu))^2).
 			\end{split}
 		\end{equation*}
 		\begin{flushright}
@@ -2059,7 +2059,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\begin{split}
 				\EW (Z \mid \theta_0) &=  n\EW\left(\ablt \log f(x \mid \theta_0)\mid \theta_0\right)\\
-				&= n \int \left(\ablt \log f(x \mid \theta_0)\mid \theta_0\right) \cdot f(x \mid \theta_0) \; dx\\
+				&= n \int \ablt \log f(x \mid \theta_0) \cdot f(x \mid \theta_0) \; dx\\
 				&= n \int \frac{\ablt f(x \mid \theta_0)}{f(x \mid \theta_0)} \cdot f(x \mid \theta_0) \; dx\\
 				&= n \ablt \underbrace{\int f(x \mid \theta_0) \; dx}_{1} = 0.
 			\end{split}
@@ -2078,7 +2078,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0) &= \underbrace{\EW(\hat{\theta}_n \mid \theta_0)}_{= \theta_0} \cdot \underbrace{\EW(Z \mid \theta_0)}_{= 0}\\
 				&= \underbrace{\int \cdots \int}_{\textbf{n-mal}}\hat{\theta}_n(\FZV) \underbrace{(\sum_{i=1}^{n}\ablt \log f(x_i \mid \theta_0)) \prod_{i=1}^{n}f(x_i \mid \theta_0)}_{\heartsuit} dx_i, \ldots, dx_n\\
 				&= \int \cdots \int \hat{\theta}_n (\FZV) \ablt \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n\\
-				&= \ablt \underbrace{\int \cdots \int \hat{\theta}_n(\FZV) \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n}_{\EW(\hat{\theta}_n \mid \theta_0) = \theta_0} = 1.
+				&= \ablt \underbrace{\int \cdots \int \hat{\theta}_n(\FZV) \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n}_{\EW(\hat{\theta}_n \mid \theta_0) = \theta_0} = 1. \square
 			\end{split}
 		\end{equation*}
 		Zu $\heartsuit$ : Für zum Beispiel $n=2$ ergibt dies unter Anwendung von $\star$:
@@ -3116,15 +3116,15 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\Lambda = \frac{f(X\mid \theta_0)}{\textbf{max}\{f(X\mid \theta_0), f(X \mid \theta_1)\}} \leq 1.
 		\end{equation*}
-		Für $\alpha < 1$ muss der entsprechende kritische Wert auch $c < 1$ sein. Also:
+		Für $\alpha < 1$ muss der entsprechende kritische Wert  $c < 1$ sein. Also:
 		\begin{equation*}
 			\Lambda \leq c (< 1).
 		\end{equation*}
-		Da ich entweder verwerfe oder nicht, entspricht der L-R-Test einer 0-1-wertigen Zufallsvariable. $d_{LR} = d_{LR}(x)$:
+		Da man entweder verwirft oder nicht, entspricht der L-R-Test einer 0-1-wertigen Zufallsvariable. $d_{LR} = d_{LR}(x)$:
 		\begin{equation*}
 			\dlr(x) = \begin{cases}
 				1 &: \frac{f(X\mid \theta_0)}{f(X\mid \theta_1)} \leq c\\
-				0 &: \frac{f(X\mid \theta_0)}{f(X\mid \theta_1)} > 1.
+				0 &: \frac{f(X\mid \theta_0)}{f(X\mid \theta_1)} > c.
 			\end{cases}
 		\end{equation*}
 		Beachte $P(\dlr=1 \mid H_0) = P(\text{L-R-Test verwirft}\mid H_0) = \alpha$.
@@ -3163,7 +3163,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\overset{(K)}&{=} P(\dlr = 1 \mid H_1)
 			\end{split}
 		\end{equation*}
-		\begin{Bemerkung}[Bemerkungen zum Beweis]
+	\textbf{Bemerkungen zum Beweis:}\\
 			$P(A) = P(d=1) \; \text{und}\; P(B) = P(\dlr =1)$
 			
 			Zu (A):
@@ -3208,9 +3208,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\end{equation*}
 			Der hintere Term wurde hier wieder von oben übernommen.
 			
-			Zu (H): Hier wurde die Klammer ausmulitplierzt mit den Skalar von $\frac{1}{c}$. 
+			Zu (H): Hier wurde die Klammer ausmultipliziert mit dem Skalar von $\frac{1}{c}$. 
 			
-			Zu (I): Hier wurde wieder eine Hilfsüberlegung angewant. Die Zeile H war im Grunde:
+			Zu (I): Hier wurde wieder eine Hilfsüberlegung angewandt. Die Zeile H war im Grunde:
 			
 			\begin{equation*}
 				P(B) + P(B \cap A) + P(A \cap B^c)
@@ -3219,11 +3219,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\begin{equation*}
 				P(B \cap A) + P(A \cap B^c) = P(A)
 			\end{equation*}
-			
 			Zu (J): Hier sieht man nur mehr die skalierten Fehler 1. Art, welche sich wegkürzen.
 			
 			Zu(K): Dies ist jetzt die Power von dem LR-Test. 
-		\end{Bemerkung}
 		\end{BWS}
 	
 \end{document}
