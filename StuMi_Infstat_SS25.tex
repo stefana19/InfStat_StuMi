@@ -3109,7 +3109,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	Unter allen Tests zwischen den simplen Hypothesen $H_0$ und $H_1$ mit Signifikanzniveau $\alpha \in (0,1)$ hat der L-R-Test die größtmögliche Power. 
 	
-	\begin{BWS}[Beweis (NP-Lemma)]
+	\begin{BWS}[Beweis 2.1.1 (NP-Lemma)]
 		Dieser Beweis wurde für stetige Modelle ausgeführt, funktioniert aber genauso für diskrete. 
 		Sei zunächst $n=1$ und setze $X = X_n$. 
 		Dann ist:
@@ -3222,6 +3222,212 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			Zu (J): Hier sieht man nur mehr die skalierten Fehler 1. Art, welche sich wegkürzen.
 			
 			Zu(K): Dies ist jetzt die Power von dem LR-Test. 
-		\end{BWS}
+			
+			
+			Damit ist die Power des LR-Tests mind. so groß (oder größer) als die anderen Tests. $\Rightarrow$ Lemma bewiesen für $n = 1$. 
+			
+			\begin{flushright}
+				$\square$
+			\end{flushright}
+			Für $n > 1$ argumentiert man genauso. Man muss nur $X$ ersetzen durch $(\FZV)$.
+			\begin{equation*}
+				f(X \mid \theta_j) \; \text{durch} \; f(X_1 \mid \theta_j)\cdots f(X_n \mid \theta_j), j \in \{0,1\},
+			\end{equation*}
+			und weiters muss noch folgendes ersetzt werden:
+			\begin{equation*}
+				\int \ldots dx \; \text{durch} \underbrace{\int \cdots \int}_{\text{n-mal}} \ldots dx. 
+			\end{equation*}
+			\end{BWS}
+			\begin{Korollar}[Korollar 2.1.1 (Uniformity most powerful Test)]
+			Betrachte $\FZV$ i.i.d. $N(\mu, \sigma^2), \mu \in \IR, \sigma^2 > 0$, bekannt. 
+			
+			Teste: $H_0: \mu = \mu_0$ gegen $H_1: \mu > \mu_0$ auf Signifikanzniveau $\alpha \in (0,1)$. Unter allen Tests zwischen $H_0$ und $H_1$ mit sig. Niveau $\alpha$ hat hier der z-Test die größtmögliche Power. In diesem Setting ist der z-Test der sogenannte Uniformity most powerful (UMP) Test. Das Korollar gilt auch, wenn man $\mu > \mu_0$ gegen $\mu < \mu_0$ ersetzt.
+			\end{Korollar}
+			\begin{BWS}[Beweis 2.1.2 (UMP z-Test)]
+			Wir wissen, dass hier der z-Tests auch der LR-Test (Beispiel ...) ist. Betrachte den z-Test und einen anderen Test zwischen $H_0$ und $H_1$ mit sig. Niveau $\alpha$, sowie die entsprechenden 0-1-wertigen Zufallsvariablen $\dlr$ und $d$. 
+			
+			Laut Voraussetzung ist:
+			\begin{equation*}
+				P(\dlr = 1 \mid \mu_0) = P(\dlr = 1 \mid H_0) = \alpha = P(d=1 \mid \mu_0) = P(d =1 \mid H_0).
+			\end{equation*}
+			Wähle $\mu_1 > \mu_0$. Zu Zeigen (*):
+			\begin{equation*}
+				P(\dlr = 1 \mid \mu_1) \geq P(d=1 \mid \mu_1). 
+			\end{equation*}
+			Betrachte dazu ein synthetisches Testproblem:
+			\begin{equation*}
+				\tilde{H}_0: \mu = \mu_0 \; \text{gegen} \; \tilde{H}_1: \mu = \mu_1,
+			\end{equation*}
+			mit sig. Niveau $\alpha$, für den LR-Test von $	\tilde{H}_0$ gegen $\tilde{H}_1$ und die entsprechenden 0-1-wertigen Zufallsvariablen $\tilde{d}_{LR}$ besagt das NP-Lemma, dass 
+			\begin{equation*}
+				P(\tilde{d}_{LR} = 1 \mid \mu_1) \geq P(\tilde{d}=1 \mid \mu_1),
+			\end{equation*}
+			weil $P(d=1\mid \tilde{H}_0) = P(d=1 \mid \mu_0) = \alpha$. Zeige nun, dass der LR-Test $\dlr$ von $H_0$ gegen $H_1$, dasselbe ist wie der LR-Test $\tilde{d}_{LR}$ von $\tilde{H}_0$ gegen $\tilde{H}_1$. Daraus folgt (*).
+			
+			Wir wissen aus Beispiel (...), dass der LR-Test:
+			\begin{equation*}
+				\dlr(x) = \begin{cases}
+					1 &: \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma} \geq c\\
+					0 &: \text{sonst},
+				\end{cases}
+			\end{equation*}
+			wobei $c = \phi^{-1}(1-\alpha)$. Insbesondere ist $\dlr = 1$, wenn $\bar{X}_n \geq c \frac{\sigma}{\sqrt{n}}+ \mu_0$ ist und $\dlr = 0$ sonst. 
+			Beim Testen von $\tilde{H}_0$ gegen $\tilde{H}_1$ ist: 
+			\begin{equation*}
+				\tilde{d}_{LR}(x) = \begin{cases}
+					1 &: \tilde{\Lambda}_n \leq c\\
+					0 &: \text{sonst},
+				\end{cases}
+			\end{equation*}
+			wo bei $\tilde{\Lambda}_n$ die entsprechende LR-Statistik und $\tilde{c}$ der entsprechende kritische Wert ist, weil $\alpha < 1$ ist, muss auch $\tilde{c} < 1$ sein, sodass
+			\begin{equation*}
+				\begin{split}
+					\tilde{\Lambda}_n \leq \tilde{c} &\Leftrightarrow \frac{L_n(\mu_0)}{L_(\mu_1)} \leq \tilde{c}\\
+					&\Leftrightarrow \frac{(2 \pi \sigma^2)^{-\frac{n}{2}} e ^{- \frac{1}{2 \sigma^2}\sni(x_i - \mu_0)^2}}{(2 \pi \sigma^2)^{-\frac{n}{2}} e ^{- \frac{1}{2 \sigma^2}\sni(x_i - \mu_1)^2}} \leq \tilde{c}\\
+					&\Leftrightarrow\;  \textbf{exp}\left(- \frac{1}{2 \sigma^2}\sni (X_i-\mu_0)^2 + \frac{1}{2 \sigma^2} \sni (X_i - \mu_1)^2\right) \leq \tilde{c}\\
+					&\Leftrightarrow \; \textbf{exp}\left(- \frac{1}{2 \sigma^2} \left( \sni X_i^2 + n \mu_0^2 - 2 \mu_0\sni X_i - \sni X_i^2 - n\mu_1^2 + 2\mu_1 \sni X_i\right)\right) \leq \tilde{c}\\
+					&\Leftrightarrow \; \textbf{exp}\left(- \frac{1}{2 \sigma^2} \left( n ( \mu_0^2 - \mu_1^2) -2(\mu_0 - \mu_1) \sni X_i\right)\right) \leq \tilde{c}\\
+					&\Leftrightarrow \; \textbf{exp}\left(- \frac{n(\mu_0^2 - \mu_1^2)}{2 \sigma^2} + \frac{n}{\sigma}(\mu_0 - \mu_1) \frac{1}{n} \sni X_i\right) \leq \tilde{c}\\
+				\end{split}
+			\end{equation*}
+			Die Exponentialfunktion wird klein, wenn $\bar{X}_n$ groß wird. Insbesondere ist $\tilde{\Lambda} \leq \tilde{c}$ genau dann, wenn $\bar{X}_n \leq \tilde{c}$.
+			\begin{equation*}
+				\textbf{exp}\left(-\frac{n(\mu_0^2-\mu_1^2)}{2 \sigma^2}+ \frac{1}{\sigma}(\mu_0 - \mu_1)\sni X_i\right) \leq \tilde{c}.
+			\end{equation*}
+			Daraus ergibt sich in vereinfachter Form:
+			\begin{equation*}
+				\begin{split}
+					e^{A+B\bar{X}_n} &\leq \tilde{c}\\
+					A+B\bar{X}_n &\leq \log\tilde{c}\\
+					B \bar{X}_n &\leq \log\tilde{c} - A\\
+					\bar{X}_n &\geq \frac{\log \tilde{c}-A}{B} = \tilde{\tilde{c}},
+				\end{split}
+			\end{equation*}
+			weil
+			\begin{equation*}
+				\alpha = P(\dlr = 1 \mid \mu_0) = P\left(\bar{X}_n \geq c \frac{\sigma}{\sqrt{n}} + \mu_0 \mid \mu_0 \right) = P(\tilde{d}_{LR} = 1 \mid \mu_0) = P(\bar{X}_n \geq \tilde{\tilde{c}} \mid \mu_0)
+			\end{equation*}
+			ist, muss $\tilde{\tilde{c}} = c \frac{\sigma}{\sqrt{n}} + \mu_0$ sein. Damit ist $\dlr = \tilde{d}_{LR}$, sodass (*) gilt. 
+			
+			\begin{flushright}
+				$\square$
+			\end{flushright}
+			\end{BWS}
+			
+			\begin{Korollar}[Korollar 2.1.2 (Kein UMP-Test Normalverteilung)]
+				Betrachte $\FZV$ i.i.d. $N(\mu, \sigma^2), \mu \in \IR, \sigma^2 >0$ bekannt. 
+				
+				Test: $H_0: \mu = \mu_0$ gegen $H_1: \mu \neq \mu_0$ mit sig. Niveau $\alpha \in (0,1)$. Hier existiert kein UMP-Test. 
+			\end{Korollar}
+			
+			\begin{BWS}[Beweis 2.1.3 (Kein UMP-Test bei Normalverteilung)]
+				Angenommen $d_{*}$ wäre ein UMP Test. Für $\mu_1 > \mu_0$ hat $d_{*}$ die größtmögliche Power $P(d_{*} = 1 \mid \mu_1)$ zum Testen von $\tilde{H}_0: \mu = \mu_0$ gegen $\tilde{H}_1: \mu = \mu_1$. Gleichzeitig hat auch hier der LR-Test $\tilde{d}_LR$ (von $\tilde{H}_0$ gegen $\tilde{H}_1$) die größtmögliche Power $P(\tilde{d}_{LR} = 1 \mid \mu_0)$.
+				\begin{equation*}
+					P(d_{*} = 1 \mid \mu_1) \geq P(\tilde{d}_{LR} = 1 \mid \mu_1).
+				\end{equation*}
+				Daraus folgt, dass
+				\begin{equation*}
+					P(d_{*} = 1 \mid \mu_1) = P(\tilde{d}_{LR} = 1 \mid \mu_1). 
+				\end{equation*}
+				Daraus folgt, dass $d_{*} = \tilde{d}_{LR}$ ist, also 
+				\begin{equation*}
+					d_{*} = \begin{cases}
+						1 &: \bar{X}_n \geq \tilde{c}\\
+						0 &: \text{sonst}. 
+					\end{cases}
+				\end{equation*}
+				Für $\mu_1 < \mu_0$:
+					\begin{equation*}
+					d_{*} = \begin{cases}
+						1 &: \bar{X}_n \leq \tilde{\tilde{c}}\\
+						0 &: \text{sonst}. 
+					\end{cases}
+				\end{equation*}
+				Das gibt einen Widerspruch. 
+			\end{BWS}
+			\begin{BSP}[Beispiel 2.1.5 (Lehmann und Stein)]
+				Betrachte $\FZV \sim N(\mu, \sigma^2), \mu \in \IR, \sigma^2 >0$ (beide unbekannt). Teste $H_0: \mu = \mu_0$ gegen $H_1: \mu > \mu_0$ auf sig. Niveau $\alpha$. Die Methode aus Korollar 2.1.1 (z-Test) lässt sich leider nicht auf den t-Test erweitern. Tatsächlich gilt:
+				
+				Für $\alpha \geq \frac{1}{2}$ ist der t-Test UMP. 
+				Für $\alpha < \frac{1}{2}$ existiert kein UMP-Test.
+				
+				(Lehmann $\&$ Stein, 1948). 
+			\end{BSP}
+			
+			\begin{Bemerkung}[Bemerkung 2.1.1 (UMP Normalverteilung)]
+				Im Gauß'schen Modell $N(\mu, \sigma^2)$ mit bekannter od. unbekannter Varianz zum Testen von sowohl einseitigen, als auch zweiseitigen Alternativen kann man zeigen, dass der entsprechende z-Test oder t-Test die größtmögliche Power hat in einer etwas kleineren Klasse von Tests mit sig. Niveau $\alpha$. 
+			\end{Bemerkung}
+			
+			\newpage
+			\part{Appendix A: Vektoren und Matrizen von Zufallsvariablen}
+			\section{Grundbegriffe und einfache Eigenschaften}
+			Für reelle Zufallsvariabeln $X$ ist $\EW (a X + b) = a \EW(X) + b$ und $\Var(aX+b) = a^2 + \Var (X)$. Für Vektoren gilt ähnliches!
+			\begin{Definition}[Definition 3.0.1 (Zufallsvektoren und Zufallsmatrizen)]
+				\begin{itemize}
+					\item Für einen n-Vektor $X=(\FZV)'$ von Zufallsvariablen ist der $\EW$ definiert als:
+					\begin{equation*}
+						\EW (X) := \left(
+						\begin{array}{c}
+							\EW(X_1)\\
+							\vdots\\
+							\EW(X_n)\\
+						\end{array}
+						\right)\; \text{- n-Vektor}
+					\end{equation*}
+					\item Für $k \times n$ Matrix $M =
+					\begin{pmatrix}
+						X_{11} & \ldots & X_{1n}\\
+						\vdots & \ddots & \vdots\\
+						X_{k1} & \ldots & X_{kn}\\
+					\end{pmatrix}$ von Zufallsvariablen ist der $\EW$ definiert als:
+					\begin{equation*}
+						\EW(M):= 	\begin{pmatrix}
+							\EW(X_{11}) & \ldots & \EW(X_{1n})\\
+							\vdots & \ddots & \vdots\\
+							\EW(X_{k1}) & \ldots & \EW(X_{kn})\\
+						\end{pmatrix} \text{- k$\times$n Matrix}
+					\end{equation*}
+				\end{itemize}
+			\end{Definition}
+			
+			\begin{Proposition}[Proposition 3.0.1 (Linearität des Erwartungswertes)]
+				\begin{enumerate}
+					\item Sei $X$ ein $n$-Vektor von Zufallsvariablen, $A$ eine $k \times n$-Matrix und $b$ ein $k$-Vektor. Dann ist $AX+b$ ein $k$-Vektor von Zufallsvariablen und es gilt:
+					\begin{equation*}
+						\EW(AX+b) = A \EW(X)+b.
+					\end{equation*}
+					\item Sei $M$ eine $m\times n$-Matrix von Zufallsvariablen, ist $A$ eine $m \times k$-Matrix und $B$ eine $m \times n$-Matrix, dann ist $AM+B$ eine $m \times n$-Matrix von Zufallsvariablen und es gilt:
+					\begin{equation*}
+						\EW(AM+B) = A\EW(M)+B.
+					\end{equation*}
+					\item  ist $C$ eine $m \times l$-Matrix und $D$ eine $k\times l$- Matrix, dann ist $MC+D$ eine $k \times l$-Matrix von Zufallsvariablen und es gilt:
+					\begin{equation*}
+						\EW(MC+D) = \EW(M) \cdot C + D.
+					\end{equation*}
+				\end{enumerate}
+			\end{Proposition}
+			
+			\begin{BWS}[Beweis 3.0.1 (Linearität des Erwartungswertes)]
+				\begin{enumerate}
+					\item Setze $Y = \underbrace{A}_{k\times n} \cdot \underbrace{X}_{n\times1}+\underbrace{b}_{k \times 1}$. Dann ist $Y$ ein $k$-Vektor mit:
+					\begin{equation*}
+						Y_i = \sum_{j=1}^{n} A_{ij} \cdot X_j + b_i,
+					\end{equation*}
+					Daraus folgt:
+					\begin{equation*}
+						\begin{split}
+						\EW(Y_i) =& \sum_{j=1}^{n} A_{ij} \cdot \EW(X_j) + b_i\\
+						=& (A_{i1} \ldots A_{in}) \cdot \left(
+						\begin{array}{c}
+							\EW(X_i)\\
+							\vdots\\
+							\EW(X_n)\\
+						\end{array}
+						\right) + b_i \; \text{für $i\leq i \leq k$}.
+						\end{split}
+					\end{equation*}
+				\end{enumerate}
+			\end{BWS}
+			
 	
 \end{document}
