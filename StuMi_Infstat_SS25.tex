@@ -18,6 +18,7 @@
 \newcommand{\JSEM}{\hat{\mu}_{JS}} %J-S-Schätzer für \mu
 \newcommand{\sni}{\sum_{i=1}^{n}} %Summe von i=1 bis n
 \newcommand{\dlr}{d_{LR}}%d_{LR}
+\newcommand{\halb}{\frac{1}{2}} %Ein halbes 
 \usepackage{aligned-overset} % Richiges alignment von over-/underset
 \usepackage{multirow}
 \usepackage[makeroom] {cancel} %Durchstreichen
@@ -3426,8 +3427,810 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 						\right) + b_i \; \text{für $i\leq i \leq k$}.
 						\end{split}
 					\end{equation*}
+					Damit ist
+					\begin{equation*}
+						\EW(Y) = \left(
+						\begin{array}{c}
+							\EW(Y_1)\\
+							\vdots\\
+							\EW(Y_n)\\
+						\end{array}
+						\right) = \begin{pmatrix}
+							A_{11} & \ldots & A_{1n}\\
+							\vdots & \ddots & \vdots\\
+							A_{k1} & \ldots & A_{kn}\\
+						\end{pmatrix} \cdot \left(
+						\begin{array}{c}
+						\EW(X_1)\\
+						\vdots\\
+						\EW(X_n)\\
+						\end{array}
+						\right) + \left(
+						\begin{array}{c}
+							b_1\\
+							\vdots\\
+							b_n\\
+						\end{array}
+						\right)
+					\end{equation*}
+					\item $\underbrace{A}_{m \times k} \cdot \underbrace{M}_{k\times n} + \underbrace{B}_{m \times n}$ ist eine $m \times n$-Matrix von Zufallsvariablen. Die $j$-te Spalte dieser Matrix ist ein $m$-Vektor von Zufallsvariablen. 
+					\begin{equation*}
+						(AM+ B)_{.j} = (AM)_{.j}+B_{.j} = A \cdot M_{.j} + B_{.j}. 
+					\end{equation*}
+					Daraus folgt:
+					\begin{equation*}
+						\EW((AM+B)_{.j}) = \EW (A \cdot M_{.j} + B_{.j}) = A \cdot \EW(M_{.j}) + B_{.j}.
+					\end{equation*}
+					Daraus folgt:
+					\begin{equation*}
+						\begin{split}
+							\EW(AM+B) =& (\EW(AM+B)_{.1},\EW(AM+B)_{.2},\EW(AM+B)_{.3},\ldots,\EW(AM+B)_{.n})\\
+							=& (A\EW(M_{.1})+B_{.1}, \ldots, A\EW(M_{.n})+B_{.n})\\
+							=&(A\EW(M_{.1}), \ldots, A\EW(M_{.n})) + (B_{.1}, \ldots, B_{.n})\\
+							=& A \cdot (\EW(M_{.1}), \ldots, \EW(M_{.n})) + (B_{.1}, \ldots, B_{.n})\\
+							=& A \cdot \EW(M) + B.
+						\end{split}
+					\end{equation*}
+					\begin{flushright}
+						$\square$
+					\end{flushright}
+					\item Die Matrix $MC+D$ wird genauso behandelt. Oder:
+					\begin{equation*}
+						\begin{split}
+							\EW(MC+D)' =& \EW((MC+D)')\\
+							=& \EW(C'M'+D')\\
+							=& C' \cdot \EW(M') + D'\\
+							=& C' \EW(M')+D'.
+						\end{split}
+					\end{equation*}
+					Daraus folgt:
+					\begin{equation*}
+						\EW(MC+B) = (C' \cdot \EW(M)' + D') = \EW(M) \cdot C + D.
+					\end{equation*}
+					\begin{flushright}
+						$\square$
+					\end{flushright}
 				\end{enumerate}
 			\end{BWS}
 			
-	
+			\begin{Definition}[Definition 3.0.2 (Varianz/Kovarianz-Matrix)]
+				Ist $X$ ein $n$-dimensionaler Vektor von Zufallsvariablen, dann ist die Varianz/Kovarianz-Matrix von $X$:
+				\begin{equation*}
+					VC(X) := (\textbf{Covar}(X_i, X_j)) ^{n \;\; \; \; \;n}_{i=1 \;\; j=1}
+				\end{equation*}
+			\end{Definition}
+			
+			\begin{Bemerkung}[Bemerkung 3.0.1 (Varianz/Kovarianz-Matrix)]
+				In der Diagonalen von $VC(X)$ stehen die Varianzen von $X_i$, weil $\textbf{Covar}(X_i,X_i) = \Var(X_i)$. Abseits der Diagonale stehen die Kovarianzen $\textbf{Covar}(X_i, X_j)$ für $i \neq j$.
+				
+				$VC(X)$ ist symmetrisch. Das heißt $VC(X)' = VC(X)$, weil $\textbf{Covar}(X_i, X_j) = \textbf{Covar}(X_j, X_i)$.
+			\end{Bemerkung}
+			\begin{Proposition}[Proposition 3.0.2 (Varianz/Kovarianz-Matrix)]
+				Für einen $n$-dimensionalen Zufallsvektor gilt:
+				\begin{equation*}
+					VC(X) = \EW[(X-\EW(X)) \cdot (X-\EW(X))']
+				\end{equation*}
+			\end{Proposition}
+			\begin{BWS}[Beweis 3.0.2 (Varianz/Kovarianz-Matrix)]
+				Links und rechts stehen $m \times n$-Matrizen. In der $i$-ten Zeile und $j$-ten Spalte steht links $\textbf{Covar}(X_i, X_j)$ und rechts steht:
+				\begin{equation*}
+					\EW[(X-\EW(X))_i \cdot (X-\EW(X))_j] = \EW[(X_i-\EW(X_i)) \cdot (X_j-\EW(X_j))] = \textbf{Covar}(X_i, X_j) 
+				\end{equation*}
+				\begin{flushright}
+					$\square$
+				\end{flushright}
+				Eine Überlegung hierzu ist:
+				\begin{equation*}
+					VV' =  \left(
+					\begin{array}{c}
+						V_1\\
+						\vdots\\
+						V_n\\
+					\end{array}
+					\right) \cdot (V_1, \ldots, V_n) = (V_i \cdot V_j)^{n \;\; \; \; \;n}_{i=1 \;\; j=1}
+				\end{equation*}
+			\end{BWS}
+			\begin{Proposition}[Proposition 3.0.3 (Lineare Transformation der Varianz/Kovarianz-Matrix)]
+				Ist $X$ ein $n$-dimensionaler Zufallsvektor und $A$ eine $k \times n$-Matrix und $b$ ein $k$-Vektor, dann ist:
+				\begin{equation*}
+					VC(A\cdot X + b) = A \cdot (VC(X)) \cdot A'
+				\end{equation*}
+				Vergleichbar mit:
+				\begin{equation*}
+					\Var(aX+b) = a^2 \cdot \Var(X) = a \cdot \Var(X) \cdot a
+				\end{equation*}
+			\end{Proposition}
+			\begin{BWS}[Beweis 3.0.3 (Lineare Transformation der Varianz/Kovarianz-Matrix)]
+				\begin{equation*}
+					\begin{split}
+						VC(AX+b) \overset{\text{Prop. 3.0.2}}&{=} \EW(\underbrace{AX+b- \EW(AX+b)}_{\overset{\text{Prop. 3.0.1}}{=} AX+b - (A\EW(X)+b)}) \cdot \EW(\underbrace{AX+b - \EW(AX+b)}_{=A(X-\EW(X))'})\\
+						&= \EW(A(X-\EW(X))) \cdot \EW(X-\EW(X)' A')\\
+						\overset{\text{Prop. 3.0.1}}&{=} A \cdot \EW(X-\EW(X)) \cdot (X-\EW(X))' \cdot A' \\
+						\overset{\text{Prop. 3.0.2}}&{=} A \cdot (VC(X)) \cdot A'
+					\end{split}
+				\end{equation*}
+				\begin{flushright}
+					$\square$
+				\end{flushright}
+			\end{BWS}
+			\begin{BSP}[Beispiel 3.0.1 (komponentenweise Unkorreliertheit)]
+				Betrachte $X = (\FZV)'$, wobei die $\FZV$ unkorreliert sind, mit $\EW(X_1) = \ldots = \EW(X_n) = \mu$ und $\Var(X_1) = \ldots = \Var(X_n) = \sigma^2$. 
+				Wir wissen aus der Vorlesung Grundzüge der Statistik, Sektion 10.2:
+				Für $\iota = (1,\ldots,1)' \in \IR^n$ ist:
+				\begin{equation*}
+					\bar{X}_n = \frac{1}{n} \sni X_i = \frac{1}{n} \iota' x
+				\end{equation*}
+				und 
+				\begin{equation*}
+					X-\iota\bar{X}_n = (X_i - \bar{X}_n)^n_{i=1} = X - \iota \bar{X}_n.
+				\end{equation*}
+				Betrachte den $(n+1)$-dimensionalen Zufallsvektor:
+				\begin{equation*}
+					Z = \left(
+					\begin{array}{c}
+						\bar{X}_n\\
+						X_1 - \bar{X}_n\\
+						X_2 - \bar{X}_n\\
+						\vdots\\
+						X_n - \bar{X}_n
+					\end{array}
+					\right) = \left(
+					\begin{array}{c}
+						\bar{X}_n\\
+						X - \bar{X}_n\\
+					\end{array}
+					\right)
+				\end{equation*}
+				Der Erwartungswert ist
+				\begin{equation*}
+					\EW(Z) = \left(
+					\begin{array}{c}
+						\mu\\
+						0\\
+						\vdots\\
+						0
+					\end{array}
+					\right).
+				\end{equation*}
+				Die Varianz/Kovarianz-Matrix von $Z$ ist laut Voraussetzung:
+				\begin{equation*}
+					VC(X) = \begin{pmatrix}
+						\sigma^2 & \ldots & 0\\
+						\vdots & \ddots & \vdots\\
+						0 & \ldots & \sigma^2\\
+					\end{pmatrix} = \sigma^2 \cdot I_n
+				\end{equation*}
+				Weiters ist:
+				\begin{equation*}
+					Z = \left(
+					\begin{array}{c}
+						\frac{1}{n} \iota' X\\
+						X - \iota \frac{1}{n} \iota' X
+					\end{array}
+					\right) = \left(
+					\begin{array}{c}
+						\frac{1}{n} \iota' X\\
+						(I - \iota \frac{1}{n} \iota') X
+					\end{array}
+					\right) =  \left(
+					\begin{array}{c}
+						\frac{1}{n} \iota'\\
+						(I - \iota \frac{1}{n} \iota')
+					\end{array}
+					\right) \cdot X, 						
+				\end{equation*}
+				sodass
+				\begin{equation*}
+					VC(Z) = VC(A \cdot X) = A \cdot \underbrace{VC(X)}_{\sigma^2 \cdot I_n} \cdot A' = \sigma^2 \cdot A \cdot \underbrace{VC(X)}_{I_n} \cdot A' = \sigma^2 \cdot A \cdot A'.
+				\end{equation*}
+				Daraus ergibt sich:
+				\begin{equation*}
+					\begin{split}
+						AA' =&  \left(
+						\begin{array}{c}
+							\frac{1}{n} \iota'\\
+							I_n - \iota \frac{1}{n} \iota'
+						\end{array}
+						\right) \cdot  \left(
+						\begin{array}{c}
+							\frac{1}{n} \iota'\\
+							I_n - \iota \frac{1}{n} \iota'
+						\end{array}
+						\right)'\\
+						=&  \left(
+						\begin{array}{c}
+							\frac{1}{n} \iota'\\
+							I_n - \iota \frac{1}{n} \iota'
+						\end{array}
+						\right) \cdot  \left( \frac{1}{n} \iota \; \; \; \; I_n - \iota \frac{1}{n} \iota'\right)\\
+						=& \begin{pmatrix}
+							\frac{1}{n} & 0 & \ldots &  0\\
+							0 &  &  &\\
+							\vdots &  & I_n - \iota \frac{1}{n} \iota' &\\
+							0 & & & 
+						\end{pmatrix}
+					\end{split}
+				\end{equation*}
+				Nebenrechnungen:
+				\begin{equation*}
+					\frac{1}{n} \iota' \frac{1}{n} \iota = \frac{1}{n^2} \cdot n = \frac{1}{n} 
+				\end{equation*}
+				\begin{equation*}
+					\begin{split}
+						\left(I_n - \iota \frac{1}{n} \iota '\right) \cdot \left(I_n - \iota \frac{1}{n} \iota '\right) =& \; I_n - \iota \frac{1}{n} \iota' - \iota \frac{1}{n} \iota' + \left(\iota \frac{1}{n} \iota' \right) \cdot \left( \iota \frac{1}{n} \iota'\right)\\
+						=& \;  I_n - \iota \frac{1}{n} \iota' - \iota \frac{1}{n} \iota' + \iota \frac{1}{n} \iota' \\
+						=&\;  I_n - \iota \frac{1}{n} \iota'
+					\end{split}
+				\end{equation*}
+				\begin{equation*}
+					\frac{1}{n} \iota' (I-\iota \frac{1}{n} \iota') = \frac{1}{n} \iota' - \frac{1}{n} \iota'\iota \frac{1}{n} \iota' = \frac{1}{n} \iota' - \frac{1}{n} \iota = 0
+				\end{equation*}
+				Man sieht: $\bar{X}_n$ und $X - \iota \bar{X}_n$ sind komponentenweise unkorrelliert. Das heißt die $\textbf{Covar}(\bar{X}_n, X_i - \bar{X}_n) =0$ für $i = 1, \ldots, n$. 
+				
+				Geometrisches Bild: Zerlege $X$ in $X = \iota \bar{X}_n + (X - \iota \bar{X}_n)$. Die beiden Vektoren rechts sind orthogonal!
+				\begin{equation*}
+					(\iota \bar{X}_n)' \cdot (X-\iota \bar{X}_n) = \bar{X}_n\iota' (X-\iota\bar{X}_n) = \bar{X}_n \iota' X - \bar{X}_n \iota'\iota\bar{X}_n = n \bar{X}_n^2 - n \bar{X}_n^2 =0
+				\end{equation*}
+				Es gilt, wenn $X,Y$ unabhängig:
+				\begin{equation*}
+					\EW(f(x) \cdot g(y)) = \EW(f(x)) \cdot \EW(g(y)) \forall \; \text{Funktionen} \; f,g: \IR \rightarrow \IR.
+				\end{equation*}
+			\end{BSP}
+			\begin{Definition}[Definition 3.0.3 (Unabhängigkeit von Zufallsvariablen)]
+				Zwei Vektoren von Zufallsvariablen $X = (X_1, \ldots, X_m)'$ und $Y=(Y_1, \ldots, Y_n)'$ sind unabhängig wenn gilt:
+				
+				Für beliebige Funktionen: $f: \IR^m \rightarrow \IR$ und $g: \IR^n \rightarrow \IR$ ist:
+				\begin{equation*}
+					\EW(f(x) \cdot g(y)) = \EW(f(x)) \cdot \EW(g(y))
+				\end{equation*}
+			\end{Definition}
+			\subsection{Spektralzerlegung}
+			Das folgende Resultat verwendet die Spektralzerlegung einer nicht-negativ-definiten und symmetrischen Matrix $\Sigma$
+			\begin{Bemerkung}[Bemerkung 3.1.1 Nicht-negativ-Definitheit]
+				Nicht-Negativ-Definitheit heißt, dass alle Eigenwerte über $0$ sind, oder \begin{equation*}
+					\forall X \neq 0 : X' \Sigma X \geq 0.
+				\end{equation*}
+			\end{Bemerkung}
+			
+			Die Spektralzerlegung sieht wie folgt aus:
+			\begin{equation*}
+				\Sigma = U \Lambda U',
+			\end{equation*}
+			wobei $\Lambda$ die Diagonalmatrix der Eigenwerte von $\Sigma$ und $U$ die Matrix der entsprechenden Eigenvektoren ist. Das heißt \begin{equation*}
+				U = (u_1, \ldots, u_n)\ldots n \times n \; \text{mit} \; U'U = UU' = I_n \; \text{und} \; \Lambda = \begin{pmatrix}
+				\sigma_1^2 & \ldots & 0\\
+				\vdots & \ddots & \vdots \\
+				0 & \ldots & \sigma_n^2
+				\end{pmatrix} - n\times n
+			\end{equation*}
+			Setzt man \begin{equation*}
+				\Lambda^{\frac{1}{2}} = \begin{pmatrix}
+					\sigma_1 & \ldots & 0\\
+					\vdots & \ddots & \vdots \\
+					0 & \ldots & \sigma_n
+				\end{pmatrix}
+			\end{equation*}
+			und $\Sigma^{\frac{1}{2}} := U \Lambda^{\frac{1}{2}} U'$, dann ist \begin{equation*}
+				\Lambda^{\halb} \cdot \Lambda^{\halb} = U \underbrace{\Lambda^{\frac{1}{2}} \underbrace{U'U}_{I_n} \Lambda^{\frac{1}{2}}}_{\underbrace{\Lambda^{\halb} \Lambda^{\halb}}_{\Lambda} = U \Lambda U' = \Sigma} U'
+			\end{equation*}
+			\begin{equation*}
+				\Sigma^{\halb} \left(\Sigma^{\halb}\right)'=\Sigma, 
+			\end{equation*}
+			hierbei ist
+			\begin{equation*}
+				\left(\Sigma^{\halb}\right)' = (U \Lambda^{\frac{1}{2}} U')' = (U')' (\Lambda^{\halb})' U' = U \Lambda^{\frac{1}{2}} U' = \Sigma^{\halb}
+			\end{equation*}
+			Ist $\Sigma$ positiv-definit (d.h. alle Eigenwerte $>0$), dann ist \begin{equation*}
+				\Sigma^{-1} = (U \Lambda U')^{-1} = (U')^{-1} \Lambda ^{-1} U^{-1} = U \Lambda^{-1} U',
+			\end{equation*}
+			mit \begin{equation*}
+				\Lambda^{-1} = \begin{pmatrix}
+					\frac{1}{\sigma_1^2} & \ldots & 0\\
+					\vdots & \ddots & \vdots \\
+					0 & \ldots & \frac{1}{\sigma^2_n}
+				\end{pmatrix}
+			\end{equation*}
+			und \begin{equation*}
+				\Sigma^{-\halb} = (\Sigma^{-1})^{\halb} = \begin{pmatrix}
+					\frac{1}{\sigma_1} & \ldots & 0\\
+					\vdots & \ddots & \vdots \\
+					0 & \ldots & \frac{1}{\sigma_n}.
+				\end{pmatrix}
+			\end{equation*}
+			\begin{Bemerkung}[Bemerkung 3.1.2 (Varianz/Kovarianz-Matrix)]
+				\begin{itemize}
+					\item $\Sigma: \Lambda = \text{diag}(\sigma^2_i)$
+					\item  $\Sigma^{-1}: \Lambda^{-1} = \text{diag}(\frac{1}{\sigma^2_i})$
+					\item  $\Sigma^{\halb}: \Lambda^{\halb} = \text{diag}(\sigma_i)$
+					\item  $\Sigma^{-\halb}: \Lambda^{-\halb} = \text{diag}(\frac{1}{\sigma_i})$
+				\end{itemize}
+			\end{Bemerkung}
+			\begin{Korollar}[Korollar 3.1.1 (nicht-negativ-definitheit von VC-Matrix)]
+				Ist $X$ ein $n$-dim Vektor von Zufallsvariablen, dann ist $VC(X)$ nicht-negativ-definit. 
+			\end{Korollar}
+			\begin{BWS}[Beweis 3.1.1 (Nicht-Negativ-Definitheit VC-Matrix)]
+				Sei $v \in \IR^n, v \neq 0.$
+				\begin{equation*}
+					v' \cdot VC(X) \cdot v \underset{\text{Prop. 3.0.3}}{=} VC(\underbrace{v' X}_{\in \IR}) = \Var(v' X) \geq 0
+				\end{equation*}
+			\end{BWS}
+			\begin{Korollar}[Korollar 3.1.2 (Eigenschaften von $\Sigma$)]
+				\begin{itemize}
+					\item Ist $X$ ein $n$-dimensionaller Vektor von Zufallsvariablen mit $VC(X)=I_n$ und ist $\Sigma$ irgendeine symmetrische und nicht-negativ-definite $n\times n$-Matrix, dann ist $\Sigma^{-\halb} \cdot X$ ein $n$-dimensionaler Vektor von Zufallsvariablen mit $VC(\Sigma^{\halb} X) = \Sigma.$
+					\item Ist $X$ ein $n$-Vektor von Zufallsvariablen mit $VC(X) = \Sigma$, mit $\Sigma$ ist positiv definit, dann ist $\Sigma^{-\halb}X$ ein $n$-dimensionaler Vektor von Zufallsvariablen mit $VC(\Sigma^{- \halb} \cdot X) = I_n$. 
+				\end{itemize}
+			\end{Korollar}
+			\begin{BWS}[Beweis 3.1.2 (Eigenschaften von $\Sigma$)]
+				Für $\Sigma = U \Lambda U'$ ist $\Sigma^{\halb} = U \Lambda^{\halb} U'$. Damit ist \begin{equation*}
+					\begin{split}
+						VC(\Sigma^{\halb}) \overset{\text{Prop. 3.0.3}}&{=} \Sigma^{\halb} \cdot VC(X) \cdot (\Sigma^{\halb})'\\
+						&= (U \Lambda^{\halb} U') \cdot (U \Lambda^{\halb} U')'\\
+						&= U \Lambda^{\halb} U'U \Lambda^{\halb} U'\\
+						&= U \Lambda^{\halb} \Lambda^{\halb} U'\\
+						&= U \Lambda U' = \Sigma.
+					\end{split}
+				\end{equation*}
+				Hier ist $VC(X) = \Sigma$ mit $\Sigma$ positiv definit. Für $\Sigma = U \Lambda U'$ ist $\Sigma^{-\frac{1}{2}} = U \Lambda^{-\halb} U'$, sodass \begin{equation*}
+					\begin{split}
+						VC(\Sigma^{-\halb}X) \overset{\text{Prop. 3.0.3}}&{=} \Sigma^{-\halb} \cdot VC(X) \cdot (\Sigma^{-\halb})' \\
+						&= \Sigma^{-\halb} \cdot \Sigma \cdot (\Sigma^{-\halb})'\\
+						&= U \Lambda^{-\halb} U'U \Lambda U'U \Lambda^{-\halb} U'\\
+						&= U \Lambda^{-\halb} \Lambda^{-\halb} \Lambda^{-\halb} U' = U \cdot I_n \cdot U' = I_n.
+					\end{split}
+				\end{equation*}
+				\begin{flushright}
+					$\square$
+				\end{flushright}
+			\end{BWS}
+			
+			
+			
+			
+			\newpage
+			\part{Appendix B: Die multivariate Normalverteilung}
+			\begin{Definition}[Definition 4.0.1 (multivariate Normalverteilung)]
+				Sei $Z = (Z_i)^k_{i=1}$ ein Vektor, dessen Komponenten $Z_i, \ldots, Z_n$ i.i.d. $N(0,1)$-verteilt sind. Sei $A$ eine $n \times k$-Matrix und $b$ ein $n$-Vektor. Die Verteilung von $X = AZ+b$ nennt man die multivariate Normalvertilung mit den Parametern $b$ und $AA$! Kurz: $X \sim N(b,AA')$.
+			\end{Definition}
+			\begin{Bemerkung}[Bemerkung 4.0.1 (Parameter der multivariaten Normalverteilung)]
+				\begin{itemize}
+					\item Ist $AA'$ invertierbar, dann besitzt $X$ eine Dichte, gegeben durch 
+					\begin{equation*}
+						(2 \pi)^{-\frac{n}{2}} \cdot(\textbf{det}AA')^{-\frac{1}{n}} \cdot e ^{- \frac{1}{2} (X-b)(A\cdot A')(X-b)}.
+					\end{equation*}
+					(ohne Beweis)
+					\item Ist $AA'$ nicht invertierbar, dann besitzt $X$ keine Dichte, weil $X$ auf einem linearen Teilraum von $\IR^n$ konzentriert ist. Zum Beispiel für $k=n=2, A=\begin{pmatrix}
+						\frac{1}{2} & \frac{1}{2}\\
+						0 &  0 
+					\end{pmatrix}$. Hier ist 
+					\begin{equation*}
+						AA' = \begin{pmatrix}
+							\frac{1}{2} & 0 \\ 0&0
+						\end{pmatrix}
+					\end{equation*}
+					Das ist nicht invertiertbar und 
+					\begin{equation*}
+						X = AZ = \begin{pmatrix}
+							\frac{1}{2} Z_1 + \frac{1}{2}Z_2\\
+							0
+						\end{pmatrix}.
+					\end{equation*}
+					Insbesondere ist $X$ auf einer Geraden konzentriert und kann daher keine Dichte sein. 
+					\item Die $N(b,AA')$-Verteilung ist wohldefiniert und insbesondere unabhängig von der Darstellung von $AA'$. Zum Beispiel ist 
+					\begin{equation*}
+						AA' = I_2 \; \text{für} \; A = \begin{pmatrix}
+							1 & 0\\ 0& 1
+						\end{pmatrix} \; \text{und für} \; \begin{pmatrix}
+						1 & 1 \\ 1 & -1
+						\end{pmatrix}
+					\end{equation*}
+					\begin{equation*}
+						A \cdot A' = \frac{1}{2} \cdot \begin{pmatrix}
+							1 & 1 \\ 1 & -1
+						\end{pmatrix} \cdot \begin{pmatrix}
+						1 & 0\\ 0& 1
+						\end{pmatrix} = \frac{1}{2} \begin{pmatrix}
+						2 & 0 \\ 0& 2
+						\end{pmatrix} = \begin{pmatrix}
+						1 & 0 \\ 0& 1
+						\end{pmatrix}.
+					\end{equation*}
+					(ohne Beweis)
+				\end{itemize}
+			\end{Bemerkung}
+			\begin{Proposition}[Proposition 4.0.1 (Varianz/Kovarianz-Matrix)]
+				Für $X \sim N(\mu,\Sigma)$ ist $\EW(X) = \mu$ und $VC(X)=\Sigma$.
+			\end{Proposition}
+			\begin{BWS}[Beweis 4.0.1 (Varianz/Kovarianz-Matrix)]
+				Laut Definition ist
+				\begin{equation*}
+					\Sigma^{\halb} \cdot Z + \mu \sim N(\mu, \underbrace{\Sigma^{\halb} \cdot (\Sigma^{\halb})'}_{= \Sigma}) = N(\mu, \Sigma).
+				\end{equation*}
+				Also ist $X$ so verteilt wie $\Sigma^{\halb} \cdot Z + \mu$. 
+				Damit ist
+				\begin{equation*}
+					\begin{split}
+						\EW(X) &= \EW(\Sigma^{\halb} \cdot Z + \mu)\\
+						\overset{\text{Prop. 3.0.3}}&{=} \Sigma^{\halb} \cdot \EW(Z) + \mu = \mu,
+					\end{split}
+				\end{equation*}
+				weil 
+				\begin{equation*}
+					\left(
+					\begin{array}{c}
+						\EW(Z_1)\\
+						\vdots\\
+						\EW(Z_n)
+					\end{array}
+					\right) = \left(
+					\begin{array}{c}
+						0\\
+						\vdots\\
+						0
+					\end{array}
+					\right).
+				\end{equation*}
+				Die Varianz/Kovarianz-Matrix sieht folgendermaßen aus:
+				\begin{equation*}
+					VC(\Sigma^{\halb} \cdot Z + \mu) \overset{\text{Prop. 3.0.3}}{=} \Sigma^{\halb} \cdot \underbrace{VC(Z)}_{= I_n} \cdot \underbrace{(\Sigma^{\halb})'}_{=\Sigma^{\halb}} = \Sigma^{\halb} \cdot \Sigma^{\halb} = \Sigma.
+				\end{equation*}
+				\begin{flushright}
+					$\square$
+				\end{flushright}
+			\end{BWS}
+			\begin{Proposition}[Proposition 4.0.2 (Reproduktionseigenschaften der multivariaten Normalverteilung)]
+				Ist $X$ ein $n$-Zufallsvektor mit $X \sim N(\mu,\Sigma)$, ist $A$ eine $k \times n$-Matrix und ist $b$ ein $k$-Vektor, dann ist
+				\begin{equation*}
+					A \cdot X + b \sim N(A\mu + b, A \Sigma A').
+				\end{equation*}
+			\end{Proposition}
+			\begin{BWS}[Beweis 4.0.2 (Reproduktionseigenschaften der multivariaten Normalverteilung)]
+				Sei $Z = (Z_i)^n_{i=1}$ mit $Z_i, \ldots, Z_n \overset{\text{i.i.d}}{N(0,1)}$. Wie zuvor ist \begin{equation*}
+					X \sim \Sigma^{\halb} \cdot Z + \mu.
+				\end{equation*}
+				Damit ist
+				\begin{equation*}
+					\begin{split}
+						A \cdot X + b &\sim A(\Sigma^{\halb} \cdot Z + \mu) + b =  A \cdot \Sigma^{\halb} \cdot Z + A \cdot \mu + b\\
+						\overset{\text{Def.}}&{\sim} N(A \cdot \mu +b, \underbrace{A \cdot \Sigma^{\halb} \cdot (A \cdot \Sigma^{\halb})'}_{A \cdot \Sigma^{\halb} \cdot (\Sigma^{\halb})' \cdot A' = A \Sigma A'}) 
+					\end{split} 
+				\end{equation*}
+				Also ist $A \cdot X +b \sim N(A\cdot \mu + b, A \cdot \Sigma \cdot A')$.
+			\end{BWS}
+			Betrachte nun einen ($m\times n$)-dimensionalen Zufallsvektor $V \sim N(\mu, \Sigma)$. 
+			\begin{equation*}
+				V = \left(
+				\begin{array}{c}
+					V_1\\
+					\vdots\\
+					V_m\\
+					V_{m+1}\\
+					\vdots\\
+					V_{m+n}
+				\end{array}
+				\right) = \left(
+				\begin{array}{c}
+				X\\
+				Y
+				\end{array}
+				\right),
+			\end{equation*}
+			wobei $X$ aus $m$-Komponenten besteht und $Y$ aus $n$-Komponenten. Entsprechend kann das $\mu$ partioniert werden:
+			\begin{equation*}
+				\mu = \left(
+				\begin{array}{c}
+					\mu_x\\
+					\mu_y
+				\end{array}
+				\right).
+			\end{equation*}
+			Hierbei hat das $\mu_x$ wiederrum $m$-Komponenten und das $\mu_y$ $n$-Komponenten. Das $\Sigma$ lässt sich ebenfalls partionieren:
+			\begin{equation*}
+				\Sigma = \begin{pmatrix}
+					\Sigma_{xx} & \Sigma_{xy} \\ \Sigma_{yx} & \Sigma_{yy}
+				\end{pmatrix}
+			\end{equation*}
+			Beachte:
+			\begin{itemize}
+				\item $\Sigma_{xx}$ enthält Kovarianzen von $X$.
+				\item $\Sigma_{yy}$ enthält Kovarianzen von $Y$.
+				\item $\Sigma_{xy}$ enthält Kovarianzen zwischen Komponenten von $X$ und Komponenten von $Y$.
+				\item $\Sigma_{yx}$ enthält Kovarianzen zwischen Komponenten von $X$ und Komponenten von $Y$.
+			\end{itemize}
+			Weiters ist $X \sim N(\mu_x, \Sigma_{xx})$ und $Y \sim N(\mu_y, \Sigma_{yy})$. Denn es ist zum Beispiel:
+			\begin{equation*}
+				X = (I_m, 0) \cdot V = (I_m,0) \cdot \left(
+				\begin{array}{c}
+					X\\
+					Y
+				\end{array}
+				\right) = I_m \cdot X + 0 \cdot Y = X,
+			\end{equation*}
+			sodass
+			\begin{equation*}
+				X \overset{\text{4.0.2}}{\sim} N((I_m,0)\cdot \mu, (I_m,0) \cdot \Sigma \cdot (I_m,0)').
+			\end{equation*}
+			\begin{equation*}
+				(I_m,0)\cdot \mu = (I_m,0) \cdot \left(
+				\begin{array}{c}
+					\mu_x\\
+					\mu_y
+				\end{array}
+				\right) = I_m \cdot \mu_x + 0 \cdot \mu_y = \mu_x
+			\end{equation*}
+			\begin{equation*}
+				\begin{split}
+					(I_m,0) \cdot \Sigma \cdot (I_m,0)' &= (I_m, 0) \cdot  \begin{pmatrix}
+						\Sigma_{xx} & \Sigma_{xy} \\ \Sigma_{yx} & \Sigma_{yy}
+					\end{pmatrix} \cdot  \left(
+					\begin{array}{c}
+					I_m\\
+					0
+					\end{array}
+					\right)\\
+					&= (I_m, 0) \cdot \begin{pmatrix}
+						\Sigma_{xx} \cdot I_m & \Sigma_{xy} \cdot 0 \\ \Sigma_{yx} \cdot I_m & \Sigma_{yy} \cdot 0
+					\end{pmatrix}\\
+					&= I_m \Sigma_{xx} + 0 \cdot \Sigma_{yx} = \Sigma_{xx}. 
+				\end{split}
+			\end{equation*}
+			In Summe sieht man $X \sim N(\mu_x, \Sigma_{xx})$. Analog ist $Y \sim N(\mu_y, \Sigma_{yy})$.
+			\begin{Proposition}[Proposition 4.0.3 (Unabhängigkeit)]
+				Ist $V = \left(
+				\begin{array}{c}
+					X\\
+					Y
+				\end{array}
+				\right)$ multivariat normalverteilt und sind $X$ und $Y$ komponentenweise unkorreliert, (d.h. $\Sigma_{xy} = 0$), dann sind $X$ und $Y$ unabhängig. 
+			\end{Proposition}
+			\begin{Bemerkung}[Bemerkung 4.0.2 (Normalverteilung)]
+				Proposition 4.0.3 gilt nicht, wenn $\left(
+				\begin{array}{c}
+					X\\
+					Y
+				\end{array}
+				\right)$ nicht normalverteilt ist. 
+			\end{Bemerkung}
+			\begin{BSP}[Beispiel 4.0.1 (Unabhängigkeit)]
+				Sei $Z \sim N(0,1)$, $B$ mit $P(B=1) = P(B=-1)$, unabhängig vor $Z$. Setze $X=Z$ und $Y=B-Z$. Dann ist $X \sim N(0,1)$ und $Y \sim N(0,1)$, weil $z$ und $-z$ gleich ist.
+				\begin{equation*}
+					\begin{split}
+						P (Y \leq t) &= P(BZ \leq t)\\
+						&= P(BZ \leq t, B = 1) + P(BZ \leq t, B = -1)\\
+						&= P(Z \leq t, B=1) + P(-Z \leq t, B = 1)\\
+						&= P(Z \leq t) \cdot P(B=1) + P(-Z \leq t) \cdot P(B =1)\\
+						&= \phi(t) \cdot \halb + \phi(t) \cdot \halb.
+					\end{split}
+				\end{equation*}
+				X und Y sind abhängig!
+				Aber: \begin{equation*}
+					\EW(X \cdot Y) = \EW (Z\cdot BZ) = \EW(B \cdot Z^2) \overset{\text{ua}}{=} \underbrace{\EW(B)}_{=0} \cdot \underbrace{\EW(Z^2)}_{=1} = 0
+				\end{equation*}
+				Sie sind unkorrelliert, aber nicht unabhängig. 
+			\end{BSP}
+			\begin{BWS}[Beweis 4.0.3 (Unabhängigkeit)]
+				$ U \sim N (\mu, \Sigma), \mu = \left(
+				\begin{array}{c}
+				\mu_X\\
+				\mu_Y	
+				\end{array}
+				\right), \Sigma = \begin{pmatrix}
+					\Sigma_{xx} & 0 \\ 0 & \Sigma_{yy}
+				\end{pmatrix}$. Wähle unabhängige Zufallsvektoren $Z^{(1)} \in \IR^m$ und $Z^{(2)} \in \IR^n$, sodass $Z^{(1)}_1, \ldots, Z^{(1)}_m$ i.i.d $N(0,1)$ und $Z^{(2)}_1, \ldots, Z^{(2)}_n$ i.i.d $N(0,1)$. Dann ist $Z = \left(
+				\begin{array}{c}
+				Z^{(1)}\\
+				Z^{(2)}	
+				\end{array}
+				\right)$ ein $(m+n)$-dimensionaler Zufallsvektor, dessen Komponenten i.i.d $N(0,1)$-verteilt sind. Jede Komponente ist $N(0,1)$-verteilt. Zur Unabhängigkeit: Seien $f^{(1)}_1, \ldots, f^{(1)}_m$ und $f^{(2)}_1, \ldots, Z^{(2)}_n$ beliebige Funktionen von $\IR$ nach $\IR$. Es ist 
+				\begin{equation*}
+					\begin{split}
+						\EW&[\underbrace{f^{(1)}_1(Z_1^{(1)}) \cdot f^{(1)}_2(Z^{(1)}_2) \cdot \ldots \cdot f_m^{(1)}(Z^{(1)}_m)}_{\text{Funktion von $Z^{(1)}$}} \cdot \underbrace{f^{(2)}_1(Z^{(2)}_1) \cdot \ldots \cdot  f^{(2)}_n(Z^{(2)}_n)}_{\text{Funktion von $Z^{(2)}$}}]\\
+						\overset{Z^{(1)}, Z^{(2)} \text{u.a.}}&{=} 	\EW[f^{(1)}_1(Z_1^{(1)}) \cdot \ldots \cdot f_m^{(1)}(Z^{(1)}_m)] \cdot \EW[f^{(2)}_1(Z^{(2)}_1) \cdot \ldots \cdot  f^{(2)}_n(Z^{(2)}_n)]\\
+						\overset{Z^{(1)}, Z^{(2)} \text{i.i.d}}&{=} 	\EW[f^{(1)}_1(Z_1^{(1)})] \cdot \ldots \cdot \EW[f_m^{(1)}(Z^{(1)}_m)] \cdot \EW[f^{(2)}_1(Z^{(2)}_1)] \cdot \ldots \cdot  \EW[f^{(2)}_n(Z^{(2)}_n)].\\
+					\end{split}
+				\end{equation*}
+				Beachte: $\Sigma^{\halb} Z + \mu \sim N(\mu, \underbrace{\Sigma^{\halb} (\Sigma^{\halb})'}_{= \Sigma})$. Also ist 
+				\begin{equation*}
+					\Sigma^{\halb} = \begin{pmatrix}
+						\Sigma_{xx} & 0 \\ 0 \Sigma_{yy}
+					\end{pmatrix}^{\halb} = \begin{pmatrix}
+					\Sigma_{xx}^{\halb} & 0 \\ 0 & \Sigma_{yy}^{\halb}
+					\end{pmatrix},
+				\end{equation*}
+				denn 
+				\begin{equation*}
+					SS' = \begin{pmatrix}
+						\Sigma_{xx}^{\halb} & 0 \\ 0 & \Sigma_{yy}^{\halb}
+					\end{pmatrix} \cdot \begin{pmatrix}
+					\Sigma_{xx}^{\halb} & 0 \\ 0 & \Sigma_{yy}^{\halb}
+					\end{pmatrix} = \begin{pmatrix}
+					\Sigma_{xx} & 0 \\ 0 & \Sigma_{yy}
+					\end{pmatrix} = \Sigma.
+				\end{equation*}
+				Also:
+				\begin{equation*}
+					V =  \left(
+					\begin{array}{c}
+						X\\
+						Y
+					\end{array}
+					\right) \sim \Sigma^{\halb} Z + \mu = \begin{pmatrix}
+						\Sigma_{xx}^{\halb} & 0 \\ 0 & \Sigma_{yy}^{\halb}
+					\end{pmatrix} \cdot \left(
+					\begin{array}{c}
+					Z^{(1)}\\
+					Z^{(2)}
+					\end{array}
+					\right) + \left(
+					\begin{array}{c}
+						\mu_x\\
+						\mu_y
+					\end{array}
+					\right) =
+					\left(
+					\begin{array}{c}
+						\Sigma_{xx}^{\halb} \cdot Z^{(1)} + \mu_x\\
+						\Sigma_{yy}^{\halb} \cdot Z^{(2)} + \mu_y
+					\end{array}
+					\right).
+				\end{equation*}
+				Die erste Zeile beschreibt eine Funktion von $Z^{(1)}$. Die zweite Zeile beschreibt eine Funktion von  $Z^{(2)}$. Damit sind $X$ und $Y$ unabhängig.
+				\begin{flushright}
+					$\square$
+				\end{flushright}
+			\end{BWS}
+			\begin{BSP}[Beispiel 4.0.2 (Mittelwertschätzer)]
+				Seien $\FZV$ i.i.d $N(\mu, \sigma^2)$-verteilt, $\sigma^2 >0$. Setze $X=(x_1,\ldots,x_n)'$. Dann ist $X \sim N(\mu \cdot \iota, \sigma^2 \cdot I_n)$. Wir wissen aus Beispiel 3.0.1:
+				\begin{equation*}
+					V = \left(
+					\begin{array}{c}
+						\bar{X}_n\\
+						X_1 - \bar{X}_n\\
+						\cdots\\
+						X_n - \bar{X}_n
+					\end{array}
+					\right) = \left(
+					\begin{array}{c}
+						\frac{1}{n} \iota' x\\
+						x-\iota \frac{1}{n} \iota' x
+					\end{array}
+					\right) = 
+					\left(
+					\begin{array}{c}
+					    \frac{1}{n}\\
+						I - \iota \frac{1}{n} \iota'
+					\end{array}
+					\right).
+				\end{equation*}
+				Damit ist $V \sim N(A\mu \iota, \sigma^2 AA')$. Wobei $A \cdot VC(X) \cdot A'$ gilt. 
+				Im Beispiel 3.0.1 wurde gezeigt, dass $\bar{X}_n$ und $X-\iota\bar{X}_n$ komponentenweise unkorreliert sind. Weil dieser Vektor $\left(
+				\begin{array}{c}
+					\bar{X}_n\\
+					X-\iota \bar{X}_n
+				\end{array}
+				\right)$ normalverteilt ist, sind hier $\bar{X}_n$ und $X-\iota\bar{X}_n$ auch unabhängig (wegen Proposition 4.0.3). Damit ist hier auch $\bar{X}_n$ und $\hat{\sigma}^2_n = \underbrace{\frac{1}{n-1} \sni (X_i - \bar{X}_n)^2}_{= \frac{1}{n-1} \Vert X - \iota \bar{X}_n \Vert ^2}$ unabhängig. 
+				
+				Zur Verteilung von $\hat{\sigma}^2_n$:
+				\begin{equation*}
+					\begin{split}
+						X - \iota \bar{X}_n &= \underbrace{\left(I_n - \iota \frac{1}{n} \iota'\right)}_{=Q} X \sim N(Q\mu, \sigma^2 QQ')\\
+						Q \mu \iota &= \left( I_n - \iota \frac{1}{n} \iota'\right)\iota\mu = I \iota \mu - \iota \frac{1}{n} \underbrace{\iota \iota'}_{=n}\mu = \iota \mu - \iota \mu =0\\
+						\sigma^2 QQ' &= \sigma^2 \cdot \left(I_n - \iota \frac{1}{n}\iota'\right) \cdot \left(I_n - \iota \frac{1}{n}\iota'\right)\\
+						&=  \sigma^2 \cdot \left(I_n - \iota \frac{1}{n}\iota'\right) - \iota \frac{1}{n} \iota' + \iota \frac{1}{n} \iota' \cdot \iota \frac{1}{n} \iota' = \sigma^2 \cdot \left(I_n - \iota \frac{1}{n}\iota'\right) = \sigma^2Q.
+					\end{split}
+				\end{equation*}
+				Spektralzerlegung von $Q$:
+				
+				$Q \cdot C = 0$. Also hat $Q$ einen Eigenwert $=0$ mit einem Eigenvektor $\iota \cdot \frac{1}{\sqrt{n}}$. Sei nun $v$ irgendein Vektor $\neq 0$, der orthogonal ist zu $\iota$, das heißt $\iota'\iota=0$:
+				\begin{equation*}
+					Qv = \left(I_n - \iota \frac{1}{n}\iota'\right) \cdot v = I \cdot v - \iota \frac{1}{n}\iota'v = v.
+				\end{equation*}
+				Damit hat $Q n-1$ Eigenwert $=1$. Also ist $Q = U \Lambda U'$ mit $\Lambda = \begin{pmatrix}
+					1 & \ldots & 0\\
+					\vdots & \ddots & \vdots \\
+					0 & \ldots & 1\\
+					0 & \ldots & 0
+				\end{pmatrix}$. Beachte: Weil $Q \cdot Q = Q \cdot Q' = Q$ ist $Q^{\halb} = Q$.
+				\begin{equation*}
+					\Longrightarrow X - \iota \bar{X}_n \sim N(0, \sigma^2 Q) \sim \sigma Q^{\halb} W \; \text{für} \; W\sim N(0,I_n).
+				\end{equation*}
+				\begin{equation*}
+					\begin{split}
+						\Leftrightarrow \Vert X - \iota \bar{X}_n \Vert^2 \sim \Vert \sigma Q^{\halb}W\Vert^2 =& \sigma^2 W' Q^{\halb'} Q^{\halb}W = \sigma^2 W' Q W\\
+						=& \sigma^2 W'U\Lambda \underbrace{U'W}_{\sim N(0,U'U) \sim W}\\
+						=& \sigma W' \Lambda W\\
+						=& \sigma \sni W_i^2 \cdot \underbrace{\Lambda_{ii}}_{i = 1, \ldots, n-1, i=n}\\
+						=& \sigma \sum_{i =1}^{n-1} W_i^2 \sim \sigma^2 \chi^2_{n-1}.
+					\end{split}
+				\end{equation*}
+				Also ist $\hat{\sigma}^2_n = \frac{1}{n-1} \Vert X - \iota \bar{X}_n\Vert^2 \sim \frac{\sigma^2}{n-1} \chi^2_{n-1}$.
+			\end{BSP}
+			
+				\begin{itemize}
+					\item Ist $W \sim N(0,I_n)$ und $U$ eine $n\times n$-Matrix mit $U'U = I_n$, dann ist $U'W \sim N(0, I_n)$. Denn $U'W \sim N(U'0, U'I_n U)$
+					\item Betrachte: $Q=\begin{pmatrix}
+						1 & \ldots & \ldots & \ldots & 0 \\
+						\vdots & \ddots & & &\vdots\\
+						\vdots & & 1 & &  \vdots\\
+						\vdots & & &0 &  \vdots\\
+						\vdots & & &  \ddots & \vdots\\
+						0  & \ldots & \ldots & \ldots & 0
+					\end{pmatrix}$
+					Das heißt: $rang(Q) =r$. 
+					\begin{equation*}
+						Q \cdot W = \left(
+						\begin{array}{c}
+							W_1\\
+							\vdots\\
+							W_n\\
+							\vdots\\
+							0
+						\end{array}
+						\right)
+					\end{equation*}
+					\begin{align*}
+						\begin{tikzpicture}
+							\draw[thick, ->] (0,0) -- (5,0) node[below] {Q W};
+							\draw[thick, ->] (0,0) -- (0,5) node[right] {n-r Basisvektoren};
+							\draw[thick, -] (0,0) -- (3,3) node[above]{W};
+						\end{tikzpicture}
+					\end{align*}
+					Man sieht $Q \cdot W$ ist die Orthogonalprojektion von $W$ auf den Raum, der von den ersten $r$ Basisvektoren aufgespannt wird. Man sieht auch: 
+					\begin{equation*}
+						W'Q'QW = \sum_{i=1}^{r}W_i^2 \sim \chi^2_r.
+					\end{equation*}
+					\item Betrachte $Q = U\Lambda U'$ mit $ U'U = UU' = I_n$ und $\Lambda = =\begin{pmatrix}
+						1 & \ldots & \ldots & \ldots & 0 \\
+						\vdots & \ddots & & &\vdots\\
+						\vdots & & 1 & &  \vdots\\
+						\vdots & & &0 &  \vdots\\
+						\vdots & & &  \ddots & \vdots\\
+						0  & \ldots & \ldots & \ldots & 0
+					\end{pmatrix}$ mit $r$ Einser und $n-r$ Nuller. Für $W$ wie oben ist:
+					\begin{equation*}
+						Q \cdot W = U\Lambda U' W
+					\end{equation*}
+					$U'W$ ist eine Transformation in ein neues Koordinatensystem = Orthogonalprojektion von $U'W$ auf den Raum, der von den ersten $r$ Vektoren des neuen Koordinatensystems aufgespannt wird. = Rücktransformation in die Standard-Koordinate. = Orthogonalprojektion $W$ auf den Raum, der von den ersten $r$ Basisvektoren der Basis $U = (U_1, \ldots, U_n)$ aufgespannt wird. Und
+					\begin{equation*}
+						W'Q'QW = W'QQW = W'U \Lambda U'U\Lambda U'W = W' U \Lambda \Lambda U'W = W' U \Lambda U'W.
+					\end{equation*}
+					\begin{equation*}
+						W' \Lambda W = \sum_{i =1 }^{r} W_i^2 \sim \chi^2_r.
+					\end{equation*}
+					\item Betrachte $Y = \left(
+					\begin{array}{c}
+						Y_1\\
+						\vdots\\
+						Y_n
+					\end{array}
+					\right)$ mit $Y_i = \alpha + \beta x_i + U_i$, wobei $U_i$ i.i.d $N(0,\sigma^2)$ und $\FZV$ nicht alle gleich. OLS Schätzer:
+					\begin{equation*}
+						\hat{\beta} = \frac{\bar{xy} - \bar{x} \cdot \bar{y}}{\bar{xx} - \bar{x} \cdot \bar{x}}
+					\end{equation*}
+					und 
+					\begin{equation*}
+						\hat{\alpha} = \bar{y} - \hat{\beta}\bar{x}.
+					\end{equation*}
+					Mit dem Wissen aus Grundzüge der Statistik: $\hat{y} = \hat{\alpha} \iota + \hat{\beta} x$ ist die Orthogonalprojektion von $Y$ auf den linearen Teilraum, der von $\iota$ udn $x$ aufgespannt wird. $y-\hat{y}$ ist damit die Orthogonalprojektion von $Y$ auf den linearen Teilraum aller Vektoren, die auf $\iota$ und $x$ orthogonal stehen. 
+					\begin{align*}
+						\begin{tikzpicture}
+							\draw[thick, red, ->] (0,0) -- (5,0) node[below] {$\hat{y}$};
+							\draw[thick, ->] (5,0) -- (7,0) node[below] {$[\iota, x]$};
+							\draw[thick, green, ->] (0,0) -- (0,5) node[right] {$y-\hat{y}$};
+							\draw[thick, ->] (0,5) -- (0,7) node[right] {$[\iota, x]'$};
+							\draw[thick, blue, ->] (0,0) -- (3,3) node[above]{$y$};
+						\end{tikzpicture}
+					\end{align*}
+					Daraus folgt:
+					\begin{equation*}
+						\Vert y- \hat{y} \Vert^2 \sim \sigma^2 \chi^2_{n-2}
+					\end{equation*}
+					Das liegt den Varianzschätzer nahe.
+					\begin{equation*}
+						\hat{\sigma}^2_n = \frac{1}{n-2} \sni (y_i - \hat{y_i})^2
+					\end{equation*}
+					Beachte: Analog zur Schätzung des Mittelwerts (Beispiel 4.0.2) sind $\hat{y}$ und $y-\hat{y}$ gemeinsam multivariat normalverteilt und unabhängig. Und es ist 
+					\begin{equation*}
+						\hat{\sigma}^2_n \sim \frac{\sigma^2}{n-2} \chi^2_{n-2}.
+					\end{equation*}
+				\end{itemize}
 \end{document}
