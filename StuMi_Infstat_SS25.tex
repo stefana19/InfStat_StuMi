@@ -128,7 +128,7 @@ coltitle = black, %Titel Box
 	
 	\noindent folgen, wobei $\textbf{F}(\theta_0)$ die Verteilung von $X$ darstellt, welche durch den Paratemer $\theta_0$ beschrieben wird. Normalerweise ist $\theta_0$ nicht bekannt, weswegen  man versucht, den Parameter zu schätzen. Glücklicherweise ist der mögliche Wertebereich des unbekannten Parameters oftmals bekannt und man schreibt
 	\begin{equation*}
-		\theta \in \Theta \subseteq \IR^k.
+		\theta \in \Theta \subseteq \IR^k \;\; \text{für} \;\; k \in \mathbb{N}.
 	\end{equation*}
 	
 	\noindent In diesem Fall spricht man von einem $\textbf{parametrischen Modell}$.\\
@@ -371,7 +371,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\end{array}
 				\right)
 			\end{equation*} 
-			Hier ist das erste Moment
+			Hier ist das erste Moment gegeben durch
 			\begin{equation*}
 				\EW_{\mu,\sigma^2}(X)=\mu.
 			\end{equation*}
@@ -1077,7 +1077,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Damit kann man asymptotisch valide Tests oder Konfidenzintervalle für $p$ konstruieren. Beispielsweise ein Konfidenzintervall für $p$ mit Überdeckungswahrscheinlichkeit $1-\alpha$ ist gegeben durch:
 		
 		\begin{equation*}
-			\hat{p}_n \pm \sqrt{\frac{\hat{p}_n^2 (1-\hat{p}_n)}{n}} \phi^{-1} \left(1-\frac{\alpha}{2}\right).
+			\hat{p}_n \pm \sqrt{\frac{\hat{p}_n^2 (1-\hat{p}_n)}{n}} \Phi^{-1} \left(1-\frac{\alpha}{2}\right).
 		\end{equation*}
 		
 	\end{BSP}
@@ -1159,20 +1159,20 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\begin{equation*}
 					\FZV \overset{\textbf{i.i.d.}}{\sim} B(\theta_0), \; 0 \leq \theta_0 \leq 1.
 				\end{equation*} 
-				Für $x \in \{0,1\}$ gilt:
+				Für $X \in \{0,1\}$ gilt:
 				\begin{equation*}
-					p(\xt) = \begin{cases}
-						\theta &: x=1 \\
-						1- \theta&: x=0
-					\end{cases} = \theta^x (1-\theta)^{1-x}.
+					p(X|\theta) = \begin{cases}
+						\theta &: X=1 \\
+						1- \theta&: X=0
+					\end{cases} = \theta^X (1-\theta)^{1-X}.
 				\end{equation*}
 				Daraus ergibt sich die Maximum-Likelihood-Funktion:
 				\begin{equation*}
-					L(\theta) = \prod_{i=1}^{n} p(x_i \mid \theta) =\prod_{i=1}^{n} \theta^{x_i} (1-\theta)^{x_i} = \theta^{\sum_{i=1}^{n}x_1}(1-\theta)^{\sum_{i=1}^{n}x_1},
+					L(\theta) = \prod_{i=1}^{n} p(X_i \mid \theta) =\prod_{i=1}^{n} \theta^{X_i} (1-\theta)^{1-X_i} = \theta^{\sum_{i=1}^{n}X_i}(1-\theta)^{\left(n - \sum_{i=1}^{n}X_i\right)},
 				\end{equation*}
 				und die entsprechende Log-Likelihood-Funktion:
 				\begin{equation*}
-					l(\theta) = \left(\sum_{i=1}^{n}x_1\right) \log \theta + \left(n-\sum_{i=1}^{n}x_1\right) \log(1-\theta) = n\bar{x}\log\theta + (n-n\bar{x})\log(1-\theta).
+					l(\theta) = \left(\sum_{i=1}^{n}X_i\right) \log \theta + \left(n-\sum_{i=1}^{n}X_i\right) \log(1-\theta) = n\bar{X}\log\theta + (n-n\bar{X})\log(1-\theta).
 				\end{equation*}
 				
 				
@@ -1181,17 +1181,17 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\begin{equation*}
 					\FZV \overset{\textbf{i.i.d.}}{\sim} G(\theta_0), \; 0 < \theta_0 < 1.
 				\end{equation*} 
-				Hier ist für $x\in \mathbb{N}$
+				Hier ist für $X\in \mathbb{N}$
 				\begin{equation*}
-					p(\xt)=(1-\theta)^{x-1}\theta
+					p(X|\theta)=(1-\theta)^{X-1}\theta
 				\end{equation*}
 				Daraus ergibt sich die Maximum-Likelihood-Funktion:
 				\begin{equation*}
-					L (\theta) = \prod_{i=1}^{n} ((1-\theta)^{x-1}\theta) = (1-\theta)^{\sum_{i=1}^{n}x_i -n} \theta^n = (1-\theta)^nx-n \theta^n,
+					L (\theta) = \prod_{i=1}^{n} ((1-\theta)^{X-1}\theta) = (1-\theta)^{\left(\sum_{i=1}^{n}X_i -n\right)} \theta^n = (1-\theta)^{n(\bar{X}_n -1)} \theta^n,
 				\end{equation*}
 				und die entsprechende Log-Likelihood-Funktion:
 				\begin{equation*}
-					\log(\theta)= (\sum_{i=1}^{n}x_i -n)\log(1-\theta)+n\log(\theta) = (n\bar{x}-n)\log(1-\theta)+ n\log\theta.
+					l(\theta)= \left(\sum_{i=1}^{n}X_i -n\right)\log(1-\theta)+n\log(\theta) = n(\bar{X}-1)\log(1-\theta)+ n\log\theta.
 				\end{equation*}
 				
 				
@@ -1202,18 +1202,18 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\end{equation*} 
 				Für $x \in \IR$	gilt:
 				\begin{equation*}
-					f(x \mid \mu, \sigma^2) = \phi_{\mu,\sigma^2}(x)=(2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}.
+					f(X \mid \mu, \sigma^2) = \phi_{\mu,\sigma^2}(X)=(2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(X-\mu)^2}.
 				\end{equation*}
 				
 				Daraus ergibt sich die Maximum-Likelihood-Funktion:
 				\begin{equation*}
-					L(\mu, \sigma^2) = \prod_{i=1}^{n}((2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(x-\mu)^2}) = (2\pi\sigma^2)^{-\frac{n}{2}}e^{-\frac{n}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2},
+					L(\mu, \sigma^2) = \prod_{i=1}^{n}((2\pi\sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2\sigma^2}(X_i-\mu)^2}) = (2\pi\sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(X_i-\mu)^2},
 				\end{equation*}
 				
 				und die entsprechende Log-Likelihood-Funktion:
 				
 				\begin{equation*}
-					l(\mu, \sigma^2) = -\frac{n}{n}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(x_i-\mu)^2.
+					l(\mu, \sigma^2) = -\frac{n}{2}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(X_i-\mu)^2.
 				\end{equation*}
 				
 				\item Gleichverteilung\\
@@ -1223,16 +1223,16 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\end{equation*}
 				Hier ist für x $\geq 0$
 				\begin{equation*}
-					f(\xt)=\begin{cases}
-						\frac{1}{\theta}, & x\leq \theta\\
-						0, & x >\theta.
+					f(X|\theta)=\begin{cases}
+						\frac{1}{\theta}, & X\leq \theta\\
+						0, & X >\theta.
 					\end{cases}
 				\end{equation*}
 				Daraus ergibt sich die Maximum-Likelihood-Funktion:
 				\begin{equation*}
 					\begin{split}
-						L(\theta)=\prod_{i=1}^{n} f(x_i \mid \theta) &= \begin{cases}
-							\frac{1}{\theta^n}, & x_i\leq \theta\\
+						L(\theta)=\prod_{i=1}^{n} f(X_i \mid \theta) &= \begin{cases}
+							\frac{1}{\theta^n}, & X_i\leq \theta\\
 							0, & \textbf{sonst}
 						\end{cases}\\ &= \frac{1}{\theta^n} \mathbbm{1}\{X_{(n)} \leq \theta\}.
 					\end{split}
@@ -1246,7 +1246,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Für das Modell wie in 1.3.8. ist ein Maximum-Likelihood Schätzer $\hat{\theta}_{ML}$ ein Maximierer von $L(\theta)$ bzw. von $l(\theta)$. 
 	
 	\begin{equation*}
-		\hat{\theta}_{ML} =
+		\hat{\theta}_\text{ML} =
 		\begin{cases}
 			\textbf{argmax} \; L(\theta),\; \theta \in \Theta\\
 			\textbf{argmax} \; l(\theta),\; \theta \in \Theta
@@ -1257,7 +1257,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Man beachte: 
 	
 	\begin{equation*}
-		\hat{\theta}_{ML} = \hat{\theta}_n (\FZV).
+		\hat{\theta}_\text{ML} = \hat{\theta}_n (\FZV).
 	\end{equation*}
 	
 	Im Allgemeinen kann es mehrere Maximierer von $L(\theta)$ bzw. $l(\theta)$ geben, oder es kann vorkommen, dass kein Maximierer existiert. Siehe 3.6. 
@@ -1327,7 +1327,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			Hier ist die Log-Likelihood-Funktion:
 			
 			\begin{equation*}
-				l(\mu, \sigma^2) = -\frac{n}{n}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(X_i-\mu)^2.
+				l(\mu, \sigma^2) = -\frac{n}{2}\log(2\pi) - \frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^{n}(X_i-\mu)^2.
 			\end{equation*}
 			
 			Für festes $\sigma^2 >0$ ist diese Funktion für $\mu \in \IR$ sicher stetig und differenzierbar. Für festes $\mu \in \IR$ ist $l(\mu, \sigma^2)$ auch sicher stetig für $\sigma^2$. 
@@ -1345,7 +1345,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					\frac{1}{n}\sum_{i=1}^{n}X_i &= \mu.			
 				\end{split}
 			\end{equation*}
-			Hier ist $\frac{\partial^2}{\delta\mu^2}l(\mu, \sigma^2) <0$, sodass $\bar{X}$ ein Maximierer von $l(\cdot,\sigma^2)$ ist. 
+			Hier ist $\frac{\partial^2}{\partial\mu^2}l(\mu, \sigma^2) <0$, sodass $\bar{X}$ ein Maximierer von $l(\cdot,\sigma^2)$ ist. 
 			
 			\begin{equation*}
 				\bar{X} = \underset{\mu \in \IR}{\textbf{argmax}}\; l(\mu, \sigma^2).
@@ -1930,13 +1930,13 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	Betrachte ein stetiges oder diskretes Modell wie in 1.3.8. mit $\FZV$ i.i.d. mit Dichte $f(X\mid \theta_0)$ beziehungsweise Wahrscheinlichkeitsfunktion $p(X \mid \theta_0)$, wobei $\theta_0 \in \Theta \subseteq \IR^k$. 
 	
-	Für einen Schätzer $\hat{\theta} = \hat{\theta}(X_1, \ldots, X_n)$ für $\theta_0 \in \IR^k$ betrachtet man hierbei den mittleren quadratsichen Fehler:
+	Für einen Schätzer $\hat{\theta} = \hat{\theta}(X_1, \ldots, X_n)$ für $\theta_0 \in \IR^k$ betrachtet man hierbei den mittleren quadratischen Fehler:
 	\begin{equation*}
 		\textbf{MSE}(\hat{\theta}_n, \theta_0) := \EW (\Vert {\hat{\theta}_n-\theta_0}\Vert ^2 \mid \theta_0)
 	\end{equation*}
 	
 	\begin{Bemerkung}[Bemerkung ]
-			Bemerkung: Für $k = 1$ ist 
+		 Für $k = 1$ ist 
 		
 		\begin{equation*}
 			\textbf{MSE} (\hat{\theta}_n, \theta) = \EW (( {\hat{\theta}_n-\theta_0} )^2 \mid \theta_0).
@@ -2376,11 +2376,11 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{equation*}
 		\Vert \JSEM - \mu \Vert^2 \; \textbf{bzw.} \; \Vert X - \mu \Vert^2.
 	\end{equation*}
-	Im Folgenden wird eine Approximation betrachtet, wo $k \rightarrow \infty$ geht. In $X \sim N(\mu, I_n), \mu \in \IR^k$, hängt $\mu$ von $k$ ab. Dabei wird angenommen, dass:
+	Im Folgenden wird eine Approximation betrachtet, wo $k \rightarrow \infty$ geht. In $X \sim N(\mu, I_n), \mu \in \IR^k$, hängt $\mu$ von $k$ ab. Dabei wird angenommen, dass
 	\begin{equation*}
 		\frac{\Vert \mu \Vert^2}{k} \overset{k \rightarrow \infty}{\longrightarrow} \rho^2 \in [0, \infty) 
 	\end{equation*}
-	$\rho^2$ ist hierbei eine Signal to Noise Ratio.
+	gilt, wobei $\rho^2$ hierbei eine Signal to Noise Ratio ist.
 	Zerlege $X$ als $X = \mu + \epsilon$ für $\epsilon = X- \mu \sim N(0, I_n)$.
 	Man sieht sofort, dass $X$ als Schätzer für $\mu$ im Mittel \textit{zu lang} ist:
 	\begin{equation*}
@@ -2398,7 +2398,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{split}
 	\end{equation*}
 	
-	Betrachte das Dreieck, das von $0, \mu, X$ bzw. $0, \frac{1}{\sqrt{k}} \mu, \frac{1}{\sqrt{k}} X$ aufgespannt wird:
+	Betrachte jenes Dreieck, welches von $0, \mu, X$ bzw. $0, \frac{1}{\sqrt{k}} \mu, \frac{1}{\sqrt{k}} X$ aufgespannt wird:
 	\begin{align*}
 			\begin{tikzpicture}
 			\draw[thick, ->] (0,0) node[below left] {0} -- node[midway, above left] {$\frac{1}{\sqrt{k}}\mu$} (5,5);
@@ -2475,7 +2475,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{tikzpicture}
 	\end{align*}
 	
-	Daraus ergibt sich Folgendes: 
+	Daraus ergibt sich folgendes: 
 	\begin{equation*}
 		\begin{split}
 			a^2 - \alpha^2 c^2 &= b^2 - (1-\alpha)^2 c^2\\
@@ -2784,43 +2784,43 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{BSP}[Beispiel 2.0.3 (Der z-Test (bekannte Varianz))]
 		Betrachte $\FZV \overset{i.i.d.}{\sim} N(\mu,\sigma), \mu \in \IR$, unbekannt, $\sigma^2 > 0$ bekannt. Gegeben $\alpha \in (0,1)$ möchte man $H_0: \mu - \mu_0$ gegen verschiedene Alternativen testen. Beachte: Unter $H_0$ ist $\sqrt{n} \frac{\bar{X}_n - \mu}{\sigma} \sim N(0,1)$.
 		
-		Teste: $H_0$ gegen $H_1$: $\mu > \mu_0$. Setze $T = \sqrt{n} \frac{\bar(X)_n - \mu_0}{\sigma}$, $c = \phi^{-1} (1- \alpha)$ und verwerfe, wenn $T\geq c$ ist. 
+		Teste: $H_0$ gegen $H_1$: $\mu > \mu_0$. Setze $T = \sqrt{n} \frac{\bar{X}_n- \mu_0}{\sigma}$, $c = \Phi^{-1} (1- \alpha)$ und verwerfe, wenn $T\geq c$ ist. 
 		Der Test hat sig. Niveau $\alpha$, denn: 
 		\begin{equation*}
 			\begin{split}
 				P(\xcancel{H_0} \mid H_0) &= P(T \geq c \mid H_0) = P(N(0,1) \geq c)\\
-				&= 1- P(N(0,1) \leq c) = 1- \phi(c)\\
-				&= 1- \phi(\phi^{-1}(1-\alpha)) = 1-(1-\alpha) = \alpha.
+				&= 1- P(N(0,1) \leq c) = 1- \Phi(c)\\
+				&= 1- \Phi(\Phi^{-1}(1-\alpha)) = 1-(1-\alpha) = \alpha.
 			\end{split}
 		\end{equation*}
 		Gegeben $T=t$ ist der $p-Wert$ gegeben durch:
 		\begin{equation*}
-			p(t) = P(T \geq t \mid H_0) = 1-\phi(t). 
+			p(t) = P(T \geq t \mid H_0) = 1-\Phi(t). 
 		\end{equation*}
 		
-		Teste $H_0$ gegen $H_1 : \mu - \mu_0$. Setze $T = \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}, c = \phi^{-1}$ und verwerfe $H_0$, wenn $T \leq c$ ist. Signifikanzniveau:
+		Teste $H_0$ gegen $H_1 : \mu - \mu_0$. Setze $T = \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}, c = \Phi^{-1}$ und verwerfe $H_0$, wenn $T \leq c$ ist. Signifikanzniveau:
 		\begin{equation*}
-			P(\xcancel{H_0} \mid H_0) = P(T \leq c \mid H_0) = P(N(0,1) \leq c) = \phi(\phi^{-1}(\alpha)) = \alpha.
+			P(\xcancel{H_0} \mid H_0) = P(T \leq c \mid H_0) = P(N(0,1) \leq c) = \Phi(\Phi^{-1}(\alpha)) = \alpha.
 		\end{equation*}
 		Gegeben $T=t$ ist $p(t)$ gerade:
 		\begin{equation*}
-			p(t) = P(T \leq t \mid H_0) = P(N(0,1) \leq t) = \phi(t).
+			p(t) = P(T \leq t \mid H_0) = P(N(0,1) \leq t) = \Phi(t).
 		\end{equation*}
-		Teste $H_0$ gegen $H_1: \mu \neq \mu_0$. Setze $T = \left\vert \sqrt{n} \frac{\bar{X}_n -\mu_0}{\sigma} \right\vert, c = \phi^{-1} \left(1 -\frac{\alpha}{2}\right)$ und verwerfe $H_0$, wenn $T \leq c$ ist. Signifikanzniveau:
+		Teste $H_0$ gegen $H_1: \mu \neq \mu_0$. Setze $T = \left\vert \sqrt{n} \frac{\bar{X}_n -\mu_0}{\sigma} \right\vert, c = \Phi^{-1} \left(1 -\frac{\alpha}{2}\right)$ und verwerfe $H_0$, wenn $T \leq c$ ist. Signifikanzniveau:
 		\begin{equation*}
 			\begin{split}
 				P(\xcancel{H_0} \mid H_0) &= P(T \geq c \mid H_0)\\
 				&= P(N(0,1) \leq -c \; \text{oder} \; N(0,1) \geq c)\\
 				&= P(N(0,1) \leq -c) + P(N(0,1) \geq c)\\
 				&= 1- P(N(0,1) \leq c) + 1 - P(N(0,1) \leq c)\\
-				&= 1- \phi(c) + 1- \phi(c)\\
-				&= 2 \cdot (1- \phi(\phi^{-1} \left(- \frac{\alpha}{2}\right)))\\
+				&= 1- \Phi(c) + 1- \Phi(c)\\
+				&= 2 \cdot (1- \Phi(\Phi^{-1} \left(- \frac{\alpha}{2}\right)))\\
 				&= 2 \cdot \left(1-\left(1-\frac{\alpha}{2}\right)\right) = \alpha.
 			\end{split}
 		\end{equation*}
 		Gegeben $T=t$ ist der $p-\textbf{Wert}$
 		\begin{equation*}
-			p(t) = 2\cdot(1-\phi(t)).
+			p(t) = 2\cdot(1-\Phi(t)).
 		\end{equation*}
 	\end{BSP}
 	\begin{BSP}[Beispiel 2.0.4 (Der t-Test)]
@@ -2896,8 +2896,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\begin{split}
 				L(\mu) &= \prod_{i = 1}^{n} \Phi_{\mu, \sigma^2} (X_i)\\
-				&= \prod_{i = 1}^{n} \left((2\pi \sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2 \sigma^2} (x_i - \mu)^2}\right)\\
-				&= (2\pi \sigma^2)^{-\frac{n}{n}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^{n}(x_i -\mu)^2}.
+				&= \prod_{i = 1}^{n} \left((2\pi \sigma^2)^{-\frac{1}{2}}e^{-\frac{1}{2 \sigma^2} (X_i - \mu)^2}\right)\\
+				&= (2\pi \sigma^2)^{-\frac{n}{2}} e^{-\frac{1}{2\sigma^2} \sum_{i=1}^{n}(X_i -\mu)^2}.
 			\end{split}
 		\end{equation*}
 		Für $\hat{\mu}$ gilt:
@@ -2912,9 +2912,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 		\begin{split}
 			\Lambda &= \frac{L(\mu_0)}{L(\bar{X}_n)}\\
-			&= \frac{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(x_i - \mu_0)^2}}{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(x_i - \bar{X}_n)^2}}\\
-			&= \; \textbf{exp}\left(- \frac{1}{2\sigma^2}\sni (x_i - \mu_0)^2 + \frac{1}{2 \sigma^2} \sni (x_i - \bar{X}_n)^2\right)\\
-			&= \; \textbf{exp} \left(- \frac{1}{2\sigma^2}(\sni x_i^2 - 2 \mu_0 \sni x_i + n\mu_0^2 - \sni x_i + \underbrace{2 \bar{X}_n \underbrace{\sni x_i}_{n \bar{X}_n} - n\bar{X}^2_n}_{n \bar{X}_n^2})\right)\\
+			&= \frac{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(X_i - \mu_0)^2}}{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(x_i - \bar{X}_n)^2}}\\
+			&= \; \textbf{exp}\left(- \frac{1}{2\sigma^2}\sni (X_i - \mu_0)^2 + \frac{1}{2 \sigma^2} \sni (X_i - \bar{X}_n)^2\right)\\
+			&= \; \textbf{exp} \left(- \frac{1}{2\sigma^2}(\sni X_i^2 - 2 \mu_0 \sni X_i + n\mu_0^2 - \sni X_i + \underbrace{2 \bar{X}_n \underbrace{\sni X_i}_{n \bar{X}_n} - n\bar{X}^2_n}_{n \bar{X}_n^2})\right)\\
 			&= \; \textbf{exp} \left(- \frac{1}{2 \sigma^2} (n \bar{X}_n^2 - 2 \mu_0n\bar{X}_n + n\mu_0^2)\right)\\
 			&= \; \textbf{exp} \left(- \frac{1}{2 \sigma^2}n (\bar{X}_n^2 - 2 \mu_0 \bar{X}_n + \mu_0^2)\right) \\
 			&= \; \textbf{exp} \left(- \frac{1}{2} \underbrace{\left(\sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}\right)^2}_{\text{Das ist die z-Statistik}}\right)
@@ -3004,7 +3004,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\begin{split}
 				\Lambda &= \frac{L(\hat{\mu}_0, \tilde{\sigma}^2_0)}{L(\mu, \tilde{\sigma}^2)}\\
 				&= \frac{(2 \pi \tilde{\sigma}^2_0)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2_0} \sni (x_i - \mu_0)^2}}{(2 \pi \tilde{\sigma}^2_0)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2_0} \sni (x_i - \bar{X}_n)^2}}\\
-				&= \left(\frac{\frac{1}{2} \sni (x_i - \mu_0)^2}{\frac{1}{n} \sni (x_i - \bar{X}_n)^2}\right)^{-\frac{n}{2}} \cdot e^{-\frac{1}{2}n + \frac{1}{2}n} = \%
+				&= \left(\frac{\frac{1}{2} \sni (x_i - \mu_0)^2}{\frac{1}{n} \sni (x_i - \bar{X}_n)^2}\right)^{-\frac{n}{2}} \cdot e^{-\frac{1}{2}n + \frac{1}{2}n} =: \%
 			\end{split}
 		\end{equation*}
 		
@@ -3075,7 +3075,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{equation*}
 		\begin{split}
 			\Lambda &= \frac{L(\tilde{\mu}_0, \tilde{\sigma}^2_0)}{L(\tilde{\mu}, \tilde{\sigma}^2)}\\
-			&= \frac{(2 \pi \tilde{\sigma}^2_0)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2_0} \sni (x_i - \mu_0)^2}}{(2 \pi \tilde{\sigma}^2)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2} \sni (x_i - \tilde{\mu})^2}}\\
+			&= \frac{(2 \pi \tilde{\sigma}^2_0)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2_0} \sni (X_i - \mu_0)^2}}{(2 \pi \tilde{\sigma}^2)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2} \sni (X_i - \tilde{\mu})^2}}\\
 			&= \left(\frac{\tilde{\sigma}^2_0}{\tilde{\sigma}^2}\right)^{\frac{n}{2}} e^{-\frac{n}{2}+\frac{n}{2}}\\
 			&=\left(\frac{\sni (X_i - \mu_0)^2}{\sni (X_i - \tilde{\mu})^2}\right)^{-\frac{n}{2}}\\
 			&= \begin{cases}
@@ -3272,7 +3272,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					0 &: \text{sonst},
 				\end{cases}
 			\end{equation*}
-			wobei $c = \phi^{-1}(1-\alpha)$. Insbesondere ist $\dlr = 1$, wenn $\bar{X}_n \geq c \frac{\sigma}{\sqrt{n}}+ \mu_0$ ist und $\dlr = 0$ sonst. 
+			wobei $c = \Phi^{-1}(1-\alpha)$. Insbesondere ist $\dlr = 1$, wenn $\bar{X}_n \geq c \frac{\sigma}{\sqrt{n}}+ \mu_0$ ist und $\dlr = 0$ sonst. 
 			Beim Testen von $\tilde{H}_0$ gegen $\tilde{H}_1$ ist: 
 			\begin{equation*}
 				\tilde{d}_{LR}(x) = \begin{cases}
@@ -3283,17 +3283,17 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			wo bei $\tilde{\Lambda}_n$ die entsprechende LR-Statistik und $\tilde{c}$ der entsprechende kritische Wert ist, weil $\alpha < 1$ ist, muss auch $\tilde{c} < 1$ sein, sodass
 			\begin{equation*}
 				\begin{split}
-					\tilde{\Lambda}_n \leq \tilde{c} &\Leftrightarrow \frac{L_n(\mu_0)}{L_(\mu_1)} \leq \tilde{c}\\
+					\tilde{\Lambda}_n \leq \tilde{c} &\Leftrightarrow \frac{L_n(\mu_0)}{L_n(\mu_1)} \leq \tilde{c}\\
 					&\Leftrightarrow \frac{(2 \pi \sigma^2)^{-\frac{n}{2}} e ^{- \frac{1}{2 \sigma^2}\sni(x_i - \mu_0)^2}}{(2 \pi \sigma^2)^{-\frac{n}{2}} e ^{- \frac{1}{2 \sigma^2}\sni(x_i - \mu_1)^2}} \leq \tilde{c}\\
 					&\Leftrightarrow\;  \textbf{exp}\left(- \frac{1}{2 \sigma^2}\sni (X_i-\mu_0)^2 + \frac{1}{2 \sigma^2} \sni (X_i - \mu_1)^2\right) \leq \tilde{c}\\
 					&\Leftrightarrow \; \textbf{exp}\left(- \frac{1}{2 \sigma^2} \left( \sni X_i^2 + n \mu_0^2 - 2 \mu_0\sni X_i - \sni X_i^2 - n\mu_1^2 + 2\mu_1 \sni X_i\right)\right) \leq \tilde{c}\\
 					&\Leftrightarrow \; \textbf{exp}\left(- \frac{1}{2 \sigma^2} \left( n ( \mu_0^2 - \mu_1^2) -2(\mu_0 - \mu_1) \sni X_i\right)\right) \leq \tilde{c}\\
-					&\Leftrightarrow \; \textbf{exp}\left(- \frac{n(\mu_0^2 - \mu_1^2)}{2 \sigma^2} + \frac{n}{\sigma}(\mu_0 - \mu_1) \frac{1}{n} \sni X_i\right) \leq \tilde{c}\\
+					&\Leftrightarrow \; \textbf{exp}\left(- \frac{n(\mu_0^2 - \mu_1^2)}{2 \sigma^2} + \frac{n}{\sigma^2}(\mu_0 - \mu_1) \frac{1}{n} \sni X_i\right) \leq \tilde{c}\\
 				\end{split}
 			\end{equation*}
 			Die Exponentialfunktion wird klein, wenn $\bar{X}_n$ groß wird. Insbesondere ist $\tilde{\Lambda} \leq \tilde{c}$ genau dann, wenn $\bar{X}_n \leq \tilde{c}$.
 			\begin{equation*}
-				\textbf{exp}\left(-\frac{n(\mu_0^2-\mu_1^2)}{2 \sigma^2}+ \frac{1}{\sigma}(\mu_0 - \mu_1)\sni X_i\right) \leq \tilde{c}.
+				\textbf{exp}\left(-\frac{n(\mu_0^2-\mu_1^2)}{2 \sigma^2}+ \frac{1}{\sigma^2}(\mu_0 - \mu_1)\sni X_i\right) \leq \tilde{c}.
 			\end{equation*}
 			Daraus ergibt sich in vereinfachter Form:
 			\begin{equation*}
@@ -3397,11 +3397,11 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					\begin{equation*}
 						\EW(AX+b) = A \EW(X)+b.
 					\end{equation*}
-					\item Sei $M$ eine $m\times n$-Matrix von Zufallsvariablen, ist $A$ eine $m \times k$-Matrix und $B$ eine $m \times n$-Matrix, dann ist $AM+B$ eine $m \times n$-Matrix von Zufallsvariablen und es gilt:
+					\item Sei $M$ eine $k\times n$-Matrix von Zufallsvariablen, ist $A$ eine $m \times k$-Matrix und $B$ eine $m \times n$-Matrix, dann ist $AM+B$ eine $m \times n$-Matrix von Zufallsvariablen und es gilt:
 					\begin{equation*}
 						\EW(AM+B) = A\EW(M)+B.
 					\end{equation*}
-					\item  ist $C$ eine $m \times l$-Matrix und $D$ eine $k\times l$- Matrix, dann ist $MC+D$ eine $k \times l$-Matrix von Zufallsvariablen und es gilt:
+					\item  ist $C$ eine $n \times l$-Matrix und $D$ eine $k\times l$- Matrix, dann ist $MC+D$ eine $k \times l$-Matrix von Zufallsvariablen und es gilt:
 					\begin{equation*}
 						\EW(MC+D) = \EW(M) \cdot C + D.
 					\end{equation*}
@@ -3673,13 +3673,13 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\end{equation*}
 				Es gilt, wenn $X,Y$ unabhängig:
 				\begin{equation*}
-					\EW(f(x) \cdot g(y)) = \EW(f(x)) \cdot \EW(g(y)) \forall \; \text{Funktionen} \; f,g: \IR \rightarrow \IR.
+					\EW(f(x) \cdot g(y)) = \EW(f(x)) \cdot \EW(g(y)) \forall \; \text{Funktionen} \; f,g: \IR \mapsto \IR.
 				\end{equation*}
 			\end{BSP}
 			\begin{Definition}[Definition 3.0.3 (Unabhängigkeit von Zufallsvariablen)]
 				Zwei Vektoren von Zufallsvariablen $X = (X_1, \ldots, X_m)'$ und $Y=(Y_1, \ldots, Y_n)'$ sind unabhängig wenn gilt:
 				
-				Für beliebige Funktionen: $f: \IR^m \rightarrow \IR$ und $g: \IR^n \rightarrow \IR$ ist:
+				Für beliebige Funktionen: $f: \IR^m \mapsto \IR$ und $g: \IR^n \mapsto \IR$ ist:
 				\begin{equation*}
 					\EW(f(x) \cdot g(y)) = \EW(f(x)) \cdot \EW(g(y))
 				\end{equation*}
