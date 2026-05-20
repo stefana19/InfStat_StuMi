@@ -136,7 +136,7 @@ coltitle = black, %Titel Box
 	
 	\begin{enumerate}
       \item $\theta_0$ ist unbekannt, aber man weiß, dass $\theta_0 \in \Theta$ liegt. 
-      \item  Jeder mögliche Wert $\theta \in \Theta$ des unbekannten Parameters entspricht genau einer Verteilung von $X$ (und $\FZV$), die mit $\mathbb{P}_\theta$ bzw. $\mathbb{E}_\theta$ bezeichnet wird.
+      \item  Jeder mögliche Wert $\theta \in \Theta$ des unbekannten Parameters entspricht genau einer Verteilung von $X$ (und damit von $\FZV$), die mit $\mathbb{P}_\theta$ bzw. $\mathbb{E}_\theta$ bezeichnet wird.
 	\end{enumerate}
 	
 	
@@ -285,8 +285,8 @@ coltitle = black, %Titel Box
 	\begin{Bemerkung} [Bemerkung 1.1.1 (Rechenregeln für Konvergenz)]
 		Es seien $\FZV$ k-dimensionale Vektoren von Zufallsvariablen und $c,d$  feste k-dimensionale Vektoren. 
 		\begin{itemize}
-			\item Gilt $X_m \KW c$ und ist $f: \IR^k \rightarrow \IR^l$ eine Funktion, die stetig im Punkt $c$ ist, dann gilt auch: \begin{equation*}
-				f(X_1) \KW f(c).
+			\item Gilt $X_n \KW c$ und ist $f: \IR^k \rightarrow \IR^l$ eine Funktion, die stetig im Punkt $c$ ist, dann gilt auch: \begin{equation*}
+				f(X_n) \KW f(c).
 			\end{equation*}
 			\item Gilt $X_n \KW c$ und $Y_n \KW d$, dann gilt auch:
 			\begin{equation*}
@@ -697,15 +697,15 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 
 	
 	\item Konsistenz \\
-	Man betrachte einen Momenten-Methoden-Schätzer $\hat{\theta}_n = f(\bar{X}_n, \bar{X}^2_n, \ldots, \bar{X}^k_n)$. Wie in 1.3.4. gilt mit dem Gesetz der Großen Zahl für jedes $\theta \in \Theta$ und jedes $j \geq 1$ dass $\bar{x}^j_n \longrightarrow \EW_\theta (X^j)$, wenn $\theta$ der wahre Parameter ist. Damit gilt auch, dass
+	Man betrachte einen Momenten-Methoden-Schätzer $\hat{\theta}_n = f(\bar{X}_n, \bar{X^2}_n, \ldots, \bar{X^k}_n)$. Wie in 1.3.4. gilt mit dem Gesetz der Großen Zahl für jedes $\theta \in \Theta$ und jedes $j \geq 1$ dass $\bar{x}^j_n \longrightarrow \EW_\theta (X^j)$, wenn $\theta$ der wahre Parameter ist. Damit gilt auch, dass
 	
 		\begin{equation*}
 		\left(
 		\begin{array}{c}
 			\bar{x}_n\\
-			\bar{x}^2_n\\
+			\bar{x^2}_n\\
 			\vdots\\
-			\bar{x}^k_n\\
+			\bar{x^k}_n\\
 		\end{array}
 		\right)\; \overset{p}\longrightarrow \;
 		\left(
@@ -718,10 +718,10 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\right).
 	\end{equation*}
 
-	Ist zusätzlich $f: \IR^k \rightarrow \IR^k$ stetig im Punkt $(\EW_\theta(X),\ldots,\EW_\theta(X^k))$, dann folgt auch, dass $\hat{\theta}_n = f(\bar{X}_n, \ldots, \bar{X}^k_n) \overset{p} \rightarrow f(\EW_\theta(X),\ldots,\EW_\theta(X^k)) = \theta$, wenn $\theta$ der wahre Parameter ist. 
+	Ist zusätzlich $f: \IR^k \rightarrow \IR^k$ stetig im Punkt $(\EW_\theta(X),\ldots,\EW_\theta(X^k))$, dann folgt auch, dass $\hat{\theta}_n = f(\bar{X}_n, \ldots, \bar{X^k}_n) \overset{p} \rightarrow f(\EW_\theta(X),\ldots,\EW_\theta(X^k)) = \theta$, wenn $\theta$ der wahre Parameter ist. 
 
 	\begin{Definition}[Definition 1.3.1 (Konsistenz von MM-Schätzern)]
-	Ein MM-Schätzer $\hat\theta_n = f(\bar{X}_n,\ldots,\bar{X}^k_n)$, wie in 1.3.4., ist konsistent, wenn die Funktion $f:\IR ^k \rightarrow \IR ^k$ stetig ist in jedem Punkt der Menge $\{(\EW_\theta(X),\ldots, \EW_\theta(X^k)) : \theta \in \Theta\}$ ist.	\end{Definition}
+	Ein MM-Schätzer $\hat\theta_n = f(\bar{X}_n,\ldots,\bar{X^k}_n)$, wie in 1.3.4., ist konsistent, wenn die Funktion $f:\IR ^k \rightarrow \IR ^k$ stetig ist in jedem Punkt der Menge $\{(\EW_\theta(X),\ldots, \EW_\theta(X^k)) : \theta \in \Theta\}$ ist.	\end{Definition}
 
 \end{enumerate}
 
