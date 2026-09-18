@@ -224,7 +224,7 @@ coltitle = black, %Titel Box
 				\begin{equation*}
 					\Theta = (0,\infty) \subseteq \IR^k,\; k=1.
 				\end{equation*}
-				\item Normalverteilung mit unbekanter Varianz und unbekanntem Erwartungswert\\
+				\item Normalverteilung mit unbekannter Varianz und unbekanntem Erwartungswert\\
 				Gegeben sind Zufallsvariablen $\FZV$ mit
 				\begin{equation*}
 					\FZV \overset{\textbf{i.i.d.}} {\sim} N(\mu_0,\sigma_0^2),\; \mu_0 \in \IR, \; \sigma_0^2 >0.
@@ -269,7 +269,7 @@ coltitle = black, %Titel Box
 	Dies muss für jeden möglichen Wert $\theta \in \Theta$ und für jedes $i = 1, \ldots, k$ gelten. 
 	
 	\item Konsistenz \\
-	Konsistenz bedeutet, dass der Schätzfehler eines Schätzers bei größer werdenden $n$ gegen $0$ geht, also:
+	Konsistenz bedeutet, dass der Schätzfehler eines Schätzers bei größer werdendem $n$ gegen $0$ geht, also:
 	
 	
 	\begin{equation*}
@@ -307,7 +307,7 @@ coltitle = black, %Titel Box
 \subsection{Methoden zur Schätzerkonstruktion}
 \subsubsection{Momentenmethode}
 
-Man betrachte ein Experiment mit $\FZV$ Zufallsvariablen und trifft die Annahme, dass $\FZV$ i.i.d. Kopien von einer Zufallsvariable $X$ darstellen und einer Verteilung mit bestimmter Form folgen:
+Man betrachte ein Experiment mit $\FZV$ Zufallsvariablen und treffe die Annahme, dass $\FZV$ i.i.d. Kopien von einer Zufallsvariablen $X$ darstellen und einer Verteilung mit bestimmter Form folgen:
 
 \vspace{-2mm}
 \begin{equation*}
@@ -447,7 +447,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{enumerate}
 	\end{BSP}
 	
-	\noindent Man betrachte erneut ein Experiment mit $\FZV$ Zufallsvariablen und trifft die Annahme, dass $\FZV$ i.i.d. Kopien von einer Zufallsvariable $X$ darstellen und einer Verteilung mit bestimmter Form folgen:
+	\noindent Man betrachte erneut ein Experiment mit $\FZV$ Zufallsvariablen und treffe die Annahme, dass $\FZV$ i.i.d. Kopien von einer Zufallsvariablen $X$ darstellen und einer Verteilung mit bestimmter Form folgen:
 
 \vspace{-2mm}
 \begin{equation*}
@@ -457,7 +457,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\noindent Mit den entsprechenden empirischen Momenten kann man die ersten $k$ Momente von $X$ berechnen. 
 
 \begin{equation*}
-	\bar{X^j} = \frac{1}{n} \sum_{i=1}^n X^j = \EW_\theta(X^j)\; \textbf{für} \; 1\leq j \leq k 
+	\bar{X^j} = \frac{1}{n} \sum_{i=1}^n X_i^j\; \textbf{für} \; 1\leq j \leq k 
 \end{equation*}
 
 	\noindent Der Momenten-Methoden-Schätzer $\hat{\theta}_{MM}$ für 
@@ -570,7 +570,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 
 \begin{enumerate}
 	\item Erwartungstreue\\
-	Es ist bereits bekannt, dass $\EW_\theta(\bar{X^i})=\EW_\theta(X^j)$ ist. Dies gilt für jedes $j \geq 1$:
+	Es ist bereits bekannt, dass $\EW_\theta(\bar{X^j})=\EW_\theta(X^j)$ ist. Dies gilt für jedes $j \geq 1$:
 	
 	\begin{equation*}
 		\left(
@@ -678,8 +678,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			Die mögliche Erwartungstreue des Schätzers für $\sigma^2$ lässt sich folgendermaßen überprüfen:
 			
 			\begin{equation*}
-				\EW_{\mu,\sigma^2} (\tilde{\sigma}^2_{MM}) = \EW_{\mu,\sigma^2} (\tilde{\sigma}^2) = \frac{n - 1 }{n} \sigma^2 < \sigma^2 
-			\end{equation*}
+				\EW_{\mu,\sigma^2} (\hat{\sigma}^2_{MM}) = \EW_{\mu,\sigma^2} (\bar{X^2}-\bar{X}^2) = \frac{n - 1 }{n} \sigma^2 < \sigma^2
+			\end{equation*} (siehe Verschiebungssatz VO Grundzüge)
 			
 			\item Gleichverteilung\\
 			Gegeben sind Zufallsvariablen $\FZV$ mit
@@ -697,7 +697,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 
 	
 	\item Konsistenz \\
-	Man betrachte einen Momenten-Methoden-Schätzer $\hat{\theta}_n = f(\bar{X}_n, \bar{X^2}_n, \ldots, \bar{X^k}_n)$. Wie in 1.3.4. gilt mit dem Gesetz der Großen Zahl für jedes $\theta \in \Theta$ und jedes $j \geq 1$ dass $\bar{x}^j_n \longrightarrow \EW_\theta (X^j)$, wenn $\theta$ der wahre Parameter ist. Damit gilt auch, dass
+	Man betrachte einen Momenten-Methoden-Schätzer $\hat{\theta}_n = f(\bar{X}_n, \bar{X^2}_n, \ldots, \bar{X^k}_n)$. Wie in 1.3.4. gilt mit dem Gesetz der Großen Zahlen für jedes $\theta \in \Theta$ und jedes $j \geq 1$, dass $\bar{x}^j_n \longrightarrow \EW_\theta (X^j)$, wenn $\theta$ der wahre Parameter ist. Damit gilt auch, dass
 	
 		\begin{equation*}
 		\left(
@@ -721,7 +721,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Ist zusätzlich $f: \IR^k \rightarrow \IR^k$ stetig im Punkt $(\EW_\theta(X),\ldots,\EW_\theta(X^k))$, dann folgt auch, dass $\hat{\theta}_n = f(\bar{X}_n, \ldots, \bar{X^k}_n) \overset{p} \rightarrow f(\EW_\theta(X),\ldots,\EW_\theta(X^k)) = \theta$, wenn $\theta$ der wahre Parameter ist. 
 
 	\begin{Definition}[Definition 1.3.1 (Konsistenz von MM-Schätzern)]
-	Ein MM-Schätzer $\hat\theta_n = f(\bar{X}_n,\ldots,\bar{X^k}_n)$, wie in 1.3.4., ist konsistent, wenn die Funktion $f:\IR ^k \rightarrow \IR ^k$ stetig ist in jedem Punkt der Menge $\{(\EW_\theta(X),\ldots, \EW_\theta(X^k)) : \theta \in \Theta\}$ ist.	\end{Definition}
+	Ein MM-Schätzer $\hat\theta_n = f(\bar{X}_n,\ldots,\bar{X^k}_n)$, wie in 1.3.4., ist konsistent, wenn die Funktion $f:\IR ^k \rightarrow \IR ^k$ stetig in jedem Punkt der Menge $\{(\EW_\theta(X),\ldots, \EW_\theta(X^k)) : \theta \in \Theta\}$ ist.	\end{Definition}
 
 \end{enumerate}
 
@@ -743,7 +743,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\noindent Hier  erhält man ein Kofindenzintervall oder Tests für Hypothesen über $\mu_0$, welche eine exakte Verteilung beinhalten und somit exakt sind:
 	
 	\begin{equation*}
-		\sqrt{n} \; \frac{\hat{\mu}_0 - \mu}{\hat{\sigma}} \;{\sim}\; t_{n-1}.
+		\sqrt{n} \; \frac{\hat{\mu}_n - \mu_0}{\hat{\sigma}_n} \;{\sim}\; t_{n-1}.
 	\end{equation*}
 	
 		\noindent Der Ausdruck ist berechenbar und die Verteilung ist bekannt.\\
@@ -752,7 +752,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Hier erhält man ein Kofindenzintervall für $\sigma^2_0$ oder Tests für Hypothesen über $\sigma^2_0$, welche ebenso exakt sind:
 	
 	\begin{equation*}
-		(n-1) \; \frac{\hat{\sigma^2}_0}{\sigma^2_0} \; {\sim} \; \chi^2_{n-1}.
+		(n-1) \; \frac{\hat{\sigma^2_n}}{\sigma^2_0} \; {\sim} \; \chi^2_{n-1}.
 	\end{equation*}
 	
 		\noindent Ist der MM-Schätzer durch eine $\textbf{lineare Funktion}$ definiert, dann kann man den zentralen Grenzwertsatz und die Rechenregeln aus der Vorlesung Grundzüge der Statistik Kapitel 8.3. verwenden. 
@@ -823,9 +823,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\frac{\sqrt{n} (\hat{p}_n - p_0)}{\sqrt{p_0 (1-p_0)}} \cdot \frac{\sqrt{p_0(1-p_0)}}{\sqrt{\hat{p}_n (1-\hat{p}_n)}}
 			\end{equation*}
 			
-			Der erste Faktor konvergiert in Verteilung gegen eine Standardnormalverteilung und der zweite Faktor konvergiert in Wahrscheinlichkeit gegen 1 aufgrund der zuvorigen Konvergenz in Wahrscheinschleichkeit. 
+			Der erste Faktor konvergiert in Verteilung gegen eine Standardnormalverteilung und der zweite Faktor konvergiert in Wahrscheinlichkeit gegen 1 aufgrund der zuvorigen Konvergenz in Wahrscheinlichkeit. 
 			
-			Wegen den Rechenregeln der Konvergenz, konvergiert der gesamte Term, wie oben beschrieben, gegen eine Standardnormalverteilung. 
+			Wegen der Rechenregeln der Konvergenz, konvergiert der gesamte Term, wie oben beschrieben, gegen eine Standardnormalverteilung. 
 			Solche Prozeduren nennt man 
 			$\textbf{asymptotisch valide}$.
 			
@@ -850,7 +850,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			Ähnlich wie im Bernoulli-Modell gilt:
 			
 			\begin{equation*}
-				\frac{\sqrt{n}(\hat{\theta}_n - \theta_0)}{\sqrt{\frac{\theta^2_n}{3}}} \; = \; 
+				\frac{\sqrt{n}(\hat{\theta}_n - \theta_0)}{\sqrt{\frac{\hat{\theta^2_n}}{3}}} \; = \; 
 				\frac{\sqrt{n}(2 \bar{X}_n - \theta_0)}{\sqrt{\frac{4\bar{X}^2_n}{3}}} \; = \; \frac{\sqrt{n}(\bar{X}_n - \frac{\theta_0}{2})}{\sqrt{\frac{\bar{X}^2_n}{3}}}.
 			\end{equation*}
 			
@@ -912,14 +912,14 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\bar{Z}_n \KW \upnu  \eqname{(1)}.
 		\end{equation*}
 		
-		\noindent Hier gilt das Gesetz der großen Zahl:
+		\noindent Hier gilt das Gesetz der großen Zahlen:
 		
 		\begin{equation*}
 			\sqrt{n} (\bar{Z}_n - \upnu) \KV N(0,\delta^2) \eqname{(2)}.
 		\end{equation*}
 		Hier gilt der Zentrale Grenzwertsatz.
 		
-		$f$ ist differenzierbar an der Stelle v, das heißt: 
+		$f$ ist differenzierbar an der Stelle $\upnu$, das heißt: 
 		
 		\begin{equation*}
 			f'(\upnu) = \underset{z \rightarrow \upnu}{lim} \frac{f(z) - f(\upnu)}{z-\upnu} \eqname{(3)}.
@@ -937,7 +937,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\noindent Hierbei muss beachtet werden das $R(z)$ an der Stelle $z=\upnu$ stetig ist, weil $\underset{z \rightarrow \upnu} {lim} R(z) = R(\upnu)$ und es gilt:
 		
 		\begin{equation*}
-			\underset{z \rightarrow \upnu} {lim} R(z) = \underset{z \rightarrow \upnu}{lim} f'(\upnu) \frac{f(z)-f(\upnu)}{z-\upnu} = 0 = R(z = \upnu) = R(\upnu).
+			\underset{z \rightarrow \upnu} {lim} R(z) = \underset{z \rightarrow \upnu}{lim} ( f'(\upnu) - \frac{f(z)-f(\upnu)}{z-\upnu} ) = 0 = R(z = \upnu) = R(\upnu).
 		\end{equation*}
 		
 		\noindent Dies gilt wegen (3) und (4).
@@ -961,7 +961,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			f'(\upnu) \cdot (\bar{Z}_n-\upnu) = f(\bar{Z}_n) - f(\upnu) + R(\bar{Z}_n) \cdot (\bar{Z}_n-\upnu).			
 		\end{equation*}
 		
-		Wenn nun weiters mit $\sqrt{n}$ multipliziert wird gilt:
+		Wenn nun weiters mit $\sqrt{n}$ multipliziert wird, gilt:
 		
 		\begin{equation*}
 			f'(\upnu) \cdot\sqrt{n} (\bar{Z}_n-\upnu) = \sqrt{n}(f(\bar{Z}_n) - f(\upnu)) + \sqrt{n} (\bar{Z}_n-\upnu)	R(\bar{Z}_n).
@@ -1016,8 +1016,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Für $t=\bar{X}_n$ ergibt das:
 		
 		\begin{equation*}
-			p - f'\left(\frac{1}{p}\right) \left(\bar{x}_n - \frac{1}{p}\right) \\
-			= p - f'\left(\frac{1}{p}\right) (\bar{x}_n - \EW_p(x)).
+			p + f'\left(\frac{1}{p}\right) \left(\bar{x}_n - \frac{1}{p}\right) \\
+			= p + f'\left(\frac{1}{p}\right) (\bar{x}_n - \EW_p(x)).
 		\end{equation*}
 		
 	\end{BSP}
@@ -1036,12 +1036,12 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		\noindent Hier ist
 		\begin{equation*}
-			\hat{p}_n = \frac{1}{\bar{x}_n}, \; \EW_p(X) = \frac{1}{p},\; \textbf{Var}_p(X) = \frac{1-p}{p^2} 
+			\hat{p}_n = \frac{1}{\bar{x}_n}
 		\end{equation*}
 		
-		\noindent Es ist
+		\noindent Wegen $0 < p < 1$ gilt:
 		\begin{equation*}
-			{\EW_p(x) : 0<p<1} = {\frac{1}{p}: 0<p<1} = [1, \infty)
+			\EW_p(X) = {\frac{1}{p}} \in [1, \infty)
 		\end{equation*}
 		
 		\noindent Die Funktion $f(m)= \frac{1}{m}$ ist differenzierbar in jedem Punkt dieser Menge mit $f'(m)= - \frac{1}{m^2}$. 
@@ -1058,12 +1058,12 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		\begin{equation*}
 			\begin{split}
-				\sqrt{n} \left(f\left(\bar{X}_n-f\left(\frac{1}{p}\right)\right)\right) \KV&\; N\left(0,\frac{1-p}{p^2}\left(f'\left(\frac{1}{p}\right)\right)^2\right) \\
-				N\left(0,\frac{1-p}{p^2}\left(f'\left(\frac{1}{p}\right)\right)^2\right) = &\;N(0,p^2(1-p)),
+				\sqrt{n} \left(f\left(\bar{X}_n\right)-f\left(\frac{1}{p}\right)\right) = \sqrt{n} (\hat{p}_n-p) \KV&\; N(0,p^2(1-p))
 			\end{split}
 		\end{equation*}
 		
 		\noindent wenn $p$ der wahre Parameter ist.
+        
 		
 		$\hat{p}_n$ ist konsistent für $p$, das heißt $\hat{p}_n \KW p$.
 		Die Funktion $\frac{1}{\sqrt{\hat{p}_n^2(1-\hat{p}_n)}}$ ist stetig in $p$ für $0<p<1$, sodass  $\frac{1}{\sqrt{\hat{p}_n^2(1-\hat{p}_n)}} \KW  \frac{1}{\sqrt{p^2(1-p)}}$.
@@ -1111,10 +1111,10 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	\subsubsection{Maximum-Likelihood-Methode (ML)}
 	
-	Man betrachte ein Modell: $\FZV$ sind i.i.d. Kopien der Zufallsvariable $X$ deren Verteilung eine bestimmte Form ist: 
+	Man betrachte ein Modell: $\FZV$ sind i.i.d. Kopien der Zufallsvariablen $X$, deren Verteilung eine bestimmte Form ist: 
 	
 	\begin{equation*}
-		X \sim \; \textbf{F}(\theta_0) \;	\theta \in \Theta \subseteq \IR^k.
+		X \sim \; \textbf{F} (\theta_0), \;	\theta_0 \in \Theta \subseteq \IR^k.
 	\end{equation*}
 	 
 	\noindent Im sogenannten diskreten Modell ist $X$ diskret und wird durch eine Wahrscheinlichkeitsfunktion $p(x \mid \theta_0)$ beschrieben. 
@@ -1136,7 +1136,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{Definition} [Definition 1.3.3 (Log-Likelihood-Funktion)]
 		\begin{equation*}
 			l(\theta) = \log ( L(\theta)) = \begin{cases}
-				\sum_{i=1}^{n} \log (f(x_i \mid \theta)) \\
+				\sum_{i=1}^{n} \log (f(x_i \mid \theta))\\
 				\sum_{i=1}^{n} \log (p(x_i \mid \theta)) 
 			\end{cases}
 		\end{equation*}
@@ -1237,6 +1237,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 						\end{cases}\\ &= \frac{1}{\theta^n} \mathbbm{1}\{X_{(n)} \leq \theta\}.
 					\end{split}
 				\end{equation*}
+                
 			\end{enumerate}
 		\end{BSP}
 		
@@ -1246,7 +1247,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Für das Modell wie in 1.3.8. ist ein Maximum-Likelihood Schätzer $\hat{\theta}_{ML}$ ein Maximierer von $L(\theta)$ bzw. von $l(\theta)$. 
 	
 	\begin{equation*}
-		\hat{\theta}_\text{ML} =
+		\hat{\theta}_{ML} =
 		\begin{cases}
 			\textbf{argmax} \; L(\theta),\; \theta \in \Theta\\
 			\textbf{argmax} \; l(\theta),\; \theta \in \Theta
@@ -1257,7 +1258,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	Man beachte: 
 	
 	\begin{equation*}
-		\hat{\theta}_\text{ML} = \hat{\theta}_n (\FZV).
+		\hat{\theta}_{ML} = \hat{\theta}_n (\FZV).
 	\end{equation*}
 	
 	Im Allgemeinen kann es mehrere Maximierer von $L(\theta)$ bzw. $l(\theta)$ geben, oder es kann vorkommen, dass kein Maximierer existiert. Siehe 3.6. 
@@ -1401,7 +1402,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\begin{equation*}
 				\FZV \overset{\textbf{i.i.d.}}{\sim} U([0,\theta_0]), \; \theta_0 >0.
 			\end{equation*}
-			Hier die die Maximum-Likelihood-Funktion:
+			Hier ist die Maximum-Likelihood-Funktion:
 			
 			\begin{equation*}
 				L(\theta)=\theta^{-n}\mathbbm{1} \{X_{(n)}\leq  \theta \}.
@@ -1420,8 +1421,10 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			Man sieht:
 			
 			\begin{equation*}
-				\hat{\theta}_{ML} = X_{(n)} \neq \hat{\theta}_{MM}.
+				\hat{\theta}_{ML} = X_{(n)} \neq \hat{\theta}_{MM} = 2\bar{x}.
 			\end{equation*}
+
+            Erklärung: Das Ziel bei der Maximum-Likelihood-Methode ist die Maximierung der Likelihood-Funktion. $L(\theta)$ wird maximal, wenn $\theta$ minimal wird. Jedoch wird sie $0$, wenn $\theta < X_{(n)}$. Daher wählt man den kleinstmöglichen Wert, der dieser Bedigung genügt: $X_{(n)}$.
 		\end{enumerate}
 		
 	\end{BSP}
@@ -1470,7 +1473,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\hat{\theta}_{ML}^{\left(\delta\right)} = \textbf{argmax}_\theta \; p^{\left(\delta\right)} (x^{\left(\delta\right)}_1 \mid \theta) \overset{\delta \rightarrow 0} \longrightarrow \;\textbf{argmax}_\theta \; f(x_1 \mid \theta) = \hat{\theta}_{ML}.
 	\end{equation*}
 	
-	Der ML-Schätzer im stetigen Modell ist dann der Grenzwert von ML-Schätzern, die sich wie zuvor interpretieren lassen. (Ähnliches gilt für $n>1$).
+	Der ML-Schätzer im stetigen Modell ist dann der Grenzwert von ML-Schätzern, die sich wie zuvor interpretieren lassen (Ähnliches gilt für $n>1$).
 	
 	\begin{BSP}[Beispiel 1.3.9 (Schätzung der Populationsgröße mit der Capture/Recapture-Methode)]
 		Gegeben ist eine Population von $N_0$ Individuen; $N_0 \in \mathbb{N}$ unbekannt. 
@@ -1479,7 +1482,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		Recapture: Wähle nun eine zweite Gruppe von $n$ Individuen zufällig aus und ermittle $X$, welches die Anzahl der bereits markierten Individuen darstellt. 
 		
-		Modell:
+		Modell (Hypergeometrische Verteilung):
 		
 		\begin{equation*}
 			X \sim HG(n,N_0,m)
@@ -1640,7 +1643,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	\subsubsection{Konsistenz von ML-Schätzern}
 	
-	Betrachte ein (diskretes oder stetiges) Modell wie in 1.3.8. und für jede Stichprobe der Größe $n$, den ML-Schätzer:
+	Betrachte ein (diskretes oder stetiges) Modell wie in 1.3.8. und für jede Stichprobe der Größe $n$ den ML-Schätzer:
 	
 	\begin{equation*}
 		\hat{\theta}_n = \hat{\theta}_{ML}(\FZV).
@@ -1658,7 +1661,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	\begin{BWS}[Beweisidee 1.3.4 (Konsistenz von ML-Schätzern)]
 		Für ein stetiges Modell (analog auch für diskret):
-		Der Einfachheit sei $k=1$:
+		Der Einfachheit halber sei $k=1$:
 		\begin{equation*}
 			\hat{\theta}_n \; \textbf{maximiert} \; l_n(\theta) = \sum_{i=1}^{n}\log f(\xt), 
 		\end{equation*}
@@ -1758,7 +1761,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{flushright}
 	\end{BWS}
 	\begin{Bemerkung}[Bemerkung (Beweis)]
-		Bezüglich $\star$ ist folgendes zu beachten:
+		Bezüglich $\star$ ist Folgendes zu beachten:
 		\begin{equation} \label{logab}
 			\frac{\partial}{\partial X} \log (f(X)) = \frac{\partial}{\partial X} f(X) \cdot \frac{1}{f(X)}.
 		\end{equation} 
@@ -1780,7 +1783,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\begin{split}
 				0 &= l'_n (\hat{\theta}_n) \\
-				&= l'(\theta) + l''_n(\theta) (\hat{\theta}_n - \theta) + \; \textbf{Rest}.
+				&= l_n'(\theta) + l''_n(\theta) (\hat{\theta}_n - \theta) + \; \textbf{Rest}.
 			\end{split}
 		\end{equation*}
 		Der Rest kann ignoriert werden und die zweite Zeile ergibt sich aus der Taylor Entwicklung von $l'_{n}(\cdot)$ im Punkt $\theta$. 
@@ -1827,7 +1830,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\EW \left(\frac{\partial^2}{\partial \theta^2} \log f(x_i \mid \theta) \mid \theta \right) = -I(\theta).
 		\end{equation*}
-		Mit dem Gesetz der großen Zahl gilt:
+		Mit dem Gesetz der großen Zahlen gilt:
 		\begin{equation*}
 			\textbf{Nenner} \; \KW \; -I(\theta),
 		\end{equation*}
@@ -1844,7 +1847,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\frac{\textbf{Zähler}}{\textbf{Nenner}} \KV \frac{N(0,I(\theta))}{-I(\theta)} = N\left(0, I(\theta) \cdot \frac{1}{(-I(\theta))^2}\right) = N\left(0, \frac{1}{I(\theta)}\right)
 		\end{equation*}
-		In dieser Approximation $\sqrt{n}(\hat{\theta}_n - \theta) = \frac{\textbf{Zähler}}{\textbf{Nenner}}$ ist der Fehler für $n \rightarrow \infty$ vernachlässigbar. Sodass auch:
+		In dieser Approximation $\sqrt{n}(\hat{\theta}_n - \theta) = \frac{\textbf{Zähler}}{\textbf{Nenner}}$ ist der Fehler für $n \rightarrow \infty$ vernachlässigbar, sodass auch:
 		\begin{equation*}
 			\sqrt{n}(\hat{\theta}_n - \theta)  \KV N\left(0, \frac{1}{I(\theta)}\right)
 		\end{equation*}
@@ -1906,7 +1909,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Damit ist:
 		\begin{equation*}
 			\begin{split}
-				P (n(\theta_0 -\hat{\theta}_0) \leq t \mid \theta_0) &= 1-P(n(\theta_0 -\hat{\theta}_0) \\
+				P (n(\theta_0 -\hat{\theta}_0) \leq t \mid \theta_0) &= 1-P(n(\theta_0 -\hat{\theta}_0) > t \mid \theta_0) \\
 				&= 1- P(n \theta_0 -n\hat{\theta}_n > t \mid \theta_0)\\
 				&= 1- P(n\hat{\theta}_n < n\theta_0 - t \mid \theta_0)\\
 				&= 1- P\left(\hat{\theta}_n < \theta_0 - \frac{t}{n} \mid \theta_0 \right)\\
@@ -1951,8 +1954,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Für $k>1$ ist 
 		\begin{equation*}
 			\begin{split}
-				\MSE(\hat{\theta}_n, \theta_0) &= \EW(\sum_{j=1}^{k}(\hat{\theta}_{n_{ji}} - \theta_{0_{ij}})^2 \mid \theta_0 )\\
-				&= \sum_{j=1}^{n} \EW ((\hat{\theta}_{n_{ji}} - \theta_{0_{ij}})^2 \mid \theta_0),
+				\MSE(\hat{\theta}_n, \theta_0) &= \EW(\sum_{i=1}^{k}(\hat{\theta}_{n_{i}} - \theta_{0_{i}})^2 \mid \theta_0 )\\
+				&= \sum_{i=1}^{k} \EW ((\hat{\theta}_{n_{i}} - \theta_{0_{i}})^2 \mid \theta_0),
 			\end{split}
 		\end{equation*}
 		
@@ -2034,15 +2037,13 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			1 \geq \textbf{Corr}(\hat{\theta}_n, Z \mid \theta_0)^2 = \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0)} \leq 1.
 		\end{equation*}
-		Daraus folgt:
+		Multiplikation mit $\textbf{Var}(\hat{\theta}_n \mid \theta_0)$ ergibt:
 		\begin{equation*}
 			\begin{split}
-				1 &\geq \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0)}\\
-				\textbf{Var}(\hat{\theta}_n \mid \theta_0) \cdot \textbf{Var}(Z \mid \theta_0) &\geq \textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2\\
 				\textbf{Var}(\hat{\theta}_n \mid \theta_0) &\geq \frac{\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2}{\textbf{Var}(Z \mid \theta_0)}
 			\end{split}
 		\end{equation*}
-		Wir wollen also zeigen, dass $\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2 = 1$ ist und $\textbf{Var}(Z \mid \theta_0)$ gleich $nI(\theta_0)$ entspricht. Damit folgendes gezeigt ist:
+		Wir wollen also zeigen, dass $\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0)^2 = 1$ ist und $\textbf{Var}(Z \mid \theta_0)$ gleich $nI(\theta_0)$ entspricht, damit gilt:
 		\begin{equation*}
 			\textbf{Var}(\hat{\theta}_n \mid \theta_0) \geq \frac{1}{nI(\theta_0)}.
 		\end{equation*}
@@ -2076,7 +2077,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Also gilt 2. Nun zu 1.:
 		\begin{equation*}
 			\begin{split}
-				\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0) &= \underbrace{\EW(\hat{\theta}_n \mid \theta_0)}_{= \theta_0} \cdot \underbrace{\EW(Z \mid \theta_0)}_{= 0}\\
+				\textbf{Cov}(\hat{\theta}_n, Z \mid \theta_0) &= \EW(\hat{\theta}_n \cdot Z \mid \theta_0) - \underbrace{\EW(\hat{\theta}_n \mid \theta_0)}_{= \theta_0} \cdot \underbrace{\EW(Z \mid \theta_0)}_{= 0}\\
 				&= \underbrace{\int \cdots \int}_{\textbf{n-mal}}\hat{\theta}_n(\FZV) \underbrace{(\sum_{i=1}^{n}\ablt \log f(x_i \mid \theta_0)) \prod_{i=1}^{n}f(x_i \mid \theta_0)}_{\heartsuit} dx_i, \ldots, dx_n\\
 				&= \int \cdots \int \hat{\theta}_n (\FZV) \ablt \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n\\
 				&= \ablt \underbrace{\int \cdots \int \hat{\theta}_n(\FZV) \prod_{i=1}^{n} f(x_i \mid \theta_0) dx_i, \ldots, dx_n}_{\EW(\hat{\theta}_n \mid \theta_0) = \theta_0} = 1. \square
@@ -2086,8 +2087,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\begin{split}
 				&\left(\frac{f'(x_1 \mid \theta_0)}{f(x_1 \mid \theta_0)} + \frac{f'(x_2 \mid \theta_0)}{f(x_2 \mid \theta_0)}\right) \cdot f(x_1 \mid \theta_0) \cdot f(x_2 \mid \theta_0)\\
-				\Leftrightarrow & \;f'(x_1 \mid \theta_0) \cdot f(x_2 \mid \theta_0) + f(x_1 \mid \theta_0) \cdot f'(x_2 \mid \theta_0)\\
-				\Leftrightarrow & \;\ablt (f(x_1 \mid \theta_0) \cdot f(x_2 \mid \theta_0)).
+				= & \;f'(x_1 \mid \theta_0) \cdot f(x_2 \mid \theta_0) + f(x_1 \mid \theta_0) \cdot f'(x_2 \mid \theta_0)\\
+				= & \;\ablt (f(x_1 \mid \theta_0) \cdot f(x_2 \mid \theta_0)).
 			\end{split}
 		\end{equation*}
 		Ähnliches gilt auch für $n \geq 2$.
@@ -2117,7 +2118,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\ablt \log p(x \mid \theta) =& \; \frac{x}{\theta} - \frac{1-x}{1-\theta} = \frac{x-x\theta-\theta+x\theta}{\theta (1-\theta)} = \frac{x-\theta}{\theta (1-\theta)}\\
 				I(\theta) =& \; \EW \left(\left(\ablt \log p(x_i \mid \theta_0)\right)^2 \mid \theta\right)\\
 				=& \; \EW \left(\left(\frac{x-\theta}{\theta(1-\theta)}\right)^2 \mid \theta \right)\\
-				=& \; \frac{(\EW(x-\theta)^2 \theta)}{\theta^2 (1-\theta)^2}\\
+				=& \; \frac{\EW ( (x-\theta)^2 \mid \theta))}{\theta^2 (1-\theta)^2}\\
 				=& \; \frac{\textbf{Var}(x\mid \theta)}{\theta^2 (1-\theta)^2}\\ 
 				=& \; \frac{\theta(1-\theta)}{\theta^2 (1-\theta)^2}\\
 				=& \; \frac{1}{\theta(1-\theta)}.
@@ -2203,7 +2204,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\begin{split}
 				n(\tilde{\theta} - \theta) &= \; n \left(\frac{(n+1)}{n} X_{(n)}- \theta\right)\\
-				&= \; n\left(X_{(n)} \frac{1}{n}X_{(n)}-\theta\right)\\
+				&= \; n\left(X_{(n)} + \frac{1}{n}X_{(n)}-\theta\right)\\
 				&= \; \underbrace{n(X_{(n)} - \theta)}_{\KV - \textbf{Exp}\left(\frac{1}{\theta}\right)} + \underbrace{X_{(n)}}_{\KW \theta}\\
 				&\KV \; \theta - \textbf{Exp}\left(\frac{1}{\theta}\right).
 			\end{split}
@@ -2217,7 +2218,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				0 &: \textbf{sonst},
 			\end{cases}
 		\end{equation*}
-		die Vorraussetzung von dem Satz der Cramèr-Rao-Schranke nicht. 
+		die Vorraussetzung von dem Satz der Cramèr-Rao-Schranke nicht, da der Träger der Dichte von dem unbekannten Parameter abhängt. 
 	\end{BSP}
 	
 	\begin{BSP}[Beispiel 1.4.5 (Anwendung der C-R-Schranke Normalverteilung mit bekannter Varianz)]
@@ -2241,24 +2242,24 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\log f(x \mid \mu) = -\frac{1}{2} \log (2\pi \sigma^2) - \frac{1}{2 \sigma^2} (x-\mu)^2
 		\end{equation*}
-		Die Ableitung dieser ist Folgende:
+		Deren Ableitung ist:
 		\begin{equation*}
 			\frac{\partial}{\partial \mu} \log(f(x \mid \mu)) = \frac{1}{\sigma^2} (x-\mu)
 		\end{equation*}
 		Daraus ergibt sich folgende Fisher-Information:
 		\begin{equation*}
 			\begin{split}
-				I(\mu) &= \EW\left(\left(\frac{\partial}{\partial \mu }\right)\right)\\
-				&= \EW\left(\frac{(x-\mu)^2}{\sigma^4} \mid \mu \right)\\
+				I(\mu) &= \EW\left(\left(\frac{\partial}{\partial \mu } \log(f(X \mid \mu)) \right) ^2 \mid \mu \right)\\
+				&= \EW\left(\frac{(X-\mu)^2}{\sigma^4} \mid \mu \right)\\
 				&= \frac{1}{\sigma^4} \Var(X \mid \mu)\\
 				&= \frac{\sigma^2}{\sigma^4} = \frac{1}{\sigma^2}
 			\end{split} 
 		\end{equation*}
-		Die C-R-Schranke sieht folgt daraus:
+		Die C-R-Schranke folgt daraus:
 		\begin{equation*}
 			\frac{1}{nI(\mu)}= \frac{\sigma^2}{n}
 		\end{equation*}
-		Also ist, bei bekannter Varianz $\hat{\mu}_{ML}$ für $\mu$ effizient in der Klasse aller unverzerrter Schätzer für $\mu$. 
+		Also ist, bei bekannter Varianz, $\hat{\mu}_{ML}$ für $\mu$ effizient in der Klasse aller unverzerrten Schätzer für $\mu$. 
 		Die Klasse sieht folgendermaßen aus:
 		\begin{equation*}
 			\mathcal{K}_\sigma^2 = \{\tilde{\mu}(\FZV, \sigma^2): \forall \mu \in \IR \; \textbf{ist} \; \EW(\tilde{\mu} \mid \mu) = \mu\}.
@@ -2305,11 +2306,11 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	
 	Unter den Voraussetzungen von dem Satz der C-R-Schranke ist:
 	\begin{equation*}
-		\EW(\sqrt{n}(\hat{\theta}-\theta_0)\mid \theta_0)
+		\EW(\sqrt{n}(\hat{\theta}_n-\theta_0)\mid \theta_0) = 0
 	\end{equation*}
 	und 
 	\begin{equation*}
-		\Var(\sqrt{n}(\hat{\theta}-\theta_0)\mid \theta_0) \geq \frac{1}{I(\theta_0)}
+		\Var(\sqrt{n}(\hat{\theta}_n-\theta_0)\mid \theta_0) \geq \frac{1}{I(\theta_0)}
 	\end{equation*}
 	Unter den Voraussetzungen von Satz 1.3.2 gilt für den ML-Schätzer $\hat{\theta}_n = \hat{\theta}_{ML}(\FZV)$, dass
 	\begin{equation*}
@@ -2338,7 +2339,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Mit Rechenregeln für bedingte Wahrscheinlichkeiten ist:
 		\begin{equation*}
 			\begin{split}
-				P(X_n \leq t) &= \underset{= \phi(t)}{P(X \leq t)} \cdot \underset{\rightarrow 1}{1-\frac{1}{n}} + \underset{\rightarrow 0}{\mathbbm{1} \{n < t\} \cdot \frac{1}{n}}\\
+				P(X_n \leq t) &= \underset{= \phi(t)}{P(X \leq t)} \cdot ( \underset{\rightarrow 1}{1-\frac{1}{n}} ) + \underset{\rightarrow 0}{\mathbbm{1} \{n \leq t\} \cdot \frac{1}{n}}\\
 				&\overset{n \rightarrow \infty}{\longrightarrow} P(X \leq t) \; \textbf{für jedes} \; t \in \IR.
 			\end{split}
 		\end{equation*}
@@ -2358,8 +2359,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		Für $X \sim N(\mu_0, I_n), \mu_0 \in \IR^k$ mit $k \geq 3$ gibt es einen Schätzer $\hat{\mu}_{JS}$ für $\mu_0$, sodass folgendes gilt:
 		\begin{equation*}
-			\forall \mu \in \IR^k: \MSE(\hat{\mu}_{JS}, \mu) < \MSE(0,\hat{\mu})
-		\end{equation*}
+			\forall \mu \in \IR^k: \MSE(\hat{\mu}_{JS}, \mu) < \MSE(X,\mu)
+		\end{equation*} (beachte: $X = \hat{\mu}_{ML}$) \\
 		$\hat{\mu}_{JS}$ ist gegeben durch:
 		\begin{equation*}
 			\hat{\mu}_{JS} = \left(1-\frac{k-2}{x'x}\right) \cdot x.
@@ -2390,8 +2391,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\underset{\text{ausmultiplizieren}}&{=} \EW(\mu' \mu + \mu' \epsilon + \epsilon' \mu + \epsilon' \epsilon) \\
 			&= \EW(\mu'\mu + 2\mu'\epsilon + \epsilon'\epsilon)\\
 			\underset{\text{Lin. und}\; \epsilon \sim N(0,I_n)}&{=} \mu' \mu + \underbrace{2\EW(\mu'\epsilon)}_{\begin{split}
-					&= \EW(\sum_{i=1}^{k} \mu_i \cdot \epsilon_i)\\
-					\underset{\epsilon \sim N(0,I_n)}&{=} \sum_{i = 1}^{k} \mu_i \cdot \underbrace{\EW(\epsilon)}_{0}\\
+					&= 2 \EW(\sum_{i=1}^{k} \mu_i \cdot \epsilon_i)\\
+					\underset{\epsilon \sim N(0,I_n)}&{=} 2 \sum_{i = 1}^{k} \mu_i \cdot \underbrace{\EW(\epsilon)}_{0}\\
 					&=0
 				\end{split}} + \underbrace{\EW(\epsilon' \epsilon)}_{\sum_{i=1}^{k}\EW(\epsilon_i^2)= \sum_{i = 1}^{k} 1 = k}\\
 			&= \Vert \mu \Vert^2 +k > \Vert \mu \Vert^2.
@@ -2417,23 +2418,24 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{equation*}
 	Daraus folgt:
 	\begin{equation*}
-		\underbrace{\frac{1}{k} \mu' \mu}_{\KW \rho^2} + \underbrace{\frac{1}{k} \epsilon'\epsilon}_{\KW 1} + \underbrace{\frac{1}{k} \mu' \epsilon}_{\KW 0} \KW \rho^2 +1.
+		\underbrace{\frac{1}{k} \mu' \mu}_{\KW \rho^2} + \underbrace{\frac{1}{k} \epsilon'\epsilon}_{\KW 1} + \underbrace{\frac{2}{k} \mu' \epsilon}_{\KW 0} \KW \rho^2 +1.
 	\end{equation*}
 	Dies ergibt sich aus folgenden Nebenrechnungen:
 	\begin{equation*}
 		\begin{split}
 			\frac{1}{k} \epsilon' \epsilon =& \frac{1}{k} \sum_{i=1}^{k} \epsilon_i^2 \KW 1\\
-			\frac{1}{k} \mu' \epsilon =& \frac{1}{k} \sum_{i=1}^{k} \underbrace{\mu_i \epsilon_i}_{\substack{
-					\scriptstyle\sim N(0,\mu_i^2) \\ 
-					\scriptstyle\sim N(0, \textstyle\sum \mu_i^2) \\ 
-					\scriptstyle\sim N(0, \frac{\mu' \mu}{k^2})}}
+			\frac{2}{k} \mu' \epsilon =& \frac{2}{k} \sum_{i=1}^{k} \underbrace{\mu_i \epsilon_i}_{\substack{
+					\scriptstyle \sim N(0,\mu_i^2) \\ 
+					\scriptstyle \Rightarrow \sum_{i=1}^{k} \mu_i \epsilon_i \sim N(0, \textstyle \sum_{i=1}^{k} \mu_i^2) \\ 
+					\scriptstyle \Rightarrow \frac{2}{k} \sum_{i=1}^{k} \mu_i \epsilon_i \sim N(0, 4\frac{\mu' \mu}{k^2})}} \\
+                    \scriptstyle \text{Beachte}: \Var(\frac{2}{k}\mu'\epsilon) = \frac{4}{k} \frac{\mu'\mu}{k}
 		\end{split}
 	\end{equation*}
 	Für $\delta >0$ ist:
 	\begin{equation*}
 		\begin{split}
-			P\left(\left\vert \frac{1}{k} \mu' \epsilon \right\vert \right) \overset{\text{Cheby.}}&{\leq} \frac{1}{\delta^2} \Var\left(\frac{1}{k} \mu' \epsilon \right)\\
-			&= \underbrace{\frac{1}{\delta^2}}_{\text{fest}} \cdot \underbrace{\frac{\mu' \mu}{k}}_{\rightarrow \rho^2} \cdot \underbrace{\frac{1}{k}}_{\rightarrow 0} \rightarrow 0
+			P\left(\left\vert \frac{2}{k} \mu' \epsilon \right\vert > \delta \right) \overset{\text{Cheby.}}&{\leq} \frac{1}{\delta^2} \Var\left(\frac{2}{k} \mu' \epsilon \right)\\
+			&= \underbrace{\frac{1}{\delta^2}}_{\text{fest}} \cdot \underbrace{\frac{\mu' \mu}{k}}_{\rightarrow \rho^2} \cdot \underbrace{\frac{4}{k}}_{\rightarrow 0} \rightarrow 0
 		\end{split}
 	\end{equation*}
 	Also gilt:
@@ -2522,15 +2524,15 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\end{equation*}
 		Zu $\frac{1}{k} \left(\frac{k}{x'x}\right)^2 \cdot x'x$:
 		\begin{equation*}
-			\frac{1}{k} \left(\frac{k}{x'x}\right)^2 \cdot x'x = \frac{x'x}{k} \cdot \frac{k^2}{(x'x)^2} = \frac{k}{x'x} = \left(\frac{1}{k} x'x\right)^{-1} \KW (1+\rho^2)^{-1}.
+			\frac{1}{k} \left(\frac{k}{x'x}\right)^2 \cdot x'x = \frac{x'x}{k} \cdot \frac{k^2}{(x'x)^2} = \frac{k}{x'x} = \left(\frac{1}{k} x'x\right)^{-1} \KW \frac{1}{1+\rho^2}}.
 		\end{equation*}
 		Zu $\frac{2}{k} \epsilon' \frac{k}{x'x} \cdot \epsilon$:
 		\begin{equation*}
-			\frac{2}{k} \epsilon' \frac{k}{x'x} \cdot \epsilon = 2 \frac{k}{x'x} \cdot \frac{x'x}{k} = \underbrace{2 \frac{k}{x'x}}_{\KW \frac{1}{1+\rho^2}} \cdot (\underbrace{\frac{\mu' \epsilon}{k}}_{\KW 0} + \underbrace{\frac{\epsilon'\epsilon}{k}}_{\KW 1})
+			\frac{2}{k} \epsilon' \frac{k}{x'x} \cdot \epsilon = 2 \frac{k}{x'x} \cdot \frac{x'x}{k} = \underbrace{2 \frac{k}{x'x}}_{\KW 2 \frac{1}{1+\rho^2}} \cdot (\underbrace{\frac{\mu' \epsilon}{k}}_{\KW 0} + \underbrace{\frac{\epsilon'\epsilon}{k}}_{\KW 1})
 		\end{equation*}
 		Daraus ergibt sich:
 		\begin{equation*}
-			\frac{k}{x'x} = \left(\frac{1}{k} x'x\right)^{-1} \KW (1+\rho^2)^{-1} \KW 1 + \frac{1}{1+ \rho^2} - 2\frac{1}{1+\rho^2} = 1- \frac{1}{1+\rho^2}.
+            \frac{\frac{1}{k} \text{Zähler}}{\frac{1}{k} \text{Nenner}} \KW \frac{1 + \frac{1}{1 + \rho^2} - 2 \frac{1}{1 + \rho^2}}{1} = 1 - \frac{1}{1 + \rho^2}
 		\end{equation*}
 		\begin{flushright}
 			$\square$
