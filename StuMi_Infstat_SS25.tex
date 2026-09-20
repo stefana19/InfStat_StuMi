@@ -2614,16 +2614,16 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		Die Power eines Test hängt ab von:
 		\begin{itemize}
-			\item Der Wahr der Statistik $T$
-			\item Der Wahr des Verwerfungsbereichs $R$.
+			\item Der Wahl der Statistik $T$
+			\item Der Wahl des Verwerfungsbereichs $R$.
 		\end{itemize}
 	\end{Definition}
 
 	\begin{Bemerkung}[Bemerkung 2.0.1 (Verwerfungsbereich $R$)]
 		Vergrößert man den Verwerfungsbereich $R$, dann:
 		\begin{itemize}
-			\item steigt die Size 
-			\item steigt die Power
+			\item steigt die Size (schlecht)
+			\item steigt die Power (gut)
 		\end{itemize}
 	\end{Bemerkung}
 	
@@ -2723,18 +2723,18 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Dies hängt von $p \neq \frac{1}{2}$ ab.
 		Setze:
 		\begin{equation*}
-			\Pi_n(P) = P(T \geq c \mid p) = P\left(\left\vert \textbf{Bin}(n,p) - \frac{n}{2} \right\vert \geq c \right).
+			\pi_n(p) = P(T \geq c \mid p) = P\left(\left\vert \textbf{Bin}(n,p) - \frac{n}{2} \right\vert \geq c \right).
 		\end{equation*}
-		Für $p = \frac{1}{2}$ ist $\Pi_n (P) \approx \alpha$, also die Size des Tests. Für $p \neq \frac{1}{2}$ ist $\Pi_n(P)$ die Power des Tests, wenn der wahre Parameter gerade $p$ ist.
+		Für $p = \frac{1}{2}$ ist $\pi_n (p) \approx \alpha$, also die Size des Tests. Für $p \neq \frac{1}{2}$ ist $\pi_n(p)$ die Power des Tests, wenn der wahre Parameter gerade $p$ ist.
 		
 		Funktion!!!
 		
-		Wie groß muss n sein, damit z.B. $\Pi_n (P) \geq 0,8$ ist? 
+		Wie groß muss n sein, damit z.B. $\pi_n (p) \geq 0,8$ ist? 
 		
-		Für $p = \frac{79}{150}$ ist $\Pi_n \left(\frac{79}{150}\right) \geq 0,8$ für $n = 2760$. Im Kreiselexperiment wird $H_0$ für Italien und Frankreich verworfen, aber Frankreich scheint extremer zu sein als Italien. Der nächste Begriff ermöglicht dies zu quantifizieren.
+		Für $p = \frac{79}{150}$ ist $\pi_n \left(\frac{79}{150}\right) \geq 0,8$ für $n = 2760$. Im Kreiselexperiment wird $H_0$ für Italien und Frankreich verworfen, aber Frankreich scheint extremer zu sein als Italien. Der nächste Begriff ermöglicht dies zu quantifizieren.
 	\end{BSP}
 	
-	Betrachte einen N-P-Test wie in 2. Für jedes $\alpha$ erhält man einen Verwerfungsbreiche $R_\alpha$, sodass $P(T \in R_\alpha \mid H_0) = \alpha$ (bzw. $\approx \alpha$), zusätzlich wird hier angenommen, dass folgendes gilt:
+	Betrachte einen N-P-Test wie in 2. Für jedes $\alpha$ erhält man einen Verwerfungsbreich $R_\alpha$, sodass $P(T \in R_\alpha \mid H_0) = \alpha$ (bzw. $\approx \alpha$), zusätzlich wird hier angenommen, dass Folgendes gilt:
 	
 	\begin{equation*}
 		\alpha \leq \alpha' \Rightarrow R_\alpha \leq R_{\alpha'}. \eqname{(1)}
@@ -2746,7 +2746,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			p(t) = \textbf{inf} \{\alpha \geq 0 : t \in R_\alpha\}. 
 		\end{equation*}
 	\end{Definition}
-	Wenn $t$ der beobachtete Wert der Test-Statistik $T$ ist. Informell ist $p(t)$ das kleinste Signifikanzniveau, auf den die Null-Hypothese verworfen werden kann. In diesem Sinne beschreibt der p-Wert, wie stark der beobachtete Wert $t$ der Null-Hypothese entspricht. 
+	Wenn $t$ der beobachtete Wert der Test-Statistik $T$ ist. Informell ist $p(t)$ das kleinste Signifikanzniveau, auf dem die Null-Hypothese verworfen werden kann. In diesem Sinne beschreibt der p-Wert, wie stark der beobachtete Wert $t$ der Null-Hypothese entspricht. 
 
 	\begin{BSP}[Beispiel 2.0.2 (p-Wert)]
 		Für die Tests in Beispiel 2.0.1 ist der p-Wert wohldefiniert, weil (1) erfoüllt ist.
@@ -2784,7 +2784,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{BSP}	
 	
 	\begin{BSP}[Beispiel 2.0.3 (Der z-Test (bekannte Varianz))]
-		Betrachte $\FZV \overset{i.i.d.}{\sim} N(\mu,\sigma), \mu \in \IR$, unbekannt, $\sigma^2 > 0$ bekannt. Gegeben $\alpha \in (0,1)$ möchte man $H_0: \mu - \mu_0$ gegen verschiedene Alternativen testen. Beachte: Unter $H_0$ ist $\sqrt{n} \frac{\bar{X}_n - \mu}{\sigma} \sim N(0,1)$.
+		Betrachte $\FZV \overset{i.i.d.}{\sim} N(\mu,\sigma), \mu \in \IR$, unbekannt, $\sigma^2 > 0$ bekannt. Gegeben $\alpha \in (0,1)$ möchte man $H_0: \mu = \mu_0$ gegen verschiedene Alternativen testen. Beachte: Unter $H_0$ ist $\sqrt{n} \frac{\bar{X}_n - \mu}{\sigma} \sim N(0,1)$.
 		
 		Teste: $H_0$ gegen $H_1$: $\mu > \mu_0$. Setze $T = \sqrt{n} \frac{\bar{X}_n- \mu_0}{\sigma}$, $c = \Phi^{-1} (1- \alpha)$ und verwerfe, wenn $T\geq c$ ist. 
 		Der Test hat sig. Niveau $\alpha$, denn: 
@@ -2795,12 +2795,12 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				&= 1- \Phi(\Phi^{-1}(1-\alpha)) = 1-(1-\alpha) = \alpha.
 			\end{split}
 		\end{equation*}
-		Gegeben $T=t$ ist der $p-Wert$ gegeben durch:
+		Gegeben $T=t$, ist der $p-Wert$ gegeben durch:
 		\begin{equation*}
 			p(t) = P(T \geq t \mid H_0) = 1-\Phi(t). 
 		\end{equation*}
 		
-		Teste $H_0$ gegen $H_1 : \mu - \mu_0$. Setze $T = \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}, c = \Phi^{-1}$ und verwerfe $H_0$, wenn $T \leq c$ ist. Signifikanzniveau:
+		Teste $H_0$ gegen $H_1 : \mu < \mu_0$. Setze $T = \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}, c = \Phi^{-1}(\alpha)$ und verwerfe $H_0$, wenn $T \leq c$ ist. Signifikanzniveau:
 		\begin{equation*}
 			P(\xcancel{H_0} \mid H_0) = P(T \leq c \mid H_0) = P(N(0,1) \leq c) = \Phi(\Phi^{-1}(\alpha)) = \alpha.
 		\end{equation*}
@@ -2816,7 +2816,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				&= P(N(0,1) \leq -c) + P(N(0,1) \geq c)\\
 				&= 1- P(N(0,1) \leq c) + 1 - P(N(0,1) \leq c)\\
 				&= 1- \Phi(c) + 1- \Phi(c)\\
-				&= 2 \cdot (1- \Phi(\Phi^{-1} \left(- \frac{\alpha}{2}\right)))\\
+				&= 2 \cdot (1- \Phi(\Phi^{-1} \left(1 - \frac{\alpha}{2}\right)))\\
 				&= 2 \cdot \left(1-\left(1-\frac{\alpha}{2}\right)\right) = \alpha.
 			\end{split}
 		\end{equation*}
@@ -2857,7 +2857,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\end{BSP}
 	
 	\begin{Bemerkung}[Bemerkung 2.0.2 (Testkonstuktion mit anderen Verteilungen)]
-		Auch für die anderen bisherigen betrachteten Modelle ($G(p_0), U([0, \theta])$) kann man, basierend auf MM-Schätzer oder ML-Schätzer, Tests konstruieren, mit Sigifikanzniveau $\alpha$, wenn die Verteilung der Test-Statistik unter der $H_0$ bekannt ist, bzw. mit nominalen Signifikanzniveau $\alpha$, wenn diese approximiert werden kann.
+		Auch für die anderen bisherigen betrachteten Modelle ($G(p_0), U([0, \theta])$) kann man, basierend auf MM-Schätzer oder ML-Schätzer, Tests konstruieren, mit Sigifikanzniveau $\alpha$, wenn die Verteilung der Test-Statistik unter der $H_0$ bekannt ist, bzw. mit nominalem Signifikanzniveau $\alpha$, wenn dieses approximiert werden kann.
 	\end{Bemerkung}
 	
 	\subsection{Likelihood-Ratio-Tests}
@@ -2914,7 +2914,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 		\begin{split}
 			\Lambda &= \frac{L(\mu_0)}{L(\bar{X}_n)}\\
-			&= \frac{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(X_i - \mu_0)^2}}{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(x_i - \bar{X}_n)^2}}\\
+			&= \frac{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(X_i - \mu_0)^2}}{(2 \pi \sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2 \sigma^2} \sum_{i=1}^{n}(X_i - \bar{X}_n)^2}}\\
 			&= \; \textbf{exp}\left(- \frac{1}{2\sigma^2}\sni (X_i - \mu_0)^2 + \frac{1}{2 \sigma^2} \sni (X_i - \bar{X}_n)^2\right)\\
 			&= \; \textbf{exp} \left(- \frac{1}{2\sigma^2}(\sni X_i^2 - 2 \mu_0 \sni X_i + n\mu_0^2 - \sni X_i + \underbrace{2 \bar{X}_n \underbrace{\sni X_i}_{n \bar{X}_n} - n\bar{X}^2_n}_{n \bar{X}_n^2})\right)\\
 			&= \; \textbf{exp} \left(- \frac{1}{2 \sigma^2} (n \bar{X}_n^2 - 2 \mu_0n\bar{X}_n + n\mu_0^2)\right)\\
@@ -2939,7 +2939,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		Teste $H_0: \mu = \mu_0$ gegen $H_1: \mu > \mu_0$.
 		
-		Hier ist $\theta = \mu, \Theta = [\mu, \infty), \Theta_0 = \{\mu_0\}$.
+		Hier ist $\theta = \mu, \Theta = [\mu_0, \infty), \Theta_0 = \{\mu_0\}$.
 		
 		Man erhält für $\hat{\mu}_0 = \;\underset{\mu \in \{\mu_0\}}{\textbf{argmax}} \; L(\mu) = \mu_0$.
 		Und für $\hat{\mu} = \;\underset{\mu \in [\mu_0, \infty)}{\textbf{argmax}} \; L(\mu) = \bar{X}_n$.
@@ -2947,25 +2947,25 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		Die L-R-Statistik sieht folgendermaßen aus:
 		\begin{equation*}
 			\Lambda = \frac{L(\mu_0)}{L(\hat{\mu})} = \begin{cases}
-				1 &: X_n < \mu_0\\
-				\frac{L(\mu_0)}{\bar{X}_n} &: X_n \geq \mu_0
+				1 &: \bar{X}_n < \mu_0\\
+				\frac{L(\mu_0)}{L(\bar{X}_n)} &: \bar{X}_n \geq \mu_0
 			\end{cases}
 			= \begin{cases}
 				1 &: \bar{X}_n < \mu_0\\
-				\textbf{exp} \left(- \frac{1}{n}\left(\sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}\right)^2\right) &: \bar{X}_n \geq \mu_0.
+				\textbf{exp} \left(- \frac{1}{2}\left(\sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}\right)^2\right) &: \bar{X}_n \geq \mu_0.
 			\end{cases}
 		\end{equation*}
 		
-		Für $\alpha \in (0,1)$ muss der entsprechende kritische Wert $c$ kleiner sind. Das ist:
+		Für $\alpha \in (0,1)$ muss der entsprechende kritische Wert $c$ kleiner sein:
 		
 		\begin{equation*}
 			\begin{split}
 				\Lambda \leq c &\Leftrightarrow \bar{X}_n \geq \mu_0 \; \text{und} \; \textbf{exp}\left(-\frac{1}{2}\left(\sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma}\right)^2\right) \leq c\\
 				&\Leftrightarrow \bar{X}_n \geq \mu_0 \; \text{und} \; \left\vert \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma} \right\vert \geq \sqrt{-2 \log(c)} \\
-				&\Leftrightarrow \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma} \geq \sqrt{-2 \log(c)}.
+				&\Leftrightarrow \bar{X}_n \geq \mu_0 \; \text{und} \; \sqrt{n} \frac{\bar{X}_n - \mu_0}{\sigma} \geq \sqrt{-2 \log(c)}.
 			\end{split}
 		\end{equation*}
-		Auch für einseitige Alternativen ist der L-R-Test gerade der entsprechende z-Test. 
+		Auch für einseitige Alternativen ist der L-R-Test also gerade der entsprechende z-Test. 
 	\end{BSP}
 	
 	\begin{BSP} [Beispiel 2.1.3 (t-Test mit zweiseitiger Alternative)]
@@ -2973,7 +2973,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		Teste: $H_0$: $\mu = \mu_0$ gegen $H_1$: $\mu \neq \mu_0$.
 		
-		Hier ist $\theta = (\mu, \sigma^2)', \Theta = \IR \times \{0, \infty\}$ und $\theta_0 = \{\mu_0\} \times (0,\infty)$.
+		Hier ist $\theta = (\mu, \sigma^2)', \Theta = \IR \times \{0, \infty\}$ und $\Theta_0 = \{\mu_0\} \times (0,\infty)$.
 		
 		\begin{equation*}
 			\left(\begin{array}{c}
@@ -2997,7 +2997,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					\sigma^2\\
 				\end{array}\right) \in \Theta_0}{\textbf{argmax}} \; L(\mu, \sigma^2) = \left(\begin{array}{c}
 				\mu_0\\
-				\frac{1}{n} \sni (x_i - \mu_0)^2\\
+				\frac{1}{n} \sni (X_i - \mu_0)^2\\
 			\end{array}\right)
 		\end{equation*}
 		Daraus ergibt sich die L-R-Statistik:
@@ -3005,8 +3005,8 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\begin{split}
 				\Lambda &= \frac{L(\hat{\mu}_0, \tilde{\sigma}^2_0)}{L(\mu, \tilde{\sigma}^2)}\\
-				&= \frac{(2 \pi \tilde{\sigma}^2_0)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2_0} \sni (x_i - \mu_0)^2}}{(2 \pi \tilde{\sigma}^2_0)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2_0} \sni (x_i - \bar{X}_n)^2}}\\
-				&= \left(\frac{\frac{1}{2} \sni (x_i - \mu_0)^2}{\frac{1}{n} \sni (x_i - \bar{X}_n)^2}\right)^{-\frac{n}{2}} \cdot e^{-\frac{1}{2}n + \frac{1}{2}n} =: \%
+				&= \frac{(2 \pi \tilde{\sigma}^2_0)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2_0} \sni (x_i - \mu_0)^2}}{(2 \pi \tilde{\sigma}^2)^{-\frac{n}{2}} e^{-\frac{1}{2 \tilde{\sigma}^2} \sni (X_i - \bar{X}_n)^2}}\\
+				&= \left(\frac{\frac{1}{2} \sni (X_i - \mu_0)^2}{\frac{1}{2} \sni (X_i - \bar{X}_n)^2}\right)^{-\frac{n}{2}} \cdot e^{-\frac{1}{2}n + \frac{1}{2}n} =: \%
 			\end{split}
 		\end{equation*}
 		
@@ -3014,7 +3014,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		
 		\begin{equation*}
 			\begin{split}
-				\sni (x_i - \mu_0)^2 = \sni(x_i^2- 2x_i\mu_0 + \mu_0^2) &= n \bar{X^2}_i - 2 \mu_0 n \bar{X}_n - n \mu_0^2 \\
+				\sni (X_i - \mu_0)^2 = \sni(X_i^2- 2X_i\mu_0 + \mu_0^2) &= n \bar{X^2}_n - 2 \mu_0 n \bar{X}_n - n \mu_0^2 \\
 				&= n \bar{X^2}_n - n \bar{X}^2_n + n \bar{X}^2_n - 2n\mu_0\bar{X}_n+n\mu_0^2\\
 				&= n(\bar{X^2}_n - \bar{X}^2_n) + n(\bar{X}_n - \mu_0)^2 \\
 				&= \sni (X_i - \bar{X}_n)^2 + n(\bar{X}_n - \mu_0)^2.
@@ -3023,14 +3023,14 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 		\begin{equation*}
 			\begin{split}
 				\Longrightarrow \% &= \left(1+\frac{n(\bar{X}_n - \mu_0)^2}{\sni (X_i - \bar{X}_n)^2}\right)^{-\frac{n}{2}}\\
-				&= \left(1+\left(\underbrace{\frac{\sqrt{n} (\bar{X}_n - \mu_0)}{\left(\frac{1}{n-1} \sni (X_i - \bar{X}_n)^2\right)^{\frac{1}{n}}}}_{\hat{\sigma}}\right)^2\right)^{-\frac{n}{2}}\\
-				&= \left(1+ \frac{1}{n-1} \left(\underbrace{\sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}}}_{\text{Das ist die t-Statistik}}\right)^2\right)^{-\frac{n}{2}}.
+				&= \left(1 + \frac{1}{n-1} \left(\underbrace{\frac{\sqrt{n} (\bar{X}_n - \mu_0)}{\sqrt{\frac{1}{n-1} \sni (X_i - \bar{X}_n)^2}}}_{\hat{\sigma}_n}\right)^2\right)^{-\frac{n}{2}}\\
+				&= \left(1+\frac{1}{n-1} \left(\underbrace{\sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}_n}}_{\text{Das ist die t-Statistik}}\right)^2\right)^{-\frac{n}{2}}.
 			\end{split}
 		\end{equation*}
 	Hier ist $\Lambda$ klein, wenn: $\left\vert \sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}} \right\vert$ groß wird. Insbesondere ist:
 	\begin{equation*}
 		\begin{split}
-			\Lambda \leq c \Leftrightarrow \left\vert \sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}} \right\vert &\leq \sqrt{(n-1) \cdot (c^{-\frac{2}{n}}-1)}\\
+			\Lambda \leq c \Leftrightarrow \left\vert \sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}} \right\vert & \geq \sqrt{(n-1) \cdot (c^{-\frac{2}{n}}-1)}\\
 			\left(1+ \frac{1}{n-1} (\ldots)^2 \right)^{-\frac{n}{2}} &\leq c\\
 			1 + \frac{1}{n-1} (\ldots)^2 &\geq c^{- \frac{2}{n}}\\
 			\frac{1}{n-1}(\ldots)^2 &\geq c^{- \frac{2}{n}} -1\\
@@ -3044,9 +3044,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 	\begin{BSP}[Beispiel 2.1.4 (t-Test mit einseitiger Alternative)]
 	Betrachte: $X \sim N(\mu, \sigma^2), \mu \in \IR, \sigma^2 >0$.
 	
-	Teste: $H_0: \mu = \mu_0$ gegen $H_1 \mu > \mu_0$
+	Teste: $H_0: \mu = \mu_0$ gegen $H_1: \mu > \mu_0$
 	
-	Hier ist: $\theta(\mu, \sigma^2)', \Theta = [\mu_0, \infty) < (0,\infty), \Theta_0 = \{\mu_0\} \times (0, \infty)$
+	Hier ist: $\theta = (\mu, \sigma^2)', \Theta = [\mu_0, \infty) \times (0,\infty), \Theta_0 = \{\mu_0\} \times (0, \infty)$
 	
 		\begin{equation*}
 		\left(\begin{array}{c}
@@ -3057,14 +3057,14 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\sigma^2\\
 			\end{array}\right) \in \Theta}{\textbf{argmax}} \; L(\mu, \sigma^2) = \left(\begin{array}{c}
 			\tilde{\mu}\\
-			\frac{1}{n} \sni (X_i - \mu)^2\\
+			\frac{1}{n} \sni (X_i - \tilde{\mu})^2\\
 		\end{array}\right),
 	\end{equation*}
 	für $\tilde{\mu} = \textbf{max}\{\bar{X}_n, \mu_0\}$
 	\begin{equation*}
 		\left(\begin{array}{c}
-			\tilde{\mu_0}\\
-			\tilde{\sigma_0}^2\\
+			\tilde{\mu}_0\\
+			\tilde{\sigma}_0^2\\
 		\end{array}\right) = \; \underset{	\left(\begin{array}{c}
 				\mu\\
 				\sigma^2\\
@@ -3086,20 +3086,27 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\end{cases}
 		\end{split}
 	\end{equation*}
-	Für ein sig. Niveau $\alpha \in (0,1)$ muss der entsprechende kritische Wert $c < 1$ sein. 
+	Für ein Signifikanzniveau $\alpha \in (0,1)$ muss der entsprechende kritische Wert $c < 1$ sein. 
 	
 	Also ist $\Lambda \leq c (< 1)$:
 	\begin{equation*}
 		\begin{split}
 			\left(\frac{\tilde{\sigma}^2_0}{\tilde{\sigma}^2}\right)^{\frac{n}{2}} e^{-\frac{n}{2}+\frac{n}{2}} &\leq c\\
 			\left(1 + \frac{1}{n-1} \left( \underbrace{ \sqrt{n} \frac{\bar{X}_n - \mu_0}{\hat{\sigma}}}_{\text{T-Statistik}}\right)^2\right)^{-\frac{n}{2}} & \leq c\\
-			\left\vert \sqrt \frac{\bar{X}_n - \mu_0}{\tilde{\sigma}} \right\vert &\leq \sqrt{(n-1)\cdot(c^{-\frac{n}{2}} -1)}\\
-			\sqrt \frac{\bar{X}_n - \mu_0}{\tilde{\sigma}} &\leq (n-1)\cdot(c^{-\frac{n}{2}} -1).
+			\left\vert \sqrt{n} \frac{\bar{X}_n - \mu_0}{\tilde{\sigma}} \right\vert & \geq \sqrt{(n-1)\cdot(c^{-\frac{n}{2}} -1)}\\
+			\sqrt{n} \frac{\bar{X}_n - \mu_0}{\tilde{\sigma}} & \geq (n-1)\cdot(c^{-\frac{n}{2}} -1).
 		\end{split}
 	\end{equation*}
-	Hier ist der LR-Test gerade der t-Test (für rechtsseitige Alternativen).
+	Hier ist der LR-Test also gerade der t-Test (für rechtsseitige Alternativen).
 	\end{BSP}
-	
+
+\vspace{3cm}
+    
+    Hier fehlt das Kapitel Verteilung der LR-Teststatistik mit Wilk's Theorem (mit Beweis)!!!
+    Kurzgesagt: $-2\log{\Lambda_n} \KW \chi^2_1$ unter gewissen Voraussetzungen und so plus Beweis.
+    
+\vspace{3cm}
+    
 	\subsubsection{Neymann-Pearson-Lemma}
 	
 	Im folgendem Lemma werden sogenannte simple Hypothesen betrachtet. D.h.: Die zugrundeliegende Verteilung unter $H_0$ und $H_1$, ist vollständig bekannt:
@@ -3156,7 +3163,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				P(d=1 \mid H_1) \overset{(A)}&{=} P(d=1, \dlr =1 \mid H_1) + P(d=1, \dlr =0 \mid H_1)\\
 				\overset{(B)}&{=} P(\dlr = 1 \mid H_1) - P(d=0, \dlr =1 \mid H_1) + P(d=1, \dlr =0 \mid H_1)\\
 				\overset{(C)}&{=} P(\dlr = 1 \mid H_1) - \int (f(X\mid \theta_1)) dx + \int f(X\mid \theta_1)dx\\
-				\overset{(D)}&{\leq} P(\dlr = 1 H_1) + \int(-\frac{1}{c} f(X\mid \theta_0))dx + \int\frac{1}{c} f(X\mid \theta_0)\\
+				\overset{(D)}&{\leq} P(\dlr = 1 \mid H_1) + \int(-\frac{1}{c} f(X\mid \theta_0))dx + \int\frac{1}{c} f(X\mid \theta_0) dx\\
 				\overset{(E)}&{=} P(\dlr = 1 \mid H_1) - \frac{1}{c} P(d =0, \dlr =1 \mid H_0) + \frac{1}{c} P(d =1, \dlr =0 \mid H_0)\\
 				\overset{(F)}&{=}P(\dlr = 1 \mid H_1) - \frac{1}{c} (P(d =0, \dlr =1 \mid H_0) -P(d =1, \dlr =0 \mid H_0))\\
 				\overset{(G)}&{=} P(\dlr = 1 \mid H_1) - \frac{1}{c} (P(\dlr = 1 \mid H_0)\\ &- P(\dlr = 1, d = 1 \mid H_0) - P(d =1, \dlr =0 \mid H_0))\\
@@ -3179,7 +3186,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\end{equation*}
 			der hintere Term ist hier gleich geblieben. 
 			
-			Zu (C): 1. Term: Hier wird davon ausgegangen, dass $d(x) =0$ und $\dlr(x) = 1$, so wie es eigentlich auch in der vorhergegangen Wahrscheinlichkeitsfunktion ist. Da der LR-Test hier verwirft entsteht folgendes:
+			Zu (C): 1. Term: Hier wird davon ausgegangen, dass $d(x) =0$ und $\dlr(x) = 1$, so wie es eigentlich auch in der vorhergegangen Wahrscheinlichkeitsfunktion ist. Da der LR-Test hier verwirft entsteht Folgendes:
 			\begin{equation*}
 				\begin{split}
 					\frac{f(x) \mid \theta_0}{f(x\mid \theta_1)} &\leq c \\
@@ -3261,7 +3268,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\begin{equation*}
 				\tilde{H}_0: \mu = \mu_0 \; \text{gegen} \; \tilde{H}_1: \mu = \mu_1,
 			\end{equation*}
-			mit sig. Niveau $\alpha$, für den LR-Test von $	\tilde{H}_0$ gegen $\tilde{H}_1$ und die entsprechenden 0-1-wertigen Zufallsvariablen $\tilde{d}_{LR}$ besagt das NP-Lemma, dass 
+			mit sig. Niveau $\alpha$. Für den LR-Test von $	\tilde{H}_0$ gegen $\tilde{H}_1$ und die entsprechenden 0-1-wertigen Zufallsvariablen $\tilde{d}_{LR}$ besagt das NP-Lemma, dass 
 			\begin{equation*}
 				P(\tilde{d}_{LR} = 1 \mid \mu_1) \geq P(\tilde{d}=1 \mid \mu_1),
 			\end{equation*}
@@ -3282,7 +3289,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					0 &: \text{sonst},
 				\end{cases}
 			\end{equation*}
-			wo bei $\tilde{\Lambda}_n$ die entsprechende LR-Statistik und $\tilde{c}$ der entsprechende kritische Wert ist, weil $\alpha < 1$ ist, muss auch $\tilde{c} < 1$ sein, sodass
+			wo bei $\tilde{\Lambda}_n$ die entsprechende LR-Statistik und $\tilde{c}$ der entsprechende kritische Wert ist. Weil $\alpha < 1$ ist, muss auch $\tilde{c} < 1$ sein, sodass
 			\begin{equation*}
 				\begin{split}
 					\tilde{\Lambda}_n \leq \tilde{c} &\Leftrightarrow \frac{L_n(\mu_0)}{L_n(\mu_1)} \leq \tilde{c}\\
@@ -3324,7 +3331,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\end{Korollar}
 			
 			\begin{BWS}[Beweis 2.1.3 (Kein UMP-Test bei Normalverteilung)]
-				Angenommen $d_{*}$ wäre ein UMP Test. Für $\mu_1 > \mu_0$ hat $d_{*}$ die größtmögliche Power $P(d_{*} = 1 \mid \mu_1)$ zum Testen von $\tilde{H}_0: \mu = \mu_0$ gegen $\tilde{H}_1: \mu = \mu_1$. Gleichzeitig hat auch hier der LR-Test $\tilde{d}_LR$ (von $\tilde{H}_0$ gegen $\tilde{H}_1$) die größtmögliche Power $P(\tilde{d}_{LR} = 1 \mid \mu_0)$.
+				Angenommen $d_{*}$ wäre ein UMP Test. Für $\mu_1 > \mu_0$ hat $d_{*}$ die größtmögliche Power $P(d_{*} = 1 \mid \mu_1)$ zum Testen von $\tilde{H}_0: \mu = \mu_0$ gegen $\tilde{H}_1: \mu = \mu_1$. Gleichzeitig hat auch hier der LR-Test $\tilde{d}_{LR}$ (von $\tilde{H}_0$ gegen $\tilde{H}_1$) die größtmögliche Power $P(\tilde{d}_{LR} = 1 \mid \mu_1)$.
 				\begin{equation*}
 					P(d_{*} = 1 \mid \mu_1) \geq P(\tilde{d}_{LR} = 1 \mid \mu_1).
 				\end{equation*}
@@ -3403,7 +3410,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					\begin{equation*}
 						\EW(AM+B) = A\EW(M)+B.
 					\end{equation*}
-					\item  ist $C$ eine $n \times l$-Matrix und $D$ eine $k\times l$- Matrix, dann ist $MC+D$ eine $k \times l$-Matrix von Zufallsvariablen und es gilt:
+					\item  Ist $C$ eine $n \times l$-Matrix und $D$ eine $k\times l$- Matrix, dann ist $MC+D$ eine $k \times l$-Matrix von Zufallsvariablen und es gilt:
 					\begin{equation*}
 						\EW(MC+D) = \EW(M) \cdot C + D.
 					\end{equation*}
@@ -3487,7 +3494,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					\end{equation*}
 					Daraus folgt:
 					\begin{equation*}
-						\EW(MC+B) = (C' \cdot \EW(M)' + D') = \EW(M) \cdot C + D.
+						\EW(MC+B) = (C' \cdot \EW(M)' + D')' = \EW(M) \cdot C + D.
 					\end{equation*}
 					\begin{flushright}
 						$\square$
@@ -3545,9 +3552,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\begin{BWS}[Beweis 3.0.3 (Lineare Transformation der Varianz/Kovarianz-Matrix)]
 				\begin{equation*}
 					\begin{split}
-						VC(AX+b) \overset{\text{Prop. 3.0.2}}&{=} \EW(\underbrace{AX+b- \EW(AX+b)}_{\overset{\text{Prop. 3.0.1}}{=} AX+b - (A\EW(X)+b)}) \cdot \EW(\underbrace{AX+b - \EW(AX+b)}_{=A(X-\EW(X))'})\\
-						&= \EW(A(X-\EW(X))) \cdot \EW(X-\EW(X)' A')\\
-						\overset{\text{Prop. 3.0.1}}&{=} A \cdot \EW(X-\EW(X)) \cdot (X-\EW(X))' \cdot A' \\
+						VC(AX+b) \overset{\text{Prop. 3.0.2}}&{=} \EW((\underbrace{AX+b- \EW(AX+b)}_{\overset{\text{Prop. 3.0.1}}{=} AX+b - (A\EW(X)+b)}) \cdot (\underbrace{AX+b - \EW(AX+b))'}_{=(A(X-\EW(X)))'})\\
+						&= \EW(A(X-\EW(X)) \cdot (X-\EW(X))' A')\\
+						\overset{\text{Prop. 3.0.1}}&{=} A \cdot \EW((X-\EW(X)) \cdot (X-\EW(X))') \cdot A' \\
 						\overset{\text{Prop. 3.0.2}}&{=} A \cdot (VC(X)) \cdot A'
 					\end{split}
 				\end{equation*}
@@ -3555,6 +3562,9 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					$\square$
 				\end{flushright}
 			\end{BWS}
+
+
+            
 			\begin{BSP}[Beispiel 3.0.1 (komponentenweise Unkorreliertheit)]
 				Betrachte $X = (\FZV)'$, wobei die $\FZV$ unkorreliert sind, mit $\EW(X_1) = \ldots = \EW(X_n) = \mu$ und $\Var(X_1) = \ldots = \Var(X_n) = \sigma^2$. 
 				Wir wissen aus der Vorlesung Grundzüge der Statistik, Sektion 10.2:
@@ -3579,7 +3589,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					\right) = \left(
 					\begin{array}{c}
 						\bar{X}_n\\
-						X - \bar{X}_n\\
+						X - \iota \bar{X}_n\\
 					\end{array}
 					\right)
 				\end{equation*}
@@ -3594,7 +3604,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					\end{array}
 					\right).
 				\end{equation*}
-				Die Varianz/Kovarianz-Matrix von $Z$ ist laut Voraussetzung:
+				Die Varianz/Kovarianz-Matrix von $X$ ist laut Voraussetzung:
 				\begin{equation*}
 					VC(X) = \begin{pmatrix}
 						\sigma^2 & \ldots & 0\\
@@ -3617,7 +3627,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					\right) =  \left(
 					\begin{array}{c}
 						\frac{1}{n} \iota'\\
-						(I - \iota \frac{1}{n} \iota')
+						I - \iota \frac{1}{n} \iota'
 					\end{array}
 					\right) \cdot X, 						
 				\end{equation*}
@@ -3791,7 +3801,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 			\newpage
 			\part{Appendix B: Die multivariate Normalverteilung}
 			\begin{Definition}[Definition 4.0.1 (multivariate Normalverteilung)]
-				Sei $Z = (Z_i)^k_{i=1}$ ein Vektor, dessen Komponenten $Z_i, \ldots, Z_n$ i.i.d. $N(0,1)$-verteilt sind. Sei $A$ eine $n \times k$-Matrix und $b$ ein $n$-Vektor. Die Verteilung von $X = AZ+b$ nennt man die multivariate Normalvertilung mit den Parametern $b$ und $AA$! Kurz: $X \sim N(b,AA')$.
+				Sei $Z = (Z_i)^k_{i=1}$ ein Vektor, dessen Komponenten $Z_i, \ldots, Z_n$ i.i.d. $N(0,1)$-verteilt sind. Sei $A$ eine $n \times k$-Matrix und $b$ ein $n$-Vektor. Die Verteilung von $X = AZ+b$ nennt man die multivariate Normalvertilung mit den Parametern $b$ und $AA'$. Kurz: $X \sim N(b,AA')$.
 			\end{Definition}
 			\begin{Bemerkung}[Bemerkung 4.0.1 (Parameter der multivariaten Normalverteilung)]
 				\begin{itemize}
@@ -3879,14 +3889,17 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					$\square$
 				\end{flushright}
 			\end{BWS}
+
+            
 			\begin{Proposition}[Proposition 4.0.2 (Reproduktionseigenschaften der multivariaten Normalverteilung)]
 				Ist $X$ ein $n$-Zufallsvektor mit $X \sim N(\mu,\Sigma)$, ist $A$ eine $k \times n$-Matrix und ist $b$ ein $k$-Vektor, dann ist
 				\begin{equation*}
 					A \cdot X + b \sim N(A\mu + b, A \Sigma A').
 				\end{equation*}
 			\end{Proposition}
+            
 			\begin{BWS}[Beweis 4.0.2 (Reproduktionseigenschaften der multivariaten Normalverteilung)]
-				Sei $Z = (Z_i)^n_{i=1}$ mit $Z_i, \ldots, Z_n \overset{\text{i.i.d}}{N(0,1)}$. Wie zuvor ist \begin{equation*}
+				Sei $Z = (Z_i)^n_{i=1}$ mit $Z_i, \ldots, Z_n \overset{\text{i.i.d}}{\sim} {N(0,1)}$. Wie zuvor ist \begin{equation*}
 					X \sim \Sigma^{\halb} \cdot Z + \mu.
 				\end{equation*}
 				Damit ist
@@ -3898,7 +3911,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\end{equation*}
 				Also ist $A \cdot X +b \sim N(A\cdot \mu + b, A \cdot \Sigma \cdot A')$.
 			\end{BWS}
-			Betrachte nun einen ($m\times n$)-dimensionalen Zufallsvektor $V \sim N(\mu, \Sigma)$. 
+			Betrachte nun einen ($m + n$)-dimensionalen Zufallsvektor $V \sim N(\mu, \Sigma)$. 
 			\begin{equation*}
 				V = \left(
 				\begin{array}{c}
@@ -3993,7 +4006,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\right)$ nicht normalverteilt ist. 
 			\end{Bemerkung}
 			\begin{BSP}[Beispiel 4.0.1 (Unabhängigkeit)]
-				Sei $Z \sim N(0,1)$, $B$ mit $P(B=1) = P(B=-1)$, unabhängig vor $Z$. Setze $X=Z$ und $Y=B-Z$. Dann ist $X \sim N(0,1)$ und $Y \sim N(0,1)$, weil $z$ und $-z$ gleich ist.
+				Sei $Z \sim N(0,1)$, $B$ mit $P(B=1) = P(B=-1)$, unabhängig von $Z$. Setze $X=Z$ und $Y=B-Z$. Dann ist $X \sim N(0,1)$ und $Y \sim N(0,1)$, weil $z$ und $-z$ gleich ist.
 				\begin{equation*}
 					\begin{split}
 						P (Y \leq t) &= P(BZ \leq t)\\
@@ -4022,7 +4035,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				Z^{(1)}\\
 				Z^{(2)}	
 				\end{array}
-				\right)$ ein $(m+n)$-dimensionaler Zufallsvektor, dessen Komponenten i.i.d $N(0,1)$-verteilt sind. Jede Komponente ist $N(0,1)$-verteilt. Zur Unabhängigkeit: Seien $f^{(1)}_1, \ldots, f^{(1)}_m$ und $f^{(2)}_1, \ldots, Z^{(2)}_n$ beliebige Funktionen von $\IR$ nach $\IR$. Es ist 
+				\right)$ ein $(m+n)$-dimensionaler Zufallsvektor, dessen Komponenten i.i.d $N(0,1)$-verteilt sind. Jede Komponente ist $N(0,1)$-verteilt. Zur Unabhängigkeit: Seien $f^{(1)}_1, \ldots, f^{(1)}_m$ und $f^{(2)}_1, \ldots, f^{(2)}_n$ beliebige Funktionen von $\IR$ nach $\IR$. Es ist 
 				\begin{equation*}
 					\begin{split}
 						\EW&[\underbrace{f^{(1)}_1(Z_1^{(1)}) \cdot f^{(1)}_2(Z^{(1)}_2) \cdot \ldots \cdot f_m^{(1)}(Z^{(1)}_m)}_{\text{Funktion von $Z^{(1)}$}} \cdot \underbrace{f^{(2)}_1(Z^{(2)}_1) \cdot \ldots \cdot  f^{(2)}_n(Z^{(2)}_n)}_{\text{Funktion von $Z^{(2)}$}}]\\
@@ -4081,7 +4094,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\end{flushright}
 			\end{BWS}
 			\begin{BSP}[Beispiel 4.0.2 (Mittelwertschätzer)]
-				Seien $\FZV$ i.i.d $N(\mu, \sigma^2)$-verteilt, $\sigma^2 >0$. Setze $X=(x_1,\ldots,x_n)'$. Dann ist $X \sim N(\mu \cdot \iota, \sigma^2 \cdot I_n)$. Wir wissen aus Beispiel 3.0.1:
+				Seien $\FZV$ i.i.d $N(\mu, \sigma^2)$-verteilt, $\sigma^2 >0$. Setze $X=(X_1,\ldots,X_n)'$. Dann ist $X \sim N(\mu \cdot \iota, \sigma^2 \cdot I_n)$. Wir wissen aus Beispiel 3.0.1:
 				\begin{equation*}
 					V = \left(
 					\begin{array}{c}
@@ -4092,16 +4105,16 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 					\end{array}
 					\right) = \left(
 					\begin{array}{c}
-						\frac{1}{n} \iota' x\\
-						x-\iota \frac{1}{n} \iota' x
+						\frac{1}{n} \iota' X\\
+						X-\iota \frac{1}{n} \iota' X
 					\end{array}
 					\right) = 
 					\left(
 					\begin{array}{c}
-					    \frac{1}{n}\\
+					    \frac{1}{n} \iota'\\
 						I - \iota \frac{1}{n} \iota'
 					\end{array}
-					\right).
+					\right) \cdot X.
 				\end{equation*}
 				Damit ist $V \sim N(A\mu \iota, \sigma^2 AA')$. Wobei $A \cdot VC(X) \cdot A'$ gilt. 
 				Im Beispiel 3.0.1 wurde gezeigt, dass $\bar{X}_n$ und $X-\iota\bar{X}_n$ komponentenweise unkorreliert sind. Weil dieser Vektor $\left(
@@ -4114,7 +4127,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				Zur Verteilung von $\hat{\sigma}^2_n$:
 				\begin{equation*}
 					\begin{split}
-						X - \iota \bar{X}_n &= \underbrace{\left(I_n - \iota \frac{1}{n} \iota'\right)}_{=Q} X \sim N(Q\mu, \sigma^2 QQ')\\
+						X - \iota \bar{X}_n &= \underbrace{\left(I_n - \iota \frac{1}{n} \iota'\right)}_{=:Q} X \sim N(Q\mu, \sigma^2 QQ')\\
 						Q \mu \iota &= \left( I_n - \iota \frac{1}{n} \iota'\right)\iota\mu = I \iota \mu - \iota \frac{1}{n} \underbrace{\iota \iota'}_{=n}\mu = \iota \mu - \iota \mu =0\\
 						\sigma^2 QQ' &= \sigma^2 \cdot \left(I_n - \iota \frac{1}{n}\iota'\right) \cdot \left(I_n - \iota \frac{1}{n}\iota'\right)\\
 						&=  \sigma^2 \cdot \left(I_n - \iota \frac{1}{n}\iota'\right) - \iota \frac{1}{n} \iota' + \iota \frac{1}{n} \iota' \cdot \iota \frac{1}{n} \iota' = \sigma^2 \cdot \left(I_n - \iota \frac{1}{n}\iota'\right) = \sigma^2Q.
@@ -4122,15 +4135,15 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 				\end{equation*}
 				Spektralzerlegung von $Q$:
 				
-				$Q \cdot C = 0$. Also hat $Q$ einen Eigenwert $=0$ mit einem Eigenvektor $\iota \cdot \frac{1}{\sqrt{n}}$. Sei nun $v$ irgendein Vektor $\neq 0$, der orthogonal ist zu $\iota$, das heißt $\iota'\iota=0$:
+				$Q \cdot C = 0$. Also hat $Q$ einen Eigenwert $=0$ mit einem Eigenvektor $\iota \cdot \frac{1}{\sqrt{n}}$. Sei nun $v$ irgendein Vektor $\neq 0$, der orthogonal ist zu $\iota$, das heißt $\iota'v=0$:
 				\begin{equation*}
-					Qv = \left(I_n - \iota \frac{1}{n}\iota'\right) \cdot v = I \cdot v - \iota \frac{1}{n}\iota'v = v.
+					Qv = \left(I_n - \iota \frac{1}{n}\iota'\right) \cdot v = I_n \cdot v - \iota \frac{1}{n}\iota'v = v.
 				\end{equation*}
-				Damit hat $Q n-1$ Eigenwert $=1$. Also ist $Q = U \Lambda U'$ mit $\Lambda = \begin{pmatrix}
-					1 & \ldots & 0\\
+				Damit hat $Q$ $(n-1)$ mal den Eigenwert $1$. Also ist $Q = U \Lambda U'$ mit $\Lambda = \begin{pmatrix}
+					1 & \ldots & 0 & 0\\
 					\vdots & \ddots & \vdots \\
-					0 & \ldots & 1\\
-					0 & \ldots & 0
+					0 & \ldots & 1 & 0\\
+					0 & \ldots & 0 & 0
 				\end{pmatrix}$. Beachte: Weil $Q \cdot Q = Q \cdot Q' = Q$ ist $Q^{\halb} = Q$.
 				\begin{equation*}
 					\Longrightarrow X - \iota \bar{X}_n \sim N(0, \sigma^2 Q) \sim \sigma Q^{\halb} W \; \text{für} \; W\sim N(0,I_n).
@@ -4187,7 +4200,7 @@ Dies soll für jedes $\theta \in \Theta$ gelten.
 						\vdots & & &0 &  \vdots\\
 						\vdots & & &  \ddots & \vdots\\
 						0  & \ldots & \ldots & \ldots & 0
-					\end{pmatrix}$ mit $r$ Einser und $n-r$ Nuller. Für $W$ wie oben ist:
+					\end{pmatrix}$ mit $r$ Einsern und $n-r$ Nullern. Für $W$ wie oben ist:
 					\begin{equation*}
 						Q \cdot W = U\Lambda U' W
 					\end{equation*}
